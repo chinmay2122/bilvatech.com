@@ -22,7 +22,7 @@
     .fromTo('.hero .hero-cta',{y:16,opacity:0},{y:0,opacity:1,clearProps:'transform,opacity'},.45);}
    reveal('#about-bilva',['.home-kicker','h2','.about-home-copy']);
    reveal('#our-solutions',['.bento-intro','.bento-card']);
-   reveal('#what-we-protect',['.protect-intro','.protect-card']);
+   reveal('#what-we-protect',['.protect-intro','.protect-item','.protect-globe-window']);
    reveal('#why-bilvatech',['.method-intro','.method-steps li']);
    reveal('#testimonials',['.testimonials-shell']);
    reveal('#faq',['.compact-faq-body']);

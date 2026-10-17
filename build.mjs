@@ -40,7 +40,9 @@ const assets = [
   "testimonials-data.js",
   "service-page.js",
   "assets/logo.webp",
+  "assets/favicon.ico",
   "assets/cta-texture.jpg",
+  "assets/cta-background.png",
 ];
 
 const encodedAssets = {};

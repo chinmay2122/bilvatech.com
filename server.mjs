@@ -24,6 +24,9 @@ const MIME_TYPES = {
   ".ttf": "font/ttf",
   ".pdf": "application/pdf",
   ".txt": "text/plain; charset=utf-8",
+  ".mp4": "video/mp4",
+  ".webm": "video/webm",
+  ".gif": "image/gif",
 };
 
 const server = http.createServer((req, res) => {

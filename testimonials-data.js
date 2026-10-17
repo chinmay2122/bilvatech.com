@@ -9,7 +9,7 @@
  * - Avatar or monogram
  */
 
-export const testimonialsConfig = {
+var testimonialsConfig = {
   // Mode: "marquee" (animated opposing rows) | "factual" (factual engineering overview)
   defaultMode: "marquee",
   
@@ -26,7 +26,7 @@ export const testimonialsConfig = {
 /**
  * Row 1 — Scrolls continuously from Right to Left
  */
-export const testimonialsRow1 = [
+var testimonialsRow1 = [
   {
     id: "perspective-kernel-1",
     solutionArea: "Separation Kernel",
@@ -98,7 +98,7 @@ export const testimonialsRow1 = [
 /**
  * Row 2 — Scrolls continuously from Left to Right
  */
-export const testimonialsRow2 = [
+var testimonialsRow2 = [
   {
     id: "perspective-kernel-2",
     solutionArea: "Separation Kernel",
@@ -170,7 +170,7 @@ export const testimonialsRow2 = [
 /**
  * Factual Engineering Perspectives (used when mode is switched to "factual")
  */
-export const factualPerspectivesData = [
+var factualPerspectivesData = [
   {
     id: "factual-1",
     title: "Kernel Separation & Spatial Isolation",
@@ -193,3 +193,10 @@ export const factualPerspectivesData = [
     iconClass: "fa-solid fa-shield-halved",
   },
 ];
+
+if (typeof window !== "undefined") {
+  window.testimonialsConfig = testimonialsConfig;
+  window.testimonialsRow1 = testimonialsRow1;
+  window.testimonialsRow2 = testimonialsRow2;
+  window.factualPerspectivesData = factualPerspectivesData;
+}

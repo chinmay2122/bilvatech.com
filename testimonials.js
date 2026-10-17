@@ -1,15 +1,12 @@
 /**
- * Bilva Tech — Animated Testimonials & Engineering Perspectives Component
+ * Bilva Tech — Animated Customer Perspectives Component
  * Recreates Framer Marketplace "Testimonial Animated" dual-direction infinite marquee,
  * cursor-reactive glow, focus/hover pause, and accessible fallback.
  */
 
-import {
-  testimonialsConfig,
-  testimonialsRow1,
-  testimonialsRow2,
-  factualPerspectivesData,
-} from "./testimonials-data.js";
+const getTestimonialsConfig = () => window.testimonialsConfig || {};
+const getTestimonialsRow1 = () => window.testimonialsRow1 || [];
+const getTestimonialsRow2 = () => window.testimonialsRow2 || [];
 
 /**
  * Creates HTML string for a single testimonial card
@@ -49,7 +46,8 @@ function createCardElement(item, isDuplicate = false) {
   `;
 
   // Attach cursor-reactive glow (Framer component highlight behavior)
-  if (testimonialsConfig.cursorReactiveGlow) {
+  const config = getTestimonialsConfig();
+  if (config.cursorReactiveGlow) {
     let ticking = false;
     card.addEventListener("pointermove", (e) => {
       if (ticking) return;
@@ -120,90 +118,30 @@ function mountMarqueeRow(container, items, speedSeconds, isReverse = false) {
 }
 
 /**
- * Mounts Factual Engineering Perspectives alternative view
- */
-function mountFactualPerspectives(container, items) {
-  if (!container) return;
-  
-  const grid = document.createElement("div");
-  grid.className = "factual-grid";
-
-  items.forEach((item) => {
-    const card = document.createElement("div");
-    card.className = "factual-card";
-    card.innerHTML = `
-      <div class="factual-icon" aria-hidden="true">
-        <i class="${item.iconClass}"></i>
-      </div>
-      <div>
-        <p class="factual-area">${item.area}</p>
-        <h3 class="factual-title">${item.title}</h3>
-      </div>
-      <p class="factual-body">${item.body}</p>
-    `;
-    grid.appendChild(card);
-  });
-
-  container.appendChild(grid);
-}
-
-/**
  * Initializes the entire Testimonials & Perspectives Section
  */
-export function initTestimonials() {
+function initTestimonials() {
   const section = document.getElementById("testimonials");
   if (!section) return;
 
   const row1Container = document.getElementById("testimonials-row-1");
   const row2Container = document.getElementById("testimonials-row-2");
-  const marqueeViewport = document.getElementById("testimonials-marquee-viewport");
-  const factualContainer = document.getElementById("factual-perspectives-view");
+
+  const config = getTestimonialsConfig();
+  const row1 = getTestimonialsRow1();
+  const row2 = getTestimonialsRow2();
 
   // Populate Row 1 (Right to Left)
   if (row1Container) {
     row1Container.innerHTML = "";
-    mountMarqueeRow(row1Container, testimonialsRow1, testimonialsConfig.speedRow1, false);
+    mountMarqueeRow(row1Container, row1, config.speedRow1 || 42, false);
   }
 
   // Populate Row 2 (Left to Right)
   if (row2Container) {
     row2Container.innerHTML = "";
-    mountMarqueeRow(row2Container, testimonialsRow2, testimonialsConfig.speedRow2, true);
+    mountMarqueeRow(row2Container, row2, config.speedRow2 || 46, true);
   }
-
-  // Populate Factual View
-  if (factualContainer) {
-    factualContainer.innerHTML = "";
-    mountFactualPerspectives(factualContainer, factualPerspectivesData);
-  }
-
-  // Mode Toggle (Animated Perspectives vs Factual Engineering)
-  const toggleBtns = section.querySelectorAll(".view-toggle-btn");
-  const setMode = (mode) => {
-    toggleBtns.forEach((btn) => {
-      const active = btn.dataset.targetView === mode;
-      btn.classList.toggle("is-active", active);
-      btn.setAttribute("aria-pressed", String(active));
-    });
-
-    if (mode === "factual") {
-      marqueeViewport?.style.setProperty("display", "none");
-      factualContainer?.classList.add("is-active");
-    } else {
-      marqueeViewport?.style.setProperty("display", "flex");
-      factualContainer?.classList.remove("is-active");
-    }
-  };
-
-  toggleBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      setMode(btn.dataset.targetView);
-    });
-  });
-
-  // Apply default mode from config
-  const initialMode = section.dataset.mode || testimonialsConfig.defaultMode || "marquee";
-  setMode(initialMode);
 
   // Entrance Reveal Animation
   if ("IntersectionObserver" in window) {
@@ -222,6 +160,11 @@ export function initTestimonials() {
   } else {
     section.classList.add("is-visible");
   }
+}
+
+// Expose to window
+if (typeof window !== "undefined") {
+  window.initTestimonials = initTestimonials;
 }
 
 // Auto-initialize when DOM is ready

@@ -9,6 +9,7 @@
       content="Bilva Tech delivers tailored cybersecurity solutions that protect business data, cloud infrastructure, and digital operations."
     />
     <title>Bilva Tech | Cybersecurity Built Around You</title>
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -27,107 +28,7 @@
     <link rel="stylesheet" href="testimonials.css" />
     <link rel="stylesheet" href="homepage.css" />
     <link rel="stylesheet" href="cto-homepage.css" />
-    <style>
-      /* Center alignment for CTA Section */
-      .bilva-home .architecture-cta-body {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        justify-content: center !important;
-        text-align: center !important;
-      }
-      .bilva-home .architecture-cta-copy {
-        max-width: 680px !important;
-        width: 100% !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        text-align: center !important;
-      }
-      .bilva-home .architecture-cta-copy .home-kicker {
-        text-align: center !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-      }
-      .bilva-home .architecture-cta-copy h2 {
-        text-align: center !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-      }
-      .bilva-home .architecture-cta-copy > p:not(.home-kicker) {
-        text-align: center !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        margin-bottom: 28px !important;
-      }
-      .bilva-home .architecture-cta .cta-primary-btn {
-        margin-left: auto !important;
-        margin-right: auto !important;
-        display: inline-flex !important;
-      }
-      .bilva-home .architecture-cta .cta-utility-link {
-        text-align: center !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        margin-top: 14px !important;
-      }
-
-      /* Section 05 / HOW WE ENGINEER SECURITY - Globe & Steps Layout */
-      .engineering-method .method-body {
-        display: grid;
-        grid-template-columns: 0.95fr 1.05fr;
-        gap: clamp(24px, 5vw, 64px);
-        align-items: center;
-        padding: clamp(30px, 5vw, 76px);
-      }
-      .method-globe-window {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        min-height: 480px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-      }
-      .method-globe-window .globe-canvas-container {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: grab;
-      }
-      .method-globe-window .globe-canvas-container canvas {
-        width: 100% !important;
-        height: 100% !important;
-        display: block;
-      }
-      @media (max-width: 768px) {
-        .engineering-method .method-body {
-          grid-template-columns: 1fr;
-          gap: 32px;
-        }
-        .method-globe-window {
-          min-height: 340px;
-          height: 340px;
-        }
-      }
-    </style>
-
-    <script type="importmap">
-      {
-        "imports": {
-          "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-          "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
-        }
-      }
-    </script>
-  <link rel="stylesheet" href="bento-polish.css"><link rel="stylesheet" href="black-motion.css"></head>
+    <link rel="stylesheet" href="black-motion.css"></head>
   <body class="bilva-home cto-home">
     <a class="skip-link" href="#main-content">Skip to main content</a>
 
@@ -147,7 +48,7 @@
           href="index.html"
           aria-label="Bilva Tech home"
         >
-          <img src="assets/logo.webp" alt="" width="52" height="52" />
+          <img src="assets/logo.webp" alt="" width="651" height="177" />
           <span class="brand-copy" aria-hidden="true">
             <strong>Bilva Tech</strong>
             <span>Business Solutions</span>
@@ -174,7 +75,7 @@
         </button>
       </header>
 
-      <div class="mobile-overlay" hidden>
+      <div class="mobile-overlay" aria-hidden="true" hidden>
         <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
           <a class="active" href="index.html" aria-current="page">Home</a>
           <a href="solutions.html">Solutions</a>
@@ -253,170 +154,156 @@
             <p>Four services. Security across your system.</p>
           </div>
           <div class="bento-grid">
-            <article class="bento-card bento-kernel">
-              <div class="bento-card-meta">
-                <span>01 / MISSION-CRITICAL COMPUTING</span>
-                <svg class="ui-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg>
-              </div>
-              <div class="bento-card-copy">
-                <h3>Separation Kernel Hypervisor</h3>
-                <p>Isolate critical workloads on shared hardware.</p>
-              </div>
-              <div class="bento-art" aria-hidden="true">
-                <div class="solution-scene kernel-scene">
-                  <div class="scene-caption">PARTITIONED EXECUTION</div>
-                  <div class="kernel-workloads">
-                    <div><span>PARTITION 01</span><b>Critical OS</b><small>Dedicated resources</small></div>
-                    <div><span>PARTITION 02</span><b>Standard OS</b><small>Independent workload</small></div>
-                    <div><span>PARTITION 03</span><b>Applications</b><small>Controlled access</small></div>
+            <!-- Card 01: Separation Kernel Hypervisor -->
+            <a class="bento-card bento-card-kernel" href="separation-kernel-hypervisor.html" aria-label="Separation Kernel Hypervisor solution">
+              <div class="bento-card-header">
+                <div class="bento-card-title-row">
+                  <div class="bento-badge" aria-hidden="true">
+                    <svg width="20" height="26" viewBox="0 0 20 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="20" height="26" rx="5.5" fill="#FFFFFF"/>
+                      <rect x="6.5" y="3.5" width="7" height="2.2" rx="1.1" fill="#141416"/>
+                      <circle cx="10" cy="20.5" r="2" fill="#141416"/>
+                    </svg>
                   </div>
-                  <div class="isolation-traces"><i></i><i></i><i></i></div>
-                  <div class="kernel-layer"><span class="scene-status"></span>SEPARATION KERNEL<span>ISOLATION BOUNDARY</span></div>
-                  <div class="hardware-layer"><span>CPU</span><span>MEMORY</span><span>I/O</span></div>
+                  <h3 class="bento-title">Separation Kernel Hypervisor</h3>
+                  <span class="bento-arrow" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M7 17 17 7M7 7h10v10"/>
+                    </svg>
+                  </span>
                 </div>
+                <p class="bento-desc">Isolate critical workloads with deterministic resource control.</p>
               </div>
-            <div class="bento-actions"><button type="button" aria-expanded="false" aria-controls="bento-note-0">Explore architecture <span aria-hidden="true">+</span></button><a href="separation-kernel-hypervisor.html">View service ↗</a></div><p class="bento-note" id="bento-note-0" hidden>Memory and resources stay inside defined workload boundaries.</p></article>
+              <div class="bento-media" aria-hidden="true">
+                <video autoplay loop muted playsinline preload="auto" poster="assets/Bento/Bento-01-poster.jpg">
+                  <source src="assets/Bento/Bento-01.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </a>
 
-            <article class="bento-card bento-iot">
-              <div class="bento-card-meta">
-                <span>02 / DEVICE TO CLOUD</span>
-                <svg class="ui-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg>
-              </div>
-              <div class="bento-card-copy">
-                <h3>IoT &amp; Edge Solutions</h3>
-                <p>Connect devices with trusted identities and protected data flows.</p>
-              </div>
-              <div class="bento-art" aria-hidden="true">
-                <div class="solution-scene edge-scene">
-                  <div class="scene-caption">DEVICE → EDGE → CLOUD</div>
-                  <svg class="edge-topology" viewBox="0 0 500 210" fill="none">
-                    <path class="topology-route" d="M72 48h72q20 0 20 20v17q0 20 20 20h66M72 162h72q20 0 20-20v-17q0-20 20-20h66M250 105h64q20 0 20-20V68q0-20 20-20h74M250 105h64q20 0 20 20v17q0 20 20 20h74"/>
-                    <circle class="topology-orbit" cx="250" cy="105" r="62"/>
-                    <circle class="topology-orbit" cx="250" cy="105" r="46"/>
-                    <rect class="topology-core" x="225" y="80" width="50" height="50" rx="12"/>
-                    <path class="topology-icon" d="M242 99v-6a8 8 0 0 1 16 0v6m-18 0h20v16h-20z"/>
-                    <g class="topology-node">
-                      <rect x="42" y="23" width="60" height="50" rx="8"/>
-                      <rect x="42" y="137" width="60" height="50" rx="8"/>
-                      <rect x="398" y="23" width="60" height="50" rx="8"/>
-                      <rect x="398" y="137" width="60" height="50" rx="8"/>
-                    </g>
-                    <g class="topology-text">
-                      <text x="72" y="52">DEVICE</text>
-                      <text x="72" y="166">SENSOR</text>
-                      <text x="428" y="52">CLOUD</text>
-                      <text x="428" y="166">OTA</text>
-                    </g>
-                    <circle class="topology-signal" cx="164" cy="80" r="3"/>
-                    <circle class="topology-signal" cx="334" cy="132" r="3"/>
-                  </svg>
-                  <div class="scene-footnote">Trusted identity · Protected communication</div>
-                </div>
-              </div>
-            <div class="bento-actions"><button type="button" aria-expanded="false" aria-controls="bento-note-1">Explore architecture <span aria-hidden="true">+</span></button><a href="iot-solutions.html">View service ↗</a></div><p class="bento-note" id="bento-note-1" hidden>Device identity establishes trust before data crosses the gateway.</p></article>
-
-            <article class="bento-card bento-cyber">
-              <div class="bento-card-meta">
-                <span>03 / DEFENSE THROUGHOUT THE LIFECYCLE</span>
-                <svg class="ui-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg>
-              </div>
-              <div class="bento-card-copy">
-                <h3>Cybersecurity Solutions</h3>
-                <p>Protect platform integrity, access, and sensitive data.</p>
-              </div>
-              <div class="bento-art" aria-hidden="true">
-                <div class="solution-scene defense-scene">
-                  <div class="scene-caption">DEFENSE THROUGHOUT THE LIFECYCLE</div>
-                  <div class="defense-row"><span class="control-mark">01</span><div><b>Platform integrity</b><small>Secure boot &amp; trusted execution</small></div><span class="control-state">VERIFY</span></div>
-                  <div class="defense-row"><span class="control-mark">02</span><div><b>Identity &amp; access</b><small>Authentication &amp; least privilege</small></div><span class="control-state">RESTRICT</span></div>
-                  <div class="defense-row"><span class="control-mark">03</span><div><b>Data protection</b><small>Encryption &amp; controlled exchange</small></div><span class="control-state">PROTECT</span></div>
-                </div>
-              </div>
-            <div class="bento-actions"><button type="button" aria-expanded="false" aria-controls="bento-note-2">Explore architecture <span aria-hidden="true">+</span></button><a href="cybersecurity-solutions.html">View service ↗</a></div><p class="bento-note" id="bento-note-2" hidden>Boot integrity, identity, and encryption protect distinct layers.</p></article>
-
-            <article class="bento-card bento-consulting">
-              <div class="bento-card-meta">
-                <span>04 / ARCHITECTURE &amp; STRATEGY</span>
-                <svg class="ui-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg>
-              </div>
-              <div class="bento-card-copy">
-                <h3>Information Security Consulting</h3>
-                <p>Turn architectural risk into clear engineering priorities.</p>
-              </div>
-              <div class="bento-art" aria-hidden="true">
-                <div class="solution-scene architecture-scene">
-                  <div class="scene-caption">FROM EXPOSURE TO ENGINEERING PRIORITIES</div>
-                  <div class="architecture-flow">
-                    <div><span>01 / DISCOVER</span><b>System context</b><small>Assets · Interfaces · Dependencies</small></div>
-                    <i></i>
-                    <div><span>02 / ASSESS</span><b>Threat model</b><small>Boundaries · Risks · Controls</small></div>
-                    <i></i>
-                    <div><span>03 / DEFINE</span><b>Security roadmap</b><small>Priorities · Ownership · Validation</small></div>
+            <!-- Card 02: IoT & Edge Solutions -->
+            <a class="bento-card bento-card-iot" href="iot-solutions.html" aria-label="IoT and Edge Solutions">
+              <div class="bento-card-header">
+                <div class="bento-card-title-row">
+                  <div class="bento-badge" aria-hidden="true">
+                    <svg width="20" height="26" viewBox="0 0 20 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="20" height="26" rx="5.5" fill="#FFFFFF"/>
+                      <rect x="6.5" y="3.5" width="7" height="2.2" rx="1.1" fill="#141416"/>
+                      <circle cx="10" cy="20.5" r="2" fill="#141416"/>
+                    </svg>
                   </div>
-                  <div class="architecture-baseline"><span>ARCHITECTURE</span><span>GOVERNANCE</span><span>IMPLEMENTATION</span></div>
+                  <h3 class="bento-title">IoT &amp; Edge Solutions</h3>
+                  <span class="bento-arrow" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M7 17 17 7M7 7h10v10"/>
+                    </svg>
+                  </span>
                 </div>
+                <p class="bento-desc">Secure devices and connections from identity to updates.</p>
               </div>
-            <div class="bento-actions"><button type="button" aria-expanded="false" aria-controls="bento-note-3">Explore architecture <span aria-hidden="true">+</span></button><a href="information-security-consulting.html">View service ↗</a></div><p class="bento-note" id="bento-note-3" hidden>Context and threat analysis guide an actionable security roadmap.</p></article>
+              <div class="bento-media" aria-hidden="true">
+                <video autoplay loop muted playsinline preload="auto" poster="assets/Bento/Bento-02-poster.jpg">
+                  <source src="assets/Bento/Bento-02.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </a>
+
+            <!-- Card 03: Cybersecurity Solutions -->
+            <a class="bento-card bento-card-cyber" href="cybersecurity-solutions.html" aria-label="Cybersecurity Solutions">
+              <div class="bento-card-header">
+                <div class="bento-card-title-row">
+                  <div class="bento-badge" aria-hidden="true">
+                    <svg width="20" height="26" viewBox="0 0 20 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="20" height="26" rx="5.5" fill="#FFFFFF"/>
+                      <rect x="6.5" y="3.5" width="7" height="2.2" rx="1.1" fill="#141416"/>
+                      <circle cx="10" cy="20.5" r="2" fill="#141416"/>
+                    </svg>
+                  </div>
+                  <h3 class="bento-title">Cybersecurity Solutions</h3>
+                  <span class="bento-arrow" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M7 17 17 7M7 7h10v10"/>
+                    </svg>
+                  </span>
+                </div>
+                <p class="bento-desc">Protect platforms and data across the lifecycle.</p>
+              </div>
+              <div class="bento-media" aria-hidden="true">
+                <video autoplay loop muted playsinline preload="auto" poster="assets/Bento/Bento-03-poster.jpg">
+                  <source src="assets/Bento/Bento-03.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </a>
+
+            <!-- Card 04: Information Security Consulting -->
+            <a class="bento-card bento-card-consulting" href="information-security-consulting.html" aria-label="Information Security Consulting">
+              <div class="bento-card-header">
+                <div class="bento-card-title-row">
+                  <div class="bento-badge" aria-hidden="true">
+                    <svg width="20" height="26" viewBox="0 0 20 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="20" height="26" rx="5.5" fill="#FFFFFF"/>
+                      <rect x="6.5" y="3.5" width="7" height="2.2" rx="1.1" fill="#141416"/>
+                      <circle cx="10" cy="20.5" r="2" fill="#141416"/>
+                    </svg>
+                  </div>
+                  <h3 class="bento-title">Information Security Consulting</h3>
+                  <span class="bento-arrow" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M7 17 17 7M7 7h10v10"/>
+                    </svg>
+                  </span>
+                </div>
+                <p class="bento-desc">Turn risk into a focused security roadmap.</p>
+              </div>
+              <div class="bento-media" aria-hidden="true">
+                <video autoplay loop muted playsinline preload="auto" poster="assets/Bento/Bento-04-poster.jpg">
+                  <source src="assets/Bento/Bento-04.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </a>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="protect-section" id="what-we-protect" aria-label="What We Protect">
-      <div class="section-box"><div class="section-meta"><span>03 / WHAT WE PROTECT</span><span>YOUR CRITICAL ENVIRONMENT</span></div>
-      <div class="protect-shell">
-        <div class="protect-intro">
-          <p class="protect-eyebrow">What We Protect</p>
-          <h2 class="protect-heading">Security for the systems behind your business</h2>
-          <p class="protect-copy">
-            Protection designed around the systems, devices, infrastructure and information that keep your business running.
-          </p>
+    <section class="engineering-method" id="why-bilvatech" aria-labelledby="method-heading">
+      <div class="section-box">
+        <div class="section-meta">
+          <span>03 / HOW WE ENGINEER SECURITY</span>
+          <span>CONTEXT → ARCHITECTURE → ASSURANCE</span>
         </div>
-
-        <div class="protect-grid" role="list">
-          <div class="protect-card" role="listitem">
-            <div class="card-indicator"></div>
-            <span class="card-num">01 //</span>
-            <h3 class="card-title">Critical Systems</h3>
-            <p class="card-desc">Isolation & trusted execution</p>
+        <div class="method-body">
+          <div class="method-intro">
+            <p class="home-kicker">A CLEAR, PRACTICAL PROCESS</p>
+            <h2 id="method-heading">Understand.<br>Design.<br>Deliver.</h2>
+            <p>We turn your security priorities into clear, practical actions.</p>
+            <a class="home-text-link" href="contact.html">Discuss your requirements <span aria-hidden="true">→</span></a>
           </div>
-          <div class="protect-card" role="listitem">
-            <div class="card-indicator"></div>
-            <span class="card-num">02 //</span>
-            <h3 class="card-title">IoT</h3>
-            <p class="card-desc">Device & network security</p>
-          </div>
-          <div class="protect-card" role="listitem">
-            <div class="card-indicator"></div>
-            <span class="card-num">03 //</span>
-            <h3 class="card-title">Embedded Systems</h3>
-            <p class="card-desc">Secure boot & lifecycle security</p>
-          </div>
-          <div class="protect-card" role="listitem">
-            <div class="card-indicator"></div>
-            <span class="card-num">04 //</span>
-            <h3 class="card-title">Digital Infrastructure</h3>
-            <p class="card-desc">Monitoring & protection</p>
-          </div>
-          <div class="protect-card" role="listitem">
-            <div class="card-indicator"></div>
-            <span class="card-num">05 //</span>
-            <h3 class="card-title">Enterprise</h3>
-            <p class="card-desc">Information security</p>
-          </div>
-          <div class="protect-card" role="listitem">
-            <div class="card-indicator"></div>
-            <span class="card-num">06 //</span>
-            <h3 class="card-title">Brand</h3>
-            <p class="card-desc">Digital brand protection</p>
-          </div>
-        </div>
-
-        <div class="protect-outro">
-          <p>Security starts with understanding what needs to be protected.</p>
+          <ol class="method-steps">
+            <li>
+              <span>01</span>
+              <div>
+                <h3>Understand the system</h3>
+                <p>Identify what matters, how it connects, and where risk sits.</p>
+              </div>
+            </li>
+            <li>
+              <span>02</span>
+              <div>
+                <h3>Design the controls</h3>
+                <p>Define trust boundaries, access rules, and protection measures.</p>
+              </div>
+            </li>
+            <li>
+              <span>03</span>
+              <div>
+                <h3>Plan delivery</h3>
+                <p>Set priorities, integration steps, and clear checks for success.</p>
+              </div>
+            </li>
+          </ol>
         </div>
       </div>
-          </div>
     </section>
 
     <section class="service-dial" id="service-showcase" aria-label="Explore our services" data-service="0">
@@ -470,46 +357,66 @@
       </div>
     </section>
 
-    <section class="engineering-method" id="why-bilvatech" aria-labelledby="method-heading">
-      <div class="section-box">
-        <div class="section-meta">
-          <span>05 / HOW WE ENGINEER SECURITY</span>
-          <span>CONTEXT → ARCHITECTURE → ASSURANCE</span>
+    <section class="protect-section" id="what-we-protect" aria-label="What We Protect">
+      <div class="section-box"><div class="section-meta"><span>05 / WHAT WE PROTECT</span><span>YOUR CRITICAL ENVIRONMENT</span></div>
+      <div class="protect-shell">
+        <div class="protect-intro">
+          <p class="protect-eyebrow">What We Protect</p>
+          <h2 class="protect-heading">Security for the systems behind your business</h2>
+          <p class="protect-copy">
+            Protection designed around the systems, devices, infrastructure and information that keep your business running.
+          </p>
         </div>
-        <div class="method-body">
-          <div class="method-globe-window why-visual" aria-hidden="true">
+
+        <div class="protect-orbit">
+          <div class="protect-list protect-list-left" role="list">
+            <article class="protect-item" role="listitem" data-protection="0">
+              <span class="card-num">01 //</span>
+              <h3 class="card-title">Critical Systems</h3>
+              <p class="card-desc">Isolation &amp; trusted execution</p>
+            </article>
+            <article class="protect-item" role="listitem" data-protection="1">
+              <span class="card-num">02 //</span>
+              <h3 class="card-title">IoT</h3>
+              <p class="card-desc">Device &amp; network security</p>
+            </article>
+            <article class="protect-item" role="listitem" data-protection="2">
+              <span class="card-num">03 //</span>
+              <h3 class="card-title">Embedded Systems</h3>
+              <p class="card-desc">Secure boot &amp; lifecycle security</p>
+            </article>
+          </div>
+
+          <div class="protect-globe-window" aria-hidden="true">
             <div id="globe-canvas-container" class="globe-canvas-container">
-              <div id="globe-loader" class="globe-loader">Loading Architecture...</div>
+              <div id="globe-loader" class="globe-loader">Mapping protected systems...</div>
             </div>
           </div>
-          <ol class="method-steps">
-            <li>
-              <span>01</span>
-              <div>
-                <h3>Understand the environment</h3>
-                <p>Map assets, interfaces, and operational constraints.</p>
-                <small>FOCUS / System context &amp; constraints</small>
-              </div>
-            </li>
-            <li>
-              <span>02</span>
-              <div>
-                <h3>Define the trust boundaries</h3>
-                <p>Define trust boundaries, access, and protected data flows.</p>
-                <small>FOCUS / Threat model &amp; architecture</small>
-              </div>
-            </li>
-            <li>
-              <span>03</span>
-              <div>
-                <h3>Plan for implementation</h3>
-                <p>Agree priorities, integration requirements, and validation criteria.</p>
-                <small>FOCUS / Delivery &amp; assurance planning</small>
-              </div>
-            </li>
-          </ol>
+
+          <div class="protect-list protect-list-right" role="list">
+            <article class="protect-item" role="listitem" data-protection="3">
+              <span class="card-num">04 //</span>
+              <h3 class="card-title">Digital Infrastructure</h3>
+              <p class="card-desc">Monitoring &amp; protection</p>
+            </article>
+            <article class="protect-item" role="listitem" data-protection="4">
+              <span class="card-num">05 //</span>
+              <h3 class="card-title">Enterprise</h3>
+              <p class="card-desc">Information security</p>
+            </article>
+            <article class="protect-item" role="listitem" data-protection="5">
+              <span class="card-num">06 //</span>
+              <h3 class="card-title">Brand</h3>
+              <p class="card-desc">Digital brand protection</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="protect-outro">
+          <p>Security starts with understanding what needs to be protected.</p>
         </div>
       </div>
+          </div>
     </section>
 
     <section class="testimonials-section" id="testimonials" aria-label="Customer Perspectives">
@@ -521,26 +428,6 @@
           <p class="testimonials-copy">
             Every system has different security requirements. Explore perspectives on the challenges, decisions, and engineering considerations behind secure connected systems.
           </p>
-          <div class="testimonials-view-controls" role="group" aria-label="Perspectives display mode">
-            <button
-              type="button"
-              class="view-toggle-btn is-active"
-              data-target-view="marquee"
-              aria-pressed="true"
-            >
-              <i class="fa-solid fa-arrows-left-right" aria-hidden="true"></i>
-              <span>Animated Perspectives</span>
-            </button>
-            <button
-              type="button"
-              class="view-toggle-btn"
-              data-target-view="factual"
-              aria-pressed="false"
-            >
-              <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
-              <span>Engineering Highlights</span>
-            </button>
-          </div>
         </div>
       </div>
 
@@ -552,12 +439,55 @@
         <div class="marquee-row marquee-row-2" id="testimonials-row-2" aria-label="Technical Perspectives Row 2"></div>
       </div>
 
-      <!-- Factual Engineering Alternative View (Non-Simulated Fallback) -->
-      <div class="factual-perspectives-container" id="factual-perspectives-view" aria-label="Factual Engineering Highlights"></div>
           </div>
     </section>
 
-    <section class="compact-faq" id="faq" aria-labelledby="faq-heading"><div class="section-box"><div class="section-meta"><span>07 / FAQ</span><span>BEFORE WE BEGIN</span></div><div class="compact-faq-body"><div><p class="home-kicker">A FEW PRACTICAL ANSWERS</p><h2 id="faq-heading">Let’s make<br>the next step clear.</h2></div><div><details><summary>Where can Bilva Tech help?<span aria-hidden="true">+</span></summary><p>We support workload isolation, connected devices, platform security, and security architecture.</p></details><details><summary>Can you work with our existing platform?<span aria-hidden="true">+</span></summary><p>Yes. We scope integration around your hardware, software, existing controls, and operational constraints.</p></details><details><summary>How does an engagement begin?<span aria-hidden="true">+</span></summary><p>We review your system context and priorities, then agree the technical scope and next steps.</p></details><details><summary>Do you support both architecture and implementation?<span aria-hidden="true">+</span></summary><p>Our services span architecture, integration, and verification. The delivery scope depends on your platform and requirements.</p></details><details><summary>What should we share in the first conversation?<span aria-hidden="true">+</span></summary><p>A brief system overview, your main security challenge, and any delivery constraints are enough to start.</p></details></div></div></div></section>
+    <section class="compact-faq" id="faq" aria-labelledby="faq-heading">
+      <div class="section-box">
+        <div class="section-meta">
+          <span>07 / FAQ</span>
+          <span>BEFORE WE BEGIN</span>
+        </div>
+        <div class="compact-faq-body">
+          <div class="compact-faq-intro">
+            <p class="home-kicker">A FEW PRACTICAL ANSWERS</p>
+            <h2 id="faq-heading">Let’s make<br>the next step clear.</h2>
+          </div>
+          <div class="compact-faq-list">
+            <details name="faq-group">
+              <summary>Where can Bilva Tech help?<span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m7 10 5 5 5-5" /></svg></span></summary>
+              <div class="faq-answer-wrap">
+                <p>We support workload isolation, connected devices, platform security, and security architecture.</p>
+              </div>
+            </details>
+            <details name="faq-group">
+              <summary>Can you work with our existing platform?<span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m7 10 5 5 5-5" /></svg></span></summary>
+              <div class="faq-answer-wrap">
+                <p>Yes. We scope integration around your hardware, software, existing controls, and operational constraints.</p>
+              </div>
+            </details>
+            <details name="faq-group">
+              <summary>How does an engagement begin?<span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m7 10 5 5 5-5" /></svg></span></summary>
+              <div class="faq-answer-wrap">
+                <p>We review your system context and priorities, then agree the technical scope and next steps.</p>
+              </div>
+            </details>
+            <details name="faq-group">
+              <summary>Do you support both architecture and implementation?<span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m7 10 5 5 5-5" /></svg></span></summary>
+              <div class="faq-answer-wrap">
+                <p>Our services span architecture, integration, and verification. The delivery scope depends on your platform and requirements.</p>
+              </div>
+            </details>
+            <details name="faq-group">
+              <summary>What should we share in the first conversation?<span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m7 10 5 5 5-5" /></svg></span></summary>
+              <div class="faq-answer-wrap">
+                <p>A brief system overview, your main security challenge, and any delivery constraints are enough to start.</p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <section class="architecture-cta" id="final-cta" aria-labelledby="cta-heading">
       <div class="section-box">
@@ -567,21 +497,30 @@
         </div>
         <div class="architecture-cta-body">
           <div class="architecture-cta-copy">
-            <p class="home-kicker">WHAT ARE YOU BUILDING?</p>
-            <h2 id="cta-heading">Secure the next move.</h2>
-            <p>Share your system. We’ll map the next step.</p>
-            <a class="cta-primary-btn" href="contact.html">Discuss your project <span aria-hidden="true">→</span></a>
-            <a class="cta-utility-link" href="cybersecurity-solutions.html">Explore cybersecurity solutions <span aria-hidden="true">↗</span></a>
+            <p class="home-kicker cta-kicker">
+              <svg class="cta-mark" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h3v3h-3zM18 18h3v3h-3zM18 14h3v3h-3zM14 18h3v3h-3z" />
+              </svg>
+              SECURITY, BUILT WITH PURPOSE
+            </p>
+            <h2 id="cta-heading">Security built for the systems that matter.</h2>
+            <p>Clear architecture. Practical controls. Protection designed around your environment.</p>
+            <a class="cta-primary-btn" href="contact.html">Start a conversation <span aria-hidden="true">→</span></a>
           </div>
         </div>
       </div>
     </section>
 
     <footer class="site-footer"></footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <script src="main.js"></script>
-    <script type="module" src="why-globe.js"></script>
+    <script src="why-globe.js"></script>
     <script src="service-dial.js"></script>
-    <script type="module" src="testimonials.js"></script>
-    <script src="cto-homepage.js"></script>
-  <script src="bento-polish.js"></script><script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script><script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script><script src="site-motion.js"></script></body>
+    <script src="testimonials-data.js"></script>
+    <script src="testimonials.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="site-motion.js"></script>
+  </body>
 </html>

@@ -6,6 +6,7 @@ const setMenuState = (open) => {
   menuToggle.setAttribute("aria-expanded", String(open));
   menuToggle.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
   mobileOverlay.hidden = !open;
+  mobileOverlay.setAttribute("aria-hidden", String(!open));
   document.body.classList.toggle("menu-open", open);
 
   if (open) {
@@ -31,6 +32,20 @@ if (menuToggle && mobileOverlay && mobileMenu) {
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && menuToggle.getAttribute("aria-expanded") === "true") {
       setMenuState(false);
+    }
+
+    if (event.key === "Tab" && menuToggle.getAttribute("aria-expanded") === "true") {
+      const links = [...mobileMenu.querySelectorAll("a")];
+      const focusable = [menuToggle, ...links];
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     }
   });
 
@@ -102,7 +117,7 @@ const globalFooter = document.querySelector(".site-footer");
 if (globalFooter) {
   globalFooter.innerHTML = `
     <div class="footer-top">
-      <div class="footer-brand"><a href="index.html" aria-label="Bilva Tech home"><img src="assets/logo.webp" alt="" width="50" height="50"><span><strong>Bilva Tech</strong><small>Business Solutions</small></span></a><p>Security engineered for connected and critical systems.</p></div>
+      <div class="footer-brand"><a href="index.html" aria-label="Bilva Tech home"><img src="assets/logo-icon.webp" alt="" width="44" height="44"><span><strong>Bilva Tech</strong><small>Business Solutions</small></span></a><p>Security engineered for connected and critical systems.</p></div>
       <div class="footer-nav-group"><div><span>Navigate</span><a href="index.html">Home</a><a href="solutions.html">Solutions</a><a href="about.html">About</a><a href="contact.html">Contact</a></div><div><span>Solutions</span><a href="separation-kernel-hypervisor.html">Separation Kernel</a><a href="iot-solutions.html">IoT Solutions</a><a href="cybersecurity-solutions.html">Cybersecurity</a><a href="information-security-consulting.html">Security Consulting</a></div></div>
       <div class="footer-legal"><span>Information</span><a href="contact.html">Security contact</a><a href="contact.html">Privacy enquiry</a><a href="contact.html">Responsible disclosure</a></div>
     </div>
@@ -325,16 +340,33 @@ if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", () => {
     initOrbitCardStack();
     initFaqAccordion();
+    initBentoVideos();
   });
 } else {
   initOrbitCardStack();
   initFaqAccordion();
+  initBentoVideos();
 }
 
 /* ==================================================
    FAQ ACCORDION COMPONENT
    ================================================== */
 function initFaqAccordion() {
+  const faqDetails = document.querySelectorAll("#faq details");
+  if (faqDetails.length) {
+    faqDetails.forEach((targetDetail) => {
+      targetDetail.addEventListener("toggle", () => {
+        if (targetDetail.open) {
+          faqDetails.forEach((otherDetail) => {
+            if (otherDetail !== targetDetail && otherDetail.open) {
+              otherDetail.open = false;
+            }
+          });
+        }
+      });
+    });
+  }
+
   const faqItems = document.querySelectorAll(".faq-item");
   if (!faqItems.length) return;
 
@@ -364,5 +396,40 @@ function initFaqAccordion() {
       }
     });
   });
+}
+
+/* ==================================================
+   BENTO VIDEO AUTOPLAY & RESOURCE MANAGER
+   ================================================== */
+function initBentoVideos() {
+  const bentoVideos = document.querySelectorAll(".solutions-bento video");
+  if (!bentoVideos.length) return;
+
+  bentoVideos.forEach((video) => {
+    video.muted = true;
+    video.playsInline = true;
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
+    const p = video.play();
+    if (p !== undefined) p.catch(() => {});
+  });
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target;
+          if (entry.isIntersecting) {
+            const playPromise = video.play();
+            if (playPromise !== undefined) playPromise.catch(() => {});
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    bentoVideos.forEach((video) => observer.observe(video));
+  }
 }
 

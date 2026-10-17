@@ -2,17 +2,17 @@
 .cto-home .ui-icon, .solutions-bento .ui-icon { display: inline-block; width: 18px; height: 18px; flex: 0 0 auto; vertical-align: middle; }
 .cto-home .section-box { isolation: isolate; }
 .cto-home :is(.about-home,.engineering-capabilities) .section-box::before { content: ''; position: absolute; z-index: -1; inset: 45px 0 0; background-image: radial-gradient(#b5a8b5 .65px,transparent .8px); background-size: 22px 22px; opacity: .14; mask-image: linear-gradient(110deg,transparent 25%,#000); pointer-events: none; }
-:is(.cto-home, .solutions-bento) .bento-grid { grid-template-columns: repeat(12,minmax(0,1fr)); gap: 18px; }
-:is(.cto-home, .solutions-bento) .bento-card { grid-column: span 6; padding: 26px 26px 0; border-radius: 18px; background: linear-gradient(155deg,#1a191b,#121214 65%); border: 1px solid #ffffff16; box-shadow: inset 0 1px 0 #ffffff05; }
-:is(.cto-home, .solutions-bento) .bento-cyber { grid-column: span 5; }
-:is(.cto-home, .solutions-bento) .bento-consulting { grid-column: span 7; }
-:is(.cto-home, .solutions-bento) .bento-card:hover { background: linear-gradient(155deg,#1d1b1e,#141315 65%); border-color: #62505b; box-shadow: inset 0 1px 0 #ffffff0a; }
-:is(.cto-home, .solutions-bento) .bento-card-meta { font-size: 8px; margin-bottom: 14px; align-items: center; color: #a59ca4; }
-:is(.cto-home, .solutions-bento) .bento-card-meta .ui-icon { width: 16px; height: 16px; color: #b7a3ac; }
-:is(.cto-home, .solutions-bento) .bento-card-copy { margin: 0; }
-:is(.cto-home, .solutions-bento) .bento-card-copy h3 { font-size: clamp(21px,2.2vw,29px); font-weight: 400; letter-spacing: -.035em; }
-:is(.cto-home, .solutions-bento) .bento-card-copy p { font-size: 13px; line-height: 1.7; margin-bottom: 0; }
-:is(.cto-home, .solutions-bento) .bento-art { display: block; padding: 0; min-height: 0; margin: 24px -12px 0; color: #c1adb8; }
+.cto-home:not(.has-new-bento) .legacy-bento .bento-grid { grid-template-columns: repeat(12,minmax(0,1fr)); gap: 18px; }
+.cto-home:not(.has-new-bento) .legacy-bento .bento-card { grid-column: span 6; padding: 26px 26px 0; border-radius: 18px; background: linear-gradient(155deg,#1a191b,#121214 65%); border: 1px solid #ffffff16; box-shadow: inset 0 1px 0 #ffffff05; }
+.cto-home:not(.has-new-bento) .legacy-bento .bento-cyber { grid-column: span 5; }
+.cto-home:not(.has-new-bento) .legacy-bento .bento-consulting { grid-column: span 7; }
+.cto-home:not(.has-new-bento) .legacy-bento .bento-card:hover { background: linear-gradient(155deg,#1d1b1e,#141315 65%); border-color: #62505b; box-shadow: inset 0 1px 0 #ffffff0a; }
+.cto-home:not(.has-new-bento) .legacy-bento .bento-card-meta { font-size: 8px; margin-bottom: 14px; align-items: center; color: #a59ca4; }
+.cto-home:not(.has-new-bento) .legacy-bento .bento-card-meta .ui-icon { width: 16px; height: 16px; color: #b7a3ac; }
+.cto-home:not(.has-new-bento) .legacy-bento .bento-card-copy { margin: 0; }
+.cto-home:not(.has-new-bento) .legacy-bento .bento-card-copy h3 { font-size: clamp(21px,2.2vw,29px); font-weight: 400; letter-spacing: -.035em; }
+.cto-home:not(.has-new-bento) .legacy-bento .bento-card-copy p { font-size: 13px; line-height: 1.7; margin-bottom: 0; }
+.cto-home:not(.has-new-bento) .legacy-bento .bento-art { display: block; padding: 0; min-height: 0; margin: 24px -12px 0; color: #c1adb8; }
 .solution-scene { position: relative; min-height: 236px; padding: 18px 12px 0; background: radial-gradient(ellipse at 50% 80%,#b7829520,transparent 70%); }
 .scene-caption { font: 8px/1.5 var(--font-secondary); letter-spacing: .12em; color: #928a94; margin-bottom: 24px; }
 .kernel-workloads { display: flex; gap: 8px; }
@@ -84,6 +84,6 @@
 .cto-home .footer-signup button { border-radius: 4px; background: #30272e; color: #dfcbd8; }
 .cto-home .site-footer :focus-visible { outline: 2px solid #c38b92; outline-offset: 4px; }
 .cto-home .dial-icon { filter: none; }
-@media(max-width:1000px) { :is(.cto-home, .solutions-bento) .bento-card { grid-column: span 6; } .method-body { gap: 6%; } .architecture-flow { flex-direction: column; align-items: stretch; margin-top: 20px; } .architecture-flow i { flex-basis: 12px; width: 1px; align-self: center; } .architecture-flow > div { padding: 12px; } .architecture-flow b { margin: 5px 0; } .architecture-baseline { padding-bottom: 20px; } }
-@media(max-width:700px) { :is(.cto-home, .solutions-bento) .bento-card { grid-column: 1/-1; padding: 22px 18px 0; } .method-body { grid-template-columns: 1fr; gap: 32px; } .capability-row { grid-template-columns: 1fr; gap: 10px; } .capability-table-head { display: none; } .capability-row p:last-child { color: #c2a8b9; } .architecture-cta-copy { width: 100%; } .architecture-cta-body { padding-bottom: 220px; } .cta-globe-window { width: 110%; height: 450px; right: -38%; bottom: -200px; opacity: .5; } .cto-home .site-footer { width: calc(100% - 24px); } .cto-home .footer-top,.cto-home .footer-bottom { grid-template-columns: 1fr; gap: 30px; } .cto-home .footer-contact,.cto-home .footer-legal { text-align: left; } .architecture-flow { flex-direction: row; } .architecture-flow i { width: auto; flex-basis: 10px; } }
+@media(max-width:1000px) { .cto-home .bento-card { grid-column: span 6; } .method-body { gap: 6%; } .architecture-flow { flex-direction: column; align-items: stretch; margin-top: 20px; } .architecture-flow i { flex-basis: 12px; width: 1px; align-self: center; } .architecture-flow > div { padding: 12px; } .architecture-flow b { margin: 5px 0; } .architecture-baseline { padding-bottom: 20px; } }
+@media(max-width:700px) { .cto-home .bento-card { grid-column: 1/-1; padding: 22px 18px 0; } .method-body { grid-template-columns: 1fr; gap: 32px; } .capability-row { grid-template-columns: 1fr; gap: 10px; } .capability-table-head { display: none; } .capability-row p:last-child { color: #c2a8b9; } .architecture-cta-copy { width: 100%; } .architecture-cta-body { padding-bottom: 220px; } .cta-globe-window { width: 110%; height: 450px; right: -38%; bottom: -200px; opacity: .5; } .cto-home .site-footer { width: calc(100% - 24px); } .cto-home .footer-top,.cto-home .footer-bottom { grid-template-columns: 1fr; gap: 30px; } .cto-home .footer-contact,.cto-home .footer-legal { text-align: left; } .architecture-flow { flex-direction: row; } .architecture-flow i { width: auto; flex-basis: 10px; } }
 @media(max-width:380px) { .architecture-flow { flex-direction: column; } .architecture-flow i { width: 1px; } .kernel-workloads > div { padding: 12px 5px; } .kernel-layer > span:last-child { display: none; } }

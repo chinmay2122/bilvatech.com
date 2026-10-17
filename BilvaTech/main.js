@@ -102,7 +102,7 @@ const globalFooter = document.querySelector(".site-footer");
 if (globalFooter) {
   globalFooter.innerHTML = `
     <div class="footer-top">
-      <div class="footer-brand"><a href="index.html" aria-label="Bilva Tech home"><img src="assets/logo.webp" alt="" width="50" height="50"><span><strong>Bilva Tech</strong><small>Business Solutions</small></span></a><p>Security engineered for connected and critical systems.</p></div>
+      <div class="footer-brand"><a href="index.html" aria-label="Bilva Tech home"><img src="assets/logo-icon.webp" alt="" width="44" height="44"><span><strong>Bilva Tech</strong><small>Business Solutions</small></span></a><p>Security engineered for connected and critical systems.</p></div>
       <div class="footer-nav-group"><div><span>Navigate</span><a href="index.html">Home</a><a href="solutions.html">Solutions</a><a href="about.html">About</a><a href="contact.html">Contact</a></div><div><span>Solutions</span><a href="separation-kernel-hypervisor.html">Separation Kernel</a><a href="iot-solutions.html">IoT Solutions</a><a href="cybersecurity-solutions.html">Cybersecurity</a><a href="information-security-consulting.html">Security Consulting</a></div></div>
       <div class="footer-legal"><span>Information</span><a href="contact.html">Security contact</a><a href="contact.html">Privacy enquiry</a><a href="contact.html">Responsible disclosure</a></div>
     </div>
