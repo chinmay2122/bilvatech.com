@@ -1,7 +1,17 @@
 /* Pure black page canvas; retain local surfaces for readable grouping. */
-html,body.bilva-home,body.bilva-inner{background:#000!important}
-body.bilva-home,body.bilva-inner{--surface-page:#000;--bg:#000}
-.bilva-home>section,.bilva-inner .inner-shell,.bilva-home .bg,.bilva-inner .site-footer,.bilva-home .site-footer{background-color:#000!important}
+/* Bilva blue architectural palette. */
+html,body.bilva-home,body.bilva-inner{background:#080F1C!important}
+body.bilva-home,body.bilva-inner{--surface-page:#080F1C;--bg:#080F1C;--surface-panel:#14263A;--surface-card:#14263A;--surface-card-subtle:#101D2D;--surface-hover:#254C66;--line:#254C66;--line-hover:#A4D5E8;--ink:#F3F7FA;--ink-secondary:#A8B7C7;--ink-muted:#A8B7C7;--kicker-color:#A4D5E8;--accent-mauve:#A4D5E8;--accent-violet:#A4D5E8;--accent-titanium:#A4D5E8}
+.bilva-home>section,.bilva-inner .inner-shell,.bilva-home .bg,.bilva-inner .site-footer,.bilva-home .site-footer{background-color:#080F1C!important}
+.bilva-home>section:nth-of-type(even),.bilva-inner .inner-box:nth-child(even){background-color:#101D2D!important}
+.bilva-home .section-box,.bilva-home .service-dial-frame,.bilva-inner .inner-box{background-color:#14263A!important;border-color:#254C66!important}
+.bilva-home .site-header,.bilva-inner .site-header,.bilva-home .site-footer,.bilva-inner .site-footer{background-color:#080F1C!important;border-color:#254C66!important}
+.bilva-home :is(h1,h2,h3,h4),.bilva-inner :is(h1,h2,h3,h4){color:#F3F7FA}
+.bilva-home :is(p,.section-meta,.about-home-copy,.method-steps p,.capability-row p),.bilva-inner :is(p,.inner-meta,.inner-list li,.service-headline,.diagram-caption,.capability-list dd,.application-list dd){color:#A8B7C7}
+.bilva-home :is(.home-kicker,.section-meta .accent),.bilva-inner :is(.inner-kicker,.contact-eyebrow){color:#A4D5E8}
+.bilva-home :is(a:hover,a:focus-visible,.home-text-link),.bilva-inner :is(a:hover,a:focus-visible,.inner-text-link){color:#A4D5E8}
+.bilva-home :is(.cta-primary-btn,.hero-cta),.bilva-inner :is(.inner-button,.contact-submit){background:#A4D5E8!important;border-color:#A4D5E8!important;color:#080F1C!important}
+.bilva-home .bento-card,.bilva-home .bento-art,.bilva-inner .architecture-outline,.bilva-inner .contact-reference-form :is(input,textarea){background-color:#14263A!important;border-color:#254C66!important}
 /* Let JS enhance an already-legible page, rather than hiding it in CSS. */
 .bilva-home .hero .anim,.bilva-home .headline>span{animation:none;opacity:1;transform:none;filter:none}
 .bilva-home .testimonials-section{opacity:1;transform:none;transition:none}
