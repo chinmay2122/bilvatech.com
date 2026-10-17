@@ -2918,61 +2918,24 @@ button {
 /* ==================================================
    FINAL CTA SECTION
    ================================================== */
-
-/* REMOVE OLD BACKGROUND LAYERS */
-.architecture-cta,
-.architecture-cta .section-box,
-.architecture-cta .architecture-cta-body {
-  background-image: none !important;
+.architecture-cta {
+  position: relative;
+  width: 100%;
 }
 
-.architecture-cta::before,
-.architecture-cta::after,
-.architecture-cta .section-box::before,
-.architecture-cta .section-box::after,
-.architecture-cta .architecture-cta-body::after {
-  display: none !important;
+.architecture-cta .section-box {
+  position: relative;
+  overflow: hidden;
 }
 
-/* CTA BACKGROUND CONTAINER */
 .architecture-cta .architecture-cta-body {
   position: relative;
   overflow: hidden;
 }
 
-/* IMAGE LAYER - ZOOMED OUT */
-.architecture-cta .architecture-cta-body::before {
-  content: "" !important;
-  display: block !important;
-  position: absolute;
-  inset: 0;
-
-  background-image: url("assets/cta-background.png");
-  background-position: center;
-  background-repeat: no-repeat;
-
-  /* CHANGE THIS TO CONTROL ZOOM */
-  background-size: 100% auto;
-
-  transform: none !important;
-  filter: none !important;
-  opacity: 1;
-
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* KEEP CONTENT ABOVE BACKGROUND */
 .architecture-cta .architecture-cta-copy {
   position: relative;
-  z-index: 1;
-}
-
-/* MOBILE */
-@media (max-width: 600px) {
-  .architecture-cta .architecture-cta-body::before {
-    background-size: 100% auto;
-  }
+  z-index: 2;
 }
 
 

@@ -22,6 +22,7 @@ const assets = [
   "information-security-consulting.html",
   "consulting-visual.html",
   "styles.css",
+  "solutions.css",
   "homepage.css",
   "testimonials.css",
   "service-page.css",
@@ -43,6 +44,14 @@ const assets = [
   "assets/favicon.ico",
   "assets/cta-texture.jpg",
   "assets/cta-background.png",
+  "assets/Bento/Bento-01-poster.jpg",
+  "assets/Bento/Bento-01.mp4",
+  "assets/Bento/Bento-02-poster.jpg",
+  "assets/Bento/Bento-02.mp4",
+  "assets/Bento/Bento-03-poster.jpg",
+  "assets/Bento/Bento-03.mp4",
+  "assets/Bento/Bento-04-poster.jpg",
+  "assets/Bento/Bento-04.mp4",
 ];
 
 const encodedAssets = {};
