@@ -27,6 +27,15 @@
    reveal('#testimonials',['.testimonials-shell']);
    reveal('#faq',['.compact-faq-body']);
    reveal('#final-cta',['.home-kicker','h2','.architecture-cta-copy>p:not(.home-kicker)','.cta-primary-btn','.cta-utility-link']);
+   const serviceVisual=document.querySelector('#service-showcase .service-dial-visual');
+   if(serviceVisual)gsap.to(serviceVisual,{yPercent:-10,ease:'none',scrollTrigger:{trigger:'#service-showcase',start:'top bottom',end:'bottom top',scrub:1}});
+   const ctaBody=document.querySelector('#final-cta .architecture-cta-body');
+   if(ctaBody)gsap.to(ctaBody,{yPercent:-3,ease:'none',scrollTrigger:{trigger:'#final-cta',start:'top bottom',end:'bottom top',scrub:1}});
+   document.querySelectorAll('#faq details').forEach(details=>{
+    const answer=details.querySelector(':scope > p');
+    if(!answer||answer.parentElement.classList.contains('faq-answer-wrap'))return;
+    const wrap=document.createElement('div');wrap.className='faq-answer-wrap';answer.replaceWith(wrap);wrap.append(answer);
+   });
   }
 
   if(document.body.classList.contains('bilva-inner')){

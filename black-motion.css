@@ -1,6 +1,7 @@
 /* Pure black page canvas; retain local surfaces for readable grouping. */
 html,body.bilva-home,body.bilva-inner{background:#000!important}
 body.bilva-home,body.bilva-inner{--surface-page:#000;--bg:#000}
+.bilva-home,.bilva-inner{--ink:#F3E9EC;--ink-secondary:#B8B2C4;--ink-muted:#898597}
 .bilva-home>section,.bilva-inner .inner-shell,.bilva-home .bg,.bilva-inner .site-footer,.bilva-home .site-footer{background-color:#000!important}
 /* Let JS enhance an already-legible page, rather than hiding it in CSS. */
 .bilva-home .hero .anim,.bilva-home .headline>span{animation:none;opacity:1;transform:none;filter:none}
@@ -10,4 +11,12 @@ body.bilva-home,body.bilva-inner{--surface-page:#000;--bg:#000}
 .motion-ready #our-solutions .bento-card{transition:border-color .25s}
 #final-cta .cta-primary-btn .ui-icon{transition:transform .2s}
 #final-cta .cta-primary-btn:is(:hover,:focus-visible) .ui-icon{transform:translateX(4px)}
+.bilva-home #faq details summary{cursor:pointer;transition:color .25s ease,background-color .25s ease}
+.bilva-home #faq details summary span{display:inline-block;transition:transform .35s cubic-bezier(.22,1,.36,1)}
+.bilva-home #faq details[open] summary span{transform:rotate(45deg)}
+.bilva-home #faq .faq-answer-wrap{display:grid;grid-template-rows:0fr;transition:grid-template-rows .38s cubic-bezier(.22,1,.36,1),opacity .25s ease;opacity:0}
+.bilva-home #faq details[open] .faq-answer-wrap{grid-template-rows:1fr;opacity:1}
+.bilva-home #faq .faq-answer-wrap>p{min-height:0;overflow:hidden;margin:0;padding-top:0;transition:padding-top .38s cubic-bezier(.22,1,.36,1)}
+.bilva-home #faq details[open] .faq-answer-wrap>p{padding-top:12px}
+@media(prefers-reduced-motion:reduce){.bilva-home #faq .faq-answer-wrap{transition:none}.bilva-home #faq .faq-answer-wrap>p{transition:none}}
 @media(prefers-reduced-motion:reduce){.bilva-home .hero *,.bilva-home .stats *{animation:none!important;opacity:1!important;transform:none!important}.bilva-home .bg-video{display:none}.motion-ready *{scroll-behavior:auto}}
