@@ -2,3 +2,6 @@
 BilvaTech/
 *.tar.gz
 dist/
+
+backups/
+service-content.json

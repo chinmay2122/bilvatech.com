@@ -30,6 +30,8 @@ const assets = [
   "inner-pages.js",
   "bento-polish.css",
   "bento-polish.js",
+  "black-motion.css",
+  "site-motion.js",
   "main.js",
   "service-dial.js",
   "why-globe.js",

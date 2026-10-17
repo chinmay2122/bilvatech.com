@@ -1,0 +1,13 @@
+/* Pure black page canvas; retain local surfaces for readable grouping. */
+html,body.bilva-home,body.bilva-inner{background:#000!important}
+body.bilva-home,body.bilva-inner{--surface-page:#000;--bg:#000}
+.bilva-home>section,.bilva-inner .inner-shell,.bilva-home .bg,.bilva-inner .site-footer,.bilva-home .site-footer{background-color:#000!important}
+/* Let JS enhance an already-legible page, rather than hiding it in CSS. */
+.bilva-home .hero .anim,.bilva-home .headline>span{animation:none;opacity:1;transform:none;filter:none}
+.bilva-home .testimonials-section{opacity:1;transform:none;transition:none}
+.bilva-home .bento-card .solution-scene{transform:none}
+.motion-ready .service-dial-panels [role="tabpanel"]:not([hidden]){animation:none}
+.motion-ready #our-solutions .bento-card{transition:border-color .25s}
+#final-cta .cta-primary-btn .ui-icon{transition:transform .2s}
+#final-cta .cta-primary-btn:is(:hover,:focus-visible) .ui-icon{transform:translateX(4px)}
+@media(prefers-reduced-motion:reduce){.bilva-home .hero *,.bilva-home .stats *{animation:none!important;opacity:1!important;transform:none!important}.bilva-home .bg-video{display:none}.motion-ready *{scroll-behavior:auto}}

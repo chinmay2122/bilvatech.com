@@ -16,6 +16,7 @@
       panels[i].hidden = i !== index;
       segments[i].classList.toggle('is-active', i === index);
     });
+    root.dispatchEvent(new CustomEvent('bilva:service-change', { detail: { index } }));
     root.querySelector('#service-count').textContent = `0${index + 1}`;
     root.querySelector('#dial-core-label').textContent = ['ISOLATE', 'CONNECT', 'FORTIFY'][index];
   }
