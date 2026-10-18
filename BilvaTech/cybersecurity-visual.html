@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Bilva Tech | Cybersecurity Lifecycle Visual</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #050505;
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", Helvetica, Arial, sans-serif;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    #bilvatech-cybersecurity-visual {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background-color: #050505;
+      overflow: hidden;
+      cursor: crosshair;
+    }
+
+    #cs-canvas-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    #cs-canvas-container canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    #cs-labels-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Base Label Styling */
+    .cs-label {
+      position: absolute;
+      color: #9ea4b0;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+      padding: 4px 9px;
+      background: rgba(10, 11, 15, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-left: 2px solid #555;
+      border-radius: 4px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transform: translate(-50%, -50%);
+      opacity: 0.8;
+      transition: opacity 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease, background 0.25s ease;
+      white-space: nowrap;
+      display: none;
+      pointer-events: auto;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+    }
+
+    /* JavaScript States */
+    .cs-label:hover,
+    .cs-label.is-active {
+      opacity: 1;
+      color: #ffffff;
+      border-color: rgba(85, 216, 255, 0.6);
+      border-left-color: #55d8ff;
+      background: rgba(16, 24, 38, 0.94);
+      box-shadow: 0 0 18px rgba(85, 216, 255, 0.4);
+      transform: translate(-50%, -50%) scale(1.05);
+    }
+
+    /* Vulnerability Management special highlight */
+    .cs-label#lbl-vulnerability.is-active {
+      border-color: rgba(255, 50, 50, 0.6);
+      border-left-color: #ff2222;
+      background: rgba(30, 12, 14, 0.96);
+      box-shadow: 0 0 22px rgba(255, 34, 34, 0.6);
+      text-shadow: 0 0 8px rgba(255, 34, 34, 0.7);
+    }
+
+    .cs-label.is-dimmed {
+      opacity: 0.2;
+    }
+
+    @media (max-width: 520px) {
+      .cs-label {
+        font-size: 8px;
+        padding: 2px 6px;
+        letter-spacing: 0.8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- REPLACEMENT CONTAINER FOR YOUR CYBERSECURITY VISUAL -->
+  <div id="bilvatech-cybersecurity-visual">
+    
+    <!-- 3D Canvas Layer -->
+    <div id="cs-canvas-container"></div>
+    
+    <!-- UI Labels Layer -->
+    <div id="cs-labels-container">
+      <div class="cs-label" id="lbl-architecture" data-stage="0">SECURE ARCHITECTURE</div>
+      <div class="cs-label" id="lbl-boot" data-stage="1">SECURE BOOT</div>
+      <div class="cs-label" id="lbl-auth" data-stage="2">AUTHENTICATION</div>
+      <div class="cs-label" id="lbl-data" data-stage="3">DATA PROTECTION</div>
+      <div class="cs-label" id="lbl-operation" data-stage="4">SECURE OPERATION</div>
+      <div class="cs-label" id="lbl-monitoring" data-stage="5">MONITORING</div>
+      <div class="cs-label" id="lbl-update" data-stage="6">SECURE UPDATE</div>
+      <div class="cs-label" id="lbl-vulnerability" data-stage="7">VULNERABILITY MANAGEMENT</div>
+    </div>
+
+  </div>
+
+  <!-- Load Three.js from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    (function() {
+      const container = document.getElementById('bilvatech-cybersecurity-visual');
+      const canvasContainer = document.getElementById('cs-canvas-container');
+      if (!container || !canvasContainer) return;
+
+      // --- Configuration ---
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const isMobile = window.innerWidth < 768;
+      const globalSpeed = prefersReducedMotion ? 0 : 1;
+
+      // --- Scene & Camera ---
+      const scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x050505, 0.025);
+
+      const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
+
+      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      canvasContainer.appendChild(renderer.domElement);
+
+      const masterGroup = new THREE.Group();
+      scene.add(masterGroup);
+
+      // --- Materials ---
+      const matCoreMetal = new THREE.MeshStandardMaterial({ color: 0x111116, metalness: 0.9, roughness: 0.2 });
+      const matGlassLayer = new THREE.MeshPhysicalMaterial({
+        color: 0x181a28, metalness: 0.2, roughness: 0.1, transmission: 0.85, transparent: true, opacity: 0.25, side: THREE.DoubleSide
+      });
+      const matNode = new THREE.MeshStandardMaterial({ color: 0xcccccc, metalness: 0.5, roughness: 0.2 });
+      const matWireframe = new THREE.LineBasicMaterial({ color: 0x485060, transparent: true, opacity: 0.35 });
+      const matPathNormal = new THREE.LineBasicMaterial({ color: 0x3d4452, transparent: true, opacity: 0.25 });
+      const matPathActive = new THREE.LineBasicMaterial({ color: 0x55d8ff, transparent: true, opacity: 0.85 });
+      const matPathAlert = new THREE.LineBasicMaterial({ color: 0xff3333, transparent: true, opacity: 0.9 });
+
+      // --- 1. SYSTEM CORE (Protected Platform) ---
+      const coreGroup = new THREE.Group();
+      masterGroup.add(coreGroup);
+
+      const coreMesh = new THREE.Mesh(new THREE.BoxGeometry(1.4, 1.4, 1.4), matCoreMetal);
+      const coreEdges = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(1.4, 1.4, 1.4)), matWireframe);
+      coreGroup.add(coreMesh, coreEdges);
+
+      // Internal nodes
+      for(let i = 0; i < 4; i++) {
+        const node = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.2, 0.2), matNode.clone());
+        node.position.set((Math.random() - 0.5) * 0.7, (Math.random() - 0.5) * 0.7, (Math.random() - 0.5) * 0.7);
+        coreGroup.add(node);
+      }
+
+      const coreHitbox = new THREE.Mesh(new THREE.SphereGeometry(1.6, 8, 8), new THREE.MeshBasicMaterial({ visible: false }));
+      coreHitbox.userData = { type: 'core' };
+      coreGroup.add(coreHitbox);
+
+      const coreLight = new THREE.PointLight(0xffffff, 0.5, 6);
+      coreGroup.add(coreLight);
+
+      // --- 2. ROTATING SECURITY LAYERS ---
+      const securityLayers = [];
+      const layerRadii = [2.0, 2.8, 3.6];
+      layerRadii.forEach((r, idx) => {
+        const lGroup = new THREE.Group();
+        const geo = new THREE.IcosahedronGeometry(r, 1);
+        const mesh = new THREE.Mesh(geo, matGlassLayer.clone());
+        const wire = new THREE.LineSegments(new THREE.EdgesGeometry(geo), matWireframe);
+        lGroup.add(mesh, wire);
+        masterGroup.add(lGroup);
+        securityLayers.push({ group: lGroup, speed: (idx % 2 === 0 ? 1 : -1) * (0.002 + idx * 0.001) });
+      });
+
+      // --- 3. LIFECYCLE STAGES (Orbiting 3D Nodes) ---
+      const stages = [
+        { name: "SECURE ARCHITECTURE", angle: 0 },
+        { name: "SECURE BOOT", angle: Math.PI * 0.25 },
+        { name: "AUTHENTICATION", angle: Math.PI * 0.5 },
+        { name: "DATA PROTECTION", angle: Math.PI * 0.75 },
+        { name: "SECURE OPERATION", angle: Math.PI },
+        { name: "MONITORING", angle: Math.PI * 1.25 },
+        { name: "SECURE UPDATE", angle: Math.PI * 1.5 },
+        { name: "VULNERABILITY MANAGEMENT", angle: Math.PI * 1.75 }
+      ];
+
+      const orbitRadius = 4.8;
+      const stageNodes = [];
+
+      stages.forEach((st, i) => {
+        const sGroup = new THREE.Group();
+        const x = Math.cos(st.angle) * orbitRadius;
+        const z = Math.sin(st.angle) * orbitRadius;
+        sGroup.position.set(x, 0, z);
+
+        // Stage Node Geometry
+        const mesh = new THREE.Mesh(new THREE.OctahedronGeometry(0.32, 0), matNode.clone());
+        sGroup.add(mesh);
+
+        // Hitbox for raycasting
+        const hitbox = new THREE.Mesh(new THREE.SphereGeometry(0.7, 8, 8), new THREE.MeshBasicMaterial({ visible: false }));
+        hitbox.userData = { type: 'stage', index: i };
+        sGroup.add(hitbox);
+
+        masterGroup.add(sGroup);
+        stageNodes.push({ group: sGroup, mesh: mesh, hitbox: hitbox, angle: st.angle, index: i });
+      });
+
+      // --- 4. LIFECYCLE PATH (Connecting Ring) ---
+      const orbitCurvePoints = [];
+      const segments = 64;
+      for (let i = 0; i <= segments; i++) {
+        const theta = (i / segments) * Math.PI * 2;
+        orbitCurvePoints.push(new THREE.Vector3(Math.cos(theta) * orbitRadius, 0, Math.sin(theta) * orbitRadius));
+      }
+      const orbitGeo = new THREE.BufferGeometry().setFromPoints(orbitCurvePoints);
+      const orbitPathLine = new THREE.Line(orbitGeo, matPathNormal);
+      masterGroup.add(orbitPathLine);
+
+      // Core-to-Stage connection lines
+      const spokeLines = [];
+      stageNodes.forEach(sn => {
+        const p1 = new THREE.Vector3(0, 0, 0);
+        const p2 = sn.group.position;
+        const lineGeo = new THREE.BufferGeometry().setFromPoints([p1, p2]);
+        const line = new THREE.Line(lineGeo, matPathNormal.clone());
+        masterGroup.add(line);
+        spokeLines.push({ line, index: sn.index });
+      });
+
+      // --- 5. PARTICLES (Continuous Flow & Events) ---
+      const particles = [];
+      const particleGeo = new THREE.SphereGeometry(0.045, 6, 6);
+      const pMatNormal = new THREE.MeshBasicMaterial({ color: 0x99e5ff });
+
+      function spawnLifecycleParticle() {
+        const pMesh = new THREE.Mesh(particleGeo, pMatNormal);
+        masterGroup.add(pMesh);
+        particles.push({ mesh: pMesh, progress: Math.random(), speed: 0.003, type: 'orbit' });
+      }
+
+      for(let i = 0; i < 18; i++) spawnLifecycleParticle();
+
+      // --- LIGHTING ---
+      scene.add(new THREE.AmbientLight(0xffffff, 0.45));
+
+      const dirLight1 = new THREE.DirectionalLight(0xffffff, 1.1);
+      dirLight1.position.set(6, 10, 8);
+      scene.add(dirLight1);
+
+      const dirLight2 = new THREE.DirectionalLight(0x5588ff, 0.5);
+      dirLight2.position.set(-6, -6, 6);
+      scene.add(dirLight2);
+
+      const alertLight = new THREE.PointLight(0xff2222, 0, 7);
+      masterGroup.add(alertLight);
+
+      // --- INTERACTION & PARALLAX ---
+      const raycaster = new THREE.Raycaster();
+      const mouse = new THREE.Vector2(-999, -999);
+      let targetRotX = 0, targetRotY = 0;
+      let currentRotX = 0, currentRotY = 0;
+      let hoveredStage = null;
+      let isCoreHovered = false;
+
+      function updateMouseCoords(clientX, clientY) {
+        const rect = container.getBoundingClientRect();
+        mouse.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+        mouse.y = -((clientY - rect.top) / rect.height) * 2 + 1;
+        if (globalSpeed > 0) {
+          targetRotY = mouse.x * 0.12;
+          targetRotX = mouse.y * 0.1;
+        }
+      }
+
+      container.addEventListener('mousemove', (e) => {
+        updateMouseCoords(e.clientX, e.clientY);
+      });
+
+      container.addEventListener('mouseleave', () => {
+        mouse.x = -999;
+        mouse.y = -999;
+        targetRotX = 0;
+        targetRotY = 0;
+      });
+
+      container.addEventListener('touchstart', (e) => {
+        if (e.touches.length > 0) {
+          updateMouseCoords(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      }, { passive: true });
+
+      container.addEventListener('touchmove', (e) => {
+        if (e.touches.length > 0) {
+          updateMouseCoords(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      }, { passive: true });
+
+      container.addEventListener('touchend', () => {
+        mouse.x = -999;
+        mouse.y = -999;
+        targetRotX = 0;
+        targetRotY = 0;
+      }, { passive: true });
+
+      // Label hover events
+      const htmlLabels = document.querySelectorAll('.cs-label');
+      htmlLabels.forEach(lbl => {
+        lbl.addEventListener('mouseenter', (e) => {
+          hoveredStage = parseInt(e.target.getAttribute('data-stage'));
+        });
+        lbl.addEventListener('mouseleave', () => {
+          hoveredStage = null;
+        });
+      });
+
+      // --- LABEL SYNCING & OUTWARD OFFSETS ---
+      const labelIds = [
+        'lbl-architecture', 'lbl-boot', 'lbl-auth', 'lbl-data',
+        'lbl-operation', 'lbl-monitoring', 'lbl-update', 'lbl-vulnerability'
+      ];
+
+      const labelData = stageNodes.map((sn, i) => {
+        // Outward radial position slightly past each stage node
+        const outwardDist = orbitRadius + 0.65;
+        const lx = Math.cos(sn.angle) * outwardDist;
+        const lz = Math.sin(sn.angle) * outwardDist;
+        return {
+          el: document.getElementById(labelIds[i]),
+          pos: new THREE.Vector3(lx, 0.25, lz),
+          index: i
+        };
+      });
+
+      function updateLabels() {
+        const w = container.clientWidth;
+        const h = container.clientHeight;
+        const halfW = w / 2;
+        const halfH = h / 2;
+        const pad = 10;
+
+        labelData.forEach(lbl => {
+          if (!lbl.el) return;
+          const vec = lbl.pos.clone();
+          vec.applyMatrix4(masterGroup.matrixWorld);
+          vec.project(camera);
+          
+          if (vec.z < 1) { 
+            lbl.el.style.display = 'block';
+            const rawX = (vec.x * halfW + halfW);
+            const rawY = (-(vec.y * halfH) + halfH);
+            
+            const elW = lbl.el.offsetWidth || 65;
+            const elH = lbl.el.offsetHeight || 22;
+
+            const clampedX = Math.max(pad + elW / 2, Math.min(w - pad - elW / 2, rawX));
+            const clampedY = Math.max(pad + elH / 2, Math.min(h - pad - elH / 2, rawY));
+
+            lbl.el.style.left = clampedX + 'px';
+            lbl.el.style.top = clampedY + 'px';
+          } else {
+            lbl.el.style.display = 'none';
+          }
+
+          const isActive = (hoveredStage === lbl.index) || (activeLifecycleStage === lbl.index);
+          const isDimmed = (hoveredStage !== null || isCoreHovered) && !isActive;
+          
+          lbl.el.classList.toggle('is-active', isActive);
+          lbl.el.classList.toggle('is-dimmed', isDimmed);
+        });
+      }
+
+      // --- DYNAMIC CAMERA & PERSPECTIVE SIZING ---
+      function onResize() {
+        const width = container.clientWidth || window.innerWidth;
+        const height = container.clientHeight || window.innerHeight;
+        if (!width || !height) return;
+
+        const aspect = width / height;
+        camera.aspect = aspect;
+        camera.updateProjectionMatrix();
+        renderer.setSize(width, height, false);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+
+        // Ring dimensions: diameter ~ 10.0 units + labels outward offset ~ 1.3 -> ~ 11.3 units width
+        const fovRad = (camera.fov * Math.PI) / 180;
+        const halfTan = Math.tan(fovRad / 2);
+
+        const desiredWidth = 11.4;
+        const desiredHeight = 9.2;
+
+        const distV = (desiredHeight / 2) / halfTan;
+        const distH = (desiredWidth / 2) / (halfTan * aspect);
+
+        const targetDist = Math.max(distV, distH);
+
+        // Perspective angle ~ 30 degrees elevation for clear elliptical 3D visibility
+        const elevationAngle = 30 * (Math.PI / 180);
+        const camY = targetDist * Math.sin(elevationAngle);
+        const camZ = targetDist * Math.cos(elevationAngle);
+
+        camera.position.set(0, camY, camZ);
+        camera.lookAt(0, 0, 0);
+      }
+
+      window.addEventListener('resize', onResize);
+      onResize();
+
+      let isVisible = true;
+      if (window.IntersectionObserver) {
+        const observer = new IntersectionObserver(entries => {
+          isVisible = entries[0].isIntersecting;
+        });
+        observer.observe(container);
+      }
+
+      // --- HIT TARGETS FOR RAYCASTING ---
+      const hitTargets = [coreHitbox, ...stageNodes.map(sn => sn.hitbox)];
+
+      // --- RENDER LOOP ---
+      let time = 0;
+      let frame = 0;
+      let activeLifecycleStage = 0;
+
+      function animate() {
+        requestAnimationFrame(animate);
+        if (!isVisible) return;
+
+        time += 0.01 * globalSpeed;
+        frame++;
+
+        // Smooth Parallax
+        currentRotX += (targetRotX - currentRotX) * 0.05;
+        currentRotY += (targetRotY - currentRotY) * 0.05;
+        masterGroup.rotation.y = (time * 0.03) + currentRotY;
+        masterGroup.rotation.x = currentRotX;
+
+        masterGroup.updateMatrixWorld();
+        updateLabels();
+
+        // Rotate Security Layers
+        securityLayers.forEach(l => {
+          l.group.rotation.y += l.speed;
+        });
+
+        // Active Stage Progression over time (cycles every ~2 seconds)
+        if (frame % 120 === 0) {
+          activeLifecycleStage = (activeLifecycleStage + 1) % stages.length;
+        }
+
+        // Raycasting for 3D Hover
+        let raycastStage = null;
+        let raycastCore = false;
+        if (mouse.x !== -999) {
+          raycaster.setFromCamera(mouse, camera);
+          const intersects = raycaster.intersectObjects(hitTargets);
+          if (intersects.length > 0) {
+            const hit = intersects[0].object;
+            if (hit.userData.type === 'core') raycastCore = true;
+            if (hit.userData.type === 'stage') raycastStage = hit.userData.index;
+          }
+        }
+        
+        isCoreHovered = raycastCore || (hoveredStage === 'core');
+        if (raycastStage !== null) hoveredStage = raycastStage;
+
+        // Core visual feedback
+        const coreActive = isCoreHovered || activeLifecycleStage === 0;
+        coreLight.intensity = coreActive ? 2.5 : 0.5;
+        coreMesh.material.color.lerp(new THREE.Color(coreActive ? 0x222228 : 0x111116), 0.1);
+
+        // Stage Node styling & Spoke Line Highlighting
+        stageNodes.forEach((sn, i) => {
+          const isHovered = hoveredStage === i;
+          const isActiveState = activeLifecycleStage === i;
+          
+          sn.mesh.scale.setScalar(isHovered || isActiveState ? 1.35 : 1.0);
+          sn.mesh.material.color.lerp(new THREE.Color(isHovered || isActiveState ? 0x55d8ff : 0xcccccc), 0.12);
+        });
+
+        spokeLines.forEach(sp => {
+          const isHovered = hoveredStage === sp.index;
+          const isActiveState = activeLifecycleStage === sp.index;
+          
+          if (isHovered || isActiveState) {
+            sp.line.material = sp.index === 7 ? matPathAlert : matPathActive;
+          } else {
+            sp.line.material = matPathNormal;
+          }
+        });
+
+        // Vulnerability Management Simulation (Stage 7 Alert Pulse)
+        if (activeLifecycleStage === 7 || hoveredStage === 7) {
+          const alertPulse = (Math.sin(time * 6) + 1) / 2;
+          alertLight.position.copy(stageNodes[7].group.position);
+          alertLight.intensity = alertPulse * 3;
+        } else {
+          alertLight.intensity = 0;
+        }
+
+        // Particles along orbit
+        particles.forEach((p, idx) => {
+          p.progress += p.speed * (globalSpeed || 0.2);
+          if (p.progress >= 1.0) p.progress = 0;
+
+          const theta = p.progress * Math.PI * 2;
+          p.mesh.position.set(
+            Math.cos(theta) * orbitRadius,
+            Math.sin(time * 2 + idx) * 0.08,
+            Math.sin(theta) * orbitRadius
+          );
+        });
+
+        renderer.render(scene, camera);
+      }
+
+      animate();
+    })();
+  </script>
+</body>
+</html>

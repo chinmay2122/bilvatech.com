@@ -1,0 +1,1024 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Bilva Tech | Security Risk & Governance Map</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #050505;
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", Helvetica, Arial, sans-serif;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    #bilvatech-consulting-visual {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 600px;
+      background-color: #050505;
+      overflow: hidden;
+      cursor: default;
+    }
+
+    #cv-canvas-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    #cv-canvas-container canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    #cv-labels-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Core and Module Label Styling */
+    .cv-label {
+      position: absolute;
+      color: #8c93a0;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      padding: 7px 14px;
+      background: rgba(10, 12, 16, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-left: 2px solid #555e6d;
+      border-radius: 4px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transform: translate(-50%, -50%);
+      opacity: 0.72;
+      transition: opacity 0.28s ease, color 0.28s ease, border-color 0.28s ease, transform 0.25s ease, background 0.28s ease, box-shadow 0.28s ease;
+      white-space: nowrap;
+      pointer-events: auto;
+      cursor: pointer;
+    }
+
+    .cv-label .cv-subtext {
+      display: none;
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.4px;
+      text-transform: none;
+      color: #b0b8c5;
+      margin-top: 3px;
+    }
+
+    .cv-label.is-active {
+      opacity: 1;
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.35);
+      border-left-color: #d12222;
+      background: rgba(18, 20, 26, 0.95);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7), 0 0 16px rgba(209, 34, 34, 0.18);
+      transform: translate(-50%, -58%) scale(1.04);
+      z-index: 10;
+    }
+
+    .cv-label.is-active .cv-subtext {
+      display: block;
+    }
+
+    .cv-label.is-dimmed {
+      opacity: 0.18;
+      transform: translate(-50%, -50%) scale(0.95);
+    }
+
+    /* Central Core Master Badge */
+    .cv-core-label {
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      font-weight: 700;
+      border-left: 2px solid #a0aab8;
+      background: rgba(14, 16, 22, 0.92);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .cv-core-label.is-active {
+      border-left-color: #ffffff;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 24px rgba(255, 255, 255, 0.15);
+    }
+
+    /* Subtle Blueprint Overlay */
+    .blueprint-badge {
+      position: absolute;
+      bottom: 18px;
+      left: 22px;
+      z-index: 3;
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.3);
+      pointer-events: none;
+    }
+
+    .blueprint-badge span {
+      color: rgba(209, 34, 34, 0.7);
+      margin-left: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .cv-label {
+        font-size: 9px;
+        padding: 5px 10px;
+        letter-spacing: 1px;
+      }
+      .cv-core-label {
+        font-size: 10px;
+      }
+      .blueprint-badge {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div id="bilvatech-consulting-visual">
+  <div id="cv-canvas-container"></div>
+  
+  <div id="cv-labels-container">
+    <div class="cv-label cv-core-label" id="lbl-core" data-idx="core">
+      SECURITY POSTURE CORE
+      <div class="cv-subtext">Integrated Business, Tech & Security State</div>
+    </div>
+    
+    <div class="cv-label" id="lbl-mod-0" data-idx="0">
+      SECURITY RISK ASSESSMENT
+      <div class="cv-subtext">Continuous scan & exposure identification</div>
+    </div>
+    <div class="cv-label" id="lbl-mod-1" data-idx="1">
+      SECURITY ARCHITECTURE & STRATEGY
+      <div class="cv-subtext">Dynamic structural alignment & defense roadmaps</div>
+    </div>
+    <div class="cv-label" id="lbl-mod-2" data-idx="2">
+      DATA PROTECTION
+      <div class="cv-subtext">Encrypted vaults & shielded sensitive data flows</div>
+    </div>
+    <div class="cv-label" id="lbl-mod-3" data-idx="3">
+      IDENTITY & ACCESS
+      <div class="cv-subtext">Zero-trust gates & verified perimeter access</div>
+    </div>
+    <div class="cv-label" id="lbl-mod-4" data-idx="4">
+      SECURITY POLICIES & GOVERNANCE
+      <div class="cv-subtext">Hierarchical operational rules & control tiers</div>
+    </div>
+    <div class="cv-label" id="lbl-mod-5" data-idx="5">
+      COMPLIANCE & SECURITY READINESS
+      <div class="cv-subtext">Automated multi-frame regulatory verification</div>
+    </div>
+    <div class="cv-label" id="lbl-mod-6" data-idx="6">
+      INCIDENT PREPAREDNESS & RESPONSE
+      <div class="cv-subtext">Active containment & anomaly isolation</div>
+    </div>
+    <div class="cv-label" id="lbl-mod-7" data-idx="7">
+      VULNERABILITY & SECURITY IMPROVEMENT
+      <div class="cv-subtext">Continuous remediation & posture hardening</div>
+    </div>
+  </div>
+
+  <div class="blueprint-badge">
+    MAP: SECURITY RISK & GOVERNANCE <span>● ACTIVE MONITORING</span>
+  </div>
+</div>
+
+<!-- Three.js CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<script>
+(function() {
+  const container = document.getElementById('bilvatech-consulting-visual');
+  const canvasContainer = document.getElementById('cv-canvas-container');
+  if (!container || !canvasContainer) return;
+
+  // --- Scene, Camera, Renderer ---
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x050505);
+  scene.fog = new THREE.FogExp2(0x050505, 0.026);
+
+  const camera = new THREE.PerspectiveCamera(38, container.clientWidth / container.clientHeight, 0.1, 100);
+  camera.position.set(0, 3.2, 19.2);
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: 'high-performance' });
+  renderer.setSize(container.clientWidth, container.clientHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.1;
+  canvasContainer.appendChild(renderer.domElement);
+
+  // --- Lighting ---
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+  scene.add(ambientLight);
+
+  const dirLight = new THREE.DirectionalLight(0xffffff, 1.2);
+  dirLight.position.set(10, 15, 12);
+  scene.add(dirLight);
+
+  const fillLight = new THREE.DirectionalLight(0x738299, 0.6);
+  fillLight.position.set(-12, -8, -10);
+  scene.add(fillLight);
+
+  // Subtle red accent light strictly for risk activities
+  const riskLight = new THREE.PointLight(0xd12222, 0, 15);
+  riskLight.position.set(0, 2, 0);
+  scene.add(riskLight);
+
+  // Master interaction group
+  const masterGroup = new THREE.Group();
+  scene.add(masterGroup);
+
+  // --- Shared Architectural Materials ---
+  const matCharcoal = new THREE.MeshStandardMaterial({
+    color: 0x141820,
+    roughness: 0.45,
+    metalness: 0.75
+  });
+
+  const matDarkMetal = new THREE.MeshStandardMaterial({
+    color: 0x1d222b,
+    roughness: 0.25,
+    metalness: 0.85
+  });
+
+  const matGlass = new THREE.MeshPhysicalMaterial({
+    color: 0x8a99ad,
+    transparent: true,
+    opacity: 0.45,
+    roughness: 0.15,
+    metalness: 0.1,
+    transmission: 0.6,
+    thickness: 0.8
+  });
+
+  const matFrosted = new THREE.MeshStandardMaterial({
+    color: 0x222733,
+    transparent: true,
+    opacity: 0.65,
+    roughness: 0.6,
+    metalness: 0.3
+  });
+
+  const matSilverEdge = new THREE.LineBasicMaterial({
+    color: 0x5a6575,
+    transparent: true,
+    opacity: 0.65
+  });
+
+  const matBrightEdge = new THREE.LineBasicMaterial({
+    color: 0xffffff,
+    transparent: true,
+    opacity: 0.95
+  });
+
+  const matRedEdge = new THREE.LineBasicMaterial({
+    color: 0xd12222,
+    transparent: true,
+    opacity: 0.9
+  });
+
+  const matConnNormal = new THREE.LineBasicMaterial({
+    color: 0x2a3240,
+    transparent: true,
+    opacity: 0.45
+  });
+
+  const matConnActive = new THREE.LineBasicMaterial({
+    color: 0xd12222,
+    transparent: true,
+    opacity: 0.95
+  });
+
+  const matConnCoreHover = new THREE.LineBasicMaterial({
+    color: 0xffffff,
+    transparent: true,
+    opacity: 0.85
+  });
+
+  function addEdges(mesh, mat = matSilverEdge) {
+    const wire = new THREE.LineSegments(new THREE.EdgesGeometry(mesh.geometry), mat);
+    mesh.add(wire);
+    return wire;
+  }
+
+  // --- 1. Architectural Blueprint Grid Floor ---
+  const gridHelper = new THREE.GridHelper(30, 30, 0x1f242e, 0x101318);
+  gridHelper.position.y = -4.5;
+  masterGroup.add(gridHelper);
+
+  // --- 2. Central Core: "SECURITY POSTURE CORE" ---
+  // Layer 1: Business Environment (bottom)
+  // Layer 2: Technology Environment (middle)
+  // Layer 3: Security Posture (top)
+  const coreGroup = new THREE.Group();
+  coreGroup.position.set(0, -0.2, 0);
+  masterGroup.add(coreGroup);
+
+  // Layer 1: BUSINESS ENVIRONMENT (Wide dark metal slab)
+  const layer1Geo = new THREE.CylinderGeometry(2.6, 2.8, 0.35, 8);
+  const layer1 = new THREE.Mesh(layer1Geo, matDarkMetal);
+  layer1.position.y = -0.9;
+  addEdges(layer1);
+  coreGroup.add(layer1);
+
+  // Layer 2: TECHNOLOGY ENVIRONMENT (Middle frosted/tinted slab)
+  const layer2Geo = new THREE.CylinderGeometry(2.1, 2.3, 0.45, 8);
+  const layer2 = new THREE.Mesh(layer2Geo, matFrosted);
+  layer2.position.y = -0.15;
+  addEdges(layer2);
+  coreGroup.add(layer2);
+
+  // Spacers between layers (precision architectural columns)
+  for (let i = 0; i < 4; i++) {
+    const angle = (i / 4) * Math.PI * 2 + Math.PI / 4;
+    const colGeo = new THREE.CylinderGeometry(0.06, 0.06, 0.4, 8);
+    const col1 = new THREE.Mesh(colGeo, matCharcoal);
+    col1.position.set(Math.cos(angle) * 1.8, -0.52, Math.sin(angle) * 1.8);
+    coreGroup.add(col1);
+
+    const col2 = new THREE.Mesh(colGeo, matCharcoal);
+    col2.position.set(Math.cos(angle) * 1.5, 0.28, Math.sin(angle) * 1.5);
+    coreGroup.add(col2);
+  }
+
+  // Layer 3: SECURITY POSTURE (Top transparent glass architectural platform)
+  const layer3Geo = new THREE.CylinderGeometry(1.6, 1.8, 0.5, 8);
+  const layer3 = new THREE.Mesh(layer3Geo, matGlass);
+  layer3.position.y = 0.65;
+  const layer3Edges = addEdges(layer3, matBrightEdge);
+  coreGroup.add(layer3);
+
+  // Crown Monolith on top of Security Posture
+  const crownGeo = new THREE.OctahedronGeometry(0.65, 0);
+  const crownMesh = new THREE.Mesh(crownGeo, matDarkMetal);
+  crownMesh.position.y = 1.35;
+  addEdges(crownMesh, matSilverEdge);
+  coreGroup.add(crownMesh);
+
+  // Subtle circulating security posture state points inside Layer 3
+  const coreParticleCount = 28;
+  const coreParticlesGeo = new THREE.BufferGeometry();
+  const corePos = new Float32Array(coreParticleCount * 3);
+  for (let i = 0; i < coreParticleCount; i++) {
+    const r = 0.4 + Math.random() * 0.95;
+    const theta = Math.random() * Math.PI * 2;
+    corePos[i * 3] = Math.cos(theta) * r;
+    corePos[i * 3 + 1] = 0.45 + (Math.random() - 0.5) * 0.35;
+    corePos[i * 3 + 2] = Math.sin(theta) * r;
+  }
+  coreParticlesGeo.setAttribute('position', new THREE.BufferAttribute(corePos, 3));
+  const coreParticlesMat = new THREE.PointsMaterial({
+    color: 0xdde6f2,
+    size: 0.12,
+    transparent: true,
+    opacity: 0.85
+  });
+  const corePoints = new THREE.Points(coreParticlesGeo, coreParticlesMat);
+  coreGroup.add(corePoints);
+
+  // Core Hitbox for Hover Raycasting
+  const coreHitbox = new THREE.Mesh(
+    new THREE.CylinderGeometry(3.0, 3.0, 3.2, 8),
+    new THREE.MeshBasicMaterial({ visible: false })
+  );
+  coreHitbox.position.y = 0.4;
+  coreHitbox.userData = { isCore: true };
+  coreGroup.add(coreHitbox);
+
+  // --- 3. Surrounding Security Domains (8 Spatial Modules) ---
+  // Irregular, non-circular balanced 3D distribution with deep depth
+  const moduleConfigs = [
+    { id: 0, name: "SECURITY RISK ASSESSMENT", pos: new THREE.Vector3(-3.6, 2.2, 1.8) },
+    { id: 1, name: "SECURITY ARCHITECTURE & STRATEGY", pos: new THREE.Vector3(-3.4, -2.4, 2.2) },
+    { id: 2, name: "DATA PROTECTION", pos: new THREE.Vector3(3.8, -0.4, 2.2) },
+    { id: 3, name: "IDENTITY & ACCESS", pos: new THREE.Vector3(3.8, 2.1, 1.4) },
+    { id: 4, name: "SECURITY POLICIES & GOVERNANCE", pos: new THREE.Vector3(-2.2, 3.8, -2.4) },
+    { id: 5, name: "COMPLIANCE & SECURITY READINESS", pos: new THREE.Vector3(-3.8, 0.2, -2.0) },
+    { id: 6, name: "INCIDENT PREPAREDNESS & RESPONSE", pos: new THREE.Vector3(2.2, 3.8, -2.4) },
+    { id: 7, name: "VULNERABILITY & SECURITY IMPROVEMENT", pos: new THREE.Vector3(3.3, -2.8, -1.8) }
+  ];
+
+  const modules = [];
+
+  // --- Module 0: SECURITY RISK ASSESSMENT (3D Scanning Grid with red anomaly & beam) ---
+  const m0Group = new THREE.Group();
+  const m0GridGeo = new THREE.BoxGeometry(1.6, 1.1, 1.6);
+  const m0Grid = new THREE.LineSegments(new THREE.EdgesGeometry(m0GridGeo), matSilverEdge);
+  m0Group.add(m0Grid);
+
+  // Internal inspection points
+  const m0PointsGeo = new THREE.BufferGeometry();
+  const m0Pts = [];
+  for (let x = -0.5; x <= 0.5; x += 0.5) {
+    for (let z = -0.5; z <= 0.5; z += 0.5) {
+      m0Pts.push(x, 0, z);
+    }
+  }
+  m0PointsGeo.setAttribute('position', new THREE.Float32BufferAttribute(m0Pts, 3));
+  const m0PtsMat = new THREE.PointsMaterial({ color: 0x8894a6, size: 0.1 });
+  const m0Points = new THREE.Points(m0PointsGeo, m0PtsMat);
+  m0Group.add(m0Points);
+
+  // Single risk point that periodically turns red
+  const m0RiskPoint = new THREE.Mesh(
+    new THREE.SphereGeometry(0.12, 8, 8),
+    new THREE.MeshBasicMaterial({ color: 0x8894a6 })
+  );
+  m0RiskPoint.position.set(0.5, 0, 0.5);
+  m0Group.add(m0RiskPoint);
+
+  // Scanning laser beam
+  const m0BeamGeo = new THREE.PlaneGeometry(1.6, 1.6);
+  const m0BeamMat = new THREE.MeshBasicMaterial({
+    color: 0xffffff,
+    transparent: true,
+    opacity: 0.18,
+    side: THREE.DoubleSide
+  });
+  const m0Beam = new THREE.Mesh(m0BeamGeo, m0BeamMat);
+  m0Beam.rotation.x = Math.PI / 2;
+  m0Group.add(m0Beam);
+
+  // --- Module 1: SECURITY ARCHITECTURE & STRATEGY (Blocks dynamically aligning) ---
+  const m1Group = new THREE.Group();
+  const m1Blocks = [];
+  const m1Count = 5;
+  for (let i = 0; i < m1Count; i++) {
+    const bGeo = new THREE.BoxGeometry(0.35 + i * 0.1, 0.16, 0.45);
+    const bMesh = new THREE.Mesh(bGeo, matGlass);
+    addEdges(bMesh, matSilverEdge);
+    bMesh.userData = { targetY: -0.4 + i * 0.22, origX: (i % 2 === 0 ? 0.3 : -0.3) };
+    bMesh.position.set(bMesh.userData.origX, bMesh.userData.targetY, 0);
+    m1Blocks.push(bMesh);
+    m1Group.add(bMesh);
+  }
+
+  // --- Module 2: DATA PROTECTION (Data blocks entering transparent vault & encoding) ---
+  const m2Group = new THREE.Group();
+  const vaultGeo = new THREE.BoxGeometry(1.5, 1.5, 1.5);
+  const vault = new THREE.Mesh(vaultGeo, matGlass);
+  addEdges(vault, matBrightEdge);
+  m2Group.add(vault);
+
+  const m2DataBlocks = [];
+  for (let i = 0; i < 4; i++) {
+    const dGeo = new THREE.BoxGeometry(0.24, 0.24, 0.24);
+    const dMesh = new THREE.Mesh(dGeo, matDarkMetal);
+    addEdges(dMesh, matSilverEdge);
+    m2Group.add(dMesh);
+    m2DataBlocks.push({ mesh: dMesh, offset: (i / 4) * Math.PI * 2 });
+  }
+
+  // --- Module 3: IDENTITY & ACCESS (Authorized connecting paths vs unauthorized stops) ---
+  const m3Group = new THREE.Group();
+  const gateGeo = new THREE.CylinderGeometry(0.4, 0.45, 1.2, 6);
+  const gate = new THREE.Mesh(gateGeo, matCharcoal);
+  addEdges(gate, matSilverEdge);
+  m3Group.add(gate);
+
+  // Perimeter threshold ring
+  const ringGeo = new THREE.RingGeometry(0.85, 0.95, 16);
+  const ring = new THREE.Mesh(ringGeo, new THREE.MeshBasicMaterial({ color: 0x485260, side: THREE.DoubleSide }));
+  ring.rotation.x = Math.PI / 2;
+  m3Group.add(ring);
+
+  // Access conduits
+  const m3Pointers = [];
+  for (let i = 0; i < 3; i++) {
+    const pGeo = new THREE.BoxGeometry(0.12, 0.12, 0.5);
+    const authorized = i !== 1; // 0 and 2 are authorized; 1 is blocked
+    const pMesh = new THREE.Mesh(pGeo, new THREE.MeshBasicMaterial({ color: authorized ? 0x9fb2c8 : 0x5a2020 }));
+    pMesh.userData = { authorized, idx: i };
+    m3Group.add(pMesh);
+    m3Pointers.push(pMesh);
+  }
+
+  // --- Module 4: SECURITY POLICIES & GOVERNANCE (Hierarchical tier planes) ---
+  const m4Group = new THREE.Group();
+  for (let i = 0; i < 4; i++) {
+    const tierGeo = new THREE.BoxGeometry(1.6 - i * 0.28, 0.08, 1.2 - i * 0.2);
+    const tierMesh = new THREE.Mesh(tierGeo, matFrosted);
+    tierMesh.position.y = -0.45 + i * 0.3;
+    addEdges(tierMesh, matSilverEdge);
+    m4Group.add(tierMesh);
+
+    // Vertical structural pillars tying the hierarchy
+    const postGeo = new THREE.CylinderGeometry(0.03, 0.03, 0.3, 4);
+    const post = new THREE.Mesh(postGeo, matDarkMetal);
+    post.position.set(0.5 - i * 0.1, -0.3 + i * 0.3, 0.3 - i * 0.08);
+    m4Group.add(post);
+  }
+
+  // --- Module 5: COMPLIANCE & SECURITY READINESS (Scanning verification frames) ---
+  const m5Group = new THREE.Group();
+  const auditNodeGeo = new THREE.OctahedronGeometry(0.45, 0);
+  const auditNode = new THREE.Mesh(auditNodeGeo, matDarkMetal);
+  addEdges(auditNode, matSilverEdge);
+  m5Group.add(auditNode);
+
+  const m5Frames = [];
+  for (let i = 0; i < 3; i++) {
+    const fGeo = new THREE.BoxGeometry(1.3 + i * 0.25, 0.06, 1.3 + i * 0.25);
+    const frame = new THREE.Mesh(fGeo, matGlass);
+    addEdges(frame, matSilverEdge);
+    frame.position.y = -0.5 + i * 0.5;
+    m5Group.add(frame);
+    m5Frames.push(frame);
+  }
+
+  // --- Module 6: INCIDENT PREPAREDNESS & RESPONSE (Anomaly approach & isolation shield) ---
+  const m6Group = new THREE.Group();
+  // Protected inner node
+  const m6Center = new THREE.Mesh(new THREE.DodecahedronGeometry(0.5), matCharcoal);
+  addEdges(m6Center, matSilverEdge);
+  m6Group.add(m6Center);
+
+  // Angular isolation shield facets
+  const shieldGeo = new THREE.IcosahedronGeometry(0.95, 0);
+  const shieldMat = new THREE.MeshBasicMaterial({
+    color: 0xd12222,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.15
+  });
+  const m6Shield = new THREE.Mesh(shieldGeo, shieldMat);
+  m6Group.add(m6Shield);
+
+  // Red anomaly node
+  const anomalyGeo = new THREE.SphereGeometry(0.14, 8, 8);
+  const anomalyMat = new THREE.MeshBasicMaterial({ color: 0xd12222 });
+  const m6Anomaly = new THREE.Mesh(anomalyGeo, anomalyMat);
+  m6Anomaly.position.set(1.4, 0.8, 0);
+  m6Group.add(m6Anomaly);
+
+  // --- Module 7: VULNERABILITY & SECURITY IMPROVEMENT (Component replacement & hardening) ---
+  const m7Group = new THREE.Group();
+  const baseChassis = new THREE.Mesh(new THREE.BoxGeometry(1.4, 0.25, 1.4), matDarkMetal);
+  baseChassis.position.y = -0.4;
+  addEdges(baseChassis, matSilverEdge);
+  m7Group.add(baseChassis);
+
+  // Weak component (red-hued / jittery until replaced)
+  const weakComp = new THREE.Mesh(new THREE.BoxGeometry(0.65, 0.55, 0.65), matCharcoal);
+  weakComp.position.set(0, 0.15, 0);
+  const weakEdge = addEdges(weakComp, matRedEdge);
+  m7Group.add(weakComp);
+
+  // Hardened replacement component
+  const robustComp = new THREE.Mesh(new THREE.BoxGeometry(0.65, 0.55, 0.65), matGlass);
+  robustComp.position.set(0, 0.15, 0);
+  addEdges(robustComp, matBrightEdge);
+  robustComp.scale.set(0, 0, 0);
+  m7Group.add(robustComp);
+
+  const groupList = [m0Group, m1Group, m2Group, m3Group, m4Group, m5Group, m6Group, m7Group];
+
+  // Assemble and position all modules
+  moduleConfigs.forEach((cfg, idx) => {
+    const grp = groupList[idx];
+    grp.position.copy(cfg.pos);
+    masterGroup.add(grp);
+
+    // Hitbox for raycasting
+    const hb = new THREE.Mesh(
+      new THREE.BoxGeometry(2.4, 2.4, 2.4),
+      new THREE.MeshBasicMaterial({ visible: false })
+    );
+    hb.userData = { modIdx: idx };
+    grp.add(hb);
+
+    // Controlled connection line to Central Core
+    const coreAttach = new THREE.Vector3(
+      cfg.pos.x * 0.35,
+      cfg.pos.y > 0 ? 0.65 : -0.2,
+      cfg.pos.z * 0.35
+    );
+
+    const curve = new THREE.LineCurve3(cfg.pos, coreAttach);
+    const connGeo = new THREE.BufferGeometry().setFromPoints(curve.getPoints(12));
+    const connLine = new THREE.Line(connGeo, matConnNormal);
+    masterGroup.add(connLine);
+
+    // Particle pulse along connection line
+    const pulseMesh = new THREE.Mesh(
+      new THREE.SphereGeometry(0.08, 6, 6),
+      new THREE.MeshBasicMaterial({ color: 0xc8d4e5, transparent: true, opacity: 0.85 })
+    );
+    masterGroup.add(pulseMesh);
+
+    modules.push({
+      config: cfg,
+      group: grp,
+      originalPos: cfg.pos.clone(),
+      hitbox: hb,
+      connLine: connLine,
+      curve: curve,
+      pulseMesh: pulseMesh,
+      pulseProgress: Math.random()
+    });
+  });
+
+  // --- 4. Background Subtle "Risk Field" ---
+  // ~120 very faint points in background space; occasionally one turns red
+  const riskFieldCount = 120;
+  const riskFieldGeo = new THREE.BufferGeometry();
+  const riskPos = new Float32Array(riskFieldCount * 3);
+  const riskColors = new Float32Array(riskFieldCount * 3);
+
+  for (let i = 0; i < riskFieldCount; i++) {
+    riskPos[i * 3] = (Math.random() - 0.5) * 24;
+    riskPos[i * 3 + 1] = (Math.random() - 0.5) * 14;
+    riskPos[i * 3 + 2] = -8 + (Math.random() - 0.5) * 10;
+
+    // Neutral dark gray
+    riskColors[i * 3] = 0.22;
+    riskColors[i * 3 + 1] = 0.25;
+    riskColors[i * 3 + 2] = 0.3;
+  }
+
+  riskFieldGeo.setAttribute('position', new THREE.BufferAttribute(riskPos, 3));
+  riskFieldGeo.setAttribute('color', new THREE.BufferAttribute(riskColors, 3));
+
+  const riskFieldMat = new THREE.PointsMaterial({
+    size: 0.14,
+    vertexColors: true,
+    transparent: true,
+    opacity: 0.6
+  });
+  const riskField = new THREE.Points(riskFieldGeo, riskFieldMat);
+  masterGroup.add(riskField);
+
+  // Risk Event cycle state
+  let riskCycleTime = 0;
+  let activeRiskIdx = -1;
+
+  // --- 5. Interactive Raycasting & Hover State ---
+  const raycaster = new THREE.Raycaster();
+  const mouse = new THREE.Vector2(-999, -999);
+  let targetParallax = new THREE.Vector2(0, 0);
+  let currentParallax = new THREE.Vector2(0, 0);
+
+  let hoveredModIdx = -1;
+  let isCoreHovered = false;
+
+  const labels = {
+    core: document.getElementById('lbl-core'),
+    modules: [0, 1, 2, 3, 4, 5, 6, 7].map(i => document.getElementById(`lbl-mod-${i}`))
+  };
+
+  function updateHoverStates() {
+    // Core label
+    if (labels.core) {
+      if (isCoreHovered) {
+        labels.core.classList.add('is-active');
+        labels.core.classList.remove('is-dimmed');
+      } else if (hoveredModIdx !== -1) {
+        labels.core.classList.add('is-dimmed');
+        labels.core.classList.remove('is-active');
+      } else {
+        labels.core.classList.remove('is-active', 'is-dimmed');
+      }
+    }
+
+    // Module labels & 3D styling
+    modules.forEach((mod, idx) => {
+      const lbl = labels.modules[idx];
+      const isHovered = (hoveredModIdx === idx);
+
+      if (isCoreHovered) {
+        // When core is hovered: highlight all modules in synchronized architectural flow
+        mod.connLine.material = matConnCoreHover;
+        if (lbl) {
+          lbl.classList.remove('is-dimmed');
+          lbl.classList.add('is-active');
+        }
+      } else if (hoveredModIdx !== -1) {
+        if (isHovered) {
+          mod.connLine.material = matConnActive;
+          if (lbl) {
+            lbl.classList.add('is-active');
+            lbl.classList.remove('is-dimmed');
+          }
+        } else {
+          mod.connLine.material = matConnNormal;
+          if (lbl) {
+            lbl.classList.add('is-dimmed');
+            lbl.classList.remove('is-active');
+          }
+        }
+      } else {
+        mod.connLine.material = matConnNormal;
+        if (lbl) {
+          lbl.classList.remove('is-active', 'is-dimmed');
+        }
+      }
+    });
+  }
+
+  // Pointer event listeners
+  window.addEventListener('pointermove', (e) => {
+    const rect = container.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return;
+
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+      mouse.x = (x / rect.width) * 2 - 1;
+      mouse.y = -(y / rect.height) * 2 + 1;
+
+      targetParallax.x = (x / rect.width - 0.5) * 0.75;
+      targetParallax.y = (y / rect.height - 0.5) * 0.55;
+    } else {
+      mouse.x = -999;
+      mouse.y = -999;
+      targetParallax.set(0, 0);
+    }
+  });
+
+  // Label hover bindings
+  if (labels.core) {
+    labels.core.addEventListener('mouseenter', () => { isCoreHovered = true; hoveredModIdx = -1; updateHoverStates(); });
+    labels.core.addEventListener('mouseleave', () => { isCoreHovered = false; updateHoverStates(); });
+  }
+
+  labels.modules.forEach((lbl, idx) => {
+    if (!lbl) return;
+    lbl.addEventListener('mouseenter', () => { hoveredModIdx = idx; isCoreHovered = false; updateHoverStates(); });
+    lbl.addEventListener('mouseleave', () => { hoveredModIdx = -1; updateHoverStates(); });
+  });
+
+  // Screen projection vector
+  const projVec = new THREE.Vector3();
+  function projectToScreen(pos3D, element) {
+    if (!element) return;
+    projVec.copy(pos3D);
+    projVec.project(camera);
+
+    const w = container.clientWidth;
+    const h = container.clientHeight;
+    const screenX = (projVec.x * 0.5 + 0.5) * w;
+    const screenY = (-(projVec.y * 0.5) + 0.5) * h;
+
+    const marginX = 110;
+    const marginY = 32;
+    const clampedX = Math.max(marginX, Math.min(w - marginX, screenX));
+    const clampedY = Math.max(marginY, Math.min(h - marginY, screenY));
+
+    element.style.left = `${clampedX}px`;
+    element.style.top = `${clampedY}px`;
+  }
+
+  // --- 6. Responsive Viewport Adaptation ---
+  function onResize() {
+    const w = container.clientWidth;
+    const h = container.clientHeight;
+    if (w === 0 || h === 0) return;
+
+    camera.aspect = w / h;
+    if (w < 600) {
+      camera.fov = 48;
+      camera.position.z = 21;
+    } else if (w < 950) {
+      camera.fov = 42;
+      camera.position.z = 19;
+    } else {
+      camera.fov = 38;
+      camera.position.z = 17.5;
+    }
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h);
+  }
+
+  window.addEventListener('resize', onResize);
+  onResize();
+
+  // --- 7. Animation & Lifecycle ---
+  let isVisible = true;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      isVisible = entry.isIntersecting;
+    });
+  }, { threshold: 0.1 });
+  observer.observe(container);
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let clock = new THREE.Clock();
+
+  function animate() {
+    requestAnimationFrame(animate);
+    if (!isVisible) return;
+
+    const delta = clock.getDelta();
+    const time = clock.getElapsedTime();
+
+    // Subtle parallax camera smoothing (no continuous scene rotation)
+    if (!prefersReducedMotion) {
+      currentParallax.x += (targetParallax.x - currentParallax.x) * 0.05;
+      currentParallax.y += (targetParallax.y - currentParallax.y) * 0.05;
+      camera.position.x = currentParallax.x * 2.2;
+      camera.position.y = 3.2 + currentParallax.y * -1.8;
+      camera.lookAt(0, 0, 0);
+    }
+
+    // --- Raycasting for 3D Hitboxes ---
+    raycaster.setFromCamera(mouse, camera);
+    const candidateMeshes = [coreHitbox, ...modules.map(m => m.hitbox)];
+    const intersects = raycaster.intersectObjects(candidateMeshes);
+
+    let nextHovered = -1;
+    let nextCore = false;
+
+    if (intersects.length > 0) {
+      const hit = intersects[0].object;
+      if (hit.userData.isCore) {
+        nextCore = true;
+      } else if (hit.userData.modIdx !== undefined) {
+        nextHovered = hit.userData.modIdx;
+      }
+    }
+
+    if (nextHovered !== hoveredModIdx || nextCore !== isCoreHovered) {
+      hoveredModIdx = nextHovered;
+      isCoreHovered = nextCore;
+      updateHoverStates();
+    }
+
+    // --- Module Hover Transitions (Smooth move towards camera) ---
+    modules.forEach((mod, idx) => {
+      const isHovered = (hoveredModIdx === idx);
+      const targetPos = mod.originalPos.clone();
+
+      if (isHovered) {
+        // Move slightly towards camera along normal
+        const toCam = camera.position.clone().sub(targetPos).normalize().multiplyScalar(0.7);
+        targetPos.add(toCam);
+      }
+
+      mod.group.position.lerp(targetPos, 0.08);
+
+      // Connection pulse along conduit
+      mod.pulseProgress += delta * (isHovered ? 0.7 : 0.3);
+      if (mod.pulseProgress > 1) mod.pulseProgress = 0;
+      const pt = mod.curve.getPoint(mod.pulseProgress);
+      mod.pulseMesh.position.copy(pt);
+      mod.pulseMesh.material.opacity = isHovered ? 1.0 : (isCoreHovered ? 0.8 : 0.45);
+    });
+
+    // --- Core Internal Animation ---
+    crownMesh.rotation.y = time * 0.35;
+    layer1.rotation.y = time * 0.04;
+    layer2.rotation.y = -time * 0.06;
+    layer3.rotation.y = time * 0.05;
+
+    // Circulating core state points
+    const cPositions = corePoints.geometry.attributes.position.array;
+    for (let i = 0; i < coreParticleCount; i++) {
+      let x = cPositions[i * 3];
+      let z = cPositions[i * 3 + 2];
+      const speed = 0.015 + (i % 5) * 0.004;
+      const cos = Math.cos(speed);
+      const sin = Math.sin(speed);
+      cPositions[i * 3] = x * cos - z * sin;
+      cPositions[i * 3 + 2] = x * sin + z * cos;
+    }
+    corePoints.geometry.attributes.position.needsUpdate = true;
+
+    // --- Module Specific Bespoke Animations ---
+
+    // 0. Risk Assessment: Scanning beam & periodic point detection
+    m0Beam.position.y = Math.sin(time * 2.2) * 0.45;
+    const isScanHit = Math.sin(time * 0.8) > 0.5;
+    m0RiskPoint.material.color.setHex(isScanHit ? 0xd12222 : 0x8894a6);
+
+    // 1. Architecture & Strategy: Blocks dynamically aligning into grid
+    m1Blocks.forEach((b, i) => {
+      const alignProgress = (Math.sin(time * 1.2 + i * 0.4) + 1) / 2;
+      b.position.x = THREE.MathUtils.lerp(b.userData.origX, 0, alignProgress);
+    });
+
+    // 2. Data Protection: Data blocks entering transparent vault & orbiting inside
+    m2DataBlocks.forEach((d, i) => {
+      const angle = time * 1.6 + d.offset;
+      const dist = 0.35 + Math.sin(time * 2 + i) * 0.12;
+      d.mesh.position.set(Math.cos(angle) * dist, Math.sin(angle * 1.5) * 0.25, Math.sin(angle) * dist);
+      d.mesh.rotation.x = time * 1.2;
+      d.mesh.rotation.y = time * 1.5;
+    });
+
+    // 3. Identity & Access: Authorized nodes reach gate, unauthorized stops
+    m3Pointers.forEach(p => {
+      if (p.userData.authorized) {
+        p.position.z = Math.sin(time * 2 + p.userData.idx) * 0.4;
+      } else {
+        // Blocked at perimeter ring
+        p.position.z = 0.9 + Math.sin(time * 4) * 0.06;
+      }
+    });
+
+    // 4. Policies & Governance: Hierarchical breathing
+    m4Group.children.forEach((c, i) => {
+      if (c.isMesh && c.geometry.type === 'BoxGeometry') {
+        c.position.x = Math.sin(time * 0.8 + i * 0.3) * 0.05;
+      }
+    });
+
+    // 5. Compliance & Readiness: Verification frames sweep through audit node
+    m5Frames.forEach((f, i) => {
+      f.position.y = Math.sin(time * 1.8 + i * 1.2) * 0.45;
+    });
+
+    // 6. Incident Preparedness: Red anomaly approaches -> shield activates -> anomaly dissolves
+    const incidentCycle = (time * 0.6) % 4; // 0 to 4 sec loop
+    if (incidentCycle < 1.5) {
+      m6Anomaly.position.set(1.2 - incidentCycle * 0.5, 0.6 - incidentCycle * 0.2, 0);
+      m6Anomaly.scale.setScalar(1);
+      m6Shield.material.opacity = 0.1;
+    } else if (incidentCycle < 3.0) {
+      // Isolated by shield
+      m6Anomaly.scale.setScalar(Math.max(0, 1 - (incidentCycle - 1.5) * 0.7));
+      m6Shield.material.opacity = 0.45;
+    } else {
+      m6Anomaly.scale.setScalar(0);
+      m6Shield.material.opacity = Math.max(0.1, 0.45 - (incidentCycle - 3.0) * 0.35);
+    }
+
+    // 7. Vulnerability & Improvement: Weak component removed, robust component takes over
+    const improveCycle = (time * 0.5) % 5;
+    if (improveCycle < 2.0) {
+      weakComp.position.set(0, 0.15, 0);
+      weakComp.scale.set(1, 1, 1);
+      robustComp.scale.set(0, 0, 0);
+    } else if (improveCycle < 2.8) {
+      const t = (improveCycle - 2.0) / 0.8;
+      weakComp.position.y = 0.15 + t * 0.8;
+      weakComp.scale.setScalar(Math.max(0.01, 1 - t));
+    } else if (improveCycle < 3.6) {
+      const t = (improveCycle - 2.8) / 0.8;
+      robustComp.scale.setScalar(t);
+    } else {
+      weakComp.scale.set(0, 0, 0);
+      robustComp.scale.set(1, 1, 1);
+    }
+
+    // --- Periodic Risk Field Event ---
+    riskCycleTime += delta;
+    if (riskCycleTime > 9.0) {
+      riskCycleTime = 0;
+      activeRiskIdx = Math.floor(Math.random() * riskFieldCount);
+    }
+
+    const colAttr = riskField.geometry.attributes.color;
+    for (let i = 0; i < riskFieldCount; i++) {
+      if (i === activeRiskIdx && riskCycleTime < 4.5) {
+        // Red alert pulse for detected risk point
+        colAttr.setXYZ(i, 0.82, 0.13, 0.13);
+        riskLight.intensity = Math.sin((riskCycleTime / 4.5) * Math.PI) * 0.8;
+      } else {
+        colAttr.setXYZ(i, 0.22, 0.25, 0.3);
+      }
+    }
+    colAttr.needsUpdate = true;
+
+    // --- Project 2D Labels to 3D Coordinates ---
+    projectToScreen(new THREE.Vector3(0, 1.8, 0), labels.core);
+    modules.forEach((mod, idx) => {
+      const offsetPos = mod.group.position.clone();
+      offsetPos.y += (mod.config.pos.y > 0 ? 0.75 : -0.75);
+      projectToScreen(offsetPos, labels.modules[idx]);
+    });
+
+    renderer.render(scene, camera);
+  }
+
+  animate();
+})();
+</script>
+</body>
+</html>

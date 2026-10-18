@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Bilva Tech | IoT Solutions Visual</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #050505;
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", Helvetica, Arial, sans-serif;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    #bilvatech-iot-visual {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background-color: #050505;
+      overflow: hidden;
+      cursor: crosshair;
+    }
+
+    #iot-canvas-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    #iot-canvas-container canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    #iot-labels-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Base Label Styling */
+    .iot-label {
+      position: absolute;
+      color: #9ea4b0;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      background: rgba(10, 11, 15, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-left: 2px solid #555;
+      border-radius: 4px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transform: translate(-50%, -50%);
+      opacity: 0.8;
+      transition: opacity 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease, background 0.25s ease;
+      white-space: nowrap;
+      display: none;
+      pointer-events: auto;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+    }
+
+    /* JavaScript States */
+    .iot-label:hover,
+    .iot-label.is-active {
+      opacity: 1;
+      color: #ffffff;
+      border-color: rgba(85, 216, 255, 0.6);
+      border-left-color: #55d8ff;
+      background: rgba(16, 24, 38, 0.94);
+      box-shadow: 0 0 18px rgba(85, 216, 255, 0.4);
+      transform: translate(-50%, -50%) scale(1.05);
+    }
+
+    .iot-label.is-dimmed {
+      opacity: 0.2;
+    }
+
+    @media (max-width: 520px) {
+      .iot-label {
+        font-size: 9px;
+        padding: 4px 8px;
+        letter-spacing: 1px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- REPLACEMENT CONTAINER FOR YOUR IOT VISUAL -->
+  <div id="bilvatech-iot-visual">
+    
+    <!-- 3D Canvas Layer -->
+    <div id="iot-canvas-container"></div>
+    
+    <!-- UI Labels Layer -->
+    <div id="iot-labels-container">
+      <div class="iot-label" id="lbl-devices" data-stage="0">PHYSICAL DEVICES</div>
+      <div class="iot-label" id="lbl-edge" data-stage="1">LOCAL INTELLIGENCE</div>
+      <div class="iot-label" id="lbl-gateway" data-stage="2">SECURE GATEWAY</div>
+      <div class="iot-label" id="lbl-data" data-stage="3">DIGITAL DATA</div>
+      <div class="iot-label" id="lbl-apps" data-stage="4">APPLICATIONS</div>
+    </div>
+
+  </div>
+
+  <!-- Load Three.js from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    (function() {
+      const container = document.getElementById('bilvatech-iot-visual');
+      const canvasContainer = document.getElementById('iot-canvas-container');
+      if (!container || !canvasContainer) return;
+
+      // --- Configuration ---
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const globalSpeed = prefersReducedMotion ? 0 : 1;
+
+      // --- Scene & Camera ---
+      const scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x050505, 0.035);
+
+      const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+
+      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      canvasContainer.appendChild(renderer.domElement);
+
+      const masterGroup = new THREE.Group();
+      scene.add(masterGroup);
+
+      // --- Materials ---
+      const matDarkMetal = new THREE.MeshStandardMaterial({ color: 0x111116, metalness: 0.9, roughness: 0.2 });
+      const matLightMetal = new THREE.MeshStandardMaterial({ color: 0xcccccc, metalness: 0.5, roughness: 0.2 });
+      const matHighlight = new THREE.MeshStandardMaterial({ color: 0x55d8ff, metalness: 0.4, roughness: 0.1, emissive: 0x114466 });
+      
+      const matGlass = new THREE.MeshPhysicalMaterial({
+        color: 0x181a28, metalness: 0.2, roughness: 0.1, transmission: 0.85, transparent: true, opacity: 0.4, side: THREE.DoubleSide
+      });
+      const matWireframe = new THREE.LineBasicMaterial({ color: 0x485060, transparent: true, opacity: 0.35 });
+      const matPathNormal = new THREE.LineBasicMaterial({ color: 0x3d4452, transparent: true, opacity: 0.25 });
+      const matPathActive = new THREE.LineBasicMaterial({ color: 0x55d8ff, transparent: true, opacity: 0.85 });
+
+      // Stage configurations
+      const stages = [
+        { id: 0, name: "devices", y: -4.0 },
+        { id: 1, name: "edge", y: -2.0 },
+        { id: 2, name: "gateway", y: 0.0 },
+        { id: 3, name: "data", y: 2.0 },
+        { id: 4, name: "apps", y: 4.0 }
+      ];
+
+      const stageNodes = [];
+      const dataStreams = [];
+      const stageGroups = [];
+      const allLines = [];
+
+      // --- STAGE 0: PHYSICAL DEVICES ---
+      const devicesGroup = new THREE.Group();
+      devicesGroup.position.y = stages[0].y;
+      masterGroup.add(devicesGroup);
+      stageGroups.push(devicesGroup);
+
+      const deviceNodes = [];
+      for (let i = 0; i < 12; i++) {
+        const mesh = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.3, 0.3), matLightMetal.clone());
+        // Scatter them in a wider circle on the ground
+        const angle = (i / 12) * Math.PI * 2 + (Math.random() * 0.2);
+        const rad = 2.0 + Math.random() * 1.0;
+        mesh.position.set(Math.cos(angle) * rad, 0, Math.sin(angle) * rad);
+        devicesGroup.add(mesh);
+        deviceNodes.push(mesh);
+      }
+      
+      // Ground plane grid for visual anchor
+      const grid = new THREE.GridHelper(8, 8, 0x485060, 0x222228);
+      grid.position.y = -0.15;
+      devicesGroup.add(grid);
+
+      // Hitbox for Stage 0
+      const hb0 = new THREE.Mesh(new THREE.CylinderGeometry(3.5, 3.5, 1, 16), new THREE.MeshBasicMaterial({ visible: false }));
+      hb0.userData = { type: 'stage', index: 0 };
+      devicesGroup.add(hb0);
+      stageNodes.push({ group: devicesGroup, meshes: deviceNodes, hitbox: hb0, index: 0 });
+
+
+      // --- STAGE 1: LOCAL INTELLIGENCE ---
+      const edgeGroup = new THREE.Group();
+      edgeGroup.position.y = stages[1].y;
+      masterGroup.add(edgeGroup);
+      stageGroups.push(edgeGroup);
+
+      const edgeNodes = [];
+      for (let i = 0; i < 3; i++) {
+        const mesh = new THREE.Mesh(new THREE.CylinderGeometry(0.4, 0.4, 0.6, 6), matLightMetal.clone());
+        const angle = (i / 3) * Math.PI * 2;
+        const rad = 1.2;
+        mesh.position.set(Math.cos(angle) * rad, 0, Math.sin(angle) * rad);
+        edgeGroup.add(mesh);
+        edgeNodes.push(mesh);
+      }
+      
+      const hb1 = new THREE.Mesh(new THREE.CylinderGeometry(2, 2, 1, 16), new THREE.MeshBasicMaterial({ visible: false }));
+      hb1.userData = { type: 'stage', index: 1 };
+      edgeGroup.add(hb1);
+      stageNodes.push({ group: edgeGroup, meshes: edgeNodes, hitbox: hb1, index: 1 });
+
+
+      // --- STAGE 2: SECURE GATEWAY ---
+      const gatewayGroup = new THREE.Group();
+      gatewayGroup.position.y = stages[2].y;
+      masterGroup.add(gatewayGroup);
+      stageGroups.push(gatewayGroup);
+
+      const gatewayCore = new THREE.Mesh(new THREE.OctahedronGeometry(0.8, 0), matDarkMetal.clone());
+      const gatewayWire = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.OctahedronGeometry(1.0, 0)), matWireframe);
+      const gatewayGlass = new THREE.Mesh(new THREE.OctahedronGeometry(1.0, 0), matGlass);
+      
+      gatewayGroup.add(gatewayCore, gatewayWire, gatewayGlass);
+      const gatewayNodes = [gatewayCore];
+
+      const gatewayRing = new THREE.Mesh(new THREE.TorusGeometry(1.6, 0.05, 8, 32), matWireframe);
+      gatewayRing.rotation.x = Math.PI / 2;
+      gatewayGroup.add(gatewayRing);
+      
+      const hb2 = new THREE.Mesh(new THREE.SphereGeometry(1.8, 16, 16), new THREE.MeshBasicMaterial({ visible: false }));
+      hb2.userData = { type: 'stage', index: 2 };
+      gatewayGroup.add(hb2);
+      stageNodes.push({ group: gatewayGroup, meshes: gatewayNodes, extra: [gatewayWire, gatewayGlass, gatewayRing], hitbox: hb2, index: 2 });
+
+
+      // --- STAGE 3: DIGITAL DATA ---
+      const dataGroup = new THREE.Group();
+      dataGroup.position.y = stages[3].y;
+      masterGroup.add(dataGroup);
+      stageGroups.push(dataGroup);
+
+      const dataNodes = [];
+      const dataRing = new THREE.Mesh(new THREE.TorusGeometry(1.2, 0.1, 8, 32), matLightMetal.clone());
+      dataRing.rotation.x = Math.PI / 2;
+      dataGroup.add(dataRing);
+      dataNodes.push(dataRing);
+
+      // We'll also add a cylinder of "data streams"
+      const dataStreamGeo = new THREE.CylinderGeometry(1.2, 1.2, 1.0, 16, 1, true);
+      const dataStreamMat = new THREE.MeshBasicMaterial({ color: 0x55d8ff, wireframe: true, transparent: true, opacity: 0.15 });
+      const dataStreamCyl = new THREE.Mesh(dataStreamGeo, dataStreamMat);
+      dataGroup.add(dataStreamCyl);
+
+      const hb3 = new THREE.Mesh(new THREE.CylinderGeometry(1.5, 1.5, 1, 16), new THREE.MeshBasicMaterial({ visible: false }));
+      hb3.userData = { type: 'stage', index: 3 };
+      dataGroup.add(hb3);
+      stageNodes.push({ group: dataGroup, meshes: dataNodes, extra: [dataStreamCyl], hitbox: hb3, index: 3 });
+
+
+      // --- STAGE 4: APPLICATIONS ---
+      const appsGroup = new THREE.Group();
+      appsGroup.position.y = stages[4].y;
+      masterGroup.add(appsGroup);
+      stageGroups.push(appsGroup);
+
+      const appNodes = [];
+      for (let i = 0; i < 4; i++) {
+        const pGroup = new THREE.Group();
+        const planeGeo = new THREE.PlaneGeometry(1.2, 0.8);
+        const plane = new THREE.Mesh(planeGeo, matGlass);
+        const pWire = new THREE.LineSegments(new THREE.EdgesGeometry(planeGeo), matWireframe);
+        
+        // Arrange them in an arc
+        const angle = (i - 1.5) * 0.4;
+        pGroup.position.set(Math.sin(angle) * 2.0, 0, Math.cos(angle) * 2.0 - 0.5);
+        pGroup.lookAt(0, 0, 0); // Face inward
+
+        pGroup.add(plane, pWire);
+        appsGroup.add(pGroup);
+        appNodes.push(plane);
+      }
+      
+      const hb4 = new THREE.Mesh(new THREE.BoxGeometry(4, 2, 4), new THREE.MeshBasicMaterial({ visible: false }));
+      hb4.userData = { type: 'stage', index: 4 };
+      appsGroup.add(hb4);
+      stageNodes.push({ group: appsGroup, meshes: appNodes, hitbox: hb4, index: 4 });
+
+
+      // --- CONNECTIONS (Lines mapping flow upwards) ---
+      function createLine(p1, p2, isVerticalStream = false) {
+        const geo = new THREE.BufferGeometry().setFromPoints([p1, p2]);
+        const line = new THREE.Line(geo, matPathNormal.clone());
+        masterGroup.add(line);
+        allLines.push({ line, p1, p2, activeStage: -1 });
+        
+        if (isVerticalStream) {
+          dataStreams.push({ p1, p2, progress: Math.random() });
+        }
+        return line;
+      }
+
+      // Connect 0 -> 1
+      deviceNodes.forEach((dn, i) => {
+        const target = edgeNodes[i % edgeNodes.length];
+        const p1 = new THREE.Vector3().copy(dn.position).setY(stages[0].y);
+        const p2 = new THREE.Vector3().copy(target.position).setY(stages[1].y - 0.3);
+        const line = createLine(p1, p2, true);
+        allLines[allLines.length-1].stageIndex = 0; // line active when stage 0 or 1 is active
+      });
+
+      // Connect 1 -> 2
+      edgeNodes.forEach(en => {
+        const p1 = new THREE.Vector3().copy(en.position).setY(stages[1].y + 0.3);
+        const p2 = new THREE.Vector3(0, stages[2].y - 0.8, 0);
+        const line = createLine(p1, p2, true);
+        allLines[allLines.length-1].stageIndex = 1;
+      });
+
+      // Connect 2 -> 3 (Gateway to Data) - straight up
+      for (let i = 0; i < 8; i++) {
+        const angle = (i / 8) * Math.PI * 2;
+        const rad = 1.2;
+        const p1 = new THREE.Vector3(Math.cos(angle)*rad, stages[2].y, Math.sin(angle)*rad);
+        const p2 = new THREE.Vector3(Math.cos(angle)*rad, stages[3].y, Math.sin(angle)*rad);
+        const line = createLine(p1, p2, true);
+        allLines[allLines.length-1].stageIndex = 2;
+      }
+
+      // Connect 3 -> 4
+      appNodes.forEach(an => {
+        const p1 = new THREE.Vector3(0, stages[3].y, 0);
+        const worldPos = new THREE.Vector3();
+        an.parent.getWorldPosition(worldPos);
+        const p2 = worldPos;
+        const line = createLine(p1, p2, true);
+        allLines[allLines.length-1].stageIndex = 3;
+      });
+
+      // --- PARTICLES ---
+      const particles = [];
+      const particleGeo = new THREE.SphereGeometry(0.06, 4, 4);
+      const pMatNormal = new THREE.MeshBasicMaterial({ color: 0x99e5ff });
+
+      for (let i = 0; i < 40; i++) {
+        const pMesh = new THREE.Mesh(particleGeo, pMatNormal);
+        masterGroup.add(pMesh);
+        const stream = dataStreams[i % dataStreams.length];
+        particles.push({ mesh: pMesh, stream: stream, progress: Math.random(), speed: 0.005 + Math.random() * 0.005 });
+      }
+
+
+      // --- LIGHTING ---
+      scene.add(new THREE.AmbientLight(0xffffff, 0.45));
+
+      const dirLight1 = new THREE.DirectionalLight(0xffffff, 1.0);
+      dirLight1.position.set(5, 10, 7);
+      scene.add(dirLight1);
+
+      const dirLight2 = new THREE.DirectionalLight(0x5588ff, 0.8);
+      dirLight2.position.set(-6, 2, -6);
+      scene.add(dirLight2);
+
+      const gatewayLight = new THREE.PointLight(0x55d8ff, 1, 5);
+      gatewayLight.position.y = stages[2].y;
+      masterGroup.add(gatewayLight);
+
+
+      // --- INTERACTION & CAMERA SIZING ---
+      const raycaster = new THREE.Raycaster();
+      const mouse = new THREE.Vector2(-999, -999);
+      let targetRotX = 0, targetRotY = 0;
+      let currentRotX = 0, currentRotY = 0;
+      let hoveredStage = null;
+
+      function updateMouseCoords(clientX, clientY) {
+        const rect = container.getBoundingClientRect();
+        mouse.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+        mouse.y = -((clientY - rect.top) / rect.height) * 2 + 1;
+        if (globalSpeed > 0) {
+          targetRotY = mouse.x * 0.15; // slightly wider rotation
+          targetRotX = mouse.y * 0.1;
+        }
+      }
+
+      container.addEventListener('mousemove', (e) => {
+        updateMouseCoords(e.clientX, e.clientY);
+      });
+
+      container.addEventListener('mouseleave', () => {
+        mouse.x = -999;
+        mouse.y = -999;
+        targetRotX = 0;
+        targetRotY = 0;
+      });
+
+      // Label hover events
+      const htmlLabels = document.querySelectorAll('.iot-label');
+      htmlLabels.forEach(lbl => {
+        lbl.addEventListener('mouseenter', (e) => {
+          hoveredStage = parseInt(e.target.getAttribute('data-stage'));
+        });
+        lbl.addEventListener('mouseleave', () => {
+          hoveredStage = null;
+        });
+      });
+
+      const labelIds = ['lbl-devices', 'lbl-edge', 'lbl-gateway', 'lbl-data', 'lbl-apps'];
+      const labelData = stages.map((st, i) => {
+        return {
+          el: document.getElementById(labelIds[i]),
+          y: st.y,
+          index: i
+        };
+      });
+
+      function updateLabels() {
+        const w = container.clientWidth;
+        const h = container.clientHeight;
+        const halfW = w / 2;
+        const halfH = h / 2;
+        const pad = 10;
+
+        labelData.forEach(lbl => {
+          if (!lbl.el) return;
+          // Offset labels slightly to the right of the vertical stack
+          const vec = new THREE.Vector3(2.5, lbl.y, 0);
+          vec.applyMatrix4(masterGroup.matrixWorld);
+          vec.project(camera);
+          
+          if (vec.z < 1) { 
+            lbl.el.style.display = 'block';
+            const rawX = (vec.x * halfW + halfW);
+            const rawY = (-(vec.y * halfH) + halfH);
+            
+            const elW = lbl.el.offsetWidth || 65;
+            const elH = lbl.el.offsetHeight || 22;
+
+            const clampedX = Math.max(pad + elW / 2, Math.min(w - pad - elW / 2, rawX));
+            const clampedY = Math.max(pad + elH / 2, Math.min(h - pad - elH / 2, rawY));
+
+            lbl.el.style.left = clampedX + 'px';
+            lbl.el.style.top = clampedY + 'px';
+          } else {
+            lbl.el.style.display = 'none';
+          }
+
+          const isActive = (hoveredStage === lbl.index) || (activeStage === lbl.index);
+          const isDimmed = (hoveredStage !== null) && !isActive;
+          
+          lbl.el.classList.toggle('is-active', isActive);
+          lbl.el.classList.toggle('is-dimmed', isDimmed);
+        });
+      }
+
+      function onResize() {
+        const width = container.clientWidth || window.innerWidth;
+        const height = container.clientHeight || window.innerHeight;
+        if (!width || !height) return;
+
+        const aspect = width / height;
+        camera.aspect = aspect;
+        camera.updateProjectionMatrix();
+        renderer.setSize(width, height, false);
+        
+        // For a vertical stack, we need the camera far enough to see from y=-4 to y=4
+        // The total height is roughly 10 units
+        const fovRad = (camera.fov * Math.PI) / 180;
+        const halfTan = Math.tan(fovRad / 2);
+
+        const desiredHeight = 11.0;
+        const desiredWidth = desiredHeight * 0.8;
+
+        const distV = (desiredHeight / 2) / halfTan;
+        const distH = (desiredWidth / 2) / (halfTan * aspect);
+
+        const targetDist = Math.max(distV, distH, 9.0);
+
+        // Isometric-ish angle: up slightly, and rotated
+        camera.position.set(targetDist * 0.6, 2, targetDist * 0.8);
+        camera.lookAt(0, 0, 0);
+      }
+
+      window.addEventListener('resize', onResize);
+      onResize();
+
+      let isVisible = true;
+      if (window.IntersectionObserver) {
+        const observer = new IntersectionObserver(entries => {
+          isVisible = entries[0].isIntersecting;
+        });
+        observer.observe(container);
+      }
+
+      const hitTargets = stageNodes.map(sn => sn.hitbox);
+
+      let time = 0;
+      let frame = 0;
+      let activeStage = -1; // sequential flow
+
+      function animate() {
+        requestAnimationFrame(animate);
+        if (!isVisible) return;
+
+        time += 0.01 * globalSpeed;
+        frame++;
+
+        // Smooth Parallax
+        currentRotX += (targetRotX - currentRotX) * 0.05;
+        currentRotY += (targetRotY - currentRotY) * 0.05;
+        masterGroup.rotation.y = (time * 0.05) + currentRotY;
+        
+        // We only pitch the master group a tiny bit vertically to maintain the stack
+        masterGroup.rotation.x = currentRotX * 0.5;
+
+        masterGroup.updateMatrixWorld();
+        updateLabels();
+
+        // Stage Animations
+        // Stage 0: Devices pulsate slightly
+        deviceNodes.forEach((dn, i) => {
+          dn.rotation.y = time + i;
+          dn.position.y = Math.sin(time * 2 + i) * 0.1;
+        });
+
+        // Stage 1: Edge nodes rotate
+        edgeNodes.forEach((en, i) => {
+          en.rotation.y = -time * 1.5;
+        });
+
+        // Stage 2: Gateway ring spins
+        stageNodes[2].extra[2].rotation.z = time * 0.5;
+        stageNodes[2].extra[1].rotation.y = -time * 0.3; // Glass layer spins
+        stageNodes[2].extra[1].rotation.x = time * 0.2;
+
+        // Stage 3: Data stream spins
+        stageNodes[3].meshes[0].rotation.z = -time;
+        stageNodes[3].extra[0].rotation.y = time * 0.8;
+
+        // Stage 4: App panels float
+        appNodes.forEach((an, i) => {
+          an.parent.position.y = Math.sin(time * 1.5 + i) * 0.15;
+        });
+
+        // Active Stage Progression (flow from 0 to 4)
+        if (frame % 150 === 0) {
+          activeStage = (activeStage + 1) % stages.length;
+        }
+
+        // Raycasting
+        let raycastStage = null;
+        if (mouse.x !== -999) {
+          raycaster.setFromCamera(mouse, camera);
+          const intersects = raycaster.intersectObjects(hitTargets);
+          if (intersects.length > 0) {
+            raycastStage = intersects[0].object.userData.index;
+          }
+        }
+        
+        if (raycastStage !== null) hoveredStage = raycastStage;
+
+        // Visual Updates based on active/hovered state
+        stageNodes.forEach((sn, i) => {
+          const isHovered = hoveredStage === i;
+          const isActiveState = activeStage === i || isHovered;
+          
+          sn.meshes.forEach(m => {
+            m.material.color.lerp(new THREE.Color(isActiveState ? 0x55d8ff : (i === 2 ? 0x111116 : 0xcccccc)), 0.1);
+            if (m.material.emissive) {
+              m.material.emissive.setHex(isActiveState ? 0x004466 : 0x000000);
+            }
+          });
+          
+          // Scale effect
+          sn.group.scale.lerp(new THREE.Vector3(
+            isActiveState ? 1.1 : 1.0,
+            isActiveState ? 1.1 : 1.0,
+            isActiveState ? 1.1 : 1.0
+          ), 0.1);
+        });
+
+        gatewayLight.intensity = (activeStage === 2 || hoveredStage === 2) ? 3 : 1;
+
+        // Lines and Particles
+        allLines.forEach(l => {
+          const isActive = l.stageIndex === activeStage || l.stageIndex === activeStage - 1 || l.stageIndex === hoveredStage || l.stageIndex === hoveredStage -1;
+          l.line.material = isActive ? matPathActive : matPathNormal;
+        });
+
+        particles.forEach((p) => {
+          p.progress += p.speed * (globalSpeed || 0.2);
+          if (p.progress >= 1.0) p.progress = 0;
+
+          p.mesh.position.lerpVectors(p.stream.p1, p.stream.p2, p.progress);
+        });
+
+        renderer.render(scene, camera);
+      }
+
+      animate();
+    })();
+  </script>
+</body>
+</html>

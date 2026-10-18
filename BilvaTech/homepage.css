@@ -1,0 +1,257 @@
+/* Homepage framing follows the Engineered for Trust instrument panel. */
+.bilva-home { background: #080809; }
+.bilva-home > section { width: 100%; padding: 0 clamp(16px,4vw,64px) 28px; border: 0; background: #080809; }
+.bilva-home > section:first-of-type { padding-top: 32px; }
+.bilva-home > section::before { display: none; }
+.section-box,.bilva-home .service-dial-frame { max-width: 1440px; margin: 0 auto; border: 1px solid #ffffff12; background: var(--surface-panel); overflow: hidden; position: relative; }
+.section-meta { display: flex; justify-content: space-between; gap: 20px; padding: 16px 23px; border-bottom: 1px solid #ffffff0c; color: #aaa2af; font: 10px/1.5 var(--font-secondary); letter-spacing: .15em; }
+.home-kicker { color: #c38b92; font-size: 11px; letter-spacing: .16em; margin: 0 0 20px; }
+.about-home-body,.bento-body,.qr-service-body { padding: clamp(32px,5vw,76px); }
+.about-home-body { display: grid; grid-template-columns: 1fr 1fr; column-gap: 9%; }
+.about-home-body > .home-kicker { grid-column: 1/-1; }
+.about-home h2,.bento-intro h2,.qr-service h2 { font: 500 clamp(30px,3.4vw,48px)/1.15 var(--font-main); letter-spacing: -.045em; margin: 0; color: #eee9f0; }
+.about-home-copy p { margin: 0 0 20px; font-size: 15px; line-height: 1.85; color: #aaa5b0; }
+.home-text-link { display: inline-flex; gap: 28px; padding: 8px 0; color: #e4d5df; font-size: 13px; text-decoration: none; }
+.home-text-link:hover { text-decoration: underline; }
+.bento-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 0 9%; margin-bottom: 40px; }
+.bento-intro .home-kicker { grid-column: 1/-1; }
+.bento-intro > p:last-child { color: #aaa5b0; line-height: 1.8; max-width: 390px; align-self: end; margin: 0; font-size: 15px; }
+.bento-grid { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 16px; }
+.bento-card { --bento-color: #c38b92; position: relative; grid-column: span 3; display: flex; flex-direction: column; min-width: 0; padding: 26px; text-decoration: none; border: 1px solid #ffffff14; border-radius: 6px; background: var(--surface-card); transition: border-color .25s,background .25s; overflow: hidden; }
+.bento-card:hover { border-color: var(--bento-color); background-color: var(--surface-hover); }
+.bento-iot,.bento-cyber { grid-column: span 2; --bento-color: #a58aae; }
+.bento-consulting { --bento-color: #9376ad; }
+.bento-card-meta { display: flex; justify-content: space-between; gap: 12px; font: 9px/1.6 var(--font-secondary); letter-spacing: .1em; color: #b3a5b5; }
+.bento-card-meta > span:last-child { font-size: 20px; line-height: 1; color: var(--bento-color); }
+.bento-art { min-height: 178px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 24px 0; color: var(--bento-color); }
+.bento-card-copy h3 { color: #eee8ef; font: 500 clamp(21px,2vw,28px)/1.2 var(--font-main); letter-spacing: -.025em; margin: 0 0 12px; }
+.bento-card-copy p { color: #aaa5b0; font-size: 13px; line-height: 1.8; margin: 0 0 20px; max-width: 480px; }
+.bento-explore { color: #ddcbdc; font-size: 11px; display: flex; justify-content: space-between; padding-top: 16px; border-top: 1px solid #ffffff0c; }
+.bento-card-copy { margin-top: auto; }
+.bento-partitions { display: flex; gap: 8px; width: 85%; }
+.bento-partitions span { flex: 1; text-align: center; border: 1px solid #c38b9240; background: #151416; padding: 22px 5px; font-size: 8px; letter-spacing: .08em; }
+.bento-foundation { width: 85%; margin-top: 8px; padding: 10px; border: 1px solid #c38b9250; background: #c38b9210; text-align: center; font-size: 9px; letter-spacing: .12em; }
+.bento-hardware { padding-top: 10px; color: #8f8594; font-size: 7px; letter-spacing: .15em; }
+.bento-network { display: flex; align-items: center; width: 100%; }
+.bento-network span { display: grid; place-items: center; width: 66px; height: 66px; flex-shrink: 0; border: 1px solid #a58aae55; border-radius: 50%; background: #151416; font-size: 8px; letter-spacing: .1em; box-shadow: none; }
+.bento-network i { height: 1px; flex: 1; background: linear-gradient(90deg,#a58aae33,#a58aaeaa,#a58aae33); }
+.bento-shield { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.bento-shield svg { height: 104px; stroke: #a58aae; stroke-width: 1.2; filter: none; }
+.bento-shield span { font-size: 8px; letter-spacing: .12em; }
+.bento-roadmap { display: flex; gap: 12px; width: 100%; }
+.bento-roadmap span { flex: 1; border-top: 1px solid #9376ad55; padding-top: 12px; font-size: 9px; letter-spacing: .08em; }
+.bilva-home .protect-shell { width: auto; max-width: none; padding: clamp(32px,5vw,76px); }
+.bilva-home .faq-shell { width: 100%; max-width: 1080px; margin: 0 auto; padding: 36px clamp(20px,3.5vw,48px); box-sizing: border-box; }
+.bilva-home .faq-intro { max-width: 680px; margin: 0 auto 24px; text-align: center; }
+.bilva-home .faq-intro .faq-eyebrow { margin: 0 0 10px; }
+.bilva-home .faq-intro .faq-heading { margin: 0 0 10px; font-size: clamp(26px,2.8vw,36px); }
+.bilva-home .faq-intro .faq-copy { margin: 0 auto; font-size: 14px; line-height: 1.6; }
+.bilva-home .faq-list { gap: 10px; }
+.bilva-home .faq-item { border-radius: 8px; }
+.bilva-home .faq-trigger { padding: 16px 20px; }
+.bilva-home .faq-content-inner { padding: 0 20px 16px; }
+.bilva-home .why-shell { width: auto; padding: clamp(28px,4vw,64px); gap: 5%; flex-direction: row-reverse; }
+.bilva-home .why-content { flex: 1; max-width: 540px; min-width: 0; }
+.bilva-home .why-visual { flex: 1; min-width: 0; }
+.bilva-home .why-copy { margin-bottom: 28px; }
+.bilva-home .principle-desc { font-size: 13px; line-height: 1.65; }
+.bilva-home .testimonials-shell { padding-top: clamp(32px,5vw,64px); }
+.bilva-home .testimonials-section .section-box { padding-bottom: 40px; }
+.bilva-home .testimonials-section { opacity: 1; transform: none; }
+.qr-service-body { display: grid; grid-template-columns: 1fr 260px; gap: 10%; align-items: center; }
+.qr-service-body > div > p:not(.home-kicker) { max-width: 570px; font-size: 15px; line-height: 1.8; color: #aaa5b0; margin: 22px 0 30px; }
+.qr-service .cta-primary-btn { gap: 24px; font-size: 13px; }
+.qr-service-aside { position: relative; aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid #c38b9228; background: var(--surface-card); color: #c38b92; }
+.qr-service-symbol { font: 400 70px var(--font-main); }
+.qr-service-aside > span:not(.qr-service-symbol) { font-size: 8px; letter-spacing: .2em; }
+.qr-service-body .qr-service-aside p { text-align: center; font-size: 13px; margin: 14px 0 0; }
+.bilva-home > section a:focus-visible { outline: 2px solid #c38b92; outline-offset: 5px; }
+@media(max-width:950px) { .bilva-home .why-shell { flex-direction: column-reverse; } .bilva-home .why-content { max-width: none; } .bilva-home .why-visual { flex: auto; width: 100%; } .qr-service-body { grid-template-columns: 1fr 190px; gap: 32px; } .bento-card { padding: 20px; } .bento-network span { width: 52px; height: 52px; font-size: 7px; } }
+@media(max-width:650px) { .bilva-home > section { padding: 0 12px 18px; } .section-meta { padding: 12px; font-size: 8px; gap: 16px; letter-spacing: .08em; } .section-meta > span:last-child { text-align: right; max-width: 45%; } .about-home-body,.bento-intro { grid-template-columns: 1fr; gap: 20px; } .about-home-body,.bento-body,.qr-service-body { padding: 30px 20px; } .about-home-body > .home-kicker,.bento-intro > .home-kicker { margin: 0; } .bento-grid { grid-template-columns: 1fr; } .bento-card { grid-column: auto; } .bento-art { min-height: 155px; } .bento-network { max-width: 280px; } .bento-network span { width: 66px; height: 66px; font-size: 8px; } .qr-service-body { grid-template-columns: 1fr; } .qr-service-aside { display: none; } .bilva-home .protect-shell,.bilva-home .faq-shell { padding: 30px 20px; } }
+@media(prefers-reduced-motion:reduce) { .bento-card { transition: none; } }
+
+/* Post-hero palette only; preserve the original hero and navigation. */
+.bilva-home > section,
+.bilva-home > .site-footer {
+  --surface-page: #080809;
+  --surface-panel: #0b0b0d;
+  --surface-card: #101012;
+  --surface-hover: #151517;
+  --line: #252527;
+  --line-hover: #494347;
+  --ink: #e9e7e8;
+  --ink-secondary: #aaa7ab;
+  --ink-muted: #918d92;
+  --bg-primary: var(--surface-panel);
+  --bg-card: var(--surface-card);
+  --border-subtle: var(--line);
+  --border-subtle-hover: var(--line-hover);
+  --text: var(--ink);
+  --muted: var(--ink-secondary);
+  --accent-glow: none;
+  --accent-gradient: linear-gradient(#b78d94,#b78d94);
+}
+.bilva-home .section-box,.bilva-home .service-dial-frame { border-color: var(--line); }
+.bilva-home .service-dial-frame { background: radial-gradient(ellipse at 50% 32%,rgba(var(--dial-rgb),.055),transparent 55%),linear-gradient(180deg,#0b090e,#080809); }
+.bilva-home .section-meta,.bilva-home .service-dial-meta { color: var(--ink-muted); border-color: #ffffff0b; }
+.bilva-home :is(.home-kicker,.protect-eyebrow,.why-eyebrow,.testimonials-eyebrow,.faq-eyebrow) { color: #b8a5aa; }
+.bilva-home :is(.about-home h2,.bento-intro h2,.qr-service h2,.architecture-cta h2,.bento-card-copy h3,.protect-heading,.why-heading,.testimonials-heading,.faq-heading,.card-title,.principle-title,.card-author-name) { color: var(--ink); }
+.bilva-home :is(.about-home-copy p,.bento-intro > p:last-child,.bento-card-copy p,.protect-copy,.why-copy,.testimonials-copy,.faq-copy,.faq-answer-text,.card-desc,.principle-desc,.card-quote-text) { color: var(--ink-secondary); }
+.bilva-home :is(.bento-card-meta,.bento-hardware,.card-num,.card-author-title,.card-author-org) { color: var(--ink-muted); }
+.bilva-home :is(.bento-card,.protect-card,.testimonial-card,.factual-card,.faq-item) { background: var(--surface-card); border-color: var(--line); box-shadow: none; }
+.bilva-home :is(.bento-card,.protect-card,.testimonial-card,.factual-card,.faq-item):hover,
+.bilva-home .faq-item.active { background: var(--surface-hover); border-color: var(--line-hover); box-shadow: none; transform: none; }
+.bilva-home .testimonial-card::before,.bilva-home .testimonial-card::after { display: none; }
+.bilva-home :is(.home-text-link,.bento-explore,.faq-inline-link) { color: #d4c9cd; }
+.bilva-home .bento-card { --bento-color: #ab969d; }
+.bilva-home :is(.bento-partitions span,.bento-foundation,.bento-network span,.bento-roadmap span,.qr-service-aside) { border-color: #3c343c; }
+.bilva-home .bento-foundation { background: #181418; }
+.bilva-home .bento-network i { background: #4d424e; }
+.bilva-home .bento-shield svg { stroke: #a594aa; }
+.bilva-home .bento-roadmap b { color: #a594aa; }
+.bilva-home .qr-service-aside { color: #b4a2a9; }
+.bilva-home > section .cta-primary-btn { background: #ded9da; color: #141315; box-shadow: none; border: 1px solid #ded9da; }
+.bilva-home > section .cta-primary-btn:hover { background: #f1edef; color: #141315; box-shadow: none; border-color: #f1edef; }
+.bilva-home .view-toggle-btn.is-active { background: #252125; border-color: #494047; box-shadow: none; }
+.bilva-home .card-avatar-box { background: #1d191c; color: #baa5ad; }
+.bilva-home .faq-item.active .faq-icon-wrapper { background: #30272e; color: #e8dce3; box-shadow: none; }
+.bilva-home .site-footer { background: var(--surface-page); border-color: var(--line); }
+
+/* --- WHY BILVA TECH: Simple Content Style (Non-boxed) --- */
+.bilva-home .why-principles {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid #ffffff12;
+  margin-top: 28px;
+}
+.bilva-home .why-principle {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 24px 0;
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid #ffffff12 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.25s ease, opacity 0.25s ease;
+  position: relative;
+}
+.bilva-home .why-principle .principle-num {
+  font: 600 13px var(--font-secondary);
+  color: #c38b92;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  margin-bottom: 6px;
+  transition: color 0.25s ease;
+}
+.bilva-home .why-principle .principle-sep {
+  color: #80566d;
+  font-size: 14px;
+  line-height: 1;
+  margin-bottom: 10px;
+  transition: color 0.25s ease;
+}
+.bilva-home .why-principle .principle-title {
+  font: 600 15px/1.3 var(--font-main);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f5f2f6;
+  margin: 0 0 10px;
+  transition: color 0.25s ease;
+}
+.bilva-home .why-principle .principle-desc {
+  font: 400 14px/1.65 var(--font-main);
+  color: #afa9b6;
+  margin: 0;
+  max-width: 500px;
+  transition: color 0.25s ease;
+}
+.bilva-home .why-principle:hover,
+.bilva-home .why-principle.active-principle,
+.bilva-home .why-principle:focus-visible {
+  background: transparent !important;
+  border-bottom-color: #c38b9288 !important;
+  transform: none !important;
+}
+.bilva-home .why-principle:hover .principle-num,
+.bilva-home .why-principle.active-principle .principle-num {
+  color: #f5f2f6;
+}
+.bilva-home .why-principle:hover .principle-sep,
+.bilva-home .why-principle.active-principle .principle-sep {
+  color: #c38b92;
+}
+.bilva-home .why-principle:hover .principle-title,
+.bilva-home .why-principle.active-principle .principle-title {
+  color: #c38b92;
+}
+.bilva-home .why-principle:hover .principle-desc,
+.bilva-home .why-principle.active-principle .principle-desc {
+  color: #f5f2f6;
+}
+
+/* --- Architecture CTA without globe --- */
+.bilva-home .architecture-cta .section-box {
+  background: #111014;
+  border: 1px solid #4c3b48;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.bilva-home .architecture-cta .section-box::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(90deg, #100e12f8 20%, #100e12d0 70%, #100e12aa), url('assets/cta-texture.jpg') center/cover;
+  opacity: 0.85;
+  pointer-events: none;
+}
+.bilva-home .architecture-cta-body {
+  position: relative;
+  z-index: 2;
+  padding: clamp(36px, 5vw, 68px);
+}
+.bilva-home .architecture-cta-copy {
+  max-width: 640px;
+  width: 100%;
+}
+.bilva-home .architecture-cta-copy h2 {
+  color: #e9e7e8;
+  font: 500 clamp(30px, 3.4vw, 46px)/1.15 var(--font-main);
+  letter-spacing: -0.04em;
+  margin: 0 0 20px;
+}
+.bilva-home .architecture-cta-copy > p:not(.home-kicker) {
+  max-width: 540px;
+  font-size: 14.5px;
+  line-height: 1.8;
+  color: #b5afb8;
+  margin: 0 0 28px;
+}
+.bilva-home .architecture-cta .cta-primary-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 13.5px;
+  text-decoration: none;
+}
+.bilva-home .cta-utility-link {
+  display: block;
+  color: #b5a5b2;
+  font-size: 11px;
+  margin-top: 20px;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.bilva-home .cta-utility-link:hover {
+  color: #f0e6ef;
+  text-decoration: underline;
+}

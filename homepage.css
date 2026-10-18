@@ -1,0 +1,625 @@
+/* Homepage framing follows the Engineered for Trust instrument panel. */
+.bilva-home { background: #080809; }
+.bilva-home > section { width: 100%; padding: 0 clamp(16px,4vw,64px) 28px; border: 0; background: #080809; }
+.bilva-home > section:first-of-type { padding-top: 32px; }
+.bilva-home > section::before { display: none; }
+.section-box,.bilva-home .service-dial-frame { max-width: 1440px; margin: 0 auto; border: 1px solid #ffffff12; background: var(--surface-panel); overflow: hidden; position: relative; }
+.section-meta { display: flex; justify-content: space-between; gap: 20px; padding: 16px 23px; border-bottom: 1px solid #ffffff0c; color: #aaa2af; font: 10px/1.5 var(--font-secondary); letter-spacing: .15em; }
+.home-kicker { color: #c38b92; font-size: 11px; letter-spacing: .16em; margin: 0 0 20px; }
+.about-home-body,.bento-body,.qr-service-body { padding: clamp(32px,5vw,76px); }
+.about-home-body { display: grid; grid-template-columns: 1fr 1fr; column-gap: 9%; }
+.about-home-body > .home-kicker { grid-column: 1/-1; }
+.about-home h2,.bento-intro h2,.qr-service h2 { font: 500 clamp(30px,3.4vw,48px)/1.15 var(--font-main); letter-spacing: -.045em; margin: 0; color: #eee9f0; }
+.about-home-copy p { margin: 0 0 20px; font-size: 15px; line-height: 1.85; color: #aaa5b0; }
+.home-text-link { display: inline-flex; gap: 28px; padding: 8px 0; color: #e4d5df; font-size: 13px; text-decoration: none; }
+.home-text-link:hover { text-decoration: underline; }
+.bento-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 0 9%; margin-bottom: 40px; }
+.bento-intro .home-kicker { grid-column: 1/-1; }
+.bento-intro > p:last-child { color: #aaa5b0; line-height: 1.8; max-width: 390px; align-self: end; margin: 0; font-size: 15px; }
+/* Bento Grid - Asymmetrical Architecture */
+.solutions-bento .section-box {
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.solutions-bento .bento-body {
+  padding: clamp(28px, 4vw, 56px);
+}
+
+.solutions-bento .bento-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+
+.solutions-bento .bento-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 26px 24px 22px;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 0;
+  background: linear-gradient(180deg, #17171a 0%, #121214 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+.solutions-bento .bento-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 28px 56px rgba(0, 0, 0, 0.65), 0 0 36px rgba(220, 140, 160, 0.12);
+}
+
+.solutions-bento .bento-card:focus-visible {
+  outline: 2px solid #c38b92;
+  outline-offset: 4px;
+}
+
+/* Row 1: 5fr (41.7%) : 7fr (58.3%) */
+.solutions-bento .bento-card-kernel {
+  grid-column: span 5;
+}
+
+.solutions-bento .bento-card-iot {
+  grid-column: span 7;
+}
+
+/* Row 2: 7fr (58.3%) : 5fr (41.7%) */
+.solutions-bento .bento-card-cyber {
+  grid-column: span 7;
+}
+
+.solutions-bento .bento-card-consulting {
+  grid-column: span 5;
+}
+
+/* Header layout */
+.solutions-bento .bento-card-header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 22px;
+}
+
+.solutions-bento .bento-card-title-row {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.solutions-bento .bento-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 0;
+  border-radius: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.solutions-bento .bento-badge svg {
+  display: block;
+  width: 20px;
+  height: 26px;
+}
+
+.solutions-bento .bento-title {
+  font-family: var(--font-main, 'Space Grotesk', sans-serif);
+  font-size: clamp(19px, 1.4vw, 22px);
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.solutions-bento .bento-arrow {
+  margin-left: auto;
+  color: rgba(255, 255, 255, 0.3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: color 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.solutions-bento .bento-card:hover .bento-arrow {
+  color: #ffffff;
+  transform: translate(2px, -2px);
+}
+
+.solutions-bento .bento-desc {
+  font-family: var(--font-secondary, 'Inter', sans-serif);
+  font-size: clamp(13px, 0.95vw, 14.5px);
+  line-height: 1.55;
+  color: #9a9aa0;
+  margin: 12px 0 0;
+  font-weight: 400;
+  max-width: 95%;
+}
+
+@media (min-width: 769px) {
+  .solutions-bento .bento-card-kernel .bento-desc,
+  .solutions-bento .bento-card-iot .bento-desc {
+    min-height: 44px;
+  }
+}
+
+/* Video media container */
+.solutions-bento .bento-media {
+  position: relative;
+  width: 100%;
+  border-radius: 0;
+  overflow: hidden;
+  background: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Row 1 cards: Distinctly TALL (~380-430px media) */
+.solutions-bento .bento-card-kernel .bento-media,
+.solutions-bento .bento-card-iot .bento-media {
+  height: clamp(290px, 25vw, 360px);
+}
+
+/* Row 2 cards: Distinctly COMPACT / PANORAMIC (~230-275px media) */
+.solutions-bento .bento-card-cyber .bento-media,
+.solutions-bento .bento-card-consulting .bento-media {
+  height: clamp(220px, 19vw, 270px);
+}
+
+.solutions-bento .bento-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: inherit;
+  pointer-events: none;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.solutions-bento .bento-card-cyber .bento-media video {
+  object-position: center top;
+}
+
+.solutions-bento .bento-card:hover .bento-media video {
+  transform: scale(1.025);
+}
+
+.solutions-bento .bento-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+  pointer-events: none;
+}
+
+/* Mobile responsive (only single-column below 768px tablet portrait) */
+@media (max-width: 768px) {
+  .solutions-bento .bento-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .solutions-bento .bento-card-kernel,
+  .solutions-bento .bento-card-iot,
+  .solutions-bento .bento-card-cyber,
+  .solutions-bento .bento-card-consulting {
+    grid-column: 1 / -1;
+  }
+  .solutions-bento .bento-card {
+    padding: 24px 20px 20px;
+    border-radius: 0;
+  }
+  .solutions-bento .bento-desc {
+    min-height: 0;
+    margin: 10px 0 0;
+  }
+  .solutions-bento .bento-card-header {
+    margin-bottom: 18px;
+  }
+  .solutions-bento .bento-card-kernel .bento-media {
+    height: auto;
+    aspect-ratio: 926 / 816;
+    border-radius: 0;
+  }
+  .solutions-bento .bento-card-iot .bento-media {
+    height: auto;
+    aspect-ratio: 1208 / 842;
+    border-radius: 0;
+  }
+  .solutions-bento .bento-card-cyber .bento-media {
+    height: auto;
+    aspect-ratio: 1294 / 620;
+    border-radius: 0;
+  }
+  .solutions-bento .bento-card-consulting .bento-media {
+    height: auto;
+    aspect-ratio: 4 / 3;
+    border-radius: 0;
+  }
+}
+.bilva-home .protect-shell { width: auto; max-width: none; padding: clamp(32px,5vw,76px); }
+/* ==========================================================================
+   COMPACT FAQ SECTION (#faq)
+   ========================================================================== */
+.compact-faq .section-box {
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.compact-faq-body {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: clamp(36px, 5vw, 72px);
+  padding: clamp(36px, 5vw, 76px);
+  align-items: start;
+}
+
+.compact-faq-intro {
+  position: sticky;
+  top: 100px;
+}
+
+.compact-faq-intro .home-kicker {
+  color: #c38b92;
+  font-size: 11px;
+  letter-spacing: .16em;
+  margin: 0 0 16px;
+  text-transform: uppercase;
+}
+
+.compact-faq-intro h2 {
+  font: 500 clamp(30px, 3.2vw, 46px)/1.15 var(--font-main, 'Space Grotesk', sans-serif);
+  letter-spacing: -.04em;
+  margin: 0;
+  color: #eee9f0;
+}
+
+.compact-faq-list {
+  display: flex;
+  flex-direction: column;
+}
+
+#faq details {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: border-color 0.25s ease;
+}
+
+#faq details:first-child {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+#faq details:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+#faq summary {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 22px 0;
+  font-family: var(--font-main, 'Space Grotesk', sans-serif);
+  font-size: clamp(16px, 1.2vw, 18.5px);
+  font-weight: 500;
+  cursor: pointer;
+  color: #e2dce4;
+  user-select: none;
+  transition: color 0.25s ease;
+}
+
+#faq summary::-webkit-details-marker,
+#faq summary::marker {
+  display: none !important;
+}
+
+#faq summary:hover {
+  color: #ffffff;
+}
+
+#faq summary .faq-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #c38b92;
+  flex-shrink: 0;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.25s ease,
+              border-color 0.25s ease,
+              color 0.25s ease;
+}
+
+#faq summary:hover .faq-icon {
+  background: rgba(195, 139, 146, 0.15);
+  border-color: rgba(195, 139, 146, 0.35);
+  color: #ffffff;
+}
+
+#faq details[open] summary {
+  color: #ffffff;
+}
+
+#faq details[open] summary .faq-icon {
+  transform: rotate(180deg);
+  background: rgba(195, 139, 146, 0.22);
+  border-color: #c38b92;
+  color: #ffffff;
+}
+
+#faq .faq-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+#faq .faq-answer-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.25s ease;
+  opacity: 0;
+}
+
+#faq details[open] .faq-answer-wrap {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+#faq .faq-answer-wrap > p,
+#faq details > p {
+  min-height: 0;
+  overflow: hidden;
+  margin: 0;
+  padding: 0 0 24px;
+  font-family: var(--font-secondary, 'Inter', sans-serif);
+  font-size: clamp(14px, 0.95vw, 15px);
+  line-height: 1.7;
+  color: #aaa2af;
+}
+
+#faq summary:focus-visible {
+  outline: 2px solid #c38b92;
+  outline-offset: 4px;
+}
+
+@media (max-width: 768px) {
+  .compact-faq-body {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 32px 20px;
+  }
+
+  .compact-faq-intro {
+    position: static;
+  }
+
+  #faq summary {
+    padding: 18px 0;
+    font-size: 16px;
+  }
+}
+.bilva-home .why-shell { width: auto; padding: clamp(28px,4vw,64px); gap: 5%; flex-direction: row-reverse; }
+.bilva-home .why-content { flex: 1; max-width: 540px; min-width: 0; }
+.bilva-home .why-visual { flex: 1; min-width: 0; }
+.bilva-home .why-copy { margin-bottom: 28px; }
+.bilva-home .principle-desc { font-size: 13px; line-height: 1.65; }
+.bilva-home .testimonials-shell { padding-top: clamp(32px,5vw,64px); }
+.bilva-home .testimonials-section .section-box { padding-bottom: 40px; }
+.bilva-home .testimonials-section { opacity: 1; transform: none; }
+.qr-service-body { display: grid; grid-template-columns: 1fr 260px; gap: 10%; align-items: center; }
+.qr-service-body > div > p:not(.home-kicker) { max-width: 570px; font-size: 15px; line-height: 1.8; color: #aaa5b0; margin: 22px 0 30px; }
+.qr-service .cta-primary-btn { gap: 24px; font-size: 13px; }
+.qr-service-aside { position: relative; aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid #c38b9228; background: var(--surface-card); color: #c38b92; }
+.qr-service-symbol { font: 400 70px var(--font-main); }
+.qr-service-aside > span:not(.qr-service-symbol) { font-size: 8px; letter-spacing: .2em; }
+.qr-service-body .qr-service-aside p { text-align: center; font-size: 13px; margin: 14px 0 0; }
+.bilva-home > section a:focus-visible { outline: 2px solid #c38b92; outline-offset: 5px; }
+@media(max-width:950px) { .bilva-home .why-shell { flex-direction: column-reverse; } .bilva-home .why-content { max-width: none; } .bilva-home .why-visual { flex: auto; width: 100%; } .qr-service-body { grid-template-columns: 1fr 190px; gap: 32px; } .bento-card { padding: 20px; } .bento-network span { width: 52px; height: 52px; font-size: 7px; } }
+@media(max-width:650px) { .bilva-home > section { padding: 0 12px 18px; } .section-meta { padding: 12px; font-size: 8px; gap: 16px; letter-spacing: .08em; } .section-meta > span:last-child { text-align: right; max-width: 45%; } .about-home-body,.bento-intro { grid-template-columns: 1fr; gap: 20px; } .about-home-body,.bento-body,.qr-service-body { padding: 30px 20px; } .about-home-body > .home-kicker,.bento-intro > .home-kicker { margin: 0; } .bento-grid { grid-template-columns: 1fr; } .bento-card { grid-column: auto; } .bento-art { min-height: 155px; } .bento-network { max-width: 280px; } .bento-network span { width: 66px; height: 66px; font-size: 8px; } .qr-service-body { grid-template-columns: 1fr; } .qr-service-aside { display: none; } .bilva-home .protect-shell,.bilva-home .faq-shell { padding: 30px 20px; } }
+@media(prefers-reduced-motion:reduce) { .bento-card { transition: none; } }
+
+/* Post-hero palette only; preserve the original hero and navigation. */
+.bilva-home > section,
+.bilva-home > .site-footer {
+  --surface-page: #080809;
+  --surface-panel: #0b0b0d;
+  --surface-card: #101012;
+  --surface-hover: #151517;
+  --line: #252527;
+  --line-hover: #494347;
+  --ink: #e9e7e8;
+  --ink-secondary: #aaa7ab;
+  --ink-muted: #918d92;
+  --bg-primary: var(--surface-panel);
+  --bg-card: var(--surface-card);
+  --border-subtle: var(--line);
+  --border-subtle-hover: var(--line-hover);
+  --text: var(--ink);
+  --muted: var(--ink-secondary);
+  --accent-glow: none;
+  --accent-gradient: linear-gradient(#b78d94,#b78d94);
+}
+.bilva-home .section-box,.bilva-home .service-dial-frame { border-color: var(--line); }
+.bilva-home .service-dial-frame { background: radial-gradient(ellipse at 50% 32%,rgba(var(--dial-rgb),.055),transparent 55%),linear-gradient(180deg,#0b090e,#080809); }
+.bilva-home .section-meta,.bilva-home .service-dial-meta { color: var(--ink-muted); border-color: #ffffff0b; }
+.bilva-home :is(.home-kicker,.protect-eyebrow,.why-eyebrow,.testimonials-eyebrow,.faq-eyebrow) { color: #b8a5aa; }
+.bilva-home :is(.about-home h2,.bento-intro h2,.qr-service h2,.architecture-cta h2,.bento-card-copy h3,.protect-heading,.why-heading,.testimonials-heading,.faq-heading,.card-title,.principle-title,.card-author-name) { color: var(--ink); }
+.bilva-home :is(.about-home-copy p,.bento-intro > p:last-child,.bento-card-copy p,.protect-copy,.why-copy,.testimonials-copy,.faq-copy,.faq-answer-text,.card-desc,.principle-desc,.card-quote-text) { color: var(--ink-secondary); }
+.bilva-home :is(.bento-card-meta,.bento-hardware,.card-num,.card-author-title,.card-author-org) { color: var(--ink-muted); }
+.bilva-home :is(.bento-card,.protect-card,.testimonial-card,.factual-card,.faq-item) { background: var(--surface-card); border-color: var(--line); box-shadow: none; }
+.bilva-home :is(.bento-card,.protect-card,.testimonial-card,.factual-card,.faq-item):hover,
+.bilva-home .faq-item.active { background: var(--surface-hover); border-color: var(--line-hover); box-shadow: none; transform: none; }
+.bilva-home .testimonial-card::before,.bilva-home .testimonial-card::after { display: none; }
+.bilva-home :is(.home-text-link,.bento-explore,.faq-inline-link) { color: #d4c9cd; }
+.bilva-home .bento-card { --bento-color: #ab969d; }
+.bilva-home :is(.bento-partitions span,.bento-foundation,.bento-network span,.bento-roadmap span,.qr-service-aside) { border-color: #3c343c; }
+.bilva-home .bento-foundation { background: #181418; }
+.bilva-home .bento-network i { background: #4d424e; }
+.bilva-home .bento-shield svg { stroke: #a594aa; }
+.bilva-home .bento-roadmap b { color: #a594aa; }
+.bilva-home .qr-service-aside { color: #b4a2a9; }
+.bilva-home > section .cta-primary-btn { background: #ded9da; color: #141315; box-shadow: none; border: 1px solid #ded9da; }
+.bilva-home > section .cta-primary-btn:hover { background: #f1edef; color: #141315; box-shadow: none; border-color: #f1edef; }
+.bilva-home .view-toggle-btn.is-active { background: #252125; border-color: #494047; box-shadow: none; }
+.bilva-home .card-avatar-box { background: #1d191c; color: #baa5ad; }
+.bilva-home .faq-item.active .faq-icon-wrapper { background: #30272e; color: #e8dce3; box-shadow: none; }
+.bilva-home .site-footer { background: var(--surface-page); border-color: var(--line); }
+
+/* --- WHY BILVA TECH: Simple Content Style (Non-boxed) --- */
+.bilva-home .why-principles {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid #ffffff12;
+  margin-top: 28px;
+}
+.bilva-home .why-principle {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 24px 0;
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid #ffffff12 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.25s ease, opacity 0.25s ease;
+  position: relative;
+}
+.bilva-home .why-principle .principle-num {
+  font: 600 13px var(--font-secondary);
+  color: #c38b92;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  margin-bottom: 6px;
+  transition: color 0.25s ease;
+}
+.bilva-home .why-principle .principle-sep {
+  color: #80566d;
+  font-size: 14px;
+  line-height: 1;
+  margin-bottom: 10px;
+  transition: color 0.25s ease;
+}
+.bilva-home .why-principle .principle-title {
+  font: 600 15px/1.3 var(--font-main);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f5f2f6;
+  margin: 0 0 10px;
+  transition: color 0.25s ease;
+}
+.bilva-home .why-principle .principle-desc {
+  font: 400 14px/1.65 var(--font-main);
+  color: #afa9b6;
+  margin: 0;
+  max-width: 500px;
+  transition: color 0.25s ease;
+}
+.bilva-home .why-principle:hover,
+.bilva-home .why-principle.active-principle,
+.bilva-home .why-principle:focus-visible {
+  background: transparent !important;
+  border-bottom-color: #c38b9288 !important;
+  transform: none !important;
+}
+.bilva-home .why-principle:hover .principle-num,
+.bilva-home .why-principle.active-principle .principle-num {
+  color: #f5f2f6;
+}
+.bilva-home .why-principle:hover .principle-sep,
+.bilva-home .why-principle.active-principle .principle-sep {
+  color: #c38b92;
+}
+.bilva-home .why-principle:hover .principle-title,
+.bilva-home .why-principle.active-principle .principle-title {
+  color: #c38b92;
+}
+.bilva-home .why-principle:hover .principle-desc,
+.bilva-home .why-principle.active-principle .principle-desc {
+  color: #f5f2f6;
+}
+
+/* --- Architecture CTA without globe --- */
+.bilva-home .architecture-cta .section-box {
+  background: #111014;
+  border: 1px solid #4c3b48;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.bilva-home .architecture-cta .section-box::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(90deg, #100e12f8 20%, #100e12d0 70%, #100e12aa), url('assets/cta-texture.jpg') center/cover;
+  opacity: 0.85;
+  pointer-events: none;
+}
+.bilva-home .architecture-cta-body {
+  position: relative;
+  z-index: 2;
+  padding: clamp(36px, 5vw, 68px);
+}
+.bilva-home .architecture-cta-copy {
+  max-width: 640px;
+  width: 100%;
+}
+.bilva-home .architecture-cta-copy h2 {
+  color: #e9e7e8;
+  font: 500 clamp(30px, 3.4vw, 46px)/1.15 var(--font-main);
+  letter-spacing: -0.04em;
+  margin: 0 0 20px;
+}
+.bilva-home .architecture-cta-copy > p:not(.home-kicker) {
+  max-width: 540px;
+  font-size: 14.5px;
+  line-height: 1.8;
+  color: #b5afb8;
+  margin: 0 0 28px;
+}
+.bilva-home .architecture-cta .cta-primary-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 13.5px;
+  text-decoration: none;
+}
+.bilva-home .cta-utility-link {
+  display: block;
+  color: #b5a5b2;
+  font-size: 11px;
+  margin-top: 20px;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.bilva-home .cta-utility-link:hover {
+  color: #f0e6ef;
+  text-decoration: underline;
+}

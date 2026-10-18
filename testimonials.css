@@ -1,0 +1,604 @@
+/* ==================================================
+   BILVA TECH — ANIMATED TESTIMONIALS / PERSPECTIVES
+   Inspired by Framer "Testimonial Animated" component
+   Seamless dual-direction marquee, cursor-reactive glow,
+   accessible focus-pause, and reduced-motion fallback.
+   Styled in Midnight Rose Palette (#0B090E, #111013, #30242E, #C38B92)
+   ================================================== */
+
+.testimonials-section {
+  position: relative;
+  width: 100%;
+  background-color: var(--bg-primary, #0B090E);
+  padding: var(--space-section, clamp(80px, 10vw, 140px)) 0;
+  z-index: 2;
+  border-top: 1px solid var(--border-subtle, #30242E);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 800ms cubic-bezier(0.16, 1, 0.3, 1), transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.testimonials-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --------------------------------------------------
+   Shell & Intro Header
+   -------------------------------------------------- */
+.testimonials-shell {
+  width: min(100%, var(--container-max, 1280px));
+  padding-inline: var(--page-px, clamp(20px, 4vw, 48px));
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(28px, 4vw, 44px);
+  margin-bottom: clamp(32px, 5vw, 54px);
+}
+
+.testimonials-header-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 840px;
+  margin: 0 auto;
+}
+
+.testimonials-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 16px;
+  color: var(--accent-rose, #C38B92);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-family: var(--font-main, "Inter", sans-serif);
+}
+
+.testimonials-eyebrow::before,
+.testimonials-eyebrow::after {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 1px;
+  background-color: rgba(195, 139, 146, 0.5);
+}
+
+.testimonials-heading {
+  font-family: var(--font-main, "Inter", sans-serif);
+  font-size: clamp(30px, 4vw, 48px);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+  color: #ffffff;
+  margin: 0 0 18px;
+}
+
+.testimonials-copy {
+  font-family: var(--font-secondary, "Space Grotesk", sans-serif);
+  font-size: clamp(15px, 1.3vw, 16.5px);
+  line-height: 1.65;
+  color: #a4a4a4;
+  margin: 0 0 24px;
+  max-width: 720px;
+}
+
+/* Configurable View Switch (Marquee vs Factual Engineering) */
+.testimonials-view-controls {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle, #30242E);
+  border-radius: 999px;
+  gap: 4px;
+}
+
+.view-toggle-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: #8c93a0;
+  font-family: var(--font-secondary, "Space Grotesk", sans-serif);
+  font-size: 12.5px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 200ms ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.view-toggle-btn i {
+  font-size: 11px;
+}
+
+.view-toggle-btn:hover {
+  color: #ffffff;
+  border-color: rgba(195, 139, 146, 0.25);
+}
+
+.view-toggle-btn.is-active {
+  background: rgba(195, 139, 146, 0.16);
+  border-color: rgba(195, 139, 146, 0.35);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* --------------------------------------------------
+   Marquee Viewport & Opposing Rows
+   -------------------------------------------------- */
+.testimonials-marquee-viewport {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 8px 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 2.5vw, 24px);
+  
+  /* Soft natural edge fade */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black clamp(36px, 8vw, 120px),
+    black calc(100% - clamp(36px, 8vw, 120px)),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black clamp(36px, 8vw, 120px),
+    black calc(100% - clamp(36px, 8vw, 120px)),
+    transparent 100%
+  );
+}
+
+.marquee-row {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  user-select: none;
+  --marquee-gap: clamp(16px, 2vw, 24px);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  align-items: stretch;
+}
+
+.marquee-group {
+  display: flex;
+  flex-shrink: 0;
+  align-items: stretch;
+  gap: var(--marquee-gap);
+  padding-right: var(--marquee-gap);
+  will-change: transform;
+}
+
+/* Row 1: Right to Left */
+.marquee-row-1 .marquee-group {
+  animation: marquee-scroll-left var(--speed-1, 42s) linear infinite;
+}
+
+/* Row 2: Left to Right */
+.marquee-row-2 .marquee-group {
+  animation: marquee-scroll-right var(--speed-2, 46s) linear infinite;
+}
+
+/* Seamless Keyframes: Move exactly (100% of group width + gap) */
+@keyframes marquee-scroll-left {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+@keyframes marquee-scroll-right {
+  0% {
+    transform: translate3d(-100%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Pause on hover and focus-within (accessible reading experience) */
+.marquee-row:hover .marquee-group,
+.marquee-row:focus-within .marquee-group,
+.marquee-row.is-paused .marquee-group {
+  animation-play-state: paused !important;
+}
+
+/* --------------------------------------------------
+   Testimonial & Perspective Card
+   -------------------------------------------------- */
+.testimonial-card {
+  position: relative;
+  width: clamp(310px, 26vw, 380px);
+  background: var(--bg-card, #111013);
+  background: linear-gradient(180deg, rgba(29, 23, 30, 0.75) 0%, rgba(17, 16, 19, 0.95) 100%);
+  border: 1px solid var(--border-subtle, #30242E);
+  border-radius: 14px;
+  padding: clamp(20px, 2.8vw, 26px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.55);
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), border-color 300ms ease, box-shadow 300ms ease;
+  overflow: hidden;
+  isolation: isolate;
+  outline: none;
+  flex-shrink: 0;
+}
+
+/* Focus outline for keyboard navigation */
+.testimonial-card:focus-visible {
+  outline: 2px solid var(--accent-rose, #C38B92);
+  outline-offset: 3px;
+  border-color: rgba(195, 139, 146, 0.6);
+}
+
+.testimonial-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-subtle-hover, #80566D);
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.75);
+}
+
+/* --------------------------------------------------
+   Cursor-Reactive Highlight & Glow (Framer Feature)
+   Follows cursor position using --mouse-x and --mouse-y
+   -------------------------------------------------- */
+.testimonial-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(
+    280px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
+    rgba(195, 139, 146, 0.55),
+    rgba(128, 86, 109, 0.3) 35%,
+    transparent 70%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 280ms ease;
+  z-index: 2;
+}
+
+.testimonial-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    320px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
+    rgba(195, 139, 146, 0.08),
+    transparent 70%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 280ms ease;
+  z-index: 0;
+}
+
+.testimonial-card:hover::before,
+.testimonial-card:hover::after,
+.testimonial-card:focus-within::before,
+.testimonial-card:focus-within::after {
+  opacity: 1;
+}
+
+/* Card Quote Body */
+.card-quote-body {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 18px;
+  flex-grow: 1;
+}
+
+.card-quote-text {
+  font-family: var(--font-secondary, "Space Grotesk", sans-serif);
+  font-size: clamp(13.5px, 1.1vw, 14.5px);
+  line-height: 1.6;
+  color: #d1d5db;
+  margin: 0;
+}
+
+.card-quote-text::before {
+  content: "“";
+  color: var(--accent-rose, #C38B92);
+  font-family: Georgia, serif;
+  font-size: 1.15em;
+  margin-right: 2px;
+}
+
+.card-quote-text::after {
+  content: "”";
+  color: var(--accent-rose, #C38B92);
+  font-family: Georgia, serif;
+  font-size: 1.15em;
+  margin-left: 2px;
+}
+
+/* Card Author Meta */
+.card-author-footer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.card-avatar-box,
+.testimonial-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(195, 139, 146, 0.1);
+  border: 1px solid rgba(195, 139, 146, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: var(--font-main, "Inter", sans-serif);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-rose, #C38B92);
+  overflow: hidden;
+  position: relative;
+}
+
+.card-avatar-box img,
+.testimonial-avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.card-avatar-box .avatar-fallback,
+.testimonial-avatar .avatar-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-author-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.card-author-name {
+  font-family: var(--font-main, "Inter", sans-serif);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-author-title {
+  font-family: var(--font-secondary, "Space Grotesk", sans-serif);
+  font-size: 11.5px;
+  color: #8c93a0;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-author-org {
+  font-family: var(--font-secondary, "Space Grotesk", sans-serif);
+  font-size: 11px;
+  color: #71717a;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --------------------------------------------------
+   Factual Perspectives Alternative View
+   -------------------------------------------------- */
+.factual-perspectives-container {
+  width: min(100%, var(--container-max, 1280px));
+  padding-inline: var(--page-px, clamp(20px, 4vw, 48px));
+  margin-inline: auto;
+  display: none;
+}
+
+.factual-perspectives-container.is-active {
+  display: block;
+  animation: fadeInPerspectives 300ms ease;
+}
+
+@keyframes fadeInPerspectives {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.factual-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 2.5vw, 28px);
+}
+
+.factual-card {
+  background: var(--bg-card, #111013);
+  border: 1px solid var(--border-subtle, #30242E);
+  border-radius: 12px;
+  padding: clamp(24px, 3vw, 32px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: border-color 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+}
+
+.factual-card:hover {
+  border-color: var(--border-subtle-hover, #80566D);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.6);
+}
+
+.factual-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: rgba(195, 139, 146, 0.1);
+  border: 1px solid rgba(195, 139, 146, 0.25);
+  color: var(--accent-rose, #C38B92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.factual-area {
+  font-family: var(--font-main, "Inter", sans-serif);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-mauve, #80566D);
+  margin: 0;
+}
+
+.factual-title {
+  font-family: var(--font-main, "Inter", sans-serif);
+  font-size: clamp(18px, 1.8vw, 21px);
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.25;
+}
+
+.factual-body {
+  font-family: var(--font-secondary, "Space Grotesk", sans-serif);
+  font-size: 14px;
+  line-height: 1.6;
+  color: #94a3b8;
+  margin: 0;
+}
+
+/* --------------------------------------------------
+   Responsive Design
+   -------------------------------------------------- */
+@media (max-width: 900px) {
+  .factual-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .testimonial-card {
+    width: clamp(280px, 45vw, 340px);
+  }
+}
+
+@media (max-width: 640px) {
+  .factual-grid {
+    grid-template-columns: 1fr;
+  }
+  .testimonials-view-controls {
+    width: 100%;
+    justify-content: center;
+  }
+  .view-toggle-btn {
+    flex: 1;
+    justify-content: center;
+    font-size: 11.5px;
+    padding: 6px 10px;
+  }
+  .testimonial-card {
+    width: 290px;
+    padding: 18px;
+  }
+  .testimonials-marquee-viewport {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 24px,
+      black calc(100% - 24px),
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 24px,
+      black calc(100% - 24px),
+      transparent 100%
+    );
+  }
+}
+
+/* --------------------------------------------------
+   prefers-reduced-motion: reduce
+   Provide static, readable layout when reduced motion is enabled
+   -------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .testimonials-section {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  
+  .marquee-group {
+    animation: none !important;
+  }
+  
+  .testimonials-marquee-viewport {
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    padding-inline: var(--page-px);
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+  }
+  
+  .marquee-row {
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+    padding-bottom: 8px;
+  }
+  
+  .marquee-group[data-duplicate="true"] {
+    display: none !important;
+  }
+  
+  .testimonial-card {
+    transition: none !important;
+  }
+  
+  .testimonial-card::before,
+  .testimonial-card::after {
+    display: none !important;
+  }
+}

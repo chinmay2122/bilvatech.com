@@ -1,0 +1,731 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Bilva Tech | Separation Kernel Visual</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #050505;
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", Helvetica, Arial, sans-serif;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    #bilvatech-sk-visual {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background-color: #050505;
+      overflow: hidden;
+      cursor: crosshair;
+    }
+
+    #sk-canvas-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    #sk-canvas-container canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    #sk-labels-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Base Label Styling */
+    .sk-label {
+      position: absolute;
+      color: #9ea4b0;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      padding: 5px 11px;
+      background: rgba(10, 11, 15, 0.78);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-left: 2px solid #555;
+      border-radius: 4px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transform: translate(-50%, -50%);
+      opacity: 0.85;
+      transition: opacity 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease, background 0.25s ease;
+      white-space: nowrap;
+      display: none;
+      pointer-events: auto;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Specific Label Styles */
+    .sk-domain {
+      font-size: 10px;
+      border-left: 2px solid #636b7b;
+      background: rgba(13, 16, 24, 0.78);
+    }
+
+    .sk-accent {
+      color: #ffffff;
+      border-left: 2px solid #cc1111;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      background: rgba(18, 10, 12, 0.88);
+      border-color: rgba(204, 17, 17, 0.35);
+      border-left-color: #ff3333;
+    }
+
+    .sk-hw {
+      font-size: 9px;
+      letter-spacing: 1.2px;
+      padding: 3px 8px;
+      border-left: 2px solid #3d424d;
+      background: rgba(10, 12, 16, 0.85);
+    }
+
+    .sk-hw-main {
+      color: #ffffff;
+      font-size: 11px;
+      letter-spacing: 2px;
+      font-weight: 700;
+      border-left: 1px solid rgba(255, 255, 255, 0.15);
+      border-bottom: 2px solid #777;
+      background: rgba(12, 14, 18, 0.85);
+    }
+
+    /* JavaScript Hover / Active States */
+    .sk-label:hover,
+    .sk-label.is-active {
+      opacity: 1;
+      color: #ffffff;
+      border-color: rgba(85, 216, 255, 0.6);
+      border-left-color: #55d8ff;
+      background: rgba(16, 24, 38, 0.92);
+      box-shadow: 0 0 20px rgba(85, 216, 255, 0.35);
+      transform: translate(-50%, -50%) scale(1.06);
+    }
+
+    .sk-label.sk-accent:hover,
+    .sk-label.sk-accent.is-active {
+      border-color: rgba(255, 50, 50, 0.6);
+      border-left-color: #ff2222;
+      background: rgba(30, 12, 14, 0.95);
+      box-shadow: 0 0 24px rgba(255, 34, 34, 0.55);
+      text-shadow: 0 0 10px rgba(255, 34, 34, 0.7);
+      transform: translate(-50%, -50%) scale(1.06);
+    }
+
+    .sk-label.is-dimmed {
+      opacity: 0.22;
+    }
+
+    @media (max-width: 520px) {
+      .sk-label {
+        font-size: 9px;
+        padding: 3px 7px;
+        letter-spacing: 1px;
+      }
+      .sk-accent {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+      }
+      .sk-hw {
+        font-size: 8px;
+        padding: 2px 5px;
+      }
+      .sk-hw-main {
+        font-size: 9px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- REPLACEMENT CONTAINER FOR YOUR GLOBE -->
+  <div id="bilvatech-sk-visual">
+    
+    <!-- 3D Canvas Layer -->
+    <div id="sk-canvas-container"></div>
+    
+    <!-- UI Labels Layer -->
+    <div id="sk-labels-container">
+      <!-- Top Layer -->
+      <div class="sk-label" id="lbl-app">APPLICATION</div>
+      <div class="sk-label" id="lbl-os">OPERATING SYSTEM</div>
+      <div class="sk-label" id="lbl-workload">WORKLOAD</div>
+      
+      <!-- Domains Layer -->
+      <div class="sk-label sk-domain" id="lbl-dom-a">DOMAIN A</div>
+      <div class="sk-label sk-domain" id="lbl-dom-b">DOMAIN B</div>
+      <div class="sk-label sk-domain" id="lbl-dom-c">DOMAIN C</div>
+      
+      <!-- Core Layer -->
+      <div class="sk-label sk-accent" id="lbl-kernel">SEPARATION KERNEL</div>
+      
+      <!-- Hardware Layer -->
+      <div class="sk-label sk-hw" id="lbl-cpu">CPU</div>
+      <div class="sk-label sk-hw" id="lbl-mem">MEMORY</div>
+      <div class="sk-label sk-hw" id="lbl-io">I/O</div>
+      <div class="sk-label sk-hw" id="lbl-periph">PERIPHERALS</div>
+      <div class="sk-label sk-hw-main" id="lbl-hardware">HARDWARE</div>
+    </div>
+  </div>
+
+  <!-- Load Three.js from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    (function() {
+      const container = document.getElementById('bilvatech-sk-visual');
+      const canvasContainer = document.getElementById('sk-canvas-container');
+      if (!container || !canvasContainer) return;
+
+      // --- Configuration ---
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const isMobile = window.innerWidth < 768;
+      const globalSpeed = prefersReducedMotion ? 0 : 1;
+      const particleCount = isMobile ? 30 : 60;
+
+      // --- Scene & Camera ---
+      const scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x050505, 0.025);
+
+      const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
+
+      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      canvasContainer.appendChild(renderer.domElement);
+
+      const masterGroup = new THREE.Group();
+      scene.add(masterGroup);
+
+      // --- Materials ---
+      const matDarkMetal = new THREE.MeshStandardMaterial({ color: 0x111116, metalness: 0.85, roughness: 0.25 });
+      const matLightNode = new THREE.MeshStandardMaterial({ color: 0xe8e8e8, metalness: 0.6, roughness: 0.2 });
+      const matGlass = new THREE.MeshPhysicalMaterial({
+        color: 0x151822, metalness: 0.15, roughness: 0.1, transmission: 0.9, transparent: true, opacity: 0.28, side: THREE.DoubleSide
+      });
+      const matKernel = new THREE.MeshStandardMaterial({ color: 0x0a0a0d, metalness: 0.9, roughness: 0.18, emissive: 0x2b0000 });
+      const matWireframe = new THREE.LineBasicMaterial({ color: 0x485060, transparent: true, opacity: 0.35 });
+      
+      const matPathNormal = new THREE.LineBasicMaterial({ color: 0x3d4452, transparent: true, opacity: 0.22 });
+      const matPathActive = new THREE.LineBasicMaterial({ color: 0x55d8ff, transparent: true, opacity: 0.85 });
+      const matPathControlled = new THREE.LineBasicMaterial({ color: 0xff3333, transparent: true, opacity: 0.9 });
+
+      // --- Y-Axis Levels (Model centered around Y = -0.25) ---
+      const LEVEL_APP = 4.0;
+      const LEVEL_DOMAIN = 1.0;
+      const LEVEL_KERNEL = -2.0;
+      const LEVEL_HW = -4.5;
+
+      // --- 1. APPLICATIONS LAYER ---
+      const appGroup = new THREE.Group();
+      appGroup.position.y = LEVEL_APP;
+      const apps = [];
+      const appXPositions = [-3, 0, 3];
+
+      appXPositions.forEach((x, i) => {
+        const mesh = new THREE.Mesh(new THREE.IcosahedronGeometry(0.32, 1), matLightNode.clone());
+        mesh.position.set(x, 0, 0);
+        appGroup.add(mesh);
+
+        const hitbox = new THREE.Mesh(new THREE.SphereGeometry(0.65, 8, 8), new THREE.MeshBasicMaterial({ visible: false }));
+        hitbox.position.set(x, 0, 0);
+        hitbox.userData = { type: 'app', index: i };
+        appGroup.add(hitbox);
+
+        apps.push({ mesh, hitbox, baseX: x, phase: Math.random() * Math.PI * 2, index: i });
+      });
+      masterGroup.add(appGroup);
+
+      // --- 2. ISOLATED DOMAINS LAYER ---
+      const domainsGroup = new THREE.Group();
+      domainsGroup.position.y = LEVEL_DOMAIN;
+      const domains = [];
+
+      appXPositions.forEach((x, i) => {
+        const dGroup = new THREE.Group();
+        dGroup.position.set(x, 0, 0);
+
+        // Glass Container
+        const boxGeo = new THREE.BoxGeometry(2, 2.2, 2);
+        const glass = new THREE.Mesh(boxGeo, matGlass.clone());
+        const edges = new THREE.LineSegments(new THREE.EdgesGeometry(boxGeo), matWireframe.clone());
+        dGroup.add(glass, edges);
+
+        // Internal Nodes
+        const nodes = [];
+        for(let n = 0; n < 3; n++) {
+          const node = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.24, 0.24), matLightNode.clone());
+          node.position.set((Math.random() - 0.5) * 1.2, (Math.random() - 0.5) * 1.2, (Math.random() - 0.5) * 1.2);
+          dGroup.add(node);
+          nodes.push(node);
+        }
+
+        // Invisible Hitbox for Raycasting (properly sized to cover the whole glass box)
+        const hitbox = new THREE.Mesh(new THREE.BoxGeometry(2.1, 2.3, 2.1), new THREE.MeshBasicMaterial({ visible: false }));
+        hitbox.userData = { type: 'domain', index: i };
+        dGroup.add(hitbox);
+
+        domainsGroup.add(dGroup);
+        domains.push({ group: dGroup, glass, edges, nodes, hitbox, x, index: i });
+      });
+      masterGroup.add(domainsGroup);
+
+      // --- 3. SEPARATION KERNEL ---
+      const kernelGroup = new THREE.Group();
+      kernelGroup.position.y = LEVEL_KERNEL;
+      
+      const kernelCore = new THREE.Mesh(new THREE.CylinderGeometry(1.5, 1.8, 1.2, 8), matKernel);
+      const kernelWire = new THREE.LineSegments(
+        new THREE.EdgesGeometry(new THREE.CylinderGeometry(1.8, 2.1, 1.4, 8)),
+        new THREE.LineBasicMaterial({ color: 0x661111, transparent: true, opacity: 0.55 })
+      );
+      kernelGroup.add(kernelCore, kernelWire);
+
+      const kernelHitbox = new THREE.Mesh(new THREE.CylinderGeometry(2.2, 2.2, 1.6, 8), new THREE.MeshBasicMaterial({ visible: false }));
+      kernelHitbox.userData = { type: 'kernel' };
+      kernelGroup.add(kernelHitbox);
+
+      masterGroup.add(kernelGroup);
+
+      // --- 4. HARDWARE RESOURCES ---
+      const hwGroup = new THREE.Group();
+      hwGroup.position.y = LEVEL_HW;
+      
+      const hwBase = new THREE.Mesh(new THREE.BoxGeometry(7.5, 0.4, 3.5), matDarkMetal);
+      const hwEdges = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(7.5, 0.4, 3.5)), matWireframe);
+      hwGroup.add(hwBase, hwEdges);
+
+      // 4 distinct hardware zones
+      const hwZones = [];
+      const hwPositions = [
+        { x: -2.5, z: 0.5, name: 'cpu' },
+        { x: -0.8, z: -0.5, name: 'mem' },
+        { x: 0.8, z: 0.5, name: 'io' },
+        { x: 2.5, z: -0.5, name: 'periph' }
+      ];
+
+      hwPositions.forEach((pos, i) => {
+        const plateGeo = new THREE.BoxGeometry(1.2, 0.1, 1.2);
+        const plate = new THREE.Mesh(plateGeo, matLightNode.clone());
+        plate.material.color.setHex(0x33353d);
+        plate.position.set(pos.x, 0.25, pos.z);
+        
+        const hitbox = new THREE.Mesh(new THREE.BoxGeometry(1.4, 0.6, 1.4), new THREE.MeshBasicMaterial({ visible: false }));
+        hitbox.position.copy(plate.position);
+        hitbox.userData = { type: 'hw', index: i, name: pos.name };
+        
+        hwGroup.add(plate, hitbox);
+        hwZones.push({ mesh: plate, pos: plate.position, hitbox, name: pos.name, index: i });
+      });
+
+      masterGroup.add(hwGroup);
+
+      // --- CONNECTIONS (Controlled Communication Paths) ---
+      const paths = [];
+      const flowRoutes = [];
+
+      function createLine(p1, p2, type, domainIndex = null, hwIndex = null) {
+        const geo = new THREE.BufferGeometry().setFromPoints([p1, p2]);
+        const line = new THREE.Line(geo, matPathNormal.clone());
+        masterGroup.add(line);
+        paths.push({ line, type, domainIndex, hwIndex });
+        flowRoutes.push({ p1, p2 });
+      }
+
+      // App -> Domain
+      appXPositions.forEach((x, i) => {
+        createLine(new THREE.Vector3(x, LEVEL_APP - 0.32, 0), new THREE.Vector3(x, LEVEL_DOMAIN + 1.1, 0), 'app_domain', i);
+      });
+
+      // Domain -> Kernel
+      appXPositions.forEach((x, i) => {
+        createLine(new THREE.Vector3(x, LEVEL_DOMAIN - 1.1, 0), new THREE.Vector3(x * 0.4, LEVEL_KERNEL + 0.6, 0), 'domain_kernel', i);
+      });
+
+      // Inter-Domain communication MUST route through Kernel
+      createLine(new THREE.Vector3(appXPositions[0] * 0.4, LEVEL_KERNEL + 0.6, 0), new THREE.Vector3(appXPositions[1] * 0.4, LEVEL_KERNEL + 0.6, 0), 'kernel_routing');
+      createLine(new THREE.Vector3(appXPositions[2] * 0.4, LEVEL_KERNEL + 0.6, 0), new THREE.Vector3(appXPositions[1] * 0.4, LEVEL_KERNEL + 0.6, 0), 'kernel_routing');
+
+      // Kernel -> Hardware
+      hwPositions.forEach((pos, i) => {
+        createLine(new THREE.Vector3(pos.x * 0.35, LEVEL_KERNEL - 0.6, 0), new THREE.Vector3(pos.x, LEVEL_HW + 0.3, pos.z), 'kernel_hw', null, i);
+      });
+
+      // --- PARTICLES ---
+      const particles = [];
+      const particleGeo = new THREE.SphereGeometry(0.045, 6, 6);
+      const particleMat = new THREE.MeshBasicMaterial({ color: 0x99e5ff });
+
+      function spawnParticle() {
+        if (flowRoutes.length === 0) return;
+        const route = flowRoutes[Math.floor(Math.random() * flowRoutes.length)];
+        const pMesh = new THREE.Mesh(particleGeo, particleMat);
+        masterGroup.add(pMesh);
+        particles.push({
+          mesh: pMesh,
+          start: route.p1,
+          end: route.p2,
+          progress: 0,
+          speed: 0.005 + Math.random() * 0.005
+        });
+      }
+
+      // --- LIGHTING ---
+      scene.add(new THREE.AmbientLight(0xffffff, 0.45));
+
+      const dirLight1 = new THREE.DirectionalLight(0xffffff, 1.1);
+      dirLight1.position.set(6, 10, 8);
+      scene.add(dirLight1);
+
+      const dirLight2 = new THREE.DirectionalLight(0x5588ff, 0.5);
+      dirLight2.position.set(-6, -6, 6);
+      scene.add(dirLight2);
+
+      const kernelGlow = new THREE.PointLight(0xff2222, 0.5, 7);
+      kernelGlow.position.set(0, 0, 0);
+      kernelGroup.add(kernelGlow);
+
+      // --- INTERACTION & PARALLAX ---
+      const raycaster = new THREE.Raycaster();
+      const mouse = new THREE.Vector2(-999, -999);
+      let targetRotX = 0, targetRotY = 0;
+      let currentRotX = 0, currentRotY = 0;
+      let raycastHovered = null;
+      let labelHovered = null;
+
+      function updateMouseCoords(clientX, clientY) {
+        const rect = container.getBoundingClientRect();
+        mouse.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+        mouse.y = -((clientY - rect.top) / rect.height) * 2 + 1;
+        if (globalSpeed > 0) {
+          targetRotY = mouse.x * 0.14;
+          targetRotX = mouse.y * 0.12;
+        }
+      }
+
+      container.addEventListener('mousemove', (e) => {
+        updateMouseCoords(e.clientX, e.clientY);
+      });
+
+      container.addEventListener('mouseleave', () => {
+        mouse.x = -999;
+        mouse.y = -999;
+        targetRotX = 0;
+        targetRotY = 0;
+      });
+
+      // Touch events for mobile support
+      container.addEventListener('touchstart', (e) => {
+        if (e.touches.length > 0) {
+          updateMouseCoords(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      }, { passive: true });
+
+      container.addEventListener('touchmove', (e) => {
+        if (e.touches.length > 0) {
+          updateMouseCoords(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      }, { passive: true });
+
+      container.addEventListener('touchend', () => {
+        mouse.x = -999;
+        mouse.y = -999;
+        targetRotX = 0;
+        targetRotY = 0;
+      }, { passive: true });
+
+      // --- LABEL CONFIGURATION & SYNCING ---
+      const labelData = [
+        // Top Layer (Applications)
+        { id: 'lbl-app', pos: new THREE.Vector3(appXPositions[0], LEVEL_APP + 0.45, 0), key: 'app', index: 0 },
+        { id: 'lbl-os', pos: new THREE.Vector3(appXPositions[1], LEVEL_APP + 0.45, 0), key: 'app', index: 1 },
+        { id: 'lbl-workload', pos: new THREE.Vector3(appXPositions[2], LEVEL_APP + 0.45, 0), key: 'app', index: 2 },
+        
+        // Domains Layer (Badges centered on front face of glass cubes)
+        { id: 'lbl-dom-a', pos: new THREE.Vector3(appXPositions[0], LEVEL_DOMAIN + 0.85, 1.08), key: 'domain', index: 0 },
+        { id: 'lbl-dom-b', pos: new THREE.Vector3(appXPositions[1], LEVEL_DOMAIN + 0.85, 1.08), key: 'domain', index: 1 },
+        { id: 'lbl-dom-c', pos: new THREE.Vector3(appXPositions[2], LEVEL_DOMAIN + 0.85, 1.08), key: 'domain', index: 2 },
+        
+        // Separation Kernel Core
+        { id: 'lbl-kernel', pos: new THREE.Vector3(0, LEVEL_KERNEL, 1.95), key: 'kernel' },
+        
+        // Hardware Platform base label
+        { id: 'lbl-hardware', pos: new THREE.Vector3(0, LEVEL_HW - 0.48, 1.8), key: 'hw_main' },
+        
+        // Hardware Component Zones
+        { id: 'lbl-cpu', pos: new THREE.Vector3(hwPositions[0].x, LEVEL_HW + 0.42, hwPositions[0].z + 0.2), key: 'hw', index: 0, name: 'cpu' },
+        { id: 'lbl-mem', pos: new THREE.Vector3(hwPositions[1].x, LEVEL_HW + 0.42, hwPositions[1].z + 0.2), key: 'hw', index: 1, name: 'mem' },
+        { id: 'lbl-io', pos: new THREE.Vector3(hwPositions[2].x, LEVEL_HW + 0.42, hwPositions[2].z + 0.2), key: 'hw', index: 2, name: 'io' },
+        { id: 'lbl-periph', pos: new THREE.Vector3(hwPositions[3].x, LEVEL_HW + 0.42, hwPositions[3].z + 0.2), key: 'hw', index: 3, name: 'periph' }
+      ].map(l => {
+        const el = document.getElementById(l.id);
+        if (el) {
+          el.addEventListener('mouseenter', () => {
+            labelHovered = { type: l.key, index: l.index, name: l.name };
+          });
+          el.addEventListener('mouseleave', () => {
+            labelHovered = null;
+          });
+        }
+        return { el, pos: l.pos, key: l.key, index: l.index, name: l.name };
+      });
+
+      function updateLabels() {
+        const w = container.clientWidth;
+        const h = container.clientHeight;
+        const halfW = w / 2;
+        const halfH = h / 2;
+        const pad = 12;
+
+        labelData.forEach(lbl => {
+          if (!lbl.el) return;
+          const vec = lbl.pos.clone();
+          vec.applyMatrix4(masterGroup.matrixWorld);
+          vec.project(camera);
+          
+          if (vec.z < 1) { 
+            lbl.el.style.display = 'block';
+            const rawX = (vec.x * halfW + halfW);
+            const rawY = (-(vec.y * halfH) + halfH);
+            
+            // Bounds clamping so labels never clip out of frame
+            const elW = lbl.el.offsetWidth || 70;
+            const elH = lbl.el.offsetHeight || 24;
+            
+            const clampedX = Math.max(pad + elW / 2, Math.min(w - pad - elW / 2, rawX));
+            const clampedY = Math.max(pad + elH / 2, Math.min(h - pad - elH / 2, rawY));
+
+            lbl.el.style.left = clampedX + 'px';
+            lbl.el.style.top = clampedY + 'px';
+          } else {
+            lbl.el.style.display = 'none';
+          }
+        });
+      }
+
+      // --- DYNAMIC CAMERA & SIZING (PERFECT FIT) ---
+      function onResize() {
+        const width = container.clientWidth || window.innerWidth;
+        const height = container.clientHeight || window.innerHeight;
+        if (!width || !height) return;
+
+        const aspect = width / height;
+        camera.aspect = aspect;
+        camera.updateProjectionMatrix();
+        renderer.setSize(width, height, false);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+
+        // Total content envelope:
+        // Height: from Y = -5.0 to Y = +4.8 -> 9.8 units (centered at Y = -0.25)
+        // Width: from X = -4.0 to X = +4.0 -> 8.0 units
+        // With padding margins: desiredHeight ~ 11.2, desiredWidth ~ 9.8
+        const fovRad = (camera.fov * Math.PI) / 180;
+        const halfTan = Math.tan(fovRad / 2);
+
+        const desiredHeight = 11.4;
+        const desiredWidth = 9.8;
+
+        const distV = (desiredHeight / 2) / halfTan;
+        const distH = (desiredWidth / 2) / (halfTan * aspect);
+
+        const targetDist = Math.max(distV, distH);
+        camera.position.set(0, -0.25, targetDist);
+        camera.lookAt(0, -0.25, 0);
+      }
+
+      window.addEventListener('resize', onResize);
+      // Run immediately
+      onResize();
+
+      let isVisible = true;
+      if (window.IntersectionObserver) {
+        const observer = new IntersectionObserver(entries => {
+          isVisible = entries[0].isIntersecting;
+        });
+        observer.observe(container);
+      }
+
+      // --- HIT TARGETS FOR RAYCASTING ---
+      const hitTargets = [
+        ...apps.map(a => a.hitbox),
+        ...domains.map(d => d.hitbox),
+        kernelHitbox,
+        ...hwZones.map(h => h.hitbox)
+      ];
+
+      // --- RENDER LOOP ---
+      let time = 0;
+      let frame = 0;
+
+      function animate() {
+        requestAnimationFrame(animate);
+        if (!isVisible) return;
+
+        time += 0.01 * globalSpeed;
+        frame++;
+
+        // Smooth Parallax
+        currentRotX += (targetRotX - currentRotX) * 0.05;
+        currentRotY += (targetRotY - currentRotY) * 0.05;
+        masterGroup.rotation.y = (time * 0.05) + currentRotY;
+        masterGroup.rotation.x = currentRotX;
+
+        masterGroup.updateMatrixWorld();
+        updateLabels();
+
+        // Subtle animations
+        if (globalSpeed > 0) {
+          apps.forEach(app => {
+            app.mesh.position.y = Math.sin(time * 2 + app.phase) * 0.12;
+            app.mesh.rotation.y += 0.01;
+          });
+          domains.forEach(d => {
+            d.nodes.forEach(n => {
+              n.rotation.x += 0.01;
+              n.rotation.y += 0.015;
+            });
+          });
+          kernelWire.rotation.y -= 0.004;
+        }
+
+        // Raycasting
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects(hitTargets);
+        raycastHovered = intersects.length > 0 ? intersects[0].object.userData : null;
+
+        // Active hover is either 2D label hover or 3D raycast hover
+        const activeHover = labelHovered || raycastHovered;
+        const isAnyHovered = activeHover !== null;
+
+        // 1. Domain Hover Logic
+        domains.forEach((d, i) => {
+          const isHovered = (activeHover?.type === 'domain' && activeHover.index === i) ||
+                            (activeHover?.type === 'app' && activeHover.index === i);
+          
+          const tOpacity = isHovered ? 0.65 : (isAnyHovered && activeHover?.type === 'domain' ? 0.1 : 0.28);
+          const tEdge = isHovered ? 0.9 : (isAnyHovered && activeHover?.type === 'domain' ? 0.12 : 0.35);
+          
+          d.glass.material.opacity += (tOpacity - d.glass.material.opacity) * 0.1;
+          d.edges.material.opacity += (tEdge - d.edges.material.opacity) * 0.1;
+
+          const lblEl = document.getElementById('lbl-dom-' + ['a', 'b', 'c'][i]);
+          if (lblEl) {
+            lblEl.classList.toggle('is-active', isHovered);
+            lblEl.classList.toggle('is-dimmed', isAnyHovered && !isHovered);
+          }
+        });
+
+        // 2. App Hover Logic
+        apps.forEach((app, i) => {
+          const isHovered = (activeHover?.type === 'app' && activeHover.index === i) ||
+                            (activeHover?.type === 'domain' && activeHover.index === i);
+          app.mesh.material.color.lerp(new THREE.Color(isHovered ? 0x55d8ff : 0xe8e8e8), 0.1);
+
+          const lblEl = document.getElementById(['lbl-app', 'lbl-os', 'lbl-workload'][i]);
+          if (lblEl) {
+            lblEl.classList.toggle('is-active', isHovered);
+            lblEl.classList.toggle('is-dimmed', isAnyHovered && !isHovered);
+          }
+        });
+
+        // 3. Kernel Hover Logic
+        const isKernelHovered = activeHover?.type === 'kernel';
+        kernelWire.material.opacity = isKernelHovered ? 0.95 : 0.55;
+        matKernel.emissive.setHex(isKernelHovered ? 0x770000 : 0x2b0000);
+        
+        const pulse = (Math.sin(time * 3) + 1) / 2;
+        kernelGlow.intensity = isKernelHovered ? 2.4 : (0.4 + pulse * 0.6);
+        
+        const kernelLbl = document.getElementById('lbl-kernel');
+        if (kernelLbl) {
+          kernelLbl.classList.toggle('is-active', isKernelHovered);
+          kernelLbl.classList.toggle('is-dimmed', isAnyHovered && !isKernelHovered);
+        }
+
+        // 4. Hardware Hover Logic
+        const isHwAll = activeHover?.type === 'hw_main';
+        hwZones.forEach((hw, i) => {
+          const isHwHovered = isHwAll || (activeHover?.type === 'hw' && activeHover.index === i);
+          hw.mesh.material.color.lerp(new THREE.Color(isHwHovered ? 0x55d8ff : 0x33353d), 0.12);
+          
+          const lblEl = document.getElementById('lbl-' + hwPositions[i].name);
+          if (lblEl) {
+            lblEl.classList.toggle('is-active', isHwHovered);
+            lblEl.classList.toggle('is-dimmed', isAnyHovered && !isHwHovered);
+          }
+        });
+
+        const hwMainLbl = document.getElementById('lbl-hardware');
+        if (hwMainLbl) {
+          hwMainLbl.classList.toggle('is-active', isHwAll);
+          hwMainLbl.classList.toggle('is-dimmed', isAnyHovered && !isHwAll);
+        }
+
+        // 5. Connection Paths Highlighting
+        paths.forEach(p => {
+          let active = false;
+          let routing = false;
+
+          if (activeHover?.type === 'domain' && p.domainIndex === activeHover.index) active = true;
+          if (activeHover?.type === 'app' && p.domainIndex === activeHover.index) active = true;
+          if (isKernelHovered && p.type.includes('kernel')) active = true;
+          if (isKernelHovered && p.type === 'kernel_routing') routing = true;
+          if (activeHover?.type === 'hw' && p.type === 'kernel_hw' && p.hwIndex === activeHover.index) active = true;
+          if (isHwAll && p.type === 'kernel_hw') active = true;
+
+          if (routing) {
+            p.line.material = matPathControlled;
+          } else if (active) {
+            p.line.material = matPathActive;
+          } else {
+            p.line.material = matPathNormal;
+          }
+        });
+
+        // 6. Particles Flow
+        if (frame % 8 === 0 && particles.length < particleCount) {
+          spawnParticle();
+        }
+        for (let i = particles.length - 1; i >= 0; i--) {
+          const p = particles[i];
+          p.progress += p.speed * (globalSpeed || 0.2);
+          if (p.progress >= 1.0) {
+            masterGroup.remove(p.mesh);
+            particles.splice(i, 1);
+          } else {
+            p.mesh.position.lerpVectors(p.start, p.end, p.progress);
+          }
+        }
+
+        renderer.render(scene, camera);
+      }
+
+      animate();
+    })();
+  </script>
+</body>
+</html>

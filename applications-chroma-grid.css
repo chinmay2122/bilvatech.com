@@ -1,0 +1,578 @@
+/* ==========================================================================
+   Applications ChromaGrid Component Styles
+   Scoped specifically to the Applications section (.applications-chroma-*)
+   ========================================================================== */
+
+.applications-chroma-grid {
+  --chroma-x: -9999px;
+  --chroma-y: -9999px;
+  --chroma-power: 0;
+  --chroma-r: 280px;
+  --chroma-stops: rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.95) 20%, rgba(0, 0, 0, 0.75) 45%, rgba(0, 0, 0, 0.4) 70%, rgba(0, 0, 0, 0) 100%;
+  --chroma-glow: 0.55;
+  --chroma-border: 0.9;
+  --chroma-fade: 0.45s;
+  --chroma-tile: linear-gradient(180deg, rgba(23, 21, 30, 0.72) 0%, rgba(13, 12, 18, 0.92) 100%);
+  --chroma-tile-edge: rgba(255, 255, 255, 0.07);
+  --chroma-tile-highlight: rgba(255, 255, 255, 0.12);
+  --chroma-tile-shadow: 0 6px 20px -6px rgba(0, 0, 0, 0.7);
+  --chroma-ink: #f4f3f6;
+  --chroma-muted: #9e9ba5;
+
+  position: relative;
+  width: 100%;
+  margin-top: 32px;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.applications-chroma-inner {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Individual Card */
+.applications-chroma-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-width: 0;
+  padding: 26px 24px;
+  box-sizing: border-box;
+  border-radius: 12px;
+  background: var(--chroma-tile);
+  box-shadow: var(--chroma-tile-shadow);
+  color: var(--chroma-ink);
+  text-decoration: none;
+  overflow: hidden;
+  isolation: isolate;
+  cursor: default;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.28s ease,
+              box-shadow 0.28s ease;
+}
+
+.applications-chroma-card:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px -8px rgba(0, 0, 0, 0.8),
+              0 0 20px -8px var(--chroma-accent, rgba(255, 255, 255, 0.15));
+}
+
+.applications-chroma-card:focus-visible {
+  outline: 2px solid var(--chroma-accent, #55d8ff);
+  outline-offset: 3px;
+  filter: brightness(1.1);
+}
+
+/* Masked Spotlight Wash and Glow */
+.applications-chroma-wash,
+.applications-chroma-card-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(
+    circle var(--chroma-r) at calc(var(--chroma-x) - var(--chroma-ox, 0px))
+      calc(var(--chroma-y) - var(--chroma-oy, 0px)),
+    var(--chroma-stops)
+  );
+  mask-image: radial-gradient(
+    circle var(--chroma-r) at calc(var(--chroma-x) - var(--chroma-ox, 0px))
+      calc(var(--chroma-y) - var(--chroma-oy, 0px)),
+    var(--chroma-stops)
+  );
+  transition: opacity var(--chroma-fade) ease;
+}
+
+/* Ambient subtle background wash under cursor */
+.applications-chroma-wash {
+  z-index: 0;
+  background: radial-gradient(130% 70% at 50% 100%, var(--chroma-accent, #55d8ff), transparent 72%);
+  opacity: calc(var(--chroma-glow) * var(--chroma-power) * 0.45);
+}
+
+/* Subtle static rim border */
+.applications-chroma-card-rim {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow:
+    inset 0 0 0 1px var(--chroma-tile-edge),
+    inset 0 1px 0 var(--chroma-tile-highlight);
+  transition: box-shadow 0.28s ease;
+}
+
+/* Accent border glow revealed by spotlight */
+.applications-chroma-card-glow {
+  z-index: 2;
+  box-shadow:
+    inset 0 0 0 1px var(--chroma-accent, #55d8ff),
+    inset 0 0 18px -6px var(--chroma-accent, #55d8ff);
+  opacity: calc(var(--chroma-border) * var(--chroma-power));
+}
+
+/* Direct hover / touch reveal fallback */
+.applications-chroma-card:hover .applications-chroma-wash,
+.applications-chroma-card:focus-visible .applications-chroma-wash {
+  opacity: calc(var(--chroma-glow) * 0.5);
+}
+
+.applications-chroma-card:hover .applications-chroma-card-glow,
+.applications-chroma-card:focus-visible .applications-chroma-card-glow {
+  opacity: var(--chroma-border);
+}
+
+/* Icon Container */
+.applications-chroma-icon-wrap {
+  position: relative;
+  z-index: 1;
+  width: 48px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  color: var(--chroma-accent, #55d8ff);
+  box-sizing: border-box;
+  transition: border-color 0.3s ease,
+              background 0.3s ease,
+              box-shadow 0.3s ease,
+              transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.applications-chroma-card:hover .applications-chroma-icon-wrap,
+.applications-chroma-card:focus-visible .applications-chroma-icon-wrap {
+  border-color: var(--chroma-accent, #55d8ff);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 18px -4px var(--chroma-accent, #55d8ff);
+  transform: translateY(-1px);
+}
+
+.applications-chroma-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: inherit;
+}
+
+.applications-chroma-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: inherit;
+  overflow: visible;
+}
+
+/* Title & Description */
+.applications-chroma-info {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.applications-chroma-title {
+  margin: 0;
+  font-family: var(--font-main, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--chroma-ink);
+  transition: color 0.25s ease;
+}
+
+.applications-chroma-card:hover .applications-chroma-title {
+  color: #ffffff;
+}
+
+.applications-chroma-description {
+  margin: 0;
+  font-family: var(--font-main, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif);
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--chroma-muted);
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+/* ==========================================================================
+   Its Hover Micro-Animations (Scoped to .applications-chroma-card)
+   ========================================================================== */
+
+/* 1. Airplane */
+.applications-chroma-card .airplane {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: 50% 50%;
+}
+.applications-chroma-card .wind1,
+.applications-chroma-card .wind2 {
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.applications-chroma-card:hover .airplane,
+.applications-chroma-card:focus-visible .airplane {
+  transform: translate(2px, -2px);
+}
+.applications-chroma-card:hover .wind1,
+.applications-chroma-card:focus-visible .wind1 {
+  opacity: 0.9 !important;
+  transform: translate(0, 0) !important;
+}
+.applications-chroma-card:hover .wind2,
+.applications-chroma-card:focus-visible .wind2 {
+  opacity: 0.9 !important;
+  transform: translate(0, 0) !important;
+}
+
+/* 2. Shield Check */
+.applications-chroma-card .shield-body {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: 50% 50%;
+}
+.applications-chroma-card .shield-check {
+  transition: stroke-dashoffset 0.4s ease, filter 0.3s ease;
+}
+.applications-chroma-card:hover .shield-body,
+.applications-chroma-card:focus-visible .shield-body {
+  transform: scale(1.05);
+}
+.applications-chroma-card:hover .shield-check,
+.applications-chroma-card:focus-visible .shield-check {
+  filter: drop-shadow(0 0 3px currentColor);
+}
+
+/* 3. Gauge */
+.applications-chroma-card .needle {
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: 12px 14px;
+}
+.applications-chroma-card:hover .needle,
+.applications-chroma-card:focus-visible .needle {
+  transform: rotate(35deg);
+}
+
+/* 4. Gear */
+.applications-chroma-card .gear-rotator {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: 50% 50%;
+}
+.applications-chroma-card:hover .gear-rotator,
+.applications-chroma-card:focus-visible .gear-rotator {
+  transform: rotate(60deg);
+}
+
+/* 5. Brain Circuit */
+.applications-chroma-card .circuit-line,
+.applications-chroma-card .terminal {
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+.applications-chroma-card:hover .circuit-line,
+.applications-chroma-card:focus-visible .circuit-line {
+  filter: drop-shadow(0 0 2px currentColor);
+}
+.applications-chroma-card:hover .terminal,
+.applications-chroma-card:focus-visible .terminal {
+  filter: drop-shadow(0 0 3px currentColor);
+}
+
+/* 6. Electric Truck */
+.applications-chroma-card .truck {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.applications-chroma-card:hover .truck,
+.applications-chroma-card:focus-visible .truck {
+  transform: translateX(3px);
+}
+
+/* 7. CPU */
+.applications-chroma-card .outer,
+.applications-chroma-card .inner {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: 12px 12px;
+}
+.applications-chroma-card .pins path {
+  transition: stroke 0.3s ease;
+}
+.applications-chroma-card:hover .inner,
+.applications-chroma-card:focus-visible .inner {
+  transform: scale(1.15);
+}
+.applications-chroma-card:hover .pins path,
+.applications-chroma-card:focus-visible .pins path {
+  stroke: var(--chroma-accent, #55d8ff);
+}
+
+/* 8. Plug Connected */
+.applications-chroma-card .plug-lower-part {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.applications-chroma-card .plug-upper-part {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.applications-chroma-card:hover .plug-lower-part,
+.applications-chroma-card:focus-visible .plug-lower-part {
+  transform: translate(1.5px, -1.5px);
+}
+.applications-chroma-card:hover .plug-upper-part,
+.applications-chroma-card:focus-visible .plug-upper-part {
+  transform: translate(-1.5px, 1.5px);
+}
+
+/* 9. Router */
+.applications-chroma-card .signal-inner,
+.applications-chroma-card .signal-outer {
+  transition: transform 0.35s ease, opacity 0.35s ease;
+}
+.applications-chroma-card:hover .signal-inner,
+.applications-chroma-card:focus-visible .signal-inner {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 2px currentColor);
+}
+.applications-chroma-card:hover .signal-outer,
+.applications-chroma-card:focus-visible .signal-outer {
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 3px currentColor);
+}
+
+/* 10. Battery Charging */
+.applications-chroma-card .battery-bar-1,
+.applications-chroma-card .battery-bar-2,
+.applications-chroma-card .battery-bar-3,
+.applications-chroma-card .battery-bar-4 {
+  transition: opacity 0.25s ease;
+}
+.applications-chroma-card:hover .battery-bar-1,
+.applications-chroma-card:focus-visible .battery-bar-1 {
+  opacity: 1 !important;
+  transition-delay: 0.05s;
+}
+.applications-chroma-card:hover .battery-bar-2,
+.applications-chroma-card:focus-visible .battery-bar-2 {
+  opacity: 1 !important;
+  transition-delay: 0.12s;
+}
+.applications-chroma-card:hover .battery-bar-3,
+.applications-chroma-card:focus-visible .battery-bar-3 {
+  opacity: 1 !important;
+  transition-delay: 0.19s;
+}
+.applications-chroma-card:hover .battery-bar-4,
+.applications-chroma-card:focus-visible .battery-bar-4 {
+  opacity: 1 !important;
+  transition-delay: 0.26s;
+}
+
+/* 11. Satellite Dish */
+.applications-chroma-card .dish {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: 9px 15px;
+}
+.applications-chroma-card:hover .dish,
+.applications-chroma-card:focus-visible .dish {
+  transform: rotate(-10deg);
+}
+
+/* 12. WiFi */
+.applications-chroma-card .wave-1,
+.applications-chroma-card .wave-2,
+.applications-chroma-card .wave-3 {
+  transition: opacity 0.25s ease, filter 0.25s ease;
+}
+.applications-chroma-card:hover .wave-1,
+.applications-chroma-card:focus-visible .wave-1 {
+  filter: drop-shadow(0 0 2px currentColor);
+}
+.applications-chroma-card:hover .wave-2,
+.applications-chroma-card:focus-visible .wave-2 {
+  filter: drop-shadow(0 0 3px currentColor);
+  transition-delay: 0.08s;
+}
+.applications-chroma-card:hover .wave-3,
+.applications-chroma-card:focus-visible .wave-3 {
+  filter: drop-shadow(0 0 4px currentColor);
+  transition-delay: 0.16s;
+}
+
+/* 13. Lock */
+.applications-chroma-card .lock-upper-body {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: 50% 100%;
+}
+.applications-chroma-card:hover .lock-upper-body,
+.applications-chroma-card:focus-visible .lock-upper-body {
+  transform: translateY(-2.5px);
+}
+
+/* 14. Cloud */
+.applications-chroma-card .applications-chroma-icon svg path {
+  transition: transform 0.35s ease, filter 0.3s ease;
+}
+.applications-chroma-card:hover .applications-chroma-icon svg path,
+.applications-chroma-card:focus-visible .applications-chroma-icon svg path {
+  filter: drop-shadow(0 0 3px currentColor);
+}
+
+/* 15. Chart Line */
+.applications-chroma-card .chart-line {
+  transition: stroke-dashoffset 0.4s ease, filter 0.3s ease;
+}
+.applications-chroma-card:hover .chart-line,
+.applications-chroma-card:focus-visible .chart-line {
+  filter: drop-shadow(0 0 3px currentColor);
+}
+
+/* 16. File Description */
+.applications-chroma-card .file-lines {
+  transition: transform 0.3s ease;
+}
+.applications-chroma-card:hover .file-lines,
+.applications-chroma-card:focus-visible .file-lines {
+  transform: scaleX(1.1);
+  transform-origin: 9px 50%;
+}
+
+/* 17. Code XML */
+.applications-chroma-card .left-bracket,
+.applications-chroma-card .right-bracket,
+.applications-chroma-card .slash {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.applications-chroma-card:hover .left-bracket,
+.applications-chroma-card:focus-visible .left-bracket {
+  transform: translateX(-2px);
+}
+.applications-chroma-card:hover .right-bracket,
+.applications-chroma-card:focus-visible .right-bracket {
+  transform: translateX(2px);
+}
+.applications-chroma-card:hover .slash,
+.applications-chroma-card:focus-visible .slash {
+  transform: scale(1.08);
+}
+
+/* 18. Target */
+.applications-chroma-card .circle-middle,
+.applications-chroma-card .circle-inner {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: 12px 12px;
+}
+.applications-chroma-card:hover .circle-inner,
+.applications-chroma-card:focus-visible .circle-inner {
+  transform: scale(1.25);
+}
+.applications-chroma-card:hover .circle-middle,
+.applications-chroma-card:focus-visible .circle-middle {
+  transform: scale(1.1);
+}
+
+/* 19. World */
+.applications-chroma-card .world-meridians {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: 50% 50%;
+}
+.applications-chroma-card:hover .world-meridians,
+.applications-chroma-card:focus-visible .world-meridians {
+  transform: scaleX(0.85);
+}
+
+/* 20. Triangle Alert */
+.applications-chroma-card .exclamation-line,
+.applications-chroma-card .exclamation-dot {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.applications-chroma-card:hover .exclamation-line,
+.applications-chroma-card:focus-visible .exclamation-line {
+  transform: translateY(-1.5px);
+}
+.applications-chroma-card:hover .exclamation-dot,
+.applications-chroma-card:focus-visible .exclamation-dot {
+  transform: scale(1.3);
+}
+
+/* ==========================================================================
+   Responsive Breakpoints (Desktop, Tablet, Mobile)
+   ========================================================================== */
+
+/* Tablet (approximately 600px - 1024px) */
+@media (max-width: 1024px) {
+  .applications-chroma-grid {
+    margin-top: 28px;
+  }
+  .applications-chroma-inner {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .applications-chroma-card {
+    padding: 22px 20px;
+    gap: 16px;
+  }
+  .applications-chroma-icon-wrap {
+    width: 44px;
+    height: 44px;
+  }
+  .applications-chroma-title {
+    font-size: 16px;
+  }
+  .applications-chroma-description {
+    font-size: 13px;
+  }
+}
+
+/* Mobile (below 600px) */
+@media (max-width: 600px) {
+  .applications-chroma-grid {
+    margin-top: 24px;
+  }
+  .applications-chroma-inner {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .applications-chroma-card {
+    padding: 20px 18px;
+    gap: 14px;
+  }
+  .applications-chroma-icon-wrap {
+    width: 42px;
+    height: 42px;
+    border-radius: 9px;
+  }
+  .applications-chroma-icon {
+    width: 22px;
+    height: 22px;
+  }
+  .applications-chroma-title {
+    font-size: 15.5px;
+  }
+  .applications-chroma-description {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+}
+
+/* ==========================================================================
+   Reduced Motion
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .applications-chroma-card,
+  .applications-chroma-wash,
+  .applications-chroma-card-glow,
+  .applications-chroma-icon-wrap,
+  .applications-chroma-card * {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+}

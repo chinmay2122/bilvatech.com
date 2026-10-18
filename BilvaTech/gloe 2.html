@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wireframe Earth with Network Connections</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            overflow: hidden;
+            font-family: sans-serif;
+        }
+
+        #canvas-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: grab;
+        }
+
+        #canvas-container:active {
+            cursor: grabbing;
+        }
+
+        #loader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #ffffff;
+            font-family: monospace;
+            font-size: 1.2rem;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loader">Loading Earth Data...</div>
+    <div id="canvas-container"></div>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+        // --- Scene Setup ---
+        const container = document.getElementById('canvas-container');
+        const loader = document.getElementById('loader');
+        
+        const scene = new THREE.Scene();
+        // scene.background = new THREE.Color(0x050505);
+
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 150);
+        camera.position.z = 40;
+        camera.position.y = 5;
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        container.appendChild(renderer.domElement);
+
+        // --- Controls (Auto-Rotate) ---
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        controls.enablePan = false;
+        controls.minDistance = 11;
+        controls.maxDistance = 100;
+        controls.autoRotate = true;
+        controls.autoRotateSpeed = 1.0;
+
+        const globeGroup = new THREE.Group();
+        scene.add(globeGroup);
+
+        const GLOBE_RADIUS = 10;
+
+        // --- 1. Solid Inner Sphere ---
+        const innerGeo = new THREE.SphereGeometry(GLOBE_RADIUS - 0.05, 64, 64);
+        const innerMat = new THREE.MeshBasicMaterial({ color: 0x050505 });
+        const innerSphere = new THREE.Mesh(innerGeo, innerMat);
+        globeGroup.add(innerSphere);
+
+        // --- 2. Latitude / Longitude Grid ---
+        const gridGeo = new THREE.SphereGeometry(GLOBE_RADIUS, 36, 18);
+        const gridMat = new THREE.MeshBasicMaterial({
+            color: 0x333333,
+            wireframe: true,
+            transparent: true,
+            opacity: 0.8
+        });
+        const gridSphere = new THREE.Mesh(gridGeo, gridMat);
+        globeGroup.add(gridSphere);
+
+        // --- Utility: Lat/Lon to 3D Vector ---
+        function latLongToVector3(lat, lon, radius) {
+            const phi = (90 - lat) * (Math.PI / 180);
+            const theta = (lon + 180) * (Math.PI / 180);
+            return new THREE.Vector3(
+                -(radius * Math.sin(phi) * Math.cos(theta)),
+                radius * Math.cos(phi),
+                radius * Math.sin(phi) * Math.sin(theta)
+            );
+        }
+
+        // --- 3. Fetch Map Data (Borders) ---
+        fetch('https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json')
+            .then(response => response.json())
+            .then(data => {
+                const points = [];
+                function processRing(ring) {
+                    for (let i = 0; i < ring.length - 1; i++) {
+                        const p1 = latLongToVector3(ring[i][1], ring[i][0], GLOBE_RADIUS);
+                        const p2 = latLongToVector3(ring[i+1][1], ring[i+1][0], GLOBE_RADIUS);
+                        points.push(p1);
+                        points.push(p2);
+                    }
+                }
+                data.features.forEach(feature => {
+                    if (feature.geometry.type === 'Polygon') {
+                        feature.geometry.coordinates.forEach(ring => processRing(ring));
+                    } else if (feature.geometry.type === 'MultiPolygon') {
+                        feature.geometry.coordinates.forEach(poly => {
+                            poly.forEach(ring => processRing(ring));
+                        });
+                    }
+                });
+                const bordersGeo = new THREE.BufferGeometry().setFromPoints(points);
+                const bordersMat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.5 });
+                globeGroup.add(new THREE.LineSegments(bordersGeo, bordersMat));
+                loader.style.opacity = '0';
+            });
+
+        // --- 4. Network Connections & Nodes ---
+        const networkGroup = new THREE.Group();
+        globeGroup.add(networkGroup);
+
+        // Sample global locations for the network
+        const locations = [
+            { name: 'New York', lat: 40.71, lon: -74.00 },
+            { name: 'London', lat: 51.50, lon: -0.12 },
+            { name: 'Tokyo', lat: 35.68, lon: 139.69 },
+            { name: 'Sydney', lat: -33.86, lon: 151.20 },
+            { name: 'São Paulo', lat: -23.55, lon: -46.63 },
+            { name: 'Cape Town', lat: -33.92, lon: 18.42 },
+            { name: 'Mumbai', lat: 19.07, lon: 72.87 },
+            { name: 'San Francisco', lat: 37.77, lon: -122.41 }
+        ];
+
+        const nodes = [];
+        const activeParticles = [];
+        const nodeGeo = new THREE.CircleGeometry(0.15, 16);
+        const nodeMat = new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide });
+
+        // Draw nodes on the globe
+        locations.forEach(loc => {
+            const pos = latLongToVector3(loc.lat, loc.lon, GLOBE_RADIUS + 0.02);
+            const mesh = new THREE.Mesh(nodeGeo, nodeMat);
+            mesh.position.copy(pos);
+            mesh.lookAt(new THREE.Vector3(0, 0, 0));
+            networkGroup.add(mesh);
+            nodes.push(pos);
+        });
+
+        // Create curved connecting lines
+        function createConnection(startPos, endPos) {
+            const distance = startPos.distanceTo(endPos);
+            
+            // Calculate midpoint and push it outward to create an arc
+            const midPoint = startPos.clone().lerp(endPos, 0.5);
+            // The further apart the nodes, the higher the arc
+            const arcHeight = distance * 0.25; 
+            midPoint.normalize().multiplyScalar(GLOBE_RADIUS + arcHeight);
+
+            // Create bezier curve
+            const curve = new THREE.QuadraticBezierCurve3(startPos, midPoint, endPos);
+            const points = curve.getPoints(50);
+            
+            // Draw the visible wire
+            const lineGeo = new THREE.BufferGeometry().setFromPoints(points);
+            const lineMat = new THREE.LineBasicMaterial({ 
+                color: 0x666666, // Faint grey wire
+                transparent: true, 
+                opacity: 0.6
+            });
+            networkGroup.add(new THREE.Line(lineGeo, lineMat));
+
+            // Create a glowing particle to travel along the wire
+            const particleGeo = new THREE.SphereGeometry(0.08, 8, 8);
+            const particleMat = new THREE.MeshBasicMaterial({ color: 0xffffff }); // White data packet
+            const particle = new THREE.Mesh(particleGeo, particleMat);
+            networkGroup.add(particle);
+
+            // Store particle animation data
+            activeParticles.push({
+                mesh: particle,
+                curve: curve,
+                progress: Math.random(), // Start at random point on the curve
+                speed: 0.002 + (Math.random() * 0.003) // Randomize speed slightly
+            });
+        }
+
+        // Connect the nodes (creating a mesh network)
+        // E.g., connecting each node to 2 other random nodes
+        nodes.forEach((startNode, i) => {
+            for (let j = 1; j <= 2; j++) {
+                const targetIndex = (i + j) % nodes.length;
+                createConnection(startNode, nodes[targetIndex]);
+            }
+        });
+
+        // --- Responsive Resizing ---
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // --- Animation Loop ---
+        function animate() {
+            requestAnimationFrame(animate);
+
+            controls.update(); // Handles auto-rotate and damping
+
+            // Animate the particles along the wires
+            activeParticles.forEach(p => {
+                p.progress += p.speed;
+                if (p.progress >= 1) {
+                    p.progress = 0; // Reset to start when it reaches the end
+                }
+                // Get the current position on the curve
+                const point = p.curve.getPointAt(p.progress);
+                p.mesh.position.copy(point);
+            });
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+    </script>
+</body>
+</html>

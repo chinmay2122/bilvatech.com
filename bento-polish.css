@@ -1,0 +1,30 @@
+#our-solutions .bento-card{--tone:195,139,146;padding:28px 28px 0;border-radius:16px;border:1px solid #ffffff19;background:radial-gradient(ellipse at 75% 70%,rgba(var(--tone),.13),transparent 65%),linear-gradient(145deg,#1b191e,#101014 70%);box-shadow:inset 0 1px 0 #ffffff08,0 14px 40px #0003}
+#our-solutions .bento-iot{--tone:119,177,170}#our-solutions .bento-cyber{--tone:173,147,199}#our-solutions .bento-consulting{--tone:194,164,119}
+#our-solutions .bento-card:hover,#our-solutions .bento-card:focus-within{border-color:rgba(var(--tone),.55);transform:none}
+#our-solutions .bento-card-copy h3{font-size:27px;font-weight:400}#our-solutions .bento-card-copy p{font-size:14px}#our-solutions .bento-card-meta{color:rgb(var(--tone))}
+#our-solutions .bento-art{overflow:hidden;margin:26px -10px 0;padding:26px 16px 0;min-height:265px;border:1px solid #ffffff0b;border-bottom:0;border-radius:12px 12px 0 0;background:radial-gradient(ellipse at 50% 100%,rgba(var(--tone),.17),transparent 70%),#08090b;perspective:900px}
+#our-solutions .solution-scene{padding:8px 0 24px;background:none;min-height:225px;transform:rotateX(7deg) rotateY(-5deg);transition:transform .45s}
+#our-solutions .is-exploring .solution-scene{transform:rotateX(0) rotateY(0) translateY(-3px)}
+#our-solutions .kernel-workloads>div{background:linear-gradient(150deg,#30272f,#17161b);border-color:rgba(var(--tone),.3);box-shadow:0 10px 18px #0006;transition:transform .4s}
+#our-solutions .is-exploring .kernel-workloads>div:first-child{transform:translateY(-8px)}#our-solutions .is-exploring .kernel-workloads>div:last-child{transform:translateY(8px)}
+#our-solutions .kernel-layer{background:linear-gradient(120deg,#50313f,#241b26);border-color:#c38b9280}
+#our-solutions .topology-route{stroke:#77b1aa}#our-solutions .is-exploring .topology-route{stroke-dasharray:9 7;animation:route-flow 3s linear 1}
+#our-solutions .topology-core{fill:#203d3b;stroke:#77b1aa}#our-solutions .topology-icon{stroke:#c2e4df}#our-solutions .topology-orbit{stroke:#77b1aa}#our-solutions .topology-signal{fill:#9ed6cd}
+#our-solutions .defense-row{background:linear-gradient(140deg,#29232f,#18161d);border-color:#ad93c72a;box-shadow:0 8px 15px #0004;transition:transform .35s,border-color .35s}#our-solutions .is-exploring .defense-row{transform:translateX(4px);border-color:#ad93c780}
+#our-solutions .control-state{color:#ccb3df;background:#ad93c710}
+#our-solutions .architecture-flow>div{background:linear-gradient(145deg,#2b2721,#19181a);border-color:#c2a47740;box-shadow:0 8px 20px #0005;transition:transform .4s}#our-solutions .architecture-flow>div:last-child{background:linear-gradient(145deg,#463a2a,#221d1a);border-color:#c2a47770}#our-solutions .architecture-flow span{color:#d2b88f}#our-solutions .architecture-flow i{background:#c2a47780}#our-solutions .is-exploring .architecture-flow>div:last-child{transform:translateY(-6px)}
+.bento-actions{display:flex;align-items:center;justify-content:space-between;gap:16px;border-top:1px solid #ffffff12;padding:15px 0}.bento-actions button{display:flex;gap:14px;align-items:center;padding:8px 0;min-height:44px;background:none;border:0;font:11px var(--font-secondary);color:#c5bbc9;cursor:pointer;text-align:left}.bento-actions button span{color:rgb(var(--tone));font-size:20px}.bento-actions a{font-size:11px;color:rgb(var(--tone));text-decoration:none;padding:12px 0}.bento-actions a:hover{text-decoration:underline}#our-solutions .bento-note{border-top:1px solid rgba(var(--tone),.2);padding:17px 0 22px;margin:0;color:#c0b4c4;font-size:12px;line-height:1.8}#our-solutions :is(button,a):focus-visible{outline:2px solid rgb(var(--tone));outline-offset:4px}
+.compact-faq-body{display:grid;grid-template-columns:.8fr 1.2fr;gap:60px;padding:clamp(28px,5vw,70px)}.compact-faq h2{font:500 clamp(28px,3.5vw,44px)/1.15 var(--font-main);letter-spacing:-.04em}.compact-faq details{border-bottom:1px solid #ffffff16}.compact-faq summary{list-style:none;display:flex;justify-content:space-between;gap:20px;padding:22px 0;font-size:15px;cursor:pointer;color:#e2dce4}.compact-faq summary::-webkit-details-marker{display:none}.compact-faq summary span{color:#b694a8}.compact-faq details[open] summary span{transform:rotate(45deg)}.compact-faq details p{font-size:13px;line-height:1.8;color:#aaa2af;margin:0 0 24px}.compact-faq summary:focus-visible{outline:2px solid #c38b92;outline-offset:4px}
+#final-cta .architecture-cta-body{min-height:340px;padding-block:60px}#final-cta .architecture-cta-copy>p:not(.home-kicker){max-width:400px;margin-bottom:24px}#final-cta .cta-utility-link{margin-top:20px;opacity:.8}
+@keyframes route-flow{to{stroke-dashoffset:-96}}
+@media(max-width:700px){#our-solutions .bento-card{grid-column:1/-1;padding:22px 20px 0}#our-solutions .bento-art{padding:20px 12px 0;min-height:220px}#our-solutions .solution-scene{transform:none;min-height:190px}#our-solutions .bento-card-copy h3{font-size:25px}.bento-actions{gap:10px}.bento-actions a{white-space:nowrap}.compact-faq-body{grid-template-columns:1fr;gap:24px;padding:28px 20px}}
+@media(prefers-reduced-motion:reduce){#our-solutions *,#our-solutions *::before{animation:none!important;transition:none!important;transform:none!important}}
+/* Layer response follows hover, keyboard focus, or the explicit touch control. */
+#our-solutions .bento-card .topology-core{transition:fill .35s,stroke .35s}
+#our-solutions .is-exploring .topology-core{fill:#335c55;stroke:#b9eee2}
+#our-solutions .defense-row:nth-child(3){transition-delay:80ms}
+#our-solutions .defense-row:nth-child(4){transition-delay:160ms}
+#our-solutions .architecture-flow>div:nth-of-type(2){transition-delay:60ms}
+#our-solutions .is-exploring .architecture-flow>div:nth-of-type(2){transform:translateY(-3px)}
+#our-solutions .bento-actions a .ui-icon{transition:transform .2s}
+#our-solutions .bento-actions a:hover .ui-icon{transform:translate(2px,-2px)}

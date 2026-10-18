@@ -1,0 +1,10 @@
+.vercel
+backups/
+.chrome-qa*
+.edge-qa*
+*_corner_bright.png
+crop_card*.png
+overall_c1_*.png
+poster1_corner_bright.png
+section_box_*.png
+*.original

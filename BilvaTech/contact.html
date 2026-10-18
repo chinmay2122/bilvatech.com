@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Get in touch with Bilva Tech to discuss cybersecurity solutions tailored to your business." />
+    <title>Get Started | Bilva Tech</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://db.onlinewebfonts.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://db.onlinewebfonts.com/c/8cb707a9b8a73f8a7403336b861c3074?family=BubbledotICG-FinePos" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="inner-page">
+    <a class="skip-link" href="#main-content">Skip to main content</a><div class="inner-bg" aria-hidden="true"></div>
+    <header class="site-header inner-header" aria-label="Primary navigation">
+      <a class="logo-button" href="index.html" aria-label="Bilva Tech home"><img src="assets/logo.webp" alt="" width="52" height="52" /><span class="brand-copy" aria-hidden="true"><strong>Bilva Tech</strong><span>Business Solutions</span></span></a>
+      <nav class="nav-pill" aria-label="Desktop navigation"><a href="index.html">Home</a><a href="solutions.html">Solutions</a><a href="about.html">About</a><a class="active" href="contact.html" aria-current="page">Contact</a></nav>
+      <a class="header-cta active-cta" href="contact.html" aria-current="page">Get Started</a>
+      <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
+    </header>
+    <div class="mobile-overlay" hidden><nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation"><a href="index.html">Home</a><a href="solutions.html">Solutions</a><a href="about.html">About</a><a class="active" href="contact.html" aria-current="page">Contact</a><a class="mobile-cta" href="contact.html">Get Started</a></nav></div>
+
+    <main class="content-shell" id="main-content">
+      <section class="contact-layout">
+        <div class="contact-intro">
+          <p class="eyebrow"><i class="fa-solid fa-lock" aria-hidden="true"></i> Cybersecurity Solutions</p>
+          <h1>Let’s strengthen<br />your defenses.</h1>
+          <p>Empower your business with cybersecurity solutions designed around your systems, people, and risk landscape.</p>
+          <div class="contact-note"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><p>Tell us what you need to protect. We’ll help you explore the right path forward.</p></div>
+        </div>
+
+        <form class="contact-form" id="contact-form">
+          <div class="form-heading"><span>Get in Touch</span><small>All fields marked * are required.</small></div>
+          <label>Full Name *<input type="text" name="name" autocomplete="name" required /></label>
+          <label>Email *<input type="email" name="email" autocomplete="email" required /></label>
+          <div class="field-row">
+            <label>Company Name<input type="text" name="company" autocomplete="organization" /></label>
+            <label>Job Title<input type="text" name="job-title" autocomplete="organization-title" /></label>
+          </div>
+          <label>Phone Number<input type="tel" name="phone" autocomplete="tel" /></label>
+          <label>Message *<textarea name="message" rows="4" required></textarea></label>
+          <button type="submit">Prepare Request <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+    <footer class="site-footer"><span>© 2026 Bilva Tech Business Solutions</span><a href="solutions.html">Explore solutions <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></footer>
+    <script src="main.js"></script>
+  </body>
+</html>

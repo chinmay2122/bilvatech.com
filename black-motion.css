@@ -1,0 +1,52 @@
+/* Pure black page canvas; retain local surfaces for readable grouping. */
+html,body.bilva-home,body.bilva-inner{background:#000!important}
+body.bilva-home,body.bilva-inner{--surface-page:#000;--bg:#000}
+.bilva-home,.bilva-inner{--ink:#F3E9EC;--ink-secondary:#B8B2C4;--ink-muted:#898597}
+.bilva-home>section,.bilva-home>.site-footer{--accent-rose:#e8e2dc;--accent-mauve:#e8e2dc;--border-subtle-hover:#4b4846;--accent-gradient:linear-gradient(#e8e2dc,#e8e2dc)}
+.bilva-home>section,.bilva-inner .inner-shell,.bilva-home .bg,.bilva-inner .site-footer,.bilva-home .site-footer{background-color:#000!important}
+/* Let JS enhance an already-legible page, rather than hiding it in CSS. */
+.bilva-home .hero .anim,.bilva-home .headline>span{animation:none;opacity:1;transform:none;filter:none}
+.bilva-home .testimonials-section{opacity:1;transform:none;transition:none}
+.bilva-home .bento-card .solution-scene{transform:none}
+.motion-ready .service-dial-panels [role="tabpanel"]:not([hidden]){animation:none}
+.motion-ready #our-solutions .bento-card{transition:border-color .25s}
+.bilva-home :is(.home-kicker,.protect-eyebrow,.why-eyebrow,.testimonials-eyebrow,.faq-eyebrow,.service-dial-eyebrow){color:#b8a5aa}
+.bilva-home .solutions-bento .section-box{border-radius:0}
+.bilva-home .bento-card{--bento-color:#e8e2dc}
+.bilva-home .solutions-bento .bento-card:hover{box-shadow:0 28px 56px rgba(0,0,0,.65)}
+.bilva-home .solutions-bento .bento-card:focus-visible{outline-color:#e8e2dc}
+.bilva-home :is(.bento-partitions span,.bento-foundation,.bento-network span,.bento-roadmap span,.qr-service-aside){border-color:#4b4846}
+.bilva-home .bento-network i{background:#e8e2dc}
+.bilva-home .bento-shield svg{stroke:#e8e2dc}
+.bilva-home .bento-roadmap b,.bilva-home .qr-service-aside{color:#e8e2dc}
+.bilva-home .service-dial{--dial-accent:#e8e2dc;--dial-rgb:232,226,220}
+.bilva-home .service-dial[data-service="1"],.bilva-home .service-dial[data-service="2"]{--dial-accent:#e8e2dc;--dial-rgb:232,226,220}
+.bilva-home #faq summary .faq-icon{color:#e8e2dc;border-color:#ffffff24;background:#ffffff08}
+.bilva-home #faq summary:hover .faq-icon,.bilva-home #faq details[open] summary .faq-icon{color:#fff;border-color:#e8e2dc;background:#ffffff16}
+.bilva-home #faq summary:focus-visible,.bilva-home>section a:focus-visible,.bilva-home .service-dial :focus-visible{outline-color:#e8e2dc}
+.bilva-home .why-principle:is(:hover,.active-principle,:focus-visible){border-bottom-color:#ffffff2e!important}
+.bilva-home .why-principle .principle-sep{color:#898597}
+.bilva-home .why-principle:is(:hover,.active-principle) .principle-sep{color:#e8e2dc}
+#final-cta .section-box{border-radius:14px;border-color:#363432;background:#090909;overflow:hidden;position:relative}
+#final-cta .section-box::before{display:none!important}
+#final-cta .architecture-cta-body{display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;min-height:clamp(300px,30vw,390px);padding:clamp(38px,4.5vw,56px) clamp(20px,5vw,64px);text-align:center;background-color:#090909;background-image:radial-gradient(ellipse 65% 55% at 50% 50%, rgba(9,9,9,0.72) 0%, rgba(9,9,9,0.3) 60%, rgba(9,9,9,0.75) 100%),linear-gradient(180deg, rgba(9,9,9,0.5) 0%, rgba(9,9,9,0.1) 50%, rgba(9,9,9,0.6) 100%),url('assets/cta-background.png');background-position:center center;background-size:cover;background-repeat:no-repeat}
+#final-cta .architecture-cta-copy{display:flex;flex-direction:column;align-items:center;position:relative;z-index:2;width:100%;max-width:800px;margin:0 auto}
+#final-cta .architecture-cta-copy .cta-kicker{display:inline-flex;align-items:center;justify-content:center;gap:10px;margin:0 0 16px;color:#d7bfc4;font-size:11px;font-weight:600;letter-spacing:.14em;text-shadow:0 1px 8px rgba(0,0,0,.8)}
+#final-cta .cta-mark{width:20px;height:20px;fill:#e8e2dc;flex:none}
+#final-cta .architecture-cta-copy h2{max-width:760px;margin:0 0 14px;color:#f7f4f1;font:500 clamp(26px,3.2vw,42px)/1.15 var(--font-main);letter-spacing:-.04em;text-shadow:0 2px 20px rgba(0,0,0,.9),0 1px 6px rgba(0,0,0,.7)}
+#final-cta .architecture-cta-copy>p:not(.home-kicker){max-width:520px;margin:0 0 24px;color:#d2ceca;font-size:clamp(13.5px,1.15vw,15.5px);line-height:1.6;text-shadow:0 1px 12px rgba(0,0,0,.85)}
+#final-cta .cta-primary-btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:46px;padding:12px 28px;border-radius:999px;background:#f3efeb;color:#111;border:1px solid #f3efeb;font-size:13.5px;font-weight:600;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.3);transition:transform .2s ease,background-color .2s ease,border-color .2s ease,box-shadow .2s ease}
+#final-cta .cta-primary-btn:is(:hover,:focus-visible){background:#fff;color:#111;border-color:#fff;transform:translateY(-1px);box-shadow:0 6px 20px rgba(255,255,255,.18)}
+#final-cta .cta-primary-btn .ui-icon{transition:transform .2s}
+#final-cta .cta-primary-btn:is(:hover,:focus-visible) .ui-icon{transform:translateX(4px)}
+.bilva-home #faq details summary{cursor:pointer;transition:color .25s ease,background-color .25s ease}
+.bilva-home #faq details summary .faq-icon{display:inline-flex;transition:transform .28s cubic-bezier(.22,1,.36,1)}
+.bilva-home #faq details[open] summary .faq-icon{transform:rotate(180deg)}
+.bilva-home #faq .faq-answer-wrap{display:grid;grid-template-rows:0fr;transition:grid-template-rows .38s cubic-bezier(.22,1,.36,1),opacity .25s ease;opacity:0}
+.bilva-home #faq details[open] .faq-answer-wrap{grid-template-rows:1fr;opacity:1}
+.bilva-home #faq .faq-answer-wrap>p{min-height:0;overflow:hidden;margin:0;padding-top:0;transition:padding-top .38s cubic-bezier(.22,1,.36,1)}
+.bilva-home #faq details[open] .faq-answer-wrap>p{padding-top:12px}
+@media(prefers-reduced-motion:reduce){.bilva-home #faq .faq-answer-wrap{transition:none}.bilva-home #faq .faq-answer-wrap>p{transition:none}}
+@media(max-width:768px){#final-cta .architecture-cta-body{min-height:300px;padding:36px 20px;background-position:center 45%}#final-cta .architecture-cta-copy .cta-kicker{font-size:10px;margin-bottom:12px}#final-cta .architecture-cta-copy h2{font-size:clamp(23px,5.5vw,30px);margin-bottom:12px}#final-cta .architecture-cta-copy>p:not(.home-kicker){font-size:14px;margin-bottom:20px;max-width:440px}#final-cta .cta-primary-btn{min-height:44px;padding:11px 24px;font-size:13px}}
+@media(max-width:480px){#final-cta .section-box{border-radius:12px}#final-cta .architecture-cta-body{min-height:280px;padding:30px 16px;background-position:50% 40%}#final-cta .architecture-cta-copy .cta-kicker{font-size:9.5px;letter-spacing:.11em;margin-bottom:10px}#final-cta .architecture-cta-copy h2{font-size:clamp(20px,6.5vw,24px);line-height:1.22}#final-cta .cta-primary-btn{width:auto;min-width:190px}}
+@media(prefers-reduced-motion:reduce){.bilva-home .hero *,.bilva-home .stats *{animation:none!important;opacity:1!important;transform:none!important}.bilva-home .bg-video{display:none}.motion-ready *{scroll-behavior:auto}}
