@@ -3,7 +3,7 @@
    Inspired by Framer "Testimonial Animated" component
    Seamless dual-direction marquee, cursor-reactive glow,
    accessible focus-pause, and reduced-motion fallback.
-   Styled in Midnight Rose Palette (#0B090E, #111013, #30242E, #C38B92)
+   Styled in Midnight Rose Palette (#0B090E, #111013, #30242E, #e8e2dc)
    ================================================== */
 
 .testimonials-section {
@@ -52,7 +52,7 @@
   align-items: center;
   gap: 8px;
   margin: 0 0 16px;
-  color: var(--accent-rose, #C38B92);
+  color: var(--accent-rose, #e8e2dc);
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.16em;
@@ -66,7 +66,7 @@
   display: inline-block;
   width: 16px;
   height: 1px;
-  background-color: rgba(195, 139, 146, 0.5);
+  background-color: rgba(232,226,220, 0.5);
 }
 
 .testimonials-heading {
@@ -121,12 +121,12 @@
 
 .view-toggle-btn:hover {
   color: #ffffff;
-  border-color: rgba(195, 139, 146, 0.25);
+  border-color: rgba(232,226,220, 0.25);
 }
 
 .view-toggle-btn.is-active {
-  background: rgba(195, 139, 146, 0.16);
-  border-color: rgba(195, 139, 146, 0.35);
+  background: rgba(232,226,220, 0.16);
+  border-color: rgba(232,226,220, 0.35);
   color: #ffffff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
@@ -243,14 +243,14 @@
 
 /* Focus outline for keyboard navigation */
 .testimonial-card:focus-visible {
-  outline: 2px solid var(--accent-rose, #C38B92);
+  outline: 2px solid var(--accent-rose, #e8e2dc);
   outline-offset: 3px;
-  border-color: rgba(195, 139, 146, 0.6);
+  border-color: rgba(232,226,220, 0.6);
 }
 
 .testimonial-card:hover {
   transform: translateY(-3px);
-  border-color: var(--border-subtle-hover, #80566D);
+  border-color: var(--border-subtle-hover, #bcb6b0);
   box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.75);
 }
 
@@ -266,8 +266,8 @@
   padding: 1px;
   background: radial-gradient(
     280px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
-    rgba(195, 139, 146, 0.55),
-    rgba(128, 86, 109, 0.3) 35%,
+    rgba(232,226,220, 0.55),
+    rgba(188,182,176, 0.3) 35%,
     transparent 70%
   );
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -285,7 +285,7 @@
   inset: 0;
   background: radial-gradient(
     320px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
-    rgba(195, 139, 146, 0.08),
+    rgba(232,226,220, 0.08),
     transparent 70%
   );
   pointer-events: none;
@@ -319,7 +319,7 @@
 
 .card-quote-text::before {
   content: "“";
-  color: var(--accent-rose, #C38B92);
+  color: var(--accent-rose, #e8e2dc);
   font-family: Georgia, serif;
   font-size: 1.15em;
   margin-right: 2px;
@@ -327,7 +327,7 @@
 
 .card-quote-text::after {
   content: "”";
-  color: var(--accent-rose, #C38B92);
+  color: var(--accent-rose, #e8e2dc);
   font-family: Georgia, serif;
   font-size: 1.15em;
   margin-left: 2px;
@@ -349,8 +349,8 @@
   width: 36px;
   height: 36px;
   border-radius: 8px;
-  background: rgba(195, 139, 146, 0.1);
-  border: 1px solid rgba(195, 139, 146, 0.2);
+  background: rgba(232,226,220, 0.1);
+  border: 1px solid rgba(232,226,220, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -358,7 +358,7 @@
   font-family: var(--font-main, "Inter", sans-serif);
   font-size: 12px;
   font-weight: 600;
-  color: var(--accent-rose, #C38B92);
+  color: var(--accent-rose, #e8e2dc);
   overflow: hidden;
   position: relative;
 }
@@ -463,7 +463,7 @@
 }
 
 .factual-card:hover {
-  border-color: var(--border-subtle-hover, #80566D);
+  border-color: var(--border-subtle-hover, #bcb6b0);
   transform: translateY(-2px);
   box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.6);
 }
@@ -472,9 +472,9 @@
   width: 42px;
   height: 42px;
   border-radius: 10px;
-  background: rgba(195, 139, 146, 0.1);
-  border: 1px solid rgba(195, 139, 146, 0.25);
-  color: var(--accent-rose, #C38B92);
+  background: rgba(232,226,220, 0.1);
+  border: 1px solid rgba(232,226,220, 0.25);
+  color: var(--accent-rose, #e8e2dc);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -487,7 +487,7 @@
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--accent-mauve, #80566D);
+  color: var(--accent-mauve, #bcb6b0);
   margin: 0;
 }
 

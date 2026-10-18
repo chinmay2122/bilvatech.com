@@ -1,6 +1,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 
 const assets = [
+  "assets/image-breaker.mp4",
   "index.html",
   "trialhomepage.html",
   "trialhomepage.css",
@@ -69,6 +70,10 @@ const assets = [
   "assets/testimonials/rachel-sterling.webp",
   "assets/testimonials/thomas-weber.webp",
   "assets/testimonials/henrik-aasgaard.webp",
+  "assets/ASSETS FOR SOLUTIONS/KERNEL HYPERVISOR.png",
+  "assets/ASSETS FOR SOLUTIONS/IOT SOLUTIONS.png",
+  "assets/ASSETS FOR SOLUTIONS/CYBERSECURITY SOLUTIONS.png",
+  "assets/ASSETS FOR SOLUTIONS/INFORMATION SECURITY.png",
 ];
 
 const encodedAssets = {};

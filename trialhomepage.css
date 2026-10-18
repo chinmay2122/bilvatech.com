@@ -5,28 +5,28 @@
      Primary Background:   #09080D
      Secondary Background: #111013
      Deep Plum:            #493047
-     Muted Mauve:          #80566D
-     Dusty Rose:           #C38B92
-     Soft Orchid:          #A58AAE
-     Smoked Violet:        #9376AD
+     Muted Mauve:          #bcb6b0
+     Dusty Rose:           #e8e2dc
+     Soft Orchid:          #d8d2cc
+     Smoked Violet:        #bcb6b0
      Primary Text:         #F5F2F6
      Secondary Text:       #AFA9B6
-     Accent Gradient:      linear-gradient(110deg, #493047 0%, #80566D 45%, #C38B92 100%)
+     Accent Gradient:      linear-gradient(110deg, #493047 0%, #bcb6b0 45%, #e8e2dc 100%)
    ================================================== */
 
 :root {
   --th-bg-primary: #09080D;
   --th-bg-secondary: #111013;
   --th-plum: #493047;
-  --th-mauve: #80566D;
-  --th-rose: #C38B92;
-  --th-orchid: #A58AAE;
-  --th-violet: #9376AD;
+  --th-mauve: #bcb6b0;
+  --th-rose: #e8e2dc;
+  --th-orchid: #d8d2cc;
+  --th-violet: #bcb6b0;
   --th-text-primary: #F5F2F6;
   --th-text-secondary: #AFA9B6;
-  --th-gradient: linear-gradient(110deg, #493047 0%, #80566D 45%, #C38B92 100%);
+  --th-gradient: linear-gradient(110deg, #493047 0%, #bcb6b0 45%, #e8e2dc 100%);
   --th-border-subtle: #241c23;
-  --th-border-hover: #80566D;
+  --th-border-hover: #bcb6b0;
   --th-shell-max: 1240px;
 }
 
@@ -60,7 +60,7 @@ body.trial-home {
 .trial-bg-glow {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 20%, rgba(128, 86, 109, 0.08) 0%, transparent 70%);
+  background: radial-gradient(circle at 50% 20%, rgba(188,182,176, 0.08) 0%, transparent 70%);
 }
 
 .trial-shell {
@@ -190,8 +190,8 @@ body.trial-home {
   align-items: center;
   gap: 10px;
   padding: 6px 16px;
-  background: rgba(128, 86, 109, 0.12);
-  border: 1px solid rgba(195, 139, 146, 0.28);
+  background: rgba(188,182,176, 0.12);
+  border: 1px solid rgba(232,226,220, 0.28);
   border-radius: 999px;
   font-size: 11.5px;
   font-weight: 500;
@@ -392,17 +392,17 @@ body.trial-home {
   letter-spacing: 0.14em;
   padding: 3px 8px;
   border-radius: 4px;
-  background: rgba(195, 139, 146, 0.08);
+  background: rgba(232,226,220, 0.08);
   color: var(--th-rose);
-  border: 1px solid rgba(195, 139, 146, 0.2);
+  border: 1px solid rgba(232,226,220, 0.2);
 }
 
 .sol-icon-box {
   width: 44px;
   height: 44px;
   border-radius: 10px;
-  background: rgba(128, 86, 109, 0.12);
-  border: 1px solid rgba(128, 86, 109, 0.25);
+  background: rgba(188,182,176, 0.12);
+  border: 1px solid rgba(188,182,176, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -798,7 +798,7 @@ body.trial-home {
 
 .faq-trigger[aria-expanded="true"] .faq-icon-rotator {
   transform: rotate(45deg);
-  background: rgba(195, 139, 146, 0.16);
+  background: rgba(232,226,220, 0.16);
   border-color: var(--th-rose);
 }
 
@@ -840,7 +840,7 @@ body.trial-home {
 .qr-banner-container {
   position: relative;
   background: linear-gradient(135deg, rgba(73, 48, 71, 0.55) 0%, rgba(26, 20, 27, 0.95) 50%, rgba(17, 16, 19, 0.98) 100%);
-  border: 1px solid rgba(195, 139, 146, 0.35);
+  border: 1px solid rgba(232,226,220, 0.35);
   border-radius: 24px;
   overflow: hidden;
   box-shadow: 0 24px 50px -16px rgba(0, 0, 0, 0.7);
@@ -866,7 +866,7 @@ body.trial-home {
   width: 380px;
   height: 380px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(195, 139, 146, 0.22) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(232,226,220, 0.22) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -925,13 +925,13 @@ body.trial-home {
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   cursor: pointer;
-  box-shadow: 0 4px 18px rgba(128, 86, 109, 0.35);
+  box-shadow: 0 4px 18px rgba(188,182,176, 0.35);
   transition: all 250ms ease;
 }
 
 .btn-qr-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 26px rgba(195, 139, 146, 0.45);
+  box-shadow: 0 8px 26px rgba(232,226,220, 0.45);
 }
 
 .btn-qr-secondary {
@@ -957,7 +957,7 @@ body.trial-home {
 /* Premium QR Preview Card */
 .qr-mockup-frame {
   background: rgba(17, 16, 19, 0.85);
-  border: 1px solid rgba(195, 139, 146, 0.3);
+  border: 1px solid rgba(232,226,220, 0.3);
   border-radius: 16px;
   padding: 24px;
   display: flex;
@@ -1057,7 +1057,7 @@ body.trial-home {
 }
 
 .qr-mode-btn.is-active {
-  background: rgba(195, 139, 146, 0.18);
+  background: rgba(232,226,220, 0.18);
   border-color: var(--th-rose);
   color: #ffffff;
 }
@@ -1217,7 +1217,7 @@ body.trial-home {
 }
 
 .footer-socials a:hover {
-  background: rgba(195, 139, 146, 0.16);
+  background: rgba(232,226,220, 0.16);
   border-color: var(--th-rose);
   color: #ffffff;
 }

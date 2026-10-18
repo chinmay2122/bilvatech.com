@@ -5,18 +5,18 @@
   --bg-primary: #0B090E;
   --bg-card: #111013;
   --accent-plum: #493047;
-  --accent-mauve: #80566D;
-  --accent-rose: #C38B92;
+  --accent-mauve: #bcb6b0;
+  --accent-rose: #e8e2dc;
   --border-subtle: #30242E;
-  --border-subtle-hover: #80566D;
+  --border-subtle-hover: #bcb6b0;
 
   --accent-gradient: linear-gradient(110deg,
       #493047 0%,
-      #80566D 45%,
-      #C38B92 100%);
+      #bcb6b0 45%,
+      #e8e2dc 100%);
 
   --accent-glow: radial-gradient(ellipse at center,
-      rgba(128, 86, 109, 0.16) 0%,
+      rgba(188,182,176, 0.16) 0%,
       transparent 70%);
 
   --text: #ffffff;
@@ -1869,7 +1869,7 @@ button {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(128, 86, 109, 0.12), transparent);
+  background: linear-gradient(90deg, rgba(188,182,176, 0.12), transparent);
   opacity: 0;
   transition: opacity 400ms ease;
   z-index: -1;
@@ -2076,7 +2076,7 @@ button {
   gap: 8px;
   padding: 8px 18px;
   border-radius: 999px;
-  background: rgba(128, 86, 109, 0.15);
+  background: rgba(188,182,176, 0.15);
   border: 1px solid var(--border-subtle);
   color: #ffffff;
   font-family: var(--font-main);
@@ -2131,8 +2131,8 @@ button {
 }
 
 .orbit-card.is-active {
-  border-color: rgba(var(--card-accent-rgb, 195, 139, 146), 0.65);
-  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8), 0 0 35px rgba(var(--card-accent-rgb, 195, 139, 146), 0.22);
+  border-color: rgba(var(--card-accent-rgb, 232,226,220), 0.65);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8), 0 0 35px rgba(var(--card-accent-rgb, 232,226,220), 0.22);
 }
 
 /* Portrait / Upper graphic area */
@@ -2143,7 +2143,7 @@ button {
   overflow: hidden;
   border-radius: 20px;
   border: 1px solid var(--border-subtle);
-  background: radial-gradient(circle at 30% 25%, rgba(var(--card-accent-rgb, 195, 139, 146), 0.2), transparent 55%), #0c0b0f;
+  background: radial-gradient(circle at 30% 25%, rgba(var(--card-accent-rgb, 232,226,220), 0.2), transparent 55%), #0c0b0f;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2165,20 +2165,20 @@ button {
   width: 66px;
   height: 66px;
   border-radius: 50%;
-  border: 1px solid rgba(var(--card-accent-rgb, 195, 139, 146), 0.45);
+  border: 1px solid rgba(var(--card-accent-rgb, 232,226,220), 0.45);
   background: rgba(73, 48, 71, 0.35);
   display: grid;
   place-items: center;
   color: var(--card-accent, var(--accent-rose));
   font-size: 26px;
-  box-shadow: 0 0 25px rgba(var(--card-accent-rgb, 195, 139, 146), 0.25);
+  box-shadow: 0 0 25px rgba(var(--card-accent-rgb, 232,226,220), 0.25);
   transition: transform 350ms var(--ease-out), box-shadow 350ms ease;
 }
 
 .orbit-card:hover .orbit-portrait-core,
 .orbit-card.is-active .orbit-portrait-core {
   transform: scale(1.08);
-  box-shadow: 0 0 35px rgba(var(--card-accent-rgb, 195, 139, 146), 0.45);
+  box-shadow: 0 0 35px rgba(var(--card-accent-rgb, 232,226,220), 0.45);
 }
 
 .orbit-initials {
@@ -2347,7 +2347,7 @@ button {
   width: 28px;
   border-radius: 999px;
   background: var(--accent-rose);
-  box-shadow: 0 0 10px rgba(195, 139, 146, 0.5);
+  box-shadow: 0 0 10px rgba(232,226,220, 0.5);
 }
 
 @media (max-width: 768px) {
@@ -2399,7 +2399,7 @@ button {
   transform: translateX(-50%);
   width: min(100%, 1240px);
   height: 1px;
-  background: radial-gradient(circle, rgba(195, 139, 146, 0.35) 0%, transparent 80%);
+  background: radial-gradient(circle, rgba(232,226,220, 0.35) 0%, transparent 80%);
 }
 
 .why-shell {
@@ -2530,7 +2530,7 @@ button {
 .why-principle.active-principle .principle-indicator,
 .why-principle:focus-visible .principle-indicator {
   background: var(--accent-rose);
-  box-shadow: 0 0 12px rgba(195, 139, 146, 0.65);
+  box-shadow: 0 0 12px rgba(232,226,220, 0.65);
   height: 36px;
 }
 
@@ -2804,7 +2804,7 @@ button {
 
 .protect-item:hover,
 .protect-item.is-active {
-  border-color: rgba(195, 139, 146, 0.42);
+  border-color: rgba(232,226,220, 0.42);
   transform: translateY(-2px);
 }
 
@@ -3066,7 +3066,7 @@ button {
 
 .bta-info-box.is-pinned {
   border-left-color: var(--accent-rose);
-  box-shadow: 0 0 20px rgba(128, 86, 109, 0.2);
+  box-shadow: 0 0 20px rgba(188,182,176, 0.2);
 }
 
 .bta-info-box.is-pinned::after {
@@ -3201,7 +3201,7 @@ button {
   transform: rotateX(-90deg);
   margin-left: -1px;
   background: #222;
-  background-image: linear-gradient(to bottom, rgba(73, 48, 71, 0) 0%, rgba(128, 86, 109, 0.8) 50%, rgba(195, 139, 146, 1) 100%);
+  background-image: linear-gradient(to bottom, rgba(73, 48, 71, 0) 0%, rgba(188,182,176, 0.8) 50%, rgba(232,226,220, 1) 100%);
   background-size: 100% 200%;
   z-index: -1;
   transition: height 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
@@ -3220,7 +3220,7 @@ button {
 .bta-layer:hover .bta-connector,
 .bta-layer.is-locked .bta-connector {
   animation: dataFlow 1.5s linear infinite;
-  box-shadow: 0 0 10px rgba(128, 86, 109, 0.6);
+  box-shadow: 0 0 10px rgba(188,182,176, 0.6);
 }
 
 /* Hardware Grid Specific Style */
@@ -3262,7 +3262,7 @@ button {
   background: #1b1620;
   border-color: var(--accent-rose);
   color: #ffffff;
-  box-shadow: inset 0 0 20px rgba(128, 86, 109, 0.25), 0 10px 40px rgba(0, 0, 0, 0.7);
+  box-shadow: inset 0 0 20px rgba(188,182,176, 0.25), 0 10px 40px rgba(0, 0, 0, 0.7);
 }
 
 .bta-layer:hover::before,
@@ -3338,21 +3338,21 @@ button {
 
 /* Three-service orbital selector */
 .service-dial {
-  --dial-accent: #C38B92;
-  --dial-rgb: 195, 139, 146;
+  --dial-accent: #e8e2dc;
+  --dial-rgb: 232,226,220;
   --dial-angle: -42deg;
   background: #080809;
   padding: 32px clamp(16px, 4vw, 64px) 64px;
 }
 
 .service-dial[data-service="1"] {
-  --dial-accent: #A58AAE;
+  --dial-accent: #d8d2cc;
   --dial-rgb: 165, 138, 174;
   --dial-angle: 0deg;
 }
 
 .service-dial[data-service="2"] {
-  --dial-accent: #9376AD;
+  --dial-accent: #bcb6b0;
   --dial-rgb: 147, 118, 173;
   --dial-angle: 42deg;
 }
@@ -3774,7 +3774,7 @@ button {
 .faq-item.active {
   border-color: var(--accent-mauve);
   background: var(--bg-card);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 25px rgba(128, 86, 109, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 25px rgba(188,182,176, 0.15);
 }
 
 .faq-trigger {
@@ -3823,7 +3823,7 @@ button {
 
 .faq-item:hover .faq-icon-wrapper {
   border-color: var(--accent-mauve);
-  background: rgba(128, 86, 109, 0.15);
+  background: rgba(188,182,176, 0.15);
 }
 
 .faq-item.active .faq-icon-wrapper {

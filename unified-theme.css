@@ -11,14 +11,14 @@
   --surface-hover: #18171b;
   --line: #252527;
   --line-hover: #494347;
-  --line-accent: rgba(195, 139, 146, 0.28);
+  --line-accent: rgba(232,226,220, 0.28);
   --ink: #eee9f0;
   --ink-secondary: #aaa5b0;
   --ink-muted: #918d92;
-  --kicker-color: #c38b92;
-  --accent-mauve: #c38b92;
-  --accent-violet: #a58aae;
-  --accent-titanium: #9376ad;
+  --kicker-color: #e8e2dc;
+  --accent-mauve: #e8e2dc;
+  --accent-violet: #d8d2cc;
+  --accent-titanium: #bcb6b0;
   --accent-coral: #ff5722;
   --font-main: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-secondary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -61,7 +61,7 @@ body.inner-page {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 50% 15%, rgba(195, 139, 146, 0.08), transparent 45%),
+    radial-gradient(circle at 50% 15%, rgba(232,226,220, 0.08), transparent 45%),
     radial-gradient(circle at 80% 50%, rgba(165, 138, 174, 0.05), transparent 50%),
     linear-gradient(180deg, rgba(8, 8, 9, 0.75) 0%, rgba(8, 8, 9, 0.95) 60%, #080809 100%);
   pointer-events: none;
@@ -200,7 +200,7 @@ body.inner-page {
 }
 
 .section-box:hover .tech-icon-badge {
-  border-color: rgba(195, 139, 146, 0.4);
+  border-color: rgba(232,226,220, 0.4);
   color: #fff;
 }
 
@@ -397,7 +397,7 @@ body.inner-page {
 .instrument-form textarea:focus {
   outline: none;
   border-color: var(--kicker-color);
-  box-shadow: 0 0 0 2px rgba(195, 139, 146, 0.25);
+  box-shadow: 0 0 0 2px rgba(232,226,220, 0.25);
   background: #17171d;
 }
 
@@ -593,7 +593,7 @@ body.inner-page {
 
 .section-box .faq-item.active {
   background: var(--surface-hover);
-  border-color: rgba(195, 139, 146, 0.4);
+  border-color: rgba(232,226,220, 0.4);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 

@@ -66,3 +66,30 @@
  document.fonts?.ready.then(()=>ST.refresh());
  window.addEventListener('load',()=>ST.refresh(),{once:true});
 })();
+
+// Independent of the animation CDN, and responsive to reduced-motion changes.
+(() => {
+ const frame = document.querySelector('.image-break-frame');
+ const art = frame?.querySelector('.image-break-art');
+ if (!art) return;
+ const section = frame.parentElement;
+ const labels = frame.querySelector('.image-break-labels');
+ const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+ let queued = false;
+ const draw = () => {
+  queued = false;
+  if (reduce.matches) { art.style.transform = 'none'; labels.style.transform = 'none'; art.pause?.(); return; }
+  if (art.paused) art.play?.().catch(() => {});
+  const rect = section.getBoundingClientRect();
+  if (rect.bottom < 0 || rect.top > innerHeight) return;
+  const height = frame.clientHeight;
+  const progress = Math.max(0, Math.min(1, -rect.top / Math.max(1, rect.height - height)));
+  art.style.transform = `translate3d(0,${(0.5 - progress) * height * .09}px,0)`;
+  labels.style.transform = `translate3d(0,${(0.5 - progress) * height * .035}px,0)`;
+ };
+ const request = () => { if (!queued) { queued = true; requestAnimationFrame(draw); } };
+ addEventListener('scroll', request, { passive:true });
+ addEventListener('resize', request);
+ reduce.addEventListener('change', request);
+ request();
+})();

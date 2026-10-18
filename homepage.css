@@ -5,7 +5,7 @@
 .bilva-home > section::before { display: none; }
 .section-box,.bilva-home .service-dial-frame { max-width: 1440px; margin: 0 auto; border: 1px solid #ffffff12; background: var(--surface-panel); overflow: hidden; position: relative; }
 .section-meta { display: flex; justify-content: space-between; gap: 20px; padding: 16px 23px; border-bottom: 1px solid #ffffff0c; color: #aaa2af; font: 10px/1.5 var(--font-secondary); letter-spacing: .15em; }
-.home-kicker { color: #c38b92; font-size: 11px; letter-spacing: .16em; margin: 0 0 20px; }
+.home-kicker { color: #e8e2dc; font-size: 11px; letter-spacing: .16em; margin: 0 0 20px; }
 .about-home-body,.bento-body,.qr-service-body { padding: clamp(32px,5vw,76px); }
 .about-home-body { display: grid; grid-template-columns: 1fr 1fr; column-gap: 9%; }
 .about-home-body > .home-kicker { grid-column: 1/-1; }
@@ -58,7 +58,7 @@
 }
 
 .solutions-bento .bento-card:focus-visible {
-  outline: 2px solid #c38b92;
+  outline: 2px solid #e8e2dc;
   outline-offset: 4px;
 }
 
@@ -271,7 +271,7 @@
 }
 
 .compact-faq-intro .home-kicker {
-  color: #c38b92;
+  color: #e8e2dc;
   font-size: 11px;
   letter-spacing: .16em;
   margin: 0 0 16px;
@@ -337,7 +337,7 @@
   border-radius: 0;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #c38b92;
+  color: #e8e2dc;
   flex-shrink: 0;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
               background-color 0.25s ease,
@@ -346,8 +346,8 @@
 }
 
 #faq summary:hover .faq-icon {
-  background: rgba(195, 139, 146, 0.15);
-  border-color: rgba(195, 139, 146, 0.35);
+  background: rgba(232,226,220, 0.15);
+  border-color: rgba(232,226,220, 0.35);
   color: #ffffff;
 }
 
@@ -357,8 +357,8 @@
 
 #faq details[open] summary .faq-icon {
   transform: rotate(180deg);
-  background: rgba(195, 139, 146, 0.22);
-  border-color: #c38b92;
+  background: rgba(232,226,220, 0.22);
+  border-color: #e8e2dc;
   color: #ffffff;
 }
 
@@ -398,7 +398,7 @@
 }
 
 #faq summary:focus-visible {
-  outline: 2px solid #c38b92;
+  outline: 2px solid #e8e2dc;
   outline-offset: 4px;
 }
 
@@ -429,11 +429,11 @@
 .qr-service-body { display: grid; grid-template-columns: 1fr 260px; gap: 10%; align-items: center; }
 .qr-service-body > div > p:not(.home-kicker) { max-width: 570px; font-size: 15px; line-height: 1.8; color: #aaa5b0; margin: 22px 0 30px; }
 .qr-service .cta-primary-btn { gap: 24px; font-size: 13px; }
-.qr-service-aside { position: relative; aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid #c38b9228; background: var(--surface-card); color: #c38b92; }
+.qr-service-aside { position: relative; aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid #e8e2dc28; background: var(--surface-card); color: #e8e2dc; }
 .qr-service-symbol { font: 400 70px var(--font-main); }
 .qr-service-aside > span:not(.qr-service-symbol) { font-size: 8px; letter-spacing: .2em; }
 .qr-service-body .qr-service-aside p { text-align: center; font-size: 13px; margin: 14px 0 0; }
-.bilva-home > section a:focus-visible { outline: 2px solid #c38b92; outline-offset: 5px; }
+.bilva-home > section a:focus-visible { outline: 2px solid #e8e2dc; outline-offset: 5px; }
 @media(max-width:950px) { .bilva-home .why-shell { flex-direction: column-reverse; } .bilva-home .why-content { max-width: none; } .bilva-home .why-visual { flex: auto; width: 100%; } .qr-service-body { grid-template-columns: 1fr 190px; gap: 32px; } .bento-card { padding: 20px; } .bento-network span { width: 52px; height: 52px; font-size: 7px; } }
 @media(max-width:650px) { .bilva-home > section { padding: 0 12px 18px; } .section-meta { padding: 12px; font-size: 8px; gap: 16px; letter-spacing: .08em; } .section-meta > span:last-child { text-align: right; max-width: 45%; } .about-home-body,.bento-intro { grid-template-columns: 1fr; gap: 20px; } .about-home-body,.bento-body,.qr-service-body { padding: 30px 20px; } .about-home-body > .home-kicker,.bento-intro > .home-kicker { margin: 0; } .bento-grid { grid-template-columns: 1fr; } .bento-card { grid-column: auto; } .bento-art { min-height: 155px; } .bento-network { max-width: 280px; } .bento-network span { width: 66px; height: 66px; font-size: 8px; } .qr-service-body { grid-template-columns: 1fr; } .qr-service-aside { display: none; } .bilva-home .protect-shell,.bilva-home .faq-shell { padding: 30px 20px; } }
 @media(prefers-reduced-motion:reduce) { .bento-card { transition: none; } }
@@ -457,12 +457,12 @@
   --text: var(--ink);
   --muted: var(--ink-secondary);
   --accent-glow: none;
-  --accent-gradient: linear-gradient(#b78d94,#b78d94);
+  --accent-gradient: linear-gradient(#e8e2dc,#e8e2dc);
 }
 .bilva-home .section-box,.bilva-home .service-dial-frame { border-color: var(--line); }
 .bilva-home .service-dial-frame { background: radial-gradient(ellipse at 50% 32%,rgba(var(--dial-rgb),.055),transparent 55%),linear-gradient(180deg,#0b090e,#080809); }
 .bilva-home .section-meta,.bilva-home .service-dial-meta { color: var(--ink-muted); border-color: #ffffff0b; }
-.bilva-home :is(.home-kicker,.protect-eyebrow,.why-eyebrow,.testimonials-eyebrow,.faq-eyebrow) { color: #b8a5aa; }
+.bilva-home :is(.home-kicker,.protect-eyebrow,.why-eyebrow,.testimonials-eyebrow,.faq-eyebrow) { color: #e8e2dc; }
 .bilva-home :is(.about-home h2,.bento-intro h2,.qr-service h2,.architecture-cta h2,.bento-card-copy h3,.protect-heading,.why-heading,.testimonials-heading,.faq-heading,.card-title,.principle-title,.card-author-name) { color: var(--ink); }
 .bilva-home :is(.about-home-copy p,.bento-intro > p:last-child,.bento-card-copy p,.protect-copy,.why-copy,.testimonials-copy,.faq-copy,.faq-answer-text,.card-desc,.principle-desc,.card-quote-text) { color: var(--ink-secondary); }
 .bilva-home :is(.bento-card-meta,.bento-hardware,.card-num,.card-author-title,.card-author-org) { color: var(--ink-muted); }
@@ -471,7 +471,7 @@
 .bilva-home .faq-item.active { background: var(--surface-hover); border-color: var(--line-hover); box-shadow: none; transform: none; }
 .bilva-home .testimonial-card::before,.bilva-home .testimonial-card::after { display: none; }
 .bilva-home :is(.home-text-link,.bento-explore,.faq-inline-link) { color: #d4c9cd; }
-.bilva-home .bento-card { --bento-color: #ab969d; }
+.bilva-home .bento-card { --bento-color: #e8e2dc; }
 .bilva-home :is(.bento-partitions span,.bento-foundation,.bento-network span,.bento-roadmap span,.qr-service-aside) { border-color: #3c343c; }
 .bilva-home .bento-foundation { background: #181418; }
 .bilva-home .bento-network i { background: #4d424e; }
@@ -510,14 +510,14 @@
 }
 .bilva-home .why-principle .principle-num {
   font: 600 13px var(--font-secondary);
-  color: #c38b92;
+  color: #e8e2dc;
   letter-spacing: 0.12em;
   line-height: 1;
   margin-bottom: 6px;
   transition: color 0.25s ease;
 }
 .bilva-home .why-principle .principle-sep {
-  color: #80566d;
+  color: #bcb6b0;
   font-size: 14px;
   line-height: 1;
   margin-bottom: 10px;
@@ -542,7 +542,7 @@
 .bilva-home .why-principle.active-principle,
 .bilva-home .why-principle:focus-visible {
   background: transparent !important;
-  border-bottom-color: #c38b9288 !important;
+  border-bottom-color: #e8e2dc88 !important;
   transform: none !important;
 }
 .bilva-home .why-principle:hover .principle-num,
@@ -551,11 +551,11 @@
 }
 .bilva-home .why-principle:hover .principle-sep,
 .bilva-home .why-principle.active-principle .principle-sep {
-  color: #c38b92;
+  color: #e8e2dc;
 }
 .bilva-home .why-principle:hover .principle-title,
 .bilva-home .why-principle.active-principle .principle-title {
-  color: #c38b92;
+  color: #e8e2dc;
 }
 .bilva-home .why-principle:hover .principle-desc,
 .bilva-home .why-principle.active-principle .principle-desc {
