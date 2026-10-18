@@ -150,3 +150,170 @@
 @media(max-width:440px) { .contact-fields { grid-template-columns:1fr; } .contact-center { padding-inline:18px; } .inner-meta > span:last-child { display:none; } .directory-focus { display:none; } .directory-arrow { grid-row:1; } .architecture-level { flex-wrap:wrap; } .architecture-level span { min-width:45%; } }
 @media(prefers-reduced-motion:reduce) { .bilva-inner *, .bilva-inner *::before,.bilva-inner *::after { scroll-behavior:auto!important; transition:none!important; animation:none!important; } }
 .contact-reference .contact-stage{min-height:760px;background:#09090b}.contact-reference .contact-stage::before{background:radial-gradient(ellipse at 50% 0%,#d8d2cc09,transparent 60%)}.contact-reference .contact-stage::after{opacity:.06}.contact-reference .contact-orbit{box-shadow:none;opacity:.35;bottom:65px}.contact-reference .contact-center{width:min(100%,640px);padding-top:64px}.contact-reference .contact-eyebrow{color:#a59aa9;font-size:10px;letter-spacing:.14em;margin-bottom:20px}.contact-reference .contact-center h1{font-size:clamp(30px,3.3vw,42px);letter-spacing:-.04em}.contact-reference .contact-lead{max-width:360px;margin:0 auto 40px;color:#a49ea8}.contact-reference .contact-reference-form input,.contact-reference .contact-reference-form textarea{background:#111013;border-color:#2d292f;padding:13px 14px;border-radius:3px}.contact-reference .contact-submit{background:#d9d2da;border-color:#d9d2da;color:#171419;box-shadow:none;font-weight:500}.contact-reference .contact-submit:hover{background:#eee8ef}.contact-reference .contact-form-note{max-width:420px;margin:auto}
+
+/* ==========================================================================
+   COMPACT FAQ ACCORDION (Inner Pages)
+   ========================================================================== */
+.bilva-inner .compact-faq-body {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: clamp(36px, 5vw, 72px);
+  padding: clamp(36px, 5vw, 76px);
+  align-items: start;
+}
+
+.bilva-inner .compact-faq-intro {
+  position: sticky;
+  top: 100px;
+}
+
+.bilva-inner .compact-faq-intro .home-kicker,
+.bilva-inner .compact-faq-intro .inner-kicker {
+  color: #e8e2dc !important;
+  font-size: 11px;
+  letter-spacing: .16em;
+  margin: 0 0 16px;
+  text-transform: uppercase;
+}
+
+.bilva-inner .compact-faq-intro h2 {
+  font: 500 clamp(30px, 3.2vw, 46px)/1.15 var(--font-main, 'Space Grotesk', sans-serif);
+  letter-spacing: -.04em;
+  margin: 0;
+  color: #eee9f0;
+}
+
+.bilva-inner .compact-faq-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.bilva-inner #faq details {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: border-color 0.25s ease;
+}
+
+.bilva-inner #faq details:first-child {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.bilva-inner #faq details:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.bilva-inner #faq summary {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 22px 0;
+  font-family: var(--font-main, 'Space Grotesk', sans-serif);
+  font-size: clamp(16px, 1.2vw, 18.5px);
+  font-weight: 500;
+  cursor: pointer;
+  color: #e2dce4;
+  user-select: none;
+  transition: color 0.25s ease;
+}
+
+.bilva-inner #faq summary::-webkit-details-marker,
+.bilva-inner #faq summary::marker {
+  display: none !important;
+}
+
+.bilva-inner #faq summary:hover {
+  color: #ffffff;
+}
+
+.bilva-inner #faq summary .faq-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #e8e2dc;
+  flex-shrink: 0;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.25s ease,
+              border-color 0.25s ease,
+              color 0.25s ease;
+}
+
+.bilva-inner #faq summary:hover .faq-icon {
+  background: rgba(232, 226, 220, 0.15);
+  border-color: rgba(232, 226, 220, 0.35);
+  color: #ffffff;
+}
+
+.bilva-inner #faq details[open] summary {
+  color: #ffffff;
+}
+
+.bilva-inner #faq details[open] summary .faq-icon {
+  transform: rotate(180deg);
+  background: rgba(232, 226, 220, 0.22);
+  border-color: #e8e2dc;
+  color: #ffffff;
+}
+
+.bilva-inner #faq .faq-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.bilva-inner #faq .faq-answer-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.25s ease;
+  opacity: 0;
+}
+
+.bilva-inner #faq details[open] .faq-answer-wrap {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.bilva-inner #faq .faq-answer-wrap > p,
+.bilva-inner #faq details > p {
+  min-height: 0;
+  overflow: hidden;
+  margin: 0;
+  padding: 0 0 24px;
+  font-family: var(--font-secondary, 'Inter', sans-serif);
+  font-size: clamp(14px, 0.95vw, 15px);
+  line-height: 1.7;
+  color: #aaa2af;
+}
+
+.bilva-inner #faq summary:focus-visible {
+  outline: 2px solid #e8e2dc;
+  outline-offset: 4px;
+}
+
+@media (max-width: 768px) {
+  .bilva-inner .compact-faq-body {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 32px 20px;
+  }
+
+  .bilva-inner .compact-faq-intro {
+    position: static;
+  }
+
+  .bilva-inner #faq summary {
+    padding: 18px 0;
+    font-size: 16px;
+  }
+}
+
