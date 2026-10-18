@@ -34,6 +34,7 @@ const assets = [
   "applications-chroma-grid.js",
   "DotGrid.css",
   "service-overview-dot-grid.css",
+  "solution-cta.css",
   "dot-grid.js",
   "bento-polish.css",
   "bento-polish.js",
