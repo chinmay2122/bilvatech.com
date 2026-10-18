@@ -1,0 +1,226 @@
+/* ==========================================================================
+   Bilva Tech — Service Pseudocode Panel Styles
+   Scoped strictly to .pseudocode-panel and its children.
+   Mandatory rule: Sharp square corners (border-radius: 0) everywhere.
+   ========================================================================== */
+
+.pseudocode-panel-wrap {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.pseudocode-panel {
+  position: relative;
+  width: 100%;
+  background: #0d0c12;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0 !important;
+  box-sizing: border-box;
+  overflow: hidden;
+  box-shadow: 0 4px 20px -8px rgba(0, 0, 0, 0.6);
+}
+
+/* Header bar */
+.pseudocode-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  background: #111017;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 0 !important;
+  box-sizing: border-box;
+  gap: 12px;
+}
+
+.pseudocode-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.pseudocode-terminal-dots {
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.pseudocode-dot {
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 0 !important;
+}
+
+.pseudocode-title {
+  margin: 0;
+  font-family: var(--font-main, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif);
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #f4f3f6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pseudocode-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px;
+  font-family: 'SF Mono', 'JetBrains Mono', 'Fira Code', 'Roboto Mono', Menlo, Consolas, monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #8e8a9d;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0 !important;
+  white-space: nowrap;
+}
+
+/* Editor body */
+.pseudocode-body {
+  display: flex;
+  padding: 18px 20px;
+  background: #0d0c12;
+  border-radius: 0 !important;
+  overflow-x: auto;
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+}
+
+.pseudocode-lines {
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+  text-align: right;
+  padding-right: 16px;
+  margin-right: 16px;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  font-family: 'SF Mono', 'JetBrains Mono', 'Fira Code', 'Roboto Mono', Menlo, Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.85;
+  color: #4b4859;
+}
+
+.pc-line-num {
+  display: block;
+  line-height: 1.85;
+  height: 1.85em;
+}
+
+.pseudocode-code {
+  margin: 0;
+  padding: 0;
+  font-family: 'SF Mono', 'JetBrains Mono', 'Fira Code', 'Roboto Mono', Menlo, Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.85;
+  color: #e2e0ea;
+  white-space: pre;
+  tab-size: 4;
+  flex: 1;
+}
+
+.pseudocode-code code {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  display: block;
+}
+
+/* Restrained Syntax Highlighting Palette */
+/* Keywords: if, not, return, function */
+.pc-kw {
+  color: #c4b5fd;
+  font-weight: 500;
+}
+
+/* Function declaration names */
+.pc-fn {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Function calls / invocations */
+.pc-call {
+  color: #93c5fd;
+}
+
+/* Variables and parameters */
+.pc-var {
+  color: #e2e0ea;
+}
+
+/* Operators and punctuation */
+.pc-op {
+  color: #7d798f;
+}
+
+/* Caption bar */
+.pseudocode-caption {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 18px;
+  background: #0a090e;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 0 !important;
+  box-sizing: border-box;
+  font-family: var(--font-main, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif);
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #8e8a9d;
+}
+
+.pseudocode-caption-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #716d82;
+  flex-shrink: 0;
+}
+
+.pseudocode-caption-text {
+  margin: 0;
+  color: inherit;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .pseudocode-body {
+    padding: 16px 16px;
+  }
+  .pseudocode-lines,
+  .pseudocode-code {
+    font-size: 12.5px;
+    line-height: 1.8;
+  }
+}
+
+@media (max-width: 600px) {
+  .pseudocode-header {
+    padding: 10px 14px;
+  }
+  .pseudocode-title {
+    font-size: 13px;
+  }
+  .pseudocode-body {
+    padding: 14px 12px;
+  }
+  .pseudocode-lines {
+    padding-right: 10px;
+    margin-right: 10px;
+    font-size: 12px;
+  }
+  .pseudocode-code {
+    font-size: 12px;
+    line-height: 1.75;
+  }
+  .pseudocode-caption {
+    padding: 10px 14px;
+    font-size: 12px;
+  }
+}

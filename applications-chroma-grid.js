@@ -1,153 +1,315 @@
 /**
- * Applications ChromaGrid
- * JavaScript spotlight engine adapted from React Bits ChromaGrid (plain JS + CSS variant).
+ * Applications Section — Horizontal Card Carousel & AnimatedBackground Integration
+ *
  * Scoped strictly to .applications-chroma-grid.
+ * Implements:
+ * 1. Functional horizontal slider with accessible Next/Prev controls and touch support.
+ * 2. CSS scroll snapping with controlled step advancement.
+ * 3. Directional boundary detection (disabling / hiding arrows at ends).
+ * 4. Keyboard arrow navigation and focus alignment.
+ * 5. Smooth shared hover highlight via GSAP.
  */
 (() => {
-  const clamp = (val, min, max) => Math.min(max, Math.max(min, val));
-
-  const falloffStops = (softness = 0.6) => {
-    const core = clamp(1 - softness, 0, 0.95);
-    const stops = [];
-    for (let i = 0; i <= 12; i++) {
-      const t = i / 12;
-      const u = clamp((t - core) / Math.max(0.0001, 1 - core), 0, 1);
-      const alpha = 1 - u * u * u * (u * (u * 6 - 15) + 10);
-      stops.push(`rgba(0, 0, 0, ${alpha.toFixed(3)}) ${(t * 100).toFixed(1)}%`);
-    }
-    return stops.join(', ');
+  const SPRING_CONFIG = {
+    duration: 0.5,
+    ease: 'cubic-bezier(0.2, 0.9, 0.3, 1)',
   };
 
-  function initChromaGrid(root) {
-    if (!root || root.__chromaInitialized) return;
-    root.__chromaInitialized = true;
+  const isReducedMotion = () =>
+    window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    const damping = 0.45;
-    const fadeOut = 0.6;
-    const radius = 280;
-    const softness = 0.6;
+  function initCarousel(gridRoot) {
+    if (!gridRoot || gridRoot.__carouselInitialized) return;
+    gridRoot.__carouselInitialized = true;
 
-    const reduceQuery = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
-    let reduce = reduceQuery ? reduceQuery.matches : false;
-    if (reduceQuery && reduceQuery.addEventListener) {
-      reduceQuery.addEventListener('change', e => {
-        reduce = e.matches;
-      });
+    const innerGrid = gridRoot.querySelector('.applications-chroma-inner');
+    if (!innerGrid) return;
+
+    // Accessibility attributes on the scroll region
+    if (!innerGrid.getAttribute('role')) {
+      innerGrid.setAttribute('role', 'region');
+      innerGrid.setAttribute('aria-label', 'Applications horizontal carousel');
+      innerGrid.setAttribute('tabindex', '0');
     }
 
-    root.style.setProperty('--chroma-r', `${radius}px`);
-    root.style.setProperty('--chroma-stops', falloffStops(softness));
+    // Ensure Navigation Buttons exist
+    let prevBtn = gridRoot.querySelector('.applications-nav-prev');
+    if (!prevBtn) {
+      prevBtn = document.createElement('button');
+      prevBtn.className = 'applications-nav-btn applications-nav-prev';
+      prevBtn.type = 'button';
+      prevBtn.setAttribute('aria-label', 'Previous applications');
+      prevBtn.disabled = true;
+      prevBtn.innerHTML = `
+        <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      `;
+      gridRoot.insertBefore(prevBtn, innerGrid);
+    }
 
-    const state = {
-      x: 0,
-      y: 0,
-      tx: 0,
-      ty: 0,
-      power: 0,
-      target: 0,
-      primed: false
+    let nextBtn = gridRoot.querySelector('.applications-nav-next');
+    if (!nextBtn) {
+      nextBtn = document.createElement('button');
+      nextBtn.className = 'applications-nav-btn applications-nav-next';
+      nextBtn.type = 'button';
+      nextBtn.setAttribute('aria-label', 'Next applications');
+      nextBtn.innerHTML = `
+        <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      `;
+      gridRoot.appendChild(nextBtn);
+    }
+
+    // Helper: calculate scroll step based on card dimensions + gap
+    const getScrollStep = () => {
+      const card = innerGrid.querySelector('.applications-chroma-card');
+      const gap = 18;
+      if (card) {
+        return card.getBoundingClientRect().width + gap;
+      }
+      return 320;
     };
 
-    let raf = 0;
-    let last = 0;
+    // Update disabled and visibility states on navigation buttons
+    const updateNavButtons = () => {
+      const maxScroll = Math.max(0, innerGrid.scrollWidth - innerGrid.clientWidth);
+      const currentScroll = innerGrid.scrollLeft;
 
-    const place = () => {
-      const box = root.getBoundingClientRect();
-      const cards = root.querySelectorAll('[data-chroma-area]');
-      cards.forEach(card => {
-        const rect = card.getBoundingClientRect();
-        card.style.setProperty('--chroma-ox', `${rect.left - box.left}px`);
-        card.style.setProperty('--chroma-oy', `${rect.top - box.top}px`);
+      // Generous threshold to tolerate subpixel rounding
+      const isAtStart = currentScroll <= 8;
+      const isAtEnd = currentScroll >= maxScroll - 8;
+
+      if (prevBtn) {
+        prevBtn.disabled = isAtStart;
+        prevBtn.setAttribute('aria-disabled', String(isAtStart));
+        prevBtn.classList.toggle('is-disabled', isAtStart);
+      }
+
+      if (nextBtn) {
+        nextBtn.disabled = isAtEnd;
+        nextBtn.setAttribute('aria-disabled', String(isAtEnd));
+        nextBtn.classList.toggle('is-disabled', isAtEnd);
+      }
+    };
+
+    // Smooth navigation interaction guarded against rapid repeated clicks
+    let isNavigating = false;
+    const scrollCarousel = (direction) => {
+      if (isNavigating) return;
+      isNavigating = true;
+
+      const step = getScrollStep();
+      const currentScroll = innerGrid.scrollLeft;
+      const maxScroll = Math.max(0, innerGrid.scrollWidth - innerGrid.clientWidth);
+      const targetScroll = Math.max(0, Math.min(maxScroll, currentScroll + step * direction));
+
+      if (Math.abs(targetScroll - currentScroll) < 1) {
+        isNavigating = false;
+        updateNavButtons();
+        return;
+      }
+
+      innerGrid.scrollTo({
+        left: targetScroll,
+        behavior: isReducedMotion() ? 'auto' : 'smooth',
       });
+
+      // Release lock after smooth scroll settle
+      setTimeout(() => {
+        isNavigating = false;
+        updateNavButtons();
+      }, 340);
     };
 
-    const frame = now => {
-      raf = 0;
-      const dt = last ? Math.min(0.05, (now - last) / 1000) : 1 / 60;
-      last = now;
+    prevBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      scrollCarousel(-1);
+    });
 
-      const follow = reduce ? 1 : 1 - Math.exp(-dt / Math.max(0.01, damping * 0.32));
-      state.x += (state.tx - state.x) * follow;
-      state.y += (state.ty - state.y) * follow;
+    nextBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      scrollCarousel(1);
+    });
 
-      const span = state.target > state.power ? 0.1 : Math.max(0.02, fadeOut * 0.35);
-      state.power += (state.target - state.power) * (reduce ? 1 : 1 - Math.exp(-dt / span));
+    // Listen to scroll events to update arrows immediately
+    let scrollRafId = null;
+    innerGrid.addEventListener(
+      'scroll',
+      () => {
+        if (scrollRafId) cancelAnimationFrame(scrollRafId);
+        scrollRafId = requestAnimationFrame(updateNavButtons);
+      },
+      { passive: true }
+    );
 
-      root.style.setProperty('--chroma-x', `${state.x.toFixed(2)}px`);
-      root.style.setProperty('--chroma-y', `${state.y.toFixed(2)}px`);
-      root.style.setProperty('--chroma-power', state.power.toFixed(4));
+    // Keyboard navigation: Left/Right arrows on innerGrid
+    innerGrid.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        scrollCarousel(1);
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        scrollCarousel(-1);
+      }
+    });
 
-      const settled =
-        Math.abs(state.tx - state.x) < 0.1 &&
-        Math.abs(state.ty - state.y) < 0.1 &&
-        Math.abs(state.target - state.power) < 0.002;
+    // Setup AnimatedBackground highlight
+    let highlight = innerGrid.querySelector('.animated-background-highlight');
+    if (!highlight) {
+      highlight = document.createElement('div');
+      highlight.className = 'animated-background-highlight';
+      highlight.setAttribute('aria-hidden', 'true');
+      innerGrid.insertBefore(highlight, innerGrid.firstChild);
+    }
 
-      if (settled) {
-        state.power = state.target;
-        root.style.setProperty('--chroma-power', state.power.toFixed(4));
-        last = 0;
+    highlight.style.borderRadius = '0';
+    highlight.style.pointerEvents = 'none';
+    highlight.style.position = 'absolute';
+    highlight.style.top = '0';
+    highlight.style.left = '0';
+    highlight.style.zIndex = '1';
+    highlight.style.opacity = '0';
+
+    const cards = Array.from(innerGrid.querySelectorAll('.applications-chroma-card'));
+
+    cards.forEach((card, idx) => {
+      if (!card.getAttribute('data-id')) {
+        card.setAttribute('data-id', `card-${idx}`);
+      }
+      card.style.borderRadius = '0';
+
+      // Keep focused card fully visible
+      card.addEventListener('focusin', () => {
+        const parentRect = innerGrid.getBoundingClientRect();
+        const cardRect = card.getBoundingClientRect();
+        if (cardRect.left < parentRect.left) {
+          innerGrid.scrollBy({
+            left: cardRect.left - parentRect.left - 12,
+            behavior: isReducedMotion() ? 'auto' : 'smooth',
+          });
+        } else if (cardRect.right > parentRect.right) {
+          innerGrid.scrollBy({
+            left: cardRect.right - parentRect.right + 12,
+            behavior: isReducedMotion() ? 'auto' : 'smooth',
+          });
+        }
+      });
+    });
+
+    let activeCard = null;
+    let isVisible = false;
+
+    const getCardBounds = (card) => {
+      const parentRect = innerGrid.getBoundingClientRect();
+      const cardRect = card.getBoundingClientRect();
+      return {
+        x: cardRect.left - parentRect.left + innerGrid.scrollLeft,
+        y: cardRect.top - parentRect.top + innerGrid.scrollTop,
+        width: cardRect.width,
+        height: cardRect.height,
+      };
+    };
+
+    const activateCard = (card, animate = true) => {
+      if (!card) return;
+      activeCard = card;
+      const { x, y, width, height } = getCardBounds(card);
+      const reduced = isReducedMotion();
+      const gsap = window.gsap;
+
+      if (gsap && !reduced && animate) {
+        if (!isVisible) {
+          gsap.set(highlight, { x, y, width, height, opacity: 0 });
+          gsap.to(highlight, {
+            opacity: 1,
+            duration: 0.22,
+            ease: 'power2.out',
+            overwrite: 'auto',
+          });
+          isVisible = true;
+        } else {
+          gsap.to(highlight, {
+            x,
+            y,
+            width,
+            height,
+            opacity: 1,
+            duration: SPRING_CONFIG.duration,
+            ease: SPRING_CONFIG.ease,
+            overwrite: 'auto',
+          });
+        }
       } else {
-        raf = requestAnimationFrame(frame);
+        highlight.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+        highlight.style.width = `${width}px`;
+        highlight.style.height = `${height}px`;
+        highlight.style.opacity = '1';
+        isVisible = true;
       }
     };
 
-    const wake = () => {
-      if (!raf) raf = requestAnimationFrame(frame);
-    };
+    const deactivateHighlight = (animate = true) => {
+      activeCard = null;
+      isVisible = false;
+      const gsap = window.gsap;
+      const reduced = isReducedMotion();
 
-    const onMove = event => {
-      const box = root.getBoundingClientRect();
-      state.tx = event.clientX - box.left;
-      state.ty = event.clientY - box.top;
-
-      if (!state.primed || state.power < 0.02) {
-        state.x = state.tx;
-        state.y = state.ty;
-        state.primed = true;
+      if (gsap && !reduced && animate) {
+        gsap.to(highlight, {
+          opacity: 0,
+          duration: 0.25,
+          ease: 'power2.out',
+          overwrite: 'auto',
+        });
+      } else {
+        highlight.style.opacity = '0';
       }
-      state.target = 1;
-      wake();
     };
 
-    const onLeave = () => {
-      state.target = 0;
-      wake();
-    };
+    cards.forEach((card) => {
+      card.addEventListener('pointerenter', () => activateCard(card, true));
+      card.addEventListener('focusin', () => activateCard(card, true));
+    });
 
-    // Touch device support: when a card is touched, update coordinates immediately
-    const onTouch = event => {
-      if (!event.touches || event.touches.length === 0) return;
-      const touch = event.touches[0];
-      const box = root.getBoundingClientRect();
-      state.tx = touch.clientX - box.left;
-      state.ty = touch.clientY - box.top;
-      state.x = state.tx;
-      state.y = state.ty;
-      state.target = 1;
-      wake();
-    };
+    innerGrid.addEventListener('pointerleave', () => deactivateHighlight(true));
+    innerGrid.addEventListener('focusout', (e) => {
+      if (!innerGrid.contains(e.relatedTarget)) {
+        deactivateHighlight(true);
+      }
+    });
 
-    root.addEventListener('pointermove', onMove, { passive: true });
-    root.addEventListener('pointerdown', onMove, { passive: true });
-    root.addEventListener('pointerleave', onLeave, { passive: true });
-    root.addEventListener('pointercancel', onLeave, { passive: true });
-    root.addEventListener('touchstart', onTouch, { passive: true });
-    root.addEventListener('touchmove', onTouch, { passive: true });
-    root.addEventListener('touchend', onLeave, { passive: true });
+    // Handle resize and reflow
+    const handleReflow = () => {
+      updateNavButtons();
+      if (activeCard) {
+        const { x, y, width, height } = getCardBounds(activeCard);
+        if (window.gsap) {
+          window.gsap.set(highlight, { x, y, width, height });
+        } else {
+          highlight.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+          highlight.style.width = `${width}px`;
+          highlight.style.height = `${height}px`;
+        }
+      }
+    };
 
     if (window.ResizeObserver) {
-      const ro = new ResizeObserver(() => place());
-      ro.observe(root);
+      const ro = new ResizeObserver(handleReflow);
+      ro.observe(innerGrid);
+      cards.forEach((c) => ro.observe(c));
     }
-    window.addEventListener('resize', place, { passive: true });
-    window.addEventListener('scroll', place, { passive: true });
+    window.addEventListener('resize', handleReflow, { passive: true });
 
-    place();
+    // Initial button state check
+    updateNavButtons();
+    setTimeout(updateNavButtons, 100);
   }
 
   function init() {
     const grids = document.querySelectorAll('.applications-chroma-grid');
-    grids.forEach(initChromaGrid);
+    grids.forEach(initCarousel);
   }
 
   if (document.readyState === 'loading') {
