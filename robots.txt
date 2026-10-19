@@ -1,0 +1,7 @@
+# Bilva Tech — Robots Directives
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /404.html
+
+Sitemap: https://bilvatech.com/sitemap.xml

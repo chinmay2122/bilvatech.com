@@ -56,6 +56,30 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  function serve404(res, reqPath) {
+    const ext = path.extname(reqPath).toLowerCase();
+    const isStaticAsset = ext && ext !== ".html";
+    if (isStaticAsset) {
+      res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
+      res.end(`404 Not Found: ${reqPath}`);
+      return;
+    }
+
+    const notFoundPath = path.join(ROOT, "404.html");
+    fs.readFile(notFoundPath, (err, data) => {
+      if (!err && data) {
+        res.writeHead(404, {
+          "Content-Type": "text/html; charset=utf-8",
+          "Cache-Control": "no-store, no-cache, must-revalidate",
+        });
+        res.end(data);
+      } else {
+        res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
+        res.end(`404 Not Found: ${reqPath}`);
+      }
+    });
+  }
+
   // Helper to serve a file path
   function serveFile(filePath) {
     fs.stat(filePath, (err, stats) => {
@@ -75,15 +99,13 @@ const server = http.createServer((req, res) => {
                 serveExistingFile(indexPath);
                 return;
               }
-              res.writeHead(404, { "Content-Type": "text/html; charset=utf-8" });
-              res.end(`<h1>404 Not Found</h1><p>The path <code>${pathname}</code> was not found.</p>`);
+              serve404(res, pathname);
             });
           });
           return;
         }
 
-        res.writeHead(404, { "Content-Type": "text/html; charset=utf-8" });
-        res.end(`<h1>404 Not Found</h1><p>The path <code>${pathname}</code> was not found.</p>`);
+        serve404(res, pathname);
         return;
       }
 
@@ -93,8 +115,7 @@ const server = http.createServer((req, res) => {
           if (!indexErr && indexStats.isFile()) {
             serveExistingFile(indexPath);
           } else {
-            res.writeHead(404, { "Content-Type": "text/plain" });
-            res.end("Not Found");
+            serve404(res, pathname);
           }
         });
         return;

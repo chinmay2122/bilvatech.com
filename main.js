@@ -103,13 +103,15 @@ if (counters.length && "IntersectionObserver" in window) {
   counters.forEach(animateCounter);
 }
 
-const contactForm = document.querySelector("#contact-form");
+const contactForm = document.querySelector("#contact-form[data-static-mock]");
 
 if (contactForm) {
   contactForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const status = contactForm.querySelector(".form-status");
-    status.textContent = "Your request is prepared. Form delivery can be connected to Bilva Tech’s preferred inbox before launch.";
+    if (status) {
+      status.textContent = "Your request is prepared. Form delivery can be connected to Bilva Tech’s preferred inbox before launch.";
+    }
   });
 }
 
