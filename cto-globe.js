@@ -69,7 +69,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
   // --- 3. Subtle Ethereal Atmosphere Aura ---
   const haloGeo = new THREE.RingGeometry(GLOBE_RADIUS + 0.02, GLOBE_RADIUS + 0.8, 64);
   const haloMat = new THREE.MeshBasicMaterial({
-    color: 0xc38b92,
+    color: 0xf2f0ed,
     transparent: true,
     opacity: 0.12,
     side: THREE.DoubleSide,
@@ -202,7 +202,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
     // Outer accent ring
     const ringMat = new THREE.MeshBasicMaterial({
-      color: 0xc38b92,
+      color: 0xf2f0ed,
       side: THREE.DoubleSide,
       transparent: true,
       opacity: 0.65
@@ -225,12 +225,12 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
     const lineGeo = new THREE.BufferGeometry().setFromPoints(points);
     const lineMat = new THREE.LineBasicMaterial({
-      color: 0x80566d,
+      color: 0xbcb6b0,
       transparent: true,
       opacity: 0.55
     });
     const line = new THREE.Line(lineGeo, lineMat);
-    line.userData = { id: index, origColor: 0x80566d, origOpacity: 0.55 };
+    line.userData = { id: index, origColor: 0xbcb6b0, origOpacity: 0.55 };
     networkGroup.add(line);
     connectionLines.push(line);
 
@@ -273,7 +273,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
         m.scale.set(1.4, 1.4, 1.4);
       });
       connectionLines.forEach(l => {
-        l.material.color.setHex(0xc38b92);
+        l.material.color.setHex(0xf2f0ed);
         l.material.opacity = 0.85;
       });
       activeParticles.forEach(p => p.speed = p.baseSpeed);
@@ -285,7 +285,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
         m.scale.set(1.2, 1.2, 1.2);
       });
       connectionLines.forEach(l => {
-        l.material.color.setHex(0xc38b92);
+        l.material.color.setHex(0xf2f0ed);
         l.material.opacity = 0.9;
       });
       activeParticles.forEach(p => p.speed = p.baseSpeed * 2.2);
@@ -293,12 +293,12 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
       // 03 MISSION-CRITICAL FOCUS: Stability, controlled connections & core activity
       controls.autoRotateSpeed = 0.35;
       nodeMeshes.forEach((m, i) => {
-        m.material.color.setHex(i % 2 === 0 ? 0xffffff : 0x80566d);
+        m.material.color.setHex(i % 2 === 0 ? 0xffffff : 0xbcb6b0);
         m.scale.set(1.25, 1.25, 1.25);
       });
       connectionLines.forEach((l, i) => {
         if (i % 2 === 0) {
-          l.material.color.setHex(0xc38b92);
+          l.material.color.setHex(0xf2f0ed);
           l.material.opacity = 0.95;
         } else {
           l.material.color.setHex(0x30242e);
@@ -311,7 +311,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
       controls.autoRotateSpeed = 0.55;
       nodeMeshes.forEach((m, i) => {
         if (i === 6 || i === 7 || i === 0) {
-          m.material.color.setHex(0xc38b92);
+          m.material.color.setHex(0xf2f0ed);
           m.scale.set(1.4, 1.4, 1.4);
         } else {
           m.material.color.setHex(0x666666);
@@ -320,7 +320,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
       });
       connectionLines.forEach((l, i) => {
         if (i === 0 || i === 1 || i === 12 || i === 13) {
-          l.material.color.setHex(0xc38b92);
+          l.material.color.setHex(0xf2f0ed);
           l.material.opacity = 0.95;
         } else {
           l.material.color.setHex(0x30242e);

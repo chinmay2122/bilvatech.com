@@ -36,7 +36,7 @@
 .directory-arrow { color:#e8e2dc; }
 .inner-split { display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(30px,7vw,100px); align-items:start; }
 .inner-split > *, .service-intro > * { min-width:0; }
-.bilva-inner .inner-callout { border-left:2px solid #bcb6b0; padding:0 0 0 20px; margin-top:28px; color:#d6c6d2; }
+.bilva-inner .inner-callout { border-left:2px solid #bcb6b0; padding:0 0 0 20px; margin-top:28px; color:#F2F0ED; }
 .inner-list { list-style:none; padding:0; margin:0; }
 .inner-list li { padding:15px 0; color:#b5aab8; border-bottom:1px solid var(--line); font-size:14px; line-height:1.6; }
 .inner-list li:first-child { border-top:1px solid var(--line); }
@@ -49,8 +49,8 @@
 .architecture-level { display:flex; gap:7px; }
 .architecture-level span { flex:1; min-width:0; display:grid; place-items:center; text-align:center; padding:18px 6px; border:1px solid #332d36; font-size:11px; line-height:1.5; color:#bfb1c4; }
 .architecture-connectors { display:flex; justify-content:space-around; height:28px; }
-.architecture-connectors i { width:1px; background:#78596c; }
-.architecture-core { padding:20px 12px; text-align:center; border:1px solid #bcb6b0; color:#dfcbd8; background:linear-gradient(130deg,#34232f,#1b141e); font:500 15px/1.5 var(--font-main); }
+.architecture-connectors i { width:1px; background:#F2F0ED; }
+.architecture-core { padding:20px 12px; text-align:center; border:1px solid #bcb6b0; color:#F2F0ED; background:linear-gradient(130deg,#34232f,#1b141e); font:500 15px/1.5 var(--font-main); }
 .architecture-base { margin-top:12px; }
 .architecture-base span { padding:12px 5px; font-size:10px; }
 .bilva-inner .diagram-caption { font-size:10px; color:#9e91a3; margin:22px 0 0; text-align:center; }
@@ -65,14 +65,14 @@
 .capability-list,.application-list { margin:0; }
 .capability-list > div { display:grid; grid-template-columns:1fr 1.3fr; gap:40px; border-top:1px solid var(--line); padding:24px 0; }
 .capability-list dt { display:flex; gap:22px; font:500 18px/1.5 var(--font-main); color:#ddd5e0; }
-.capability-list dt span { color:#a5899d; font:11px/2.5 var(--font-secondary); }
+.capability-list dt span { color:#F2F0ED; font:11px/2.5 var(--font-secondary); }
 .capability-list dd,.application-list dd { margin:0; color:#aaa7ab; font-size:13px; line-height:1.8; }
 .application-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:48px; }
 .application-list > div { padding:20px 0; border-top:1px solid var(--line); }
 .application-list dt { font:500 17px var(--font-main); margin-bottom:8px; }
 .delivery-list { list-style:none; margin:30px 0 0; padding:0; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:50px; }
 .delivery-list li { display:flex; gap:20px; padding:24px 0; border-top:1px solid var(--line); }
-.delivery-list li > span { color:#b492a8; font-size:11px; padding-top:4px; }
+.delivery-list li > span { color:#F2F0ED; font-size:11px; padding-top:4px; }
 .delivery-list h3 { font-size:18px; }
 .delivery-list p { margin:0; font-size:13px; }
 .inner-cta { display:flex; justify-content:space-between; align-items:center; gap:36px; }
@@ -93,8 +93,8 @@
 .contact-orbit { position:absolute; z-index:-1; width:140%; height:1000px; left:-20%; bottom:125px; border-radius:0 0 50% 50%; border-bottom:1px solid #66577555; background:linear-gradient(180deg,transparent 75%,#050507); box-shadow:0 40px 75px #47364f12; pointer-events:none; }
 .contact-center { position:relative; width:min(100%,620px); margin:auto; padding:65px 24px 110px; text-align:center; }
 .contact-tag { display:inline-flex; align-items:center; gap:8px; padding:7px 10px; border:1px solid #42364a; border-radius:999px; background:#1b1420; }
-.bilva-inner .contact-tag { font-size:9px; line-height:1.4; letter-spacing:.12em; color:#baa9ca; margin:0 0 22px; }
-.contact-tag span { width:5px; height:5px; border-radius:50%; background:#b19bbf; }
+.bilva-inner .contact-tag { font-size:9px; line-height:1.4; letter-spacing:.12em; color:#F2F0ED; margin:0 0 22px; }
+.contact-tag span { width:5px; height:5px; border-radius:50%; background:#F2F0ED; }
 .bilva-inner .contact-center h1 { font-size:clamp(32px,3.8vw,46px); font-weight:400; margin-bottom:14px; }
 .bilva-inner .contact-lead { font-size:13px; line-height:1.7; margin-bottom:38px; }
 .contact-reference-form { text-align:left; display:grid; gap:18px; }
@@ -109,18 +109,18 @@
 .contact-submit { display:flex; align-items:center; justify-content:center; gap:16px; min-height:46px; border:1px solid #49404f; border-radius:5px; color:#e4dce9; background:linear-gradient(180deg,#27222d,#1b171f); font:13px var(--font-secondary); cursor:pointer; }
 .contact-submit:hover { background:#302837; border-color:#897394; }
 .bilva-inner .contact-form-note { font-size:10px; line-height:1.7; text-align:center; color:#918795; margin:0; }
-.bilva-inner .form-status { font-size:12px; color:#c9adc3; text-align:center; margin:0; }
+.bilva-inner .form-status { font-size:12px; color:#F2F0ED; text-align:center; margin:0; }
 .contact-bottom-link { display:inline-block; border-top:1px solid #ffffff0c; margin-top:22px; padding:18px 36px; color:#a497ae; font-size:11px; text-decoration:none; }
 /* Shared footer follows the homepage's dark frame, without homepage selectors. */
 .bilva-inner .site-footer { width:min(1440px,calc(100% - clamp(32px,8vw,128px))); margin:0 auto 28px; border:1px solid var(--line); border-radius:0; background:var(--surface-panel); padding:clamp(28px,4vw,56px); gap:44px; color:var(--ink-secondary); }
 .bilva-inner .site-footer a { color:#c9c3cb; }
-.bilva-inner .site-footer a:hover { color:#d9acba; }
+.bilva-inner .site-footer a:hover { color:#F2F0ED; }
 .bilva-inner .footer-bottom { border-top:1px solid #ffffff10; padding-top:30px; }
 .bilva-inner .footer-top,.bilva-inner .footer-bottom { gap:32px; }
 .bilva-inner .footer-signup { min-width:0; }
 .bilva-inner .footer-signup label { font-size:20px; font-weight:400; color:#d9d3dc; }
 .bilva-inner .footer-signup > div,.bilva-inner .back-to-top { border-radius:5px; }
-.bilva-inner .footer-signup button { border-radius:4px; background:#30272e; color:#dfcbd8; }
+.bilva-inner .footer-signup button { border-radius:4px; background:#30272e; color:#F2F0ED; }
 .bilva-inner .footer-nav-group span,.bilva-inner .footer-legal span { color:#999099; }
 @media(max-width:1050px) {
  .service-intro { grid-template-columns:1fr; } .architecture-outline { max-width:650px; width:100%; }

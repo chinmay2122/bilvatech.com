@@ -470,19 +470,19 @@
 .bilva-home :is(.bento-card,.protect-card,.testimonial-card,.factual-card,.faq-item):hover,
 .bilva-home .faq-item.active { background: var(--surface-hover); border-color: var(--line-hover); box-shadow: none; transform: none; }
 .bilva-home .testimonial-card::before,.bilva-home .testimonial-card::after { display: none; }
-.bilva-home :is(.home-text-link,.bento-explore,.faq-inline-link) { color: #d4c9cd; }
+.bilva-home :is(.home-text-link,.bento-explore,.faq-inline-link) { color: #F2F0ED; }
 .bilva-home .bento-card { --bento-color: #e8e2dc; }
 .bilva-home :is(.bento-partitions span,.bento-foundation,.bento-network span,.bento-roadmap span,.qr-service-aside) { border-color: #3c343c; }
 .bilva-home .bento-foundation { background: #181418; }
 .bilva-home .bento-network i { background: #4d424e; }
-.bilva-home .bento-shield svg { stroke: #a594aa; }
-.bilva-home .bento-roadmap b { color: #a594aa; }
-.bilva-home .qr-service-aside { color: #b4a2a9; }
+.bilva-home .bento-shield svg { stroke: #F2F0ED; }
+.bilva-home .bento-roadmap b { color: #F2F0ED; }
+.bilva-home .qr-service-aside { color: #F2F0ED; }
 .bilva-home > section .cta-primary-btn { background: #ded9da; color: #141315; box-shadow: none; border: 1px solid #ded9da; }
 .bilva-home > section .cta-primary-btn:hover { background: #f1edef; color: #141315; box-shadow: none; border-color: #f1edef; }
 .bilva-home .view-toggle-btn.is-active { background: #252125; border-color: #494047; box-shadow: none; }
-.bilva-home .card-avatar-box { background: #1d191c; color: #baa5ad; }
-.bilva-home .faq-item.active .faq-icon-wrapper { background: #30272e; color: #e8dce3; box-shadow: none; }
+.bilva-home .card-avatar-box { background: #1d191c; color: #F2F0ED; }
+.bilva-home .faq-item.active .faq-icon-wrapper { background: #30272e; color: #F2F0ED; box-shadow: none; }
 .bilva-home .site-footer { background: var(--surface-page); border-color: var(--line); }
 
 /* --- WHY BILVA TECH: Simple Content Style (Non-boxed) --- */
@@ -613,13 +613,13 @@
 }
 .bilva-home .cta-utility-link {
   display: block;
-  color: #b5a5b2;
+  color: #bcb6b0;
   font-size: 11px;
   margin-top: 20px;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 .bilva-home .cta-utility-link:hover {
-  color: #f0e6ef;
+  color: #F2F0ED;
   text-decoration: underline;
 }
