@@ -1,20 +1,14 @@
 /**
- * Applications Section — Horizontal Card Carousel & AnimatedBackground Integration
+ * Applications Section — Horizontal Card Carousel Controller
  *
- * Scoped strictly to .applications-chroma-grid.
+ * Scoped strictly to .applications-chroma-grid and .applications-layout-container.
  * Implements:
  * 1. Functional horizontal slider with accessible Next/Prev controls and touch support.
- * 2. CSS scroll snapping with controlled step advancement.
- * 3. Directional boundary detection (disabling / hiding arrows at ends).
+ * 2. Responsive step advancement (1 card + gap).
+ * 3. Directional boundary detection (disabling arrows at start/end).
  * 4. Keyboard arrow navigation and focus alignment.
- * 5. Smooth shared hover highlight via GSAP.
  */
 (() => {
-  const SPRING_CONFIG = {
-    duration: 0.5,
-    ease: 'cubic-bezier(0.2, 0.9, 0.3, 1)',
-  };
-
   const isReducedMotion = () =>
     window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -25,61 +19,35 @@
     const innerGrid = gridRoot.querySelector('.applications-chroma-inner');
     if (!innerGrid) return;
 
-    // Accessibility attributes on the scroll region
     if (!innerGrid.getAttribute('role')) {
       innerGrid.setAttribute('role', 'region');
-      innerGrid.setAttribute('aria-label', 'Applications horizontal carousel');
+      innerGrid.setAttribute('aria-label', 'Applications carousel');
       innerGrid.setAttribute('tabindex', '0');
     }
 
-    // Ensure Navigation Buttons exist
-    let prevBtn = gridRoot.querySelector('.applications-nav-prev');
-    if (!prevBtn) {
-      prevBtn = document.createElement('button');
-      prevBtn.className = 'applications-nav-btn applications-nav-prev';
-      prevBtn.type = 'button';
-      prevBtn.setAttribute('aria-label', 'Previous applications');
-      prevBtn.disabled = true;
-      prevBtn.innerHTML = `
-        <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="15 18 9 12 15 6"></polyline>
-        </svg>
-      `;
-      gridRoot.insertBefore(prevBtn, innerGrid);
-    }
+    // Locate navigation controls within container or gridRoot
+    const container = gridRoot.closest('.applications-layout-container') || gridRoot.parentElement;
+    const prevBtn = container.querySelector('.applications-nav-prev');
+    const nextBtn = container.querySelector('.applications-nav-next');
 
-    let nextBtn = gridRoot.querySelector('.applications-nav-next');
-    if (!nextBtn) {
-      nextBtn = document.createElement('button');
-      nextBtn.className = 'applications-nav-btn applications-nav-next';
-      nextBtn.type = 'button';
-      nextBtn.setAttribute('aria-label', 'Next applications');
-      nextBtn.innerHTML = `
-        <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"></polyline>
-        </svg>
-      `;
-      gridRoot.appendChild(nextBtn);
-    }
-
-    // Helper: calculate scroll step based on card dimensions + gap
+    // Calculate step width based on card width + gap
     const getScrollStep = () => {
       const card = innerGrid.querySelector('.applications-chroma-card');
-      const gap = 18;
       if (card) {
+        const style = window.getComputedStyle(innerGrid);
+        const gap = parseFloat(style.columnGap || style.gap) || 24;
         return card.getBoundingClientRect().width + gap;
       }
       return 320;
     };
 
-    // Update disabled and visibility states on navigation buttons
+    // Update disabled state on navigation controls
     const updateNavButtons = () => {
       const maxScroll = Math.max(0, innerGrid.scrollWidth - innerGrid.clientWidth);
       const currentScroll = innerGrid.scrollLeft;
 
-      // Generous threshold to tolerate subpixel rounding
-      const isAtStart = currentScroll <= 8;
-      const isAtEnd = currentScroll >= maxScroll - 8;
+      const isAtStart = currentScroll <= 4;
+      const isAtEnd = currentScroll >= maxScroll - 4;
 
       if (prevBtn) {
         prevBtn.disabled = isAtStart;
@@ -94,7 +62,7 @@
       }
     };
 
-    // Smooth navigation interaction guarded against rapid repeated clicks
+    // Smooth navigation interaction
     let isNavigating = false;
     const scrollCarousel = (direction) => {
       if (isNavigating) return;
@@ -116,24 +84,27 @@
         behavior: isReducedMotion() ? 'auto' : 'smooth',
       });
 
-      // Release lock after smooth scroll settle
       setTimeout(() => {
         isNavigating = false;
         updateNavButtons();
       }, 340);
     };
 
-    prevBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      scrollCarousel(-1);
-    });
+    if (prevBtn) {
+      prevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        scrollCarousel(-1);
+      });
+    }
 
-    nextBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      scrollCarousel(1);
-    });
+    if (nextBtn) {
+      nextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        scrollCarousel(1);
+      });
+    }
 
-    // Listen to scroll events to update arrows immediately
+    // Scroll listener with requestAnimationFrame
     let scrollRafId = null;
     innerGrid.addEventListener(
       'scroll',
@@ -144,7 +115,7 @@
       { passive: true }
     );
 
-    // Keyboard navigation: Left/Right arrows on innerGrid
+    // Keyboard navigation: Left/Right arrow keys
     innerGrid.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowRight') {
         e.preventDefault();
@@ -155,32 +126,9 @@
       }
     });
 
-    // Setup AnimatedBackground highlight
-    let highlight = innerGrid.querySelector('.animated-background-highlight');
-    if (!highlight) {
-      highlight = document.createElement('div');
-      highlight.className = 'animated-background-highlight';
-      highlight.setAttribute('aria-hidden', 'true');
-      innerGrid.insertBefore(highlight, innerGrid.firstChild);
-    }
-
-    highlight.style.borderRadius = '0';
-    highlight.style.pointerEvents = 'none';
-    highlight.style.position = 'absolute';
-    highlight.style.top = '0';
-    highlight.style.left = '0';
-    highlight.style.zIndex = '1';
-    highlight.style.opacity = '0';
-
+    // Keep focused card fully visible within scroll window
     const cards = Array.from(innerGrid.querySelectorAll('.applications-chroma-card'));
-
-    cards.forEach((card, idx) => {
-      if (!card.getAttribute('data-id')) {
-        card.setAttribute('data-id', `card-${idx}`);
-      }
-      card.style.borderRadius = '0';
-
-      // Keep focused card fully visible
+    cards.forEach((card) => {
       card.addEventListener('focusin', () => {
         const parentRect = innerGrid.getBoundingClientRect();
         const cardRect = card.getBoundingClientRect();
@@ -198,111 +146,15 @@
       });
     });
 
-    let activeCard = null;
-    let isVisible = false;
-
-    const getCardBounds = (card) => {
-      const parentRect = innerGrid.getBoundingClientRect();
-      const cardRect = card.getBoundingClientRect();
-      return {
-        x: cardRect.left - parentRect.left + innerGrid.scrollLeft,
-        y: cardRect.top - parentRect.top + innerGrid.scrollTop,
-        width: cardRect.width,
-        height: cardRect.height,
-      };
-    };
-
-    const activateCard = (card, animate = true) => {
-      if (!card) return;
-      activeCard = card;
-      const { x, y, width, height } = getCardBounds(card);
-      const reduced = isReducedMotion();
-      const gsap = window.gsap;
-
-      if (gsap && !reduced && animate) {
-        if (!isVisible) {
-          gsap.set(highlight, { x, y, width, height, opacity: 0 });
-          gsap.to(highlight, {
-            opacity: 1,
-            duration: 0.22,
-            ease: 'power2.out',
-            overwrite: 'auto',
-          });
-          isVisible = true;
-        } else {
-          gsap.to(highlight, {
-            x,
-            y,
-            width,
-            height,
-            opacity: 1,
-            duration: SPRING_CONFIG.duration,
-            ease: SPRING_CONFIG.ease,
-            overwrite: 'auto',
-          });
-        }
-      } else {
-        highlight.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-        highlight.style.width = `${width}px`;
-        highlight.style.height = `${height}px`;
-        highlight.style.opacity = '1';
-        isVisible = true;
-      }
-    };
-
-    const deactivateHighlight = (animate = true) => {
-      activeCard = null;
-      isVisible = false;
-      const gsap = window.gsap;
-      const reduced = isReducedMotion();
-
-      if (gsap && !reduced && animate) {
-        gsap.to(highlight, {
-          opacity: 0,
-          duration: 0.25,
-          ease: 'power2.out',
-          overwrite: 'auto',
-        });
-      } else {
-        highlight.style.opacity = '0';
-      }
-    };
-
-    cards.forEach((card) => {
-      card.addEventListener('pointerenter', () => activateCard(card, true));
-      card.addEventListener('focusin', () => activateCard(card, true));
-    });
-
-    innerGrid.addEventListener('pointerleave', () => deactivateHighlight(true));
-    innerGrid.addEventListener('focusout', (e) => {
-      if (!innerGrid.contains(e.relatedTarget)) {
-        deactivateHighlight(true);
-      }
-    });
-
-    // Handle resize and reflow
-    const handleReflow = () => {
-      updateNavButtons();
-      if (activeCard) {
-        const { x, y, width, height } = getCardBounds(activeCard);
-        if (window.gsap) {
-          window.gsap.set(highlight, { x, y, width, height });
-        } else {
-          highlight.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-          highlight.style.width = `${width}px`;
-          highlight.style.height = `${height}px`;
-        }
-      }
-    };
-
+    // Resize handling
     if (window.ResizeObserver) {
-      const ro = new ResizeObserver(handleReflow);
+      const ro = new ResizeObserver(updateNavButtons);
       ro.observe(innerGrid);
       cards.forEach((c) => ro.observe(c));
     }
-    window.addEventListener('resize', handleReflow, { passive: true });
+    window.addEventListener('resize', updateNavButtons, { passive: true });
 
-    // Initial button state check
+    // Initial check
     updateNavButtons();
     setTimeout(updateNavButtons, 100);
   }

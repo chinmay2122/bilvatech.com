@@ -1,151 +1,127 @@
 /* ==========================================================================
-   Applications Section — Horizontal Card Carousel & Header Styles
-   Scoped specifically to .applications-section-heading and .applications-chroma-*
-   Strict sharp-corner enterprise aesthetic (border-radius: 0 !important)
+   Applications / Use Cases Section — Minimal Structured Card Carousel
+   Strictly scoped to .applications-section-body and .applications-chroma-*
+   Reference visual layout: Minimal tall charcoal cards, thin borders,
+   two-column header layout, and understated square styling.
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   1. Section Header — Compact 3-Column / Horizontal Composition
+   1. Section Layout & Two-Column Header
    -------------------------------------------------------------------------- */
-.applications-section-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: clamp(24px, 4vw, 48px);
-  margin-bottom: 24px;
+.applications-layout-container {
+  display: grid;
+  grid-template-columns: clamp(160px, 18vw, 240px) minmax(0, 1fr);
+  column-gap: clamp(28px, 4vw, 56px);
+  row-gap: 24px;
+  align-items: start;
   width: 100%;
+  box-sizing: border-box;
 }
 
-.applications-header-left {
+/* Left Column: Label + Unobtrusive Navigation */
+.applications-sidebar-col {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  justify-content: flex-start;
   min-width: 0;
+  box-sizing: border-box;
 }
 
-.applications-header-label {
+.applications-col-label {
+  font-family: var(--font-secondary, 'Space Grotesk', monospace);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8c8b91;
+  user-select: none;
+  margin-top: 4px;
+}
+
+/* Navigation Controls in Sidebar (Unobtrusive, never obscuring cards) */
+.applications-nav-controls {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-family: var(--font-secondary, 'Space Grotesk', monospace);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: #9e9ba5;
-  user-select: none;
+  gap: 10px;
+  margin-top: 36px;
 }
 
-.applications-label-dot {
-  width: 6px;
-  height: 6px;
-  background: #55d8ff;
-  display: inline-block;
-  border-radius: 0 !important;
-  flex-shrink: 0;
-}
-
-.applications-header-title {
-  margin: 0;
-  font-family: var(--font-main, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif);
-  font-size: clamp(28px, 3.2vw, 40px);
-  font-weight: 500;
-  line-height: 1.15;
-  letter-spacing: -0.035em;
-  color: #e9e7e8;
-}
-
-.applications-header-desc {
-  margin: 0;
-  max-width: 380px;
-  font-family: var(--font-main, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif);
-  font-size: 13.5px;
-  line-height: 1.65;
-  color: #9e9ba5;
-  text-align: right;
-  flex-shrink: 0;
-}
-
-/* --------------------------------------------------------------------------
-   2. Carousel Container & Navigation Controls
-   -------------------------------------------------------------------------- */
-.applications-chroma-grid {
-  position: relative;
-  width: 100%;
-  margin-top: 16px;
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* Navigation Arrow Buttons — Sharp square enterprise controls */
 .applications-nav-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  width: 44px;
-  height: 44px;
+  width: 38px;
+  height: 38px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: #141318;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 0 !important; /* Mandatory: Sharp square corners */
-  color: #f4f3f6;
+  background: #161619;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 0 !important;
+  color: #c4c3c8;
   cursor: pointer;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
-  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease, opacity 0.25s ease, transform 0.2s ease;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
   padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .applications-nav-btn svg {
   display: block;
-  width: 20px;
-  height: 20px;
-  stroke-width: 2.25;
+  width: 18px;
+  height: 18px;
   pointer-events: none;
 }
 
 .applications-nav-btn:hover:not(:disabled) {
-  background: #1d1b24;
-  border-color: #55d8ff;
-  color: #55d8ff;
+  background: #1f1f24;
+  border-color: rgba(255, 255, 255, 0.32);
+  color: #ffffff;
 }
 
 .applications-nav-btn:focus-visible {
-  outline: 2px solid #55d8ff;
-  outline-offset: 3px;
+  outline: 2px solid #249175;
+  outline-offset: 2px;
 }
 
-/* Placed on left and right edges */
-.applications-nav-prev {
-  left: -12px;
-}
-
-.applications-nav-next {
-  right: -12px;
-}
-
-/* Disabled state when at ends of carousel */
 .applications-nav-btn:disabled,
 .applications-nav-btn.is-disabled {
-  opacity: 0;
-  pointer-events: none;
+  opacity: 0.22;
   cursor: default;
-  transform: translateY(-50%) scale(0.92);
+  pointer-events: none;
+}
+
+/* Right Column: Title + Horizontal Slider */
+.applications-main-col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.applications-section-title {
+  margin: 0 0 clamp(36px, 4.5vw, 56px) 0;
+  font-family: var(--font-main, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif);
+  font-size: clamp(28px, 3.2vw, 42px);
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: -0.03em;
+  color: #f4f3f6;
 }
 
 /* --------------------------------------------------------------------------
-   3. Horizontal Scroll Track
+   2. Horizontal Card Slider Track
    -------------------------------------------------------------------------- */
-.applications-chroma-inner {
+.applications-chroma-grid {
   position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.applications-chroma-inner {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  gap: 18px;
+  gap: 24px;
   width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
@@ -154,9 +130,8 @@
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE & Edge */
+  padding: 2px 2px 16px 2px;
   box-sizing: border-box;
-  padding: 4px 6px 14px 4px;
-  counter-reset: app-card;
 }
 
 .applications-chroma-inner::-webkit-scrollbar {
@@ -164,364 +139,266 @@
 }
 
 /* --------------------------------------------------------------------------
-   4. Single Shared Animated Hover Highlight
-   -------------------------------------------------------------------------- */
-.animated-background-highlight {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: #1c1b22;
-  border: 1px solid rgba(255, 255, 255, 0.11);
-  border-radius: 0 !important; /* Mandatory: Sharp square corners */
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0;
-  box-sizing: border-box;
-  will-change: transform, width, height, opacity;
-}
-
-/* --------------------------------------------------------------------------
-   5. Individual Rectangular Cards
+   3. Tall Portrait Card Structure
    -------------------------------------------------------------------------- */
 .applications-chroma-card {
   position: relative;
-  flex: 0 0 clamp(280px, calc((100% - 3 * 18px) / 3.35), 340px);
-  min-width: 280px;
-  max-width: 340px;
-  min-height: 285px;
+  flex: 0 0 clamp(260px, 22vw, 298px);
+  min-width: 260px;
+  max-width: 298px;
+  height: 462px;
+  min-height: 462px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 26px 24px 22px;
+  padding: 30px 26px 24px 26px;
   box-sizing: border-box;
-  border-radius: 0 !important; /* Mandatory: Sharp square corners */
-  background: #100f14;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.6);
+  background: #1f1f22;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0 !important;
   color: #f4f3f6;
   text-decoration: none;
-  overflow: hidden;
-  cursor: default;
   scroll-snap-align: start;
   scroll-snap-stop: normal;
-  transition: border-color 0.25s ease, background 0.25s ease;
+  cursor: default;
   user-select: none;
-}
-
-/* Automatic Card Numbering (01, 02, etc.) in top right */
-.applications-chroma-card::before {
-  counter-increment: app-card;
-  content: "0" counter(app-card);
-  position: absolute;
-  top: 24px;
-  right: 22px;
-  font-family: var(--font-secondary, 'Space Grotesk', monospace);
-  font-size: 11px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.26);
-  letter-spacing: 0.12em;
-  pointer-events: none;
-  z-index: 2;
-  transition: color 0.25s ease;
-}
-
-/* Subtle Accent Line at Bottom */
-.applications-chroma-card::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--chroma-accent, #55d8ff);
-  opacity: 0.2;
-  transition: opacity 0.25s ease, height 0.25s ease;
-  pointer-events: none;
-  z-index: 2;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
 }
 
 .applications-chroma-card:hover {
-  border-color: rgba(255, 255, 255, 0.16);
-}
-
-.applications-chroma-card:hover::before {
-  color: rgba(255, 255, 255, 0.55);
-}
-
-.applications-chroma-card:hover::after {
-  opacity: 1;
-  height: 2.5px;
+  border-color: rgba(255, 255, 255, 0.24);
 }
 
 .applications-chroma-card:focus-visible {
-  outline: 2px solid #55d8ff;
+  outline: 2px solid #249175;
   outline-offset: 3px;
-  border-radius: 0 !important;
 }
 
-/* Icon Container */
-.applications-chroma-icon-wrap {
-  position: relative;
-  z-index: 2;
+/* Top Area: Outlined Circle with Centered Dot + Title/Index Group */
+.applications-card-top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.applications-card-symbol {
   width: 46px;
   height: 46px;
-  display: inline-flex;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0 !important; /* Mandatory: Sharp square corners */
-  background: rgba(255, 255, 255, 0.035);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: var(--chroma-accent, #55d8ff);
+  flex-shrink: 0;
   box-sizing: border-box;
-  transition: border-color 0.25s ease, background 0.25s ease;
 }
 
-.applications-chroma-card:hover .applications-chroma-icon-wrap,
-.applications-chroma-card:focus-visible .applications-chroma-icon-wrap {
-  border-color: var(--chroma-accent, #55d8ff);
-  background: rgba(255, 255, 255, 0.07);
-}
-
-.applications-chroma-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  color: inherit;
-}
-
-.applications-chroma-icon svg {
+.applications-card-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #d1d1d6;
   display: block;
-  width: 100%;
-  height: 100%;
-  color: inherit;
-  overflow: visible;
 }
 
-/* Title & Description */
-.applications-chroma-info {
-  position: relative;
-  z-index: 2;
+.applications-card-title-group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
   min-width: 0;
-  margin-top: 36px;
 }
 
 .applications-chroma-title {
   margin: 0;
   font-family: var(--font-main, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif);
-  font-size: 17.5px;
-  font-weight: 600;
-  line-height: 1.35;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.25;
   letter-spacing: -0.015em;
-  color: #f4f3f6;
-  transition: color 0.25s ease;
+  color: #f3f3f5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.applications-chroma-card:hover .applications-chroma-title {
-  color: #ffffff;
+.applications-card-index {
+  margin-top: 3px;
+  font-family: var(--font-main, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif);
+  font-size: 12px;
+  font-weight: 400;
+  color: #848389;
+  letter-spacing: 0.04em;
+}
+
+/* Lower Half: Category Label + Dividers + Description + Bottom-Right Badge */
+.applications-card-bottom {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.applications-card-category {
+  font-family: var(--font-secondary, 'Space Grotesk', monospace);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: #727177;
+  margin-bottom: 12px;
+  user-select: none;
+}
+
+.applications-card-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.12);
+  border: none;
+  margin: 0 0 16px 0;
+  width: 100%;
 }
 
 .applications-chroma-description {
-  margin: 0;
+  margin: 0 0 20px 0;
   font-family: var(--font-main, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif);
   font-size: 13.5px;
-  line-height: 1.6;
-  color: #9e9ba5;
+  line-height: 1.55;
+  color: #a2a1a7;
   word-break: normal;
   overflow-wrap: break-word;
+  max-width: 240px;
+}
+
+.applications-card-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Bottom-Right Small Restrained Teal CTA Badge */
+.applications-card-badge {
+  width: 26px;
+  height: 26px;
+  background-color: #249175;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  color: #ffffff;
+}
+
+.applications-card-badge svg,
+.applications-card-badge .applications-icon-svg {
+  width: 14px;
+  height: 14px;
+  max-width: 14px;
+  max-height: 14px;
+  stroke: #ffffff;
+  color: #ffffff;
+  display: block;
 }
 
 /* --------------------------------------------------------------------------
-   6. Icon Micro-Animations (Preserved strictly within .applications-chroma-card)
+   4. Responsive Breakpoints
    -------------------------------------------------------------------------- */
 
-/* Airplane */
-.applications-chroma-card .airplane {
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  transform-origin: 50% 50%;
-}
-.applications-chroma-card .wind1,
-.applications-chroma-card .wind2 {
-  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.applications-chroma-card:hover .airplane,
-.applications-chroma-card:focus-visible .airplane {
-  transform: translate(2px, -2px);
-}
-.applications-chroma-card:hover .wind1,
-.applications-chroma-card:focus-visible .wind1 {
-  opacity: 0.9 !important;
-  transform: translate(0, 0) !important;
-}
-.applications-chroma-card:hover .wind2,
-.applications-chroma-card:focus-visible .wind2 {
-  opacity: 0.9 !important;
-  transform: translate(0, 0) !important;
-}
-
-/* Shield Check */
-.applications-chroma-card .shield-body {
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  transform-origin: 50% 50%;
-}
-.applications-chroma-card .shield-check {
-  transition: stroke-dashoffset 0.4s ease, filter 0.3s ease;
-}
-.applications-chroma-card:hover .shield-body,
-.applications-chroma-card:focus-visible .shield-body {
-  transform: scale(1.05);
-}
-.applications-chroma-card:hover .shield-check,
-.applications-chroma-card:focus-visible .shield-check {
-  stroke-dashoffset: 0 !important;
-  opacity: 1 !important;
-}
-
-/* Automotive / Speedometer Needle */
-.applications-chroma-card .needle {
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  transform-origin: 12px 14px;
-}
-.applications-chroma-card:hover .needle,
-.applications-chroma-card:focus-visible .needle {
-  transform: rotate(45deg);
-}
-
-/* Gear Rotator */
-.applications-chroma-card .gear-rotator {
-  transition: transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1);
-  transform-origin: 50% 50%;
-}
-.applications-chroma-card:hover .gear-rotator,
-.applications-chroma-card:focus-visible .gear-rotator {
-  transform: rotate(90deg);
-}
-
-/* Robotics / Circuit Brain */
-.applications-chroma-card .brain-outline {
-  transition: opacity 0.3s ease;
-}
-.applications-chroma-card .circuit-line {
-  transition: stroke-dashoffset 0.45s ease, opacity 0.3s ease;
-}
-.applications-chroma-card:hover .brain-outline,
-.applications-chroma-card:focus-visible .brain-outline {
-  opacity: 0.75;
-}
-.applications-chroma-card:hover .circuit-line,
-.applications-chroma-card:focus-visible .circuit-line {
-  opacity: 1;
-}
-
-/* Transportation / Truck */
-.applications-chroma-card .truck {
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.applications-chroma-card:hover .truck,
-.applications-chroma-card:focus-visible .truck {
-  transform: translateX(2px);
-}
-
-/* --------------------------------------------------------------------------
-   7. Responsive Breakpoints (Tablet & Mobile)
-   -------------------------------------------------------------------------- */
-
-/* Tablet (max-width: 1024px) */
-@media (max-width: 1024px) {
-  .applications-section-heading {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
+/* Tablet (max-width: 960px) */
+@media (max-width: 960px) {
+  .applications-layout-container {
+    grid-template-columns: 1fr;
+    row-gap: 20px;
   }
-  .applications-header-desc {
-    text-align: left;
-    max-width: 100%;
+
+  .applications-sidebar-col {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
+
+  .applications-nav-controls {
+    margin-top: 0;
+  }
+
+  .applications-section-title {
+    margin-bottom: 32px;
+  }
+
   .applications-chroma-card {
-    flex: 0 0 clamp(260px, calc((100% - 18px) / 2.3), 320px);
-    min-width: 260px;
-    max-width: 320px;
-    min-height: 270px;
-    padding: 24px 20px 20px;
-  }
-  .applications-nav-btn {
-    width: 40px;
-    height: 40px;
-  }
-  .applications-nav-prev {
-    left: -6px;
-  }
-  .applications-nav-next {
-    right: -6px;
+    flex: 0 0 clamp(250px, 38vw, 280px);
+    min-width: 250px;
+    max-width: 280px;
+    height: 440px;
+    min-height: 440px;
+    padding: 26px 22px 22px 22px;
   }
 }
 
 /* Mobile (max-width: 640px) */
 @media (max-width: 640px) {
-  .applications-section-heading {
-    margin-bottom: 18px;
-    gap: 10px;
+  .applications-col-label {
+    font-size: 12px;
   }
-  .applications-header-title {
+
+  .applications-nav-btn {
+    width: 34px;
+    height: 34px;
+  }
+
+  .applications-nav-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .applications-section-title {
     font-size: 26px;
+    line-height: 1.22;
+    margin-bottom: 24px;
   }
-  .applications-header-desc {
-    font-size: 13px;
-    line-height: 1.55;
-  }
+
   .applications-chroma-inner {
-    gap: 14px;
-    padding-bottom: 10px;
+    gap: 16px;
+    padding-bottom: 12px;
   }
+
   .applications-chroma-card {
-    flex: 0 0 calc(100% - 44px);
-    min-width: 250px;
-    max-width: 310px;
-    min-height: 250px;
-    padding: 22px 18px 18px;
+    flex: 0 0 calc(100% - 40px);
+    min-width: 240px;
+    max-width: 300px;
+    height: 420px;
+    min-height: 420px;
+    padding: 24px 20px 20px 20px;
   }
-  .applications-chroma-info {
-    margin-top: 26px;
+
+  .applications-card-symbol {
+    width: 42px;
+    height: 42px;
   }
+
   .applications-chroma-title {
     font-size: 16px;
   }
+
   .applications-chroma-description {
     font-size: 13px;
-  }
-  .applications-nav-btn {
-    width: 36px;
-    height: 36px;
-  }
-  .applications-nav-prev {
-    left: -2px;
-  }
-  .applications-nav-next {
-    right: -2px;
+    margin-bottom: 16px;
   }
 }
 
 /* --------------------------------------------------------------------------
-   8. Reduced Motion
+   5. Reduced Motion
    -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   .applications-chroma-inner {
     scroll-behavior: auto !important;
   }
-  .animated-background-highlight {
-    transition: opacity 0.15s ease !important;
-    transform: none !important;
-  }
+
   .applications-nav-btn,
-  .applications-chroma-card,
-  .applications-chroma-icon-wrap,
-  .applications-chroma-card * {
+  .applications-chroma-card {
     transition: none !important;
-    animation: none !important;
-    transform: none !important;
   }
 }
