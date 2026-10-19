@@ -32,6 +32,8 @@ const assets = [
   "inner-pages.js",
   "applications-chroma-grid.css",
   "applications-chroma-grid.js",
+  "our-approach-zigzag.css",
+  "our-approach-zigzag.js",
   "DotGrid.css",
   "service-overview-dot-grid.css",
   "solution-cta.css",
