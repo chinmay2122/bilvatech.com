@@ -185,19 +185,28 @@
 /* Form Status Message */
 .contact-composition-form .form-status {
   font-family: var(--font-secondary, "Inter", sans-serif);
-  font-size: 13px;
+  font-size: 13.5px;
   line-height: 1.5;
   color: var(--ink-secondary, #aaa7ab);
-  margin: 6px 0 0;
+  margin: 8px 0 0;
   min-height: 20px;
+  transition: opacity 0.2s ease;
 }
 
 .contact-composition-form .form-status.is-success {
-  color: #a3e6cd;
+  color: #6ee7b7;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  padding: 10px 14px;
+  border-radius: 4px;
 }
 
 .contact-composition-form .form-status.is-error {
   color: #fca5a5;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  padding: 10px 14px;
+  border-radius: 4px;
 }
 
 /* ==========================================================================

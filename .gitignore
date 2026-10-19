@@ -11,3 +11,7 @@ section_box_*.png
 node_modules/
 .DS_Store
 Thumbs.db
+.env
+.env.*
+contact-config.local.php
+composer.phar

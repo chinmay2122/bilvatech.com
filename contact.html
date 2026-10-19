@@ -96,6 +96,11 @@
           <!-- Right Column: Exact Form -->
           <div class="contact-form-col">
             <form id="contact-form" class="contact-composition-form" novalidate>
+              <!-- Hidden honeypot field for bot/spam protection -->
+              <div style="display: none !important;" aria-hidden="true">
+                <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
+              </div>
+
               <div class="contact-input-wrap">
                 <input
                   type="text"
@@ -297,65 +302,140 @@
         const form = document.querySelector("#contact-form");
         if (!form) return;
 
+        // Configurable endpoint (relative by default, can be overridden by window.BILVA_API_URL if hosted externally)
+        const ENDPOINT = window.BILVA_API_URL || "api/contact.php";
+
         const nameInput = form.querySelector('input[name="name"]');
         const phoneInput = form.querySelector('input[name="phone"]');
         const emailInput = form.querySelector('input[name="email"]');
         const messageInput = form.querySelector('textarea[name="message"]');
+        const gotchaInput = form.querySelector('input[name="_gotcha"]');
         const submitBtn = form.querySelector("#contact-submit");
         const statusEl = form.querySelector(".form-status");
 
-        form.addEventListener("submit", function (e) {
+        let isSubmitting = false;
+
+        function setStatus(msg, type) {
+          statusEl.textContent = msg;
+          statusEl.className = "form-status" + (type ? " is-" + type : "");
+        }
+
+        form.addEventListener("submit", async function (e) {
           e.preventDefault();
+          if (isSubmitting) return;
 
           const nameVal = (nameInput.value || "").trim();
           const phoneVal = (phoneInput.value || "").trim();
           const emailVal = (emailInput.value || "").trim();
           const msgVal = (messageInput.value || "").trim();
+          const gotchaVal = gotchaInput ? (gotchaInput.value || "").trim() : "";
 
-          statusEl.className = "form-status";
-          statusEl.textContent = "";
+          // Clear previous status
+          setStatus("", "");
 
-          // Validation
+          // 1. Frontend Validations
           if (!nameVal) {
-            statusEl.className = "form-status is-error";
-            statusEl.textContent = "Please enter your name.";
+            setStatus("Please enter your name.", "error");
             nameInput.focus();
             return;
           }
 
           if (!phoneVal) {
-            statusEl.className = "form-status is-error";
-            statusEl.textContent = "Please enter your mobile number.";
+            setStatus("Please enter your mobile number.", "error");
             phoneInput.focus();
             return;
           }
 
-          if (!emailVal || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
-            statusEl.className = "form-status is-error";
-            statusEl.textContent = "Please enter a valid email address.";
+          // Mobile number format: at least 6 digits/characters, allow +, -, spaces, ()
+          const phoneRegex = /^[0-9+\-\s()]{6,40}$/;
+          if (!phoneRegex.test(phoneVal)) {
+            setStatus("Please enter a valid mobile number.", "error");
+            phoneInput.focus();
+            return;
+          }
+
+          if (!emailVal) {
+            setStatus("Please enter your email address.", "error");
+            emailInput.focus();
+            return;
+          }
+
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(emailVal)) {
+            setStatus("Please enter a valid email address.", "error");
             emailInput.focus();
             return;
           }
 
           if (!msgVal) {
-            statusEl.className = "form-status is-error";
-            statusEl.textContent = "Please share details about your enquiry.";
+            setStatus("Please share details about your enquiry.", "error");
             messageInput.focus();
             return;
           }
 
-          // Processing state
-          submitBtn.disabled = true;
-          submitBtn.textContent = "Processing...";
+          if (msgVal.length < 5) {
+            setStatus("Enquiry message is too short. Please provide more details.", "error");
+            messageInput.focus();
+            return;
+          }
 
-          setTimeout(function () {
+          // 2. Prevent repeated submissions while sending
+          isSubmitting = true;
+          submitBtn.disabled = true;
+          const originalText = submitBtn.textContent;
+          submitBtn.textContent = "Sending Enquiry...";
+
+          try {
+            const payload = {
+              name: nameVal,
+              phone: phoneVal,
+              email: emailVal,
+              message: msgVal,
+              _gotcha: gotchaVal
+            };
+
+            const response = await fetch(ENDPOINT, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+              },
+              body: JSON.stringify(payload)
+            });
+
+            let data;
+            try {
+              data = await response.json();
+            } catch (jsonErr) {
+              throw new Error("Invalid response received from the server. Please verify PHP endpoint setup.");
+            }
+
+            if (response.ok && data && data.success) {
+              setStatus(
+                data.message || "Thank you! Your enquiry has been received.",
+                "success"
+              );
+              // Only reset form on SUCCESS
+              form.reset();
+            } else {
+              // Submission failed: preserve form values, do NOT reset form
+              const errMsg = (data && data.message)
+                ? data.message
+                : "Unable to deliver enquiry. Please check your details and try again.";
+              setStatus(errMsg, "error");
+            }
+          } catch (err) {
+            // Network or server failure: preserve form values
+            console.error("Enquiry submission error:", err);
+            setStatus(
+              err.message || "Unable to reach the server. Please verify your connection or try again later.",
+              "error"
+            );
+          } finally {
+            isSubmitting = false;
             submitBtn.disabled = false;
-            submitBtn.textContent = "Enquire Now";
-            statusEl.className = "form-status is-success";
-            statusEl.textContent =
-              "Your request is prepared. Form delivery can be connected to Bilva Tech’s preferred inbox before launch.";
-            form.reset();
-          }, 450);
+            submitBtn.textContent = originalText;
+          }
         });
       })();
     </script>
