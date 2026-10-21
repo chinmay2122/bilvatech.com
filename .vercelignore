@@ -5,3 +5,11 @@ dist/
 
 backups/
 service-content.json
+docs/
+vendor/
+composer.json
+composer.lock
+contact.php
+contact-config.php
+contact-config.local.example.php
+api/contact.php

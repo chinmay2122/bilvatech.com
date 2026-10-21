@@ -17,8 +17,8 @@
   if(document.body.classList.contains('bilva-home')){
    if(scrollY<100){gsap.timeline({defaults:{duration:.7,ease:'power2.out'}})
     .fromTo('.hero .trust-row',{y:18,opacity:0},{y:0,opacity:1,clearProps:'transform,opacity'})
-    .fromTo('.hero .headline>span',{y:28,opacity:0},{y:0,opacity:1,stagger:.1,clearProps:'transform,opacity'},.12)
-    .fromTo('.hero .subhead',{y:20,opacity:0},{y:0,opacity:1,clearProps:'transform,opacity'},.3)
+    .fromTo('.hero .headline>span',{y:28,opacity:1},{y:0,opacity:1,stagger:.1,clearProps:'transform,opacity'},.12)
+    .fromTo('.hero .subhead',{y:20,opacity:1},{y:0,opacity:1,clearProps:'transform,opacity'},.3)
     .fromTo('.hero .hero-cta',{y:16,opacity:0},{y:0,opacity:1,clearProps:'transform,opacity'},.45);}
    reveal('#about-bilva',['.home-kicker','h2','.about-home-copy']);
    reveal('#our-solutions',['.bento-intro','.bento-card']);
@@ -43,7 +43,7 @@
    const first=sections[0];
    if(first&&scrollY<100){
     const introTargets=[...first.querySelectorAll('.inner-meta>span,.inner-kicker,.contact-eyebrow,h1,.inner-intro>p:last-child,.contact-lead,.contact-reference-form>*,.contact-bottom-link')];
-    gsap.fromTo(introTargets,{y:context.conditions.mobile?18:24,opacity:0},{y:0,opacity:1,duration:.68,stagger:.065,ease:'power2.out',clearProps:'transform,opacity',overwrite:'auto'});
+    gsap.fromTo(introTargets,{y:context.conditions.mobile?18:24,opacity:1},{y:0,opacity:1,duration:.68,stagger:.065,ease:'power2.out',clearProps:'transform,opacity',overwrite:'auto'});
     const orbit=first.querySelector('.contact-orbit');
     if(orbit)gsap.fromTo(orbit,{scale:.96,opacity:0},{scale:1,opacity:1,duration:.9,ease:'power2.out',clearProps:'transform,opacity'},0);
    }

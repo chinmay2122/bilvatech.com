@@ -127,9 +127,9 @@
 /* Left Hero Intro */
 .bilva-scan__intro {
   max-width: 380px;
-  opacity: 0;
-  transform: translateY(14px);
-  pointer-events: none;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 

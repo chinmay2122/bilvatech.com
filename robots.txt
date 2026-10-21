@@ -1,7 +1,11 @@
-# Bilva Tech — Robots Directives
+# Bilva Tech public crawler directives
 User-agent: *
 Allow: /
 Disallow: /api/
-Disallow: /404.html
+Disallow: /404
 
-Sitemap: https://bilvatech.com/sitemap.xml
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /api/
+
+Sitemap: https://bilvatechcom.vercel.app/sitemap.xml

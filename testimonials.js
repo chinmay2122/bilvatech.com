@@ -39,7 +39,7 @@ function createCardElement(item, isDuplicate = false) {
         ${avatarContent}
       </div>
       <div class="card-author-details">
-        <h4 class="card-author-name">${item.author}</h4>
+        <h3 class="card-author-name">${item.author}</h3>
         <p class="card-author-title">${item.designation}</p>
         <p class="card-author-org">${item.organization}</p>
       </div>

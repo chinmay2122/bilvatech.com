@@ -297,3 +297,14 @@
     font-size: 14.5px;
   }
 }
+.contact-privacy-note {
+  color: #9d9da5;
+  font-size: 11px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.contact-privacy-note a {
+  color: #e5e5ea;
+  text-underline-offset: 3px;
+}

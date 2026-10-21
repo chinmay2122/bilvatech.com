@@ -119,14 +119,14 @@ const globalFooter = document.querySelector(".site-footer");
 if (globalFooter) {
   globalFooter.innerHTML = `
     <div class="footer-top">
-      <div class="footer-brand"><a href="index.html" aria-label="Bilva Tech home"><img src="assets/logo-icon.webp" alt="" width="44" height="44"><span><strong>Bilva Tech</strong><small>Business Solutions</small></span></a><p>Security engineered for connected and critical systems.</p></div>
-      <div class="footer-nav-group"><div><span>Navigate</span><a href="index.html">Home</a><a href="solutions.html">Solutions</a><a href="about.html">About</a><a href="contact.html">Contact</a></div><div><span>Solutions</span><a href="separation-kernel-hypervisor.html">Separation Kernel</a><a href="iot-solutions.html">IoT Solutions</a><a href="cybersecurity-solutions.html">Cybersecurity</a><a href="information-security-consulting.html">Security Consulting</a></div></div>
-      <div class="footer-legal"><span>Information</span><a href="contact.html">Security contact</a><a href="contact.html">Privacy enquiry</a><a href="contact.html">Responsible disclosure</a></div>
+      <div class="footer-brand"><a href="/" aria-label="Bilva Tech home"><img src="assets/logo-icon.webp" alt="" width="44" height="44"><span><strong>Bilva Tech</strong><small>Business Solutions</small></span></a><p>Security engineered for connected and critical systems.</p></div>
+      <div class="footer-nav-group"><div><span>Navigate</span><a href="/">Home</a><a href="/solutions">Solutions</a><a href="/about">About</a><a href="/insights">Insights</a><a href="/contact">Contact</a></div><div><span>Solutions</span><a href="/separation-kernel-hypervisor">Separation Kernel</a><a href="/iot-solutions">IoT Solutions</a><a href="/cybersecurity-solutions">Cybersecurity</a><a href="/information-security-consulting">Security Consulting</a></div></div>
+      <div class="footer-legal"><span>Information</span><a href="/contact">Security contact</a><a href="/privacy">Privacy policy</a><a href="/contact">Responsible disclosure</a></div>
     </div>
     <div class="footer-bottom">
       <button class="back-to-top" type="button">Back to top <i class="fa-solid fa-arrow-up" aria-hidden="true"></i></button>
       <form class="footer-signup"><label for="footer-email">Security insights, without the noise.</label><div><input id="footer-email" type="email" autocomplete="email" placeholder="Business email" aria-label="Business email"><button type="submit" aria-label="Subscribe"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button></div><p role="status" aria-live="polite"></p></form>
-      <div class="footer-contact"><a href="contact.html">Contact Bilva Tech</a><small>© 2026 Bilva Tech Business Solutions</small></div>
+      <div class="footer-contact"><a href="/contact">Contact Bilva Tech</a><small>© 2026 Bilva Tech Business Solutions</small></div>
     </div>`;
   globalFooter.querySelector(".back-to-top")?.addEventListener("click", () => window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" }));
   globalFooter.querySelector(".footer-signup")?.addEventListener("submit", (event) => { event.preventDefault(); event.currentTarget.querySelector("p").textContent = "Thank you. Subscription delivery can be connected before launch."; });
@@ -412,8 +412,6 @@ function initBentoVideos() {
     video.playsInline = true;
     video.setAttribute("playsinline", "");
     video.setAttribute("webkit-playsinline", "");
-    const p = video.play();
-    if (p !== undefined) p.catch(() => {});
   });
 
   if ("IntersectionObserver" in window) {

@@ -4,12 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Bilva Tech delivers tailored cybersecurity solutions that protect business data, cloud infrastructure, and digital operations."
-    />
-    <title>Bilva Tech | Cybersecurity Built Around You</title>
+
+
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+    <style>
+      .bilva-home .hero .anim,
+      .bilva-home .headline > span {
+        animation: none;
+        opacity: 1;
+        transform: none;
+        filter: none;
+      }
+    </style>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -28,7 +34,60 @@
     <link rel="stylesheet" href="testimonials.css" />
     <link rel="stylesheet" href="homepage.css" />
     <link rel="stylesheet" href="cto-homepage.css" />
-    <link rel="stylesheet" href="black-motion.css"></head>
+    <link rel="stylesheet" href="black-motion.css">
+
+
+
+    <!-- SEO:START -->
+    <title>Bilva Tech | Cybersecurity, IoT &amp; Business Solutions</title>
+    <meta name="description" content="Bilva Tech engineers separation kernel hypervisors, secure IoT and edge systems, cybersecurity solutions, and information security consulting." />
+    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+    <link rel="canonical" href="https://bilvatechcom.vercel.app/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Bilva Tech" />
+    <meta property="og:title" content="Bilva Tech | Cybersecurity, IoT &amp; Business Solutions" />
+    <meta property="og:description" content="Bilva Tech engineers separation kernel hypervisors, secure IoT and edge systems, cybersecurity solutions, and information security consulting." />
+    <meta property="og:url" content="https://bilvatechcom.vercel.app/" />
+    <meta property="og:image" content="https://bilvatechcom.vercel.app/assets/logo-full.png" />
+    <meta property="og:image:width" content="1302" />
+    <meta property="og:image:height" content="354" />
+    <meta property="og:image:alt" content="Bilva Tech Business Solutions" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Bilva Tech | Cybersecurity, IoT &amp; Business Solutions" />
+    <meta name="twitter:description" content="Bilva Tech engineers separation kernel hypervisors, secure IoT and edge systems, cybersecurity solutions, and information security consulting." />
+    <meta name="twitter:image" content="https://bilvatechcom.vercel.app/assets/logo-full.png" />
+    <script type="application/ld+json" data-bilva-seo>
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://bilvatechcom.vercel.app/#organization",
+      "name": "Bilva Tech",
+      "alternateName": "Bilva Tech Business Solutions",
+      "url": "https://bilvatechcom.vercel.app/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://bilvatechcom.vercel.app/assets/logo-full.png",
+        "width": 1302,
+        "height": 354
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://bilvatechcom.vercel.app/#website",
+      "url": "https://bilvatechcom.vercel.app/",
+      "name": "Bilva Tech",
+      "publisher": {
+        "@id": "https://bilvatechcom.vercel.app/#organization"
+      },
+      "inLanguage": "en"
+    }
+  ]
+}
+    </script>
+    <!-- SEO:END -->
+  </head>
   <body class="bilva-home cto-home">
     <a class="skip-link" href="#main-content">Skip to main content</a>
 
@@ -45,7 +104,7 @@
       <header class="site-header" aria-label="Primary navigation">
         <a
           class="logo-button"
-          href="index.html"
+          href="/"
           aria-label="Bilva Tech home"
         >
           <img src="assets/logo.webp" alt="" width="651" height="177" />
@@ -56,13 +115,13 @@
         </a>
 
         <nav class="nav-pill" aria-label="Desktop navigation">
-          <a class="active" href="index.html" aria-current="page">Home</a>
-          <a href="solutions.html">Solutions</a>
-          <a href="about.html">About</a>
-          <a href="contact.html">Contact</a>
+          <a class="active" href="/" aria-current="page">Home</a>
+          <a href="/solutions">Solutions</a>
+          <a href="/about">About</a>
+          <a href="/contact">Contact</a>
         </nav>
 
-        <a class="header-cta" href="contact.html">Get Started</a>
+        <a class="header-cta" href="/contact">Get Started</a>
 
         <button
           class="menu-toggle"
@@ -77,11 +136,11 @@
 
       <div class="mobile-overlay" aria-hidden="true" hidden>
         <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
-          <a class="active" href="index.html" aria-current="page">Home</a>
-          <a href="solutions.html">Solutions</a>
-          <a href="about.html">About</a>
-          <a href="contact.html">Contact</a>
-          <a class="mobile-cta" href="contact.html">Get Started</a>
+          <a class="active" href="/" aria-current="page">Home</a>
+          <a href="/solutions">Solutions</a>
+          <a href="/about">About</a>
+          <a href="/contact">Contact</a>
+          <a class="mobile-cta" href="/contact">Get Started</a>
         </nav>
       </div>
 
@@ -105,7 +164,7 @@
           infrastructure, and keep you ahead of evolving threats.
         </p>
 
-        <a class="hero-cta anim" style="--d: 0.4s" href="contact.html">
+        <a class="hero-cta anim" style="--d: 0.4s" href="/contact">
           Secure Your Business
           <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
         </a>
@@ -137,7 +196,7 @@
 
     <section class="about-home" id="about-bilva" aria-labelledby="about-home-heading">
       <div class="section-box"><div class="section-meta"><span>01 / ABOUT US</span><span>THE PEOPLE BEHIND THE PROTECTION</span></div>
-<div class="about-home-body"><p class="home-kicker">ABOUT BILVA TECH</p><h2 id="about-home-heading">Built on engineering.<br>Focused on what matters.</h2><div class="about-home-copy"><p>We engineer security for critical workloads, connected devices, and enterprise systems.</p><p>Your environment and risks shape the architecture.</p><a class="home-text-link" href="about.html">Get to know Bilva Tech <span aria-hidden="true">↗</span></a></div></div>
+<div class="about-home-body"><p class="home-kicker">ABOUT BILVA TECH</p><h2 id="about-home-heading">Built on engineering.<br>Focused on what matters.</h2><div class="about-home-copy"><p>We engineer security for critical workloads, connected devices, and enterprise systems.</p><p>Our four services cover separation kernel hypervisors, IoT and edge systems, connected-system cybersecurity, and information security consulting.</p><a class="home-text-link" href="/about">Get to know Bilva Tech <span aria-hidden="true">↗</span></a></div></div>
       </div>
     </section>
 
@@ -155,7 +214,7 @@
           </div>
           <div class="bento-grid">
             <!-- Card 01: Separation Kernel Hypervisor -->
-            <a class="bento-card bento-card-kernel" href="separation-kernel-hypervisor.html" aria-label="Separation Kernel Hypervisor solution">
+            <a class="bento-card bento-card-kernel" href="/separation-kernel-hypervisor" aria-label="Separation Kernel Hypervisor solution">
               <div class="bento-card-header">
                 <div class="bento-card-title-row">
                   <div class="bento-badge" aria-hidden="true">
@@ -175,14 +234,14 @@
                 <p class="bento-desc">Isolate critical workloads with deterministic resource control.</p>
               </div>
               <div class="bento-media" aria-hidden="true">
-                <video autoplay loop muted playsinline preload="auto" poster="assets/Bento/Bento-01-poster.jpg">
+                <video loop muted playsinline preload="metadata" poster="assets/Bento/Bento-01-poster.jpg">
                   <source src="assets/Bento/Bento-01.mp4" type="video/mp4" />
                 </video>
               </div>
             </a>
 
             <!-- Card 02: IoT & Edge Solutions -->
-            <a class="bento-card bento-card-iot" href="iot-solutions.html" aria-label="IoT and Edge Solutions">
+            <a class="bento-card bento-card-iot" href="/iot-solutions" aria-label="IoT and Edge Solutions">
               <div class="bento-card-header">
                 <div class="bento-card-title-row">
                   <div class="bento-badge" aria-hidden="true">
@@ -202,14 +261,14 @@
                 <p class="bento-desc">Secure devices and connections from identity to updates.</p>
               </div>
               <div class="bento-media" aria-hidden="true">
-                <video autoplay loop muted playsinline preload="auto" poster="assets/Bento/Bento-02-poster.jpg">
+                <video loop muted playsinline preload="metadata" poster="assets/Bento/Bento-02-poster.jpg">
                   <source src="assets/Bento/Bento-02.mp4" type="video/mp4" />
                 </video>
               </div>
             </a>
 
             <!-- Card 03: Cybersecurity Solutions -->
-            <a class="bento-card bento-card-cyber" href="cybersecurity-solutions.html" aria-label="Cybersecurity Solutions">
+            <a class="bento-card bento-card-cyber" href="/cybersecurity-solutions" aria-label="Cybersecurity Solutions">
               <div class="bento-card-header">
                 <div class="bento-card-title-row">
                   <div class="bento-badge" aria-hidden="true">
@@ -229,14 +288,14 @@
                 <p class="bento-desc">Protect platforms and data across the lifecycle.</p>
               </div>
               <div class="bento-media" aria-hidden="true">
-                <video autoplay loop muted playsinline preload="auto" poster="assets/Bento/Bento-03-poster.jpg">
+                <video loop muted playsinline preload="metadata" poster="assets/Bento/Bento-03-poster.jpg">
                   <source src="assets/Bento/Bento-03.mp4" type="video/mp4" />
                 </video>
               </div>
             </a>
 
             <!-- Card 04: Information Security Consulting -->
-            <a class="bento-card bento-card-consulting" href="information-security-consulting.html" aria-label="Information Security Consulting">
+            <a class="bento-card bento-card-consulting" href="/information-security-consulting" aria-label="Information Security Consulting">
               <div class="bento-card-header">
                 <div class="bento-card-title-row">
                   <div class="bento-badge" aria-hidden="true">
@@ -256,7 +315,7 @@
                 <p class="bento-desc">Turn risk into a focused security roadmap.</p>
               </div>
               <div class="bento-media" aria-hidden="true">
-                <video autoplay loop muted playsinline preload="auto" poster="assets/Bento/Bento-04-poster.jpg">
+                <video loop muted playsinline preload="metadata" poster="assets/Bento/Bento-04-poster.jpg">
                   <source src="assets/Bento/Bento-04.mp4" type="video/mp4" />
                 </video>
               </div>
@@ -277,7 +336,7 @@
             <p class="home-kicker">A CLEAR, PRACTICAL PROCESS</p>
             <h2 id="method-heading">Understand.<br>Design.<br>Deliver.</h2>
             <p>We turn your security priorities into clear, practical actions.</p>
-            <a class="home-text-link" href="contact.html">Discuss your requirements <span aria-hidden="true">→</span></a>
+            <a class="home-text-link" href="/contact">Discuss your requirements <span aria-hidden="true">→</span></a>
           </div>
           <ol class="method-steps">
             <li>
@@ -338,19 +397,19 @@
             <p class="service-dial-eyebrow">SEPARATION KERNEL HYPERVISOR</p>
             <h2>Kernel separation.<br>Uncompromising isolation.</h2>
             <p class="service-dial-copy">Keep critical workloads independent with hardware-enforced memory segmentation, dedicated CPU affinity, and deterministic timing budgets — for safety-critical and standard operating systems.</p>
-            <a href="separation-kernel-hypervisor.html">Explore kernel separation <span aria-hidden="true">↗</span></a>
+            <a href="/separation-kernel-hypervisor">Explore kernel separation <span aria-hidden="true">↗</span></a>
           </div>
           <div id="service-panel-1" role="tabpanel" aria-labelledby="service-tab-1" tabindex="0" hidden>
             <p class="service-dial-eyebrow">IOT &amp; EDGE SOLUTIONS</p>
             <h2>Connected by design.<br>Secured at every edge.</h2>
             <p class="service-dial-copy">Establish device identity from silicon root of trust to cloud telemetry. Protect every connection with encrypted message routing, mutual TLS authentication, and verified atomic OTA recovery.</p>
-            <a href="iot-solutions.html">Explore connected architectures <span aria-hidden="true">↗</span></a>
+            <a href="/iot-solutions">Explore connected architectures <span aria-hidden="true">↗</span></a>
           </div>
           <div id="service-panel-2" role="tabpanel" aria-labelledby="service-tab-2" tabindex="0" hidden>
             <p class="service-dial-eyebrow">CONSULTING &amp; ARCHITECTURE</p>
             <h2>Security by design.<br>Resilience from the start.</h2>
             <p class="service-dial-copy">Build stronger foundations with architectural threat modeling, least-privilege boundaries, and vulnerability assessments aligned with IEC 62443, ISO 27001, and zero-trust engineering.</p>
-            <a href="information-security-consulting.html">Explore security consulting <span aria-hidden="true">↗</span></a>
+            <a href="/information-security-consulting">Explore security consulting <span aria-hidden="true">↗</span></a>
           </div>
         </div>
         <div class="service-dial-bottom"><span>THREE DISCIPLINES. ONE SECURE FOUNDATION.</span><button class="dial-playback" type="button" aria-pressed="false">Pause animation <span aria-hidden="true">Ⅱ</span></button></div>
@@ -378,18 +437,18 @@
         </div>
 
         <div class="protect-orbit">
-          <div class="protect-list protect-list-left" role="list">
-            <article class="protect-item" role="listitem" data-protection="0">
+          <div class="protect-list protect-list-left">
+            <article class="protect-item" data-protection="0">
               <span class="card-num">01 //</span>
               <h3 class="card-title">Critical Systems</h3>
               <p class="card-desc">Isolation &amp; trusted execution</p>
             </article>
-            <article class="protect-item" role="listitem" data-protection="1">
+            <article class="protect-item" data-protection="1">
               <span class="card-num">02 //</span>
               <h3 class="card-title">IoT</h3>
               <p class="card-desc">Device &amp; network security</p>
             </article>
-            <article class="protect-item" role="listitem" data-protection="2">
+            <article class="protect-item" data-protection="2">
               <span class="card-num">03 //</span>
               <h3 class="card-title">Embedded Systems</h3>
               <p class="card-desc">Secure boot &amp; lifecycle security</p>
@@ -402,18 +461,18 @@
             </div>
           </div>
 
-          <div class="protect-list protect-list-right" role="list">
-            <article class="protect-item" role="listitem" data-protection="3">
+          <div class="protect-list protect-list-right">
+            <article class="protect-item" data-protection="3">
               <span class="card-num">04 //</span>
               <h3 class="card-title">Digital Infrastructure</h3>
               <p class="card-desc">Monitoring &amp; protection</p>
             </article>
-            <article class="protect-item" role="listitem" data-protection="4">
+            <article class="protect-item" data-protection="4">
               <span class="card-num">05 //</span>
               <h3 class="card-title">Enterprise</h3>
               <p class="card-desc">Information security</p>
             </article>
-            <article class="protect-item" role="listitem" data-protection="5">
+            <article class="protect-item" data-protection="5">
               <span class="card-num">06 //</span>
               <h3 class="card-title">Brand</h3>
               <p class="card-desc">Digital brand protection</p>
@@ -514,17 +573,15 @@
             </p>
             <h2 id="cta-heading">Security built for the systems that matter.</h2>
             <p>Clear architecture. Practical controls. Protection designed around your environment.</p>
-            <a class="cta-primary-btn" href="contact.html">Start a conversation <span aria-hidden="true">→</span></a>
+            <a class="cta-primary-btn" href="/contact">Start a conversation <span aria-hidden="true">→</span></a>
           </div>
         </div>
       </div>
     </section>
 
     <footer class="site-footer"></footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <script src="main.js"></script>
-    <script src="why-globe.js"></script>
+    <script src="lazy-globe.js"></script>
     <script src="service-dial.js"></script>
     <script src="testimonials-data.js"></script>
     <script src="testimonials.js"></script>
