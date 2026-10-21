@@ -7,7 +7,8 @@
     { "source": "/index", "destination": "/", "permanent": true },
     { "source": "/homepage", "destination": "/", "permanent": true },
     { "source": "/homepage-original", "destination": "/", "permanent": true },
-    { "source": "/trialhomepage", "destination": "/", "permanent": true }
+    { "source": "/trialhomepage", "destination": "/", "permanent": true },
+    { "source": "/privacy", "destination": "/user-policy", "permanent": true }
   ],
   "headers": [
     {

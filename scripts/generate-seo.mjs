@@ -174,6 +174,10 @@ for (const page of pages) {
     .replaceAll('href="iot-solutions.html"', 'href="/iot-solutions"')
     .replaceAll('href="cybersecurity-solutions.html"', 'href="/cybersecurity-solutions"')
     .replaceAll('href="information-security-consulting.html"', 'href="/information-security-consulting"');
+  html = html
+    .replaceAll('href="privacy.html"', 'href="/user-policy"')
+    .replaceAll('href="user-policy.html"', 'href="/user-policy"')
+    .replaceAll('href="terms-and-conditions.html"', 'href="/terms-and-conditions"');
 
   if (page.file === "solutions.html") {
     html = html
@@ -184,6 +188,11 @@ for (const page of pages) {
       )
       .replace('aria-controls="bilva-scan-content bilva-scan-keywords"', 'aria-controls="bilva-scan-keywords"')
       .replace("for (const el of [details, keywords])", "for (const el of [keywords])");
+
+    if (!html.includes('id="final-cta"')) {
+      const finalCta = '<section class="inner-box architecture-cta" id="final-cta" aria-labelledby="cta-heading"><div class="inner-meta"><span>04 / START A TECHNICAL CONVERSATION</span><span>BUILT AROUND YOUR SYSTEM</span></div><div class="architecture-cta-body"><div class="architecture-cta-copy"><p class="home-kicker cta-kicker">SECURITY, BUILT WITH PURPOSE</p><h2 id="cta-heading">Security built for the systems that matter.</h2><p>Clear architecture. Practical controls. Protection designed around your environment.</p><a class="cta-primary-btn" href="/contact">Start a conversation <span aria-hidden="true">→</span></a></div></div></section>';
+      html = html.replace("</main>", `${finalCta}</main>`);
+    }
   }
 
   if (page.faqs) {

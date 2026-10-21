@@ -234,6 +234,15 @@
   padding: 0;
 }
 
+/* Keep animated cards and their focus/hover edges clear of the clipped marquee rows. */
+.contact-page-body .testimonials-marquee-viewport {
+  padding-block: 16px;
+}
+
+.contact-page-body .marquee-row {
+  padding-block: 4px;
+}
+
 /* ==========================================================================
    Responsive Adaptations
    ========================================================================== */

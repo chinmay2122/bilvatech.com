@@ -151,11 +151,19 @@ export const pages = [
     breadcrumb: "Insights",
   },
   {
-    file: "privacy.html",
-    path: "/privacy",
-    title: "Privacy Policy | Bilva Tech",
+    file: "user-policy.html",
+    path: "/user-policy",
+    title: "User Policy | Bilva Tech",
     description:
-      "Read how Bilva Tech handles information submitted through this website and contact form.",
-    breadcrumb: "Privacy Policy",
+      "Read how Bilva Tech handles website use, contact-form information, privacy, security, and acceptable use.",
+    breadcrumb: "User Policy",
+  },
+  {
+    file: "terms-and-conditions.html",
+    path: "/terms-and-conditions",
+    title: "Terms and Conditions | Bilva Tech",
+    description:
+      "Read the terms and conditions governing use of the Bilva Tech website and its informational content.",
+    breadcrumb: "Terms and Conditions",
   },
 ];

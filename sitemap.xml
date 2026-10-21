@@ -28,6 +28,9 @@
     <loc>https://bilvatechcom.vercel.app/insights</loc>
   </url>
   <url>
-    <loc>https://bilvatechcom.vercel.app/privacy</loc>
+    <loc>https://bilvatechcom.vercel.app/user-policy</loc>
+  </url>
+  <url>
+    <loc>https://bilvatechcom.vercel.app/terms-and-conditions</loc>
   </url>
 </urlset>

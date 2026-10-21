@@ -58,3 +58,42 @@ body.bilva-home,body.bilva-inner{--surface-page:#000;--bg:#000}
 @media(max-width:768px){#final-cta .architecture-cta-body{min-height:300px;padding:36px 20px;background-position:center 45%}#final-cta .architecture-cta-copy .cta-kicker{font-size:10px;margin-bottom:12px}#final-cta .architecture-cta-copy h2{font-size:clamp(23px,5.5vw,30px);margin-bottom:12px}#final-cta .architecture-cta-copy>p:not(.home-kicker){font-size:14px;margin-bottom:20px;max-width:440px}#final-cta .cta-primary-btn{min-height:44px;padding:11px 24px;font-size:13px}}
 @media(max-width:480px){#final-cta .section-box{border-radius:12px}#final-cta .architecture-cta-body{min-height:280px;padding:30px 16px;background-position:50% 40%}#final-cta .architecture-cta-copy .cta-kicker{font-size:9.5px;letter-spacing:.11em;margin-bottom:10px}#final-cta .architecture-cta-copy h2{font-size:clamp(20px,6.5vw,24px);line-height:1.22}#final-cta .cta-primary-btn{width:auto;min-width:190px}}
 @media(prefers-reduced-motion:reduce){.bilva-home .hero *,.bilva-home .stats *{animation:none!important;opacity:1!important;transform:none!important}.bilva-home .bg-video{display:none}.motion-ready *{scroll-behavior:auto}}
+
+/* Shared FAQ treatment: matches the Solutions page on every public page. */
+body.bilva-home #faq .compact-faq-body,
+body.bilva-inner #faq .compact-faq-body{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(36px,5vw,72px);padding:clamp(36px,5vw,76px);align-items:start}
+body.bilva-home #faq .compact-faq-intro,
+body.bilva-inner #faq .compact-faq-intro{position:sticky;top:100px}
+body.bilva-home #faq .compact-faq-list,
+body.bilva-inner #faq .compact-faq-list{display:flex;flex-direction:column}
+body.bilva-home #faq details,
+body.bilva-inner #faq details{border-bottom:1px solid rgba(255,255,255,.08);transition:border-color .25s ease}
+body.bilva-home #faq details:first-child,
+body.bilva-inner #faq details:first-child{border-top:1px solid rgba(255,255,255,.08)}
+body.bilva-home #faq details:hover,
+body.bilva-inner #faq details:hover{border-color:rgba(255,255,255,.18)}
+body.bilva-home #faq summary,
+body.bilva-inner #faq summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;font-family:var(--font-main,'Space Grotesk',sans-serif);font-size:clamp(16px,1.2vw,18.5px);font-weight:500;cursor:pointer;color:#e5e5ea;user-select:none;transition:color .25s ease}
+body.bilva-home #faq summary::-webkit-details-marker,
+body.bilva-inner #faq summary::-webkit-details-marker,
+body.bilva-home #faq summary::marker,
+body.bilva-inner #faq summary::marker{display:none!important}
+body.bilva-home #faq summary .faq-icon,
+body.bilva-inner #faq summary .faq-icon{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);color:#fff;font-size:0;font-weight:300;line-height:1;flex-shrink:0;transition:transform .35s cubic-bezier(.16,1,.3,1),background-color .25s ease,border-color .25s ease,color .25s ease}
+body.bilva-home #faq summary .faq-icon::before,
+body.bilva-inner #faq summary .faq-icon::before{content:'+';font-size:19px;line-height:1}
+body.bilva-home #faq summary .faq-icon svg,
+body.bilva-inner #faq summary .faq-icon svg{display:none}
+body.bilva-home #faq summary:hover .faq-icon,
+body.bilva-inner #faq summary:hover .faq-icon{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.35);color:#fff}
+body.bilva-home #faq details[open] summary .faq-icon,
+body.bilva-inner #faq details[open] summary .faq-icon{transform:rotate(45deg);background:rgba(255,255,255,.18);border-color:#fff;color:#fff}
+body.bilva-home #faq .faq-answer-wrap,
+body.bilva-inner #faq .faq-answer-wrap{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .35s cubic-bezier(.16,1,.3,1),opacity .25s ease}
+body.bilva-home #faq details[open] .faq-answer-wrap,
+body.bilva-inner #faq details[open] .faq-answer-wrap{grid-template-rows:1fr;opacity:1}
+body.bilva-home #faq .faq-answer-wrap>p,
+body.bilva-inner #faq .faq-answer-wrap>p{min-height:0;overflow:hidden;margin:0;padding:0 0 24px;font-family:var(--font-secondary,'Inter',sans-serif);font-size:clamp(14px,.95vw,15px);line-height:1.7;color:#b5b5be}
+body.bilva-home #faq summary:focus-visible,
+body.bilva-inner #faq summary:focus-visible{outline:2px solid #fff;outline-offset:4px}
+@media(max-width:768px){body.bilva-home #faq .compact-faq-body,body.bilva-inner #faq .compact-faq-body{grid-template-columns:1fr;gap:24px;padding:28px 20px}body.bilva-home #faq .compact-faq-intro,body.bilva-inner #faq .compact-faq-intro{position:static}body.bilva-home #faq summary,body.bilva-inner #faq summary{padding:18px 0;font-size:16px}}

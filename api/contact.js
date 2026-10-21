@@ -72,10 +72,10 @@ export default async function handler(request, response) {
   const smtpPort = Number(process.env.SMTP_PORT || 587);
   const smtpUser = process.env.SMTP_USER;
   const smtpPass = process.env.SMTP_PASS;
-  const recipient = process.env.BILVA_RECIPIENT_EMAIL;
+  const recipient = "karthik@bilvatechsolutions.com";
   const fromEmail = process.env.SMTP_FROM_EMAIL || smtpUser;
 
-  if (!smtpHost || !smtpUser || !smtpPass || !recipient || !fromEmail) {
+  if (!smtpHost || !smtpUser || !smtpPass || !fromEmail) {
     return json(response, 503, {
       success: false,
       message: "Enquiry delivery is not configured yet. Please try again later.",
