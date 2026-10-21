@@ -9,15 +9,13 @@
 .testimonials-section {
   position: relative;
   width: 100%;
-  background-color: var(--bg-primary, #0B090E);
-  padding: var(--space-section, clamp(80px, 10vw, 140px)) 0;
+  background-color: transparent;
+  padding: 0;
   z-index: 2;
-  border-top: 1px solid var(--border-subtle, #30242E);
+  border-top: 0;
   overflow: hidden;
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 800ms cubic-bezier(0.16, 1, 0.3, 1), transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
+  opacity: 1;
+  transform: none;
 }
 
 .testimonials-section.is-visible {
@@ -31,11 +29,17 @@
 .testimonials-shell {
   width: min(100%, var(--container-max, 1280px));
   padding-inline: var(--page-px, clamp(20px, 4vw, 48px));
+  padding-top: clamp(28px, 4vw, 44px);
   margin-inline: auto;
   display: flex;
   flex-direction: column;
-  gap: clamp(28px, 4vw, 44px);
-  margin-bottom: clamp(32px, 5vw, 54px);
+  gap: clamp(20px, 3vw, 36px);
+  margin-bottom: clamp(24px, 3.5vw, 40px);
+}
+
+.inner-box.testimonials-section,
+.bilva-home .testimonials-section .section-box {
+  padding-bottom: clamp(32px, 4vw, 48px);
 }
 
 .testimonials-header-row {

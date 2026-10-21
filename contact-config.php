@@ -12,7 +12,7 @@ $config = [
     // Recipient Configuration (Client Handover)
     // -------------------------------------------------------------
     // Change this single email address during handover to direct all website enquiries.
-    'recipient_email' => getenv('BILVA_RECIPIENT_EMAIL') ?: 'chinmaysganiga2005@gmail.com',
+    'recipient_email' => getenv('BILVA_RECIPIENT_EMAIL') ?: '////client mail////',
     'recipient_name'  => getenv('BILVA_RECIPIENT_NAME')  ?: 'Bilva Tech Inquiries',
 
     // -------------------------------------------------------------

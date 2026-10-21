@@ -8,7 +8,7 @@
 
 return [
     // Recipient email address for enquiries
-    'recipient_email' => 'chinmaysganiga2005@gmail.com',
+    'recipient_email' => 'client@gmail.com',
     'recipient_name'  => 'Bilva Tech Inquiries',
 
     // SMTP Credentials

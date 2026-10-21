@@ -7,7 +7,7 @@
 .contact-composition-section {
   position: relative;
   width: 100%;
-  margin: 0 0 16px;
+  margin: 0;
 }
 
 /* Two-Column Layout Grid */
@@ -231,6 +231,7 @@
   border: 1px solid var(--line, #252527);
   background: var(--surface-panel, #0b0b0d);
   overflow: hidden;
+  padding: 0;
 }
 
 /* ==========================================================================
