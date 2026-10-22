@@ -243,6 +243,31 @@
   padding-block: 4px;
 }
 
+/* The inner-page type system targets all h3/p elements. Restore the
+   testimonial component's compact author stack without affecting Home. */
+.contact-page-body .card-author-name {
+  font-family: var(--font-main, "Inter", sans-serif);
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: normal;
+  margin: 0;
+}
+
+.contact-page-body .card-author-title {
+  font-family: var(--font-secondary, "Space Grotesk", sans-serif);
+  font-size: 11.5px;
+  line-height: normal;
+  margin: 0;
+}
+
+.contact-page-body .card-author-org {
+  font-family: var(--font-secondary, "Space Grotesk", sans-serif);
+  font-size: 11px;
+  line-height: normal;
+  margin: 0;
+}
+
 /* ==========================================================================
    Responsive Adaptations
    ========================================================================== */
