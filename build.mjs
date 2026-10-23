@@ -53,6 +53,8 @@ const assets = [
   "assets/contact-halftone-clouds.jpg",
   "assets/cta-texture.jpg",
   "assets/cta-background.png",
+  "assets/secure-qr-interface-widget.png",
+  "assets/secure-qr-output-interface.png",
   "assets/Bento/Bento-01-poster.jpg",
   "assets/Bento/Bento-01.mp4",
   "assets/Bento/Bento-02-poster.jpg",

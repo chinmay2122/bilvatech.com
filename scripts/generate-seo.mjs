@@ -153,7 +153,7 @@ function faqSection(page) {
     )
     .join("");
 
-  return `<!-- SEO-FAQ:START --><section class="inner-box compact-faq" id="faq" aria-labelledby="faq-heading"><div class="inner-meta"><span>06 / SERVICE QUESTIONS</span><span>TECHNICAL ANSWERS</span></div><div class="compact-faq-body"><div class="compact-faq-intro"><p class="inner-kicker">SERVICE-SPECIFIC QUESTIONS</p><h2 id="faq-heading">Practical answers<br>for planning.</h2><p><a class="inner-text-link" href="/solutions">Compare all solutions →</a><br><a class="inner-text-link" href="/contact">Discuss your requirements →</a></p></div><div class="compact-faq-list">${items}</div></div></section><!-- SEO-FAQ:END -->`;
+  return `<!-- SEO-FAQ:START --><section class="inner-box compact-faq" id="faq" aria-labelledby="faq-heading"><div class="inner-meta"><span>${escapeHtml(page.faqLabel || "06 / SERVICE QUESTIONS")}</span><span>TECHNICAL ANSWERS</span></div><div class="compact-faq-body"><div class="compact-faq-intro"><p class="inner-kicker">SERVICE-SPECIFIC QUESTIONS</p><h2 id="faq-heading">Practical answers<br>for planning.</h2><p><a class="inner-text-link" href="/solutions">Compare all solutions →</a><br><a class="inner-text-link" href="/contact">Discuss your requirements →</a></p></div><div class="compact-faq-list">${items}</div></div></section><!-- SEO-FAQ:END -->`;
 }
 
 function stripLegacySeo(html) {
