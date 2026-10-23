@@ -1,0 +1,17 @@
+{
+  "name": "bilvatech",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node server.mjs",
+    "start": "node server.mjs",
+    "seo:generate": "node scripts/generate-seo.mjs",
+    "seo:check": "node scripts/check-seo.mjs",
+    "test:contact": "node scripts/check-contact.mjs",
+    "build": "npm run seo:generate && node build.mjs"
+  },
+  "dependencies": {
+    "gsap": "^3.13.0",
+    "nodemailer": "^10.2.0"
+  }
+}

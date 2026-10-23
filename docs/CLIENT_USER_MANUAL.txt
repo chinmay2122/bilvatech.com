@@ -1,0 +1,182 @@
+================================================================================
+BILVA TECH WEBSITE — CLIENT USER MANUAL & HANDOVER GUIDE
+================================================================================
+Document Version: 1.0.0
+Date: October 19, 2026
+Website: Bilva Tech Business Solutions (https://bilvatech.com)
+Prepared for: Bilva Tech Administration & Marketing Team
+================================================================================
+
+
+1. WEBSITE OVERVIEW
+--------------------------------------------------------------------------------
+The Bilva Tech website is an online technical showcase for Bilva Tech Business
+Solutions. It presents Bilva Tech's engineering capabilities in:
+  * Separation Kernel & Hypervisor Virtualization (Mission-Critical Computing)
+  * Connected Operations & IoT Solutions (Edge and Connected Devices)
+  * Embedded & Connected Cybersecurity Solutions
+  * Information Security Consulting, Governance, Risk & Resilience
+
+The website consists of eight primary pages:
+  1. Home (index.html): High-level overview, bento video showcase, orbit stack,
+     and customer perspectives.
+  2. Solutions (solutions.html): Complete service directory and technical
+     capabilities.
+  3. About Us (about.html): Company mission, engineering principles, customer
+     perspectives, and FAQs.
+  4. Contact (contact.html): High-priority enterprise enquiry form with
+     halftone artwork presentation.
+  5. Separation Kernel & Hypervisor (separation-kernel-hypervisor.html):
+     In-depth service page with interactive process timeline.
+  6. Connected Operations & IoT (iot-solutions.html): Device security and
+     connectivity service page.
+  7. Embedded Cybersecurity (cybersecurity-solutions.html): Platform integrity
+     and security lifecycle service page.
+  8. Security Consulting (information-security-consulting.html): Governance,
+     threat modeling, and compliance roadmap page.
+  9. 404 Recovery (404.html): Custom page for mistyped or missing addresses.
+
+Navigation Options:
+  * Top Navigation Pill: Visible on all pages to jump between Home, Solutions,
+    About, and Contact.
+  * Header 'Get Started' Button: Direct shortcut to the Contact enquiry form.
+  * Mobile Menu: Hamburger toggle for easy navigation on phones and tablets.
+  * Footer: Contains comprehensive site links, solutions links, back-to-top
+    button, and business contact information.
+
+
+2. HOW TO USE THE WEBSITE
+--------------------------------------------------------------------------------
+Visitors use the website to explore Bilva Tech's security architecture and book
+technical consultations:
+
+  * Exploring Services: Visitors can browse the 4 core solutions directly from
+    the homepage bento cards, the Solutions directory, or the footer links.
+  * Interactive Diagrams: Visual architecture diagrams and step-by-step
+    process timelines allow technical clients to understand Bilva Tech's
+    methodology.
+  * Frequently Asked Questions (FAQ): Present on Solutions, About, and Contact
+    pages. Clicking any question expands clear, concise answers.
+  * Submitting an Enquiry:
+      1. Click "Contact" in the menu or "Get Started".
+      2. Enter Name, Mobile Number, Email Id, and details of the enquiry.
+      3. Click "Enquire Now".
+      4. The system validates the inputs, shows a "Sending Enquiry..." state,
+         and displays an on-screen confirmation upon delivery.
+
+
+3. MANAGING CONTACT ENQUIRIES
+--------------------------------------------------------------------------------
+How the Enquiry Workflow Works:
+  1. When a visitor fills out the Contact page form, the website securely
+     sends the data to the server-side processor.
+  2. The server verifies that all details are genuine, checks for spam bots,
+     and constructs a Bilva Tech branded notification email.
+  3. The notification email is delivered to the designated Bilva Tech inbox
+     (configured by default to: chinmaysganiga2005@gmail.com).
+
+Receiving & Replying to Enquiries:
+  * Header of the received email: Displays "New Contact Enquiry" with the
+    date, time, visitor's name, phone number, and message.
+  * Direct Reply: The email automatically sets the visitor's email address as
+    the "Reply-To" address. You can simply click "Reply" in your email software
+    (Gmail, Outlook, Apple Mail) to respond directly to the prospective client.
+
+What Controls the Recipient Address:
+  The destination email address is controlled by a single server setting in:
+    contact-config.php (line 17)
+  To direct enquiries to a new inbox (e.g., info@bilvatech.com), only this one
+  address needs to be updated.
+
+What to Check if an Email Does Not Arrive:
+  * Check the spam / junk folder of your receiving email account.
+  * Ensure your web server has valid SMTP credentials configured (see Section 4).
+  * If the website displays an error message on the Contact page, note the
+    message and provide it to your web administrator.
+
+
+4. CLIENT CONFIGURATION & SETTINGS
+--------------------------------------------------------------------------------
+The website settings are organized cleanly so you or your technical team can
+make adjustments without modifying complex code:
+
+1. Changing the Recipient Email Address:
+   Open the file: contact-config.php
+   Find:
+     'recipient_email' => 'chinmaysganiga2005@gmail.com'
+   Change this to your preferred inbox (e.g. 'contact@bilvatech.com').
+
+2. Setting Up Live Email Sending (SMTP):
+   To send real emails, your server requires an outgoing email account (SMTP).
+   You can use your business email provider (e.g., Google Workspace, Microsoft
+   365, or cPanel webmail).
+   Create a file named `contact-config.local.php` on the server containing:
+   
+   <?php
+   return [
+       'smtp_host'     => 'smtp.gmail.com',         // Your mail server
+       'smtp_port'     => 587,                      // Port (587 for TLS, 465 for SSL)
+       'smtp_secure'   => 'tls',                    // 'tls' or 'ssl'
+       'smtp_username' => 'your-email@bilvatech.com',
+       'smtp_password' => 'your-email-password-or-app-password',
+   ];
+
+   Note: `contact-config.local.php` is protected and will never be published
+   publicly or uploaded to GitHub.
+
+
+5. HOSTING AND DEPLOYMENT
+--------------------------------------------------------------------------------
+Supported Hosting Environments:
+  1. Standard PHP Hosting (cPanel, Plesk, Apache, Nginx):
+     Upload all website files to the `public_html` or web root folder. The
+     entire site, pages, images, and the PHP contact form will work out of
+     the box immediately.
+  2. Static Host (e.g., Vercel, Netlify, Cloudflare Pages):
+     The frontend pages can be hosted on Vercel. For email delivery, the
+     `api/contact.php` script should be hosted on a PHP-enabled server or
+     subdomain (e.g. api.bilvatech.com).
+
+Who Should Perform Deployment:
+  Deployment should be performed by a web administrator or hosting provider
+  familiar with uploading files via SFTP or connecting a Git repository.
+
+
+6. COMMON PROBLEMS & SIMPLE SOLUTIONS
+--------------------------------------------------------------------------------
+* Problem: The Contact Form shows an error mentioning "SMTP credentials".
+  Solution: Your web hosting server needs the SMTP outgoing mail username and
+  password added to `contact-config.local.php`. Follow Section 4 above.
+
+* Problem: An enquiry was submitted, but the email was not received.
+  Solution: Check your Spam or Junk folder first. Verify that the receiving
+  email address in `contact-config.php` is spelled correctly.
+
+* Problem: A page shows "404 Page Not Found".
+  Solution: The website has a built-in recovery page. Click "Back to Home" or
+  "Explore Solutions" to return to the active website. Verify that the link
+  entered in the browser address bar has no typing mistakes.
+
+* Problem: Changes made to the website do not appear on your screen.
+  Solution: Your browser may have saved an older copy of the page. Hold the
+  Shift key and click the browser's "Reload" button (hard refresh), or clear
+  your browser cache.
+
+
+7. SUPPORT AND MAINTENANCE
+--------------------------------------------------------------------------------
+Safe Updates You Can Request Anytime:
+  * Updating text copy, headings, or company descriptions.
+  * Changing team portraits, customer perspective quotes, or testimonials.
+  * Updating contact phone numbers, email addresses, or office locations.
+  * Adding new FAQ questions and answers.
+
+Updates That Require a Technical Developer:
+  * Adding new interactive 3D canvas effects or complex animations.
+  * Modifying the core grid layout or global design tokens.
+  * Changing server-side form validation rules or mail transmission logic.
+  * Domain DNS configuration or SSL certificate renewals.
+
+================================================================================
+End of Client User Manual
+================================================================================

@@ -1,0 +1,929 @@
+/* ==========================================================================
+   BILVA TECH - SOLUTIONS PAGE DEDICATED SYSTEM
+   Palette: Crisp White & Off-White (#ffffff, #e5e5ea, #b5b5be)
+   Typography: Space Grotesk (Headings) & Inter (Secondary / Body)
+   ========================================================================== */
+
+/* Scoped variables for Solutions page */
+.solutions-page {
+  --surface-page: #080809;
+  --surface-panel: #0b0b0d;
+  --surface-card: #101012;
+  --line: #252527;
+  --line-hover: #3e3e42;
+  --ink: #ffffff;
+  --ink-secondary: #b5b5be;
+  --ink-muted: #8e8e93;
+  --accent-primary: #ffffff;
+  --kicker-color: #e5e5ea;
+  --border-subtle: #252527;
+  --bg-primary: #0b0b0d;
+  --bg-card: #101012;
+  background: var(--surface-page);
+  color: var(--ink);
+}
+
+/* Primary Headings with White to Off-White Gradient */
+.solutions-page h1,
+.solutions-page .bilva-scan__intro h1,
+.solutions-page .solution-directory h2,
+.solutions-page .service-name,
+.solutions-page .compact-faq-intro h2 {
+  font-family: var(--font-main, 'Space Grotesk', sans-serif);
+  font-weight: 500;
+  background: linear-gradient(180deg, #ffffff 15%, #b5b5be 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #ffffff;
+}
+
+/* Kickers / Eyebrows in Off-White across Solutions */
+.solutions-page .inner-kicker,
+.solutions-page .bilva-scan__eyebrow,
+.solutions-page .home-kicker {
+  color: #e5e5ea !important;
+  font-family: var(--font-secondary, 'Inter', sans-serif);
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+/* Neutral subtle ambient lighting - replaces rose tints */
+.solutions-page .inner-dotted::before {
+  background-image: radial-gradient(#8e8e93 .65px, transparent .8px);
+  opacity: 0.12;
+}
+
+.solutions-page :focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 4px;
+}
+
+/* ==========================================================================
+   HERO: ENGINEERING IN PRACTICE (Interactive Fingerprint Scanner)
+   ========================================================================== */
+.bilva-scan {
+  --bscan-bg: #0b0b0d;
+  --bscan-text: #ffffff;
+  --bscan-muted: #8e8e93;
+  --bscan-line: rgba(255, 255, 255, 0.08);
+  background: var(--bscan-bg);
+  color: var(--bscan-text);
+  font-family: inherit;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid var(--line, #252527);
+}
+
+.bilva-scan,
+.bilva-scan * {
+  box-sizing: border-box;
+}
+
+/* Architectural Reference Grid Lines */
+.bilva-scan::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, transparent calc(33.333% - .5px), var(--bscan-line) 33.333%, transparent calc(33.333% + .5px)),
+    linear-gradient(90deg, transparent calc(66.666% - .5px), var(--bscan-line) 66.666%, transparent calc(66.666% + .5px)),
+    linear-gradient(0deg, transparent calc(32% - .5px), var(--bscan-line) 32%, transparent calc(32% + .5px)),
+    linear-gradient(0deg, transparent calc(74% - .5px), var(--bscan-line) 74%, transparent calc(74% + .5px));
+}
+
+.bilva-scan::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.035), transparent 70%);
+}
+
+.bilva-scan .bilva-scan__top {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.bilva-scan .bilva-scan__bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom: none;
+}
+
+.bilva-scan__stage {
+  width: 100%;
+  min-height: 580px;
+  padding: clamp(36px, 4vw, 56px) clamp(24px, 4.5vw, 64px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 390px) minmax(0, 1fr);
+  align-items: center;
+  column-gap: clamp(24px, 3vw, 48px);
+}
+
+/* Left Hero Intro */
+.bilva-scan__intro {
+  max-width: 380px;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.bilva-scan__eyebrow {
+  margin: 0 0 16px;
+  color: #e5e5ea;
+  font-family: var(--font-secondary, 'Inter', sans-serif);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.bilva-scan__intro h1 {
+  margin: 0;
+  font-family: var(--font-main, 'Space Grotesk', sans-serif);
+  font-size: clamp(35px, 4vw, 58px);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -.045em;
+  background: linear-gradient(180deg, #ffffff 15%, #b5b5be 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #ffffff;
+}
+
+.bilva-scan__description {
+  margin: 20px 0 24px;
+  font-family: var(--font-secondary, 'Inter', sans-serif);
+  font-size: 14px;
+  line-height: 1.7;
+  color: #aaa7ab;
+  max-width: 330px;
+}
+
+.bilva-scan__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: #ffffff;
+  text-decoration: none;
+  font-family: var(--font-secondary, 'Inter', sans-serif);
+  font-size: 12.5px;
+  font-weight: 500;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.45);
+  transition: border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.bilva-scan__link:hover {
+  border-bottom-color: #ffffff;
+}
+
+.bilva-scan__link:focus-visible,
+.bilva-scan__trigger:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 6px;
+}
+
+/* Center Fingerprint Trigger */
+.bilva-scan__center {
+  justify-self: center;
+  display: grid;
+  justify-items: center;
+  gap: 16px;
+}
+
+.bilva-scan__trigger {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 340px;
+  max-width: 100%;
+  height: 380px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.bilva-scan__trigger::before {
+  content: "";
+  position: absolute;
+  width: 135%;
+  height: 110%;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.08), transparent 64%);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+
+.bilva-scan__print-frame {
+  position: relative;
+  display: block;
+  width: 270px;
+  height: 340px;
+  max-width: 78%;
+}
+
+.bilva-scan__corner {
+  position: absolute;
+  z-index: 2;
+  width: 12px;
+  height: 12px;
+  opacity: 0.35;
+  border-color: rgba(255, 255, 255, 0.5);
+  border-style: solid;
+  transition: opacity 0.4s ease;
+}
+
+.bilva-scan__corner--tl { top: -10px; left: -10px; border-width: 1px 0 0 1px; }
+.bilva-scan__corner--tr { top: -10px; right: -10px; border-width: 1px 1px 0 0; }
+.bilva-scan__corner--bl { bottom: -10px; left: -10px; border-width: 0 0 1px 1px; }
+.bilva-scan__corner--br { bottom: -10px; right: -10px; border-width: 0 1px 1px 0; }
+
+.bilva-scan__print {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+  fill: currentColor;
+  shape-rendering: geometricPrecision;
+  transition: filter 0.35s ease, opacity 0.35s ease;
+}
+
+.bilva-scan__print--base {
+  color: #88909e;
+  opacity: 0.32;
+}
+
+.bilva-scan__print--reveal {
+  color: #ffffff;
+  opacity: 0.98;
+  clip-path: inset(0 0 100% 0);
+}
+
+.bilva-scan__beam {
+  position: absolute;
+  width: 96%;
+  left: 50%;
+  top: 9%;
+  z-index: 3;
+  height: 2px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.55) 8%, #ffffff 24%, #ffffff 76%, rgba(255,255,255,.55) 92%, transparent);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.9), 0 0 28px rgba(255, 255, 255, 0.35);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.bilva-scan__beam::after {
+  content: "";
+  position: absolute;
+  inset: 2px 0 auto;
+  height: 64px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0));
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.bilva-scan__hint {
+  color: #8e8e93;
+  text-transform: uppercase;
+  font-family: var(--font-secondary, 'Inter', sans-serif);
+  font-size: 10px;
+  letter-spacing: .18em;
+  transition: color 0.35s ease;
+}
+
+.bilva-scan__hint::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 9px;
+  vertical-align: 2px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.bilva-scan__touch-hint { display: none; }
+.bilva-scan__hint--active { display: none; }
+
+/* Right Keywords List */
+.bilva-scan__keywords {
+  list-style: none;
+  width: 100%;
+  max-width: 290px;
+  justify-self: end;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+}
+
+.bilva-scan__keywords li {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--bscan-line);
+  color: #ffffff;
+  font-family: var(--font-main, 'Space Grotesk', sans-serif);
+  font-size: 14.5px;
+  font-weight: 500;
+  opacity: 0;
+  transform: translateX(14px);
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+.bilva-scan__keywords li:first-child {
+  border-top: 1px solid var(--bscan-line);
+}
+
+.bilva-scan__keywords li span {
+  color: #8e8e93;
+  font-family: var(--font-secondary, 'Inter', monospace);
+  font-size: 11px;
+  letter-spacing: .12em;
+}
+
+/* Active Scanner State */
+.bilva-scan.is-active .bilva-scan__trigger::before {
+  opacity: 1;
+}
+
+.bilva-scan.is-active .bilva-scan__corner {
+  opacity: 0.9;
+  border-color: rgba(255, 255, 255, 0.85);
+}
+
+.bilva-scan.is-active .bilva-scan__print--base {
+  opacity: 0.2;
+}
+
+.bilva-scan.is-active .bilva-scan__print--reveal {
+  animation: bilva-print-reveal-v2 1.5s cubic-bezier(.24,.08,.4,1) forwards;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.25));
+}
+
+.bilva-scan.is-active .bilva-scan__beam {
+  animation: bilva-fingerprint-scan-v2 1.5s cubic-bezier(.24,.08,.4,1) both;
+}
+
+.bilva-scan.is-active .bilva-scan__hint {
+  color: #f5f5f7;
+}
+
+.bilva-scan.is-active .bilva-scan__hint--idle {
+  display: none;
+}
+
+.bilva-scan.is-active .bilva-scan__hint--active {
+  display: inline;
+}
+
+.bilva-scan.is-active .bilva-scan__intro {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  transition-delay: .5s;
+}
+
+.bilva-scan.is-active .bilva-scan__keywords {
+  pointer-events: auto;
+}
+
+.bilva-scan.is-active .bilva-scan__keywords li {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.bilva-scan.is-active .bilva-scan__keywords li:nth-child(1) { transition-delay: .48s; }
+.bilva-scan.is-active .bilva-scan__keywords li:nth-child(2) { transition-delay: .58s; }
+.bilva-scan.is-active .bilva-scan__keywords li:nth-child(3) { transition-delay: .68s; }
+.bilva-scan.is-active .bilva-scan__keywords li:nth-child(4) { transition-delay: .78s; }
+.bilva-scan.is-active .bilva-scan__keywords li:nth-child(5) { transition-delay: .88s; }
+
+@keyframes bilva-fingerprint-scan-v2 {
+  0% { top: 8%; opacity: 0; }
+  9% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 91%; opacity: 0; }
+}
+
+@keyframes bilva-print-reveal-v2 {
+  0% { clip-path: inset(0 0 100% 0); }
+  100% { clip-path: inset(0 0 0% 0); }
+}
+
+/* ==========================================================================
+   SECTION 02: SERVICES SHOWCASE (Referenced Staggered Layout with Parallax)
+   ========================================================================== */
+.solutions-page .services-showcase-box {
+  background: var(--surface-panel, #0b0b0d);
+  border: 1px solid var(--line, #252527);
+  position: relative;
+  overflow: hidden;
+}
+
+.solutions-page .services-showcase {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(56px, 7vw, 110px) clamp(24px, 5.5vw, 88px);
+  gap: clamp(72px, 9vw, 130px);
+  background: #080809;
+  position: relative;
+}
+
+/* Subtle architectural grid lines across the services showcase */
+.solutions-page .services-showcase::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 80px 80px;
+  opacity: 0.35;
+}
+
+.solutions-page .service-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  align-items: center;
+  gap: clamp(36px, 6vw, 92px);
+  position: relative;
+  z-index: 2;
+}
+
+.solutions-page .service-row--reverse {
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+}
+
+.solutions-page .service-row--reverse .service-media-col {
+  order: 2;
+  justify-content: flex-end;
+}
+
+.solutions-page .service-row--reverse .service-text-col {
+  order: 1;
+}
+
+/* Media Column & Card Frame */
+.solutions-page .service-media-col {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.solutions-page .service-media-frame-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  aspect-ratio: 1 / 1;
+  perspective: 1200px;
+  will-change: transform;
+}
+
+.solutions-page .service-card-link {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  transform-style: preserve-3d;
+}
+
+/* Ambient Backlight Glow */
+.solutions-page .service-card-ambient {
+  position: absolute;
+  inset: -22px;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.06) 45%, transparent 72%);
+  filter: blur(28px);
+  border-radius: 16px;
+  pointer-events: none;
+  opacity: 0.8;
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+  z-index: 1;
+}
+
+.solutions-page .service-card-link:hover .service-card-ambient {
+  opacity: 1;
+  filter: blur(36px);
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.09) 50%, transparent 75%);
+  transform: scale(1.06);
+}
+
+/* The Card Box itself */
+.solutions-page .service-card-box {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  background: #08080a;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 
+    0 20px 45px -15px rgba(0, 0, 0, 0.95),
+    0 0 35px -5px rgba(255, 255, 255, 0.12);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+}
+
+.solutions-page .service-card-link:hover .service-card-box {
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 
+    0 25px 55px -10px rgba(0, 0, 0, 0.98),
+    0 0 55px -5px rgba(255, 255, 255, 0.28);
+}
+
+.solutions-page .service-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.solutions-page .service-card-link:hover .service-card-img {
+  transform: scale(1.03);
+}
+
+/* Dynamic Glare Reflection */
+.solutions-page .service-card-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0) 55%);
+  opacity: 0.4;
+  mix-blend-mode: overlay;
+  transition: opacity 0.3s ease;
+}
+
+.solutions-page .service-card-link:hover .service-card-glare {
+  opacity: 0.8;
+}
+
+/* Text Content Column */
+.solutions-page .service-text-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  z-index: 3;
+}
+
+.solutions-page .service-eyebrow {
+  color: #a0a0a8;
+  font-family: var(--font-secondary, 'Inter', sans-serif);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  margin: 0 0 16px;
+}
+
+.solutions-page .service-name {
+  font-family: var(--font-main, 'Space Grotesk', sans-serif);
+  font-size: clamp(28px, 3.2vw, 42px);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -.035em;
+  margin: 0 0 16px;
+  background: linear-gradient(180deg, #ffffff 20%, #d4d4dc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #ffffff;
+}
+
+.solutions-page .service-name a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.solutions-page .service-name a:hover {
+  opacity: 0.88;
+}
+
+.solutions-page .service-summary {
+  font-family: var(--font-secondary, 'Inter', sans-serif);
+  font-size: clamp(14px, 1.15vw, 15px);
+  font-weight: 400;
+  line-height: 1.65;
+  color: #92929a;
+  max-width: 440px;
+  margin: 0 0 32px;
+}
+
+/* Explore Solutions Pill Button */
+.solutions-page .service-action {
+  display: flex;
+  align-items: center;
+}
+
+.solutions-page .service-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 28px;
+  border-radius: 9999px;
+  background: #17171a;
+  border: 1px solid #2e2e34;
+  color: #e2e2e8;
+  font-family: var(--font-secondary, 'Inter', sans-serif);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .01em;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.solutions-page .service-btn:hover {
+  background: #232328;
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.6),
+    0 0 24px rgba(255, 255, 255, 0.12);
+}
+
+.solutions-page .service-btn:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+/* Backward compatibility for directory-row if referenced anywhere */
+.solutions-page .directory-row {
+  transition: background 0.25s ease;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 900px) {
+  .solutions-page .service-row,
+  .solutions-page .service-row--reverse {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .solutions-page .service-row--reverse .service-media-col {
+    order: 1;
+    justify-content: center;
+  }
+
+  .solutions-page .service-row--reverse .service-text-col {
+    order: 2;
+  }
+
+  .solutions-page .service-media-col {
+    justify-content: center;
+  }
+
+  .solutions-page .service-media-frame-wrap {
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .solutions-page .service-text-col {
+    align-items: flex-start;
+    max-width: 520px;
+  }
+
+  .solutions-page .services-showcase {
+    gap: 64px;
+    padding: 48px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .solutions-page .service-media-frame-wrap {
+    max-width: 270px;
+  }
+
+  .solutions-page .service-name {
+    font-size: 26px;
+  }
+
+  .solutions-page .service-summary {
+    font-size: 13.5px;
+    margin-bottom: 24px;
+  }
+
+  .solutions-page .service-btn {
+    padding: 9px 24px;
+    font-size: 12.5px;
+  }
+}
+
+/* ==========================================================================
+   SECTION 03: COMPACT FAQ ACCORDION
+   ========================================================================== */
+.solutions-page .compact-faq-body {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: clamp(36px, 5vw, 72px);
+  padding: clamp(36px, 5vw, 76px);
+  align-items: start;
+}
+
+.solutions-page .compact-faq-intro {
+  position: sticky;
+  top: 100px;
+}
+
+.solutions-page .compact-faq-intro .inner-kicker {
+  color: #e5e5ea !important;
+}
+
+.solutions-page .compact-faq-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.solutions-page #faq details {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: border-color 0.25s ease;
+}
+
+.solutions-page #faq details:first-child {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.solutions-page #faq details:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.solutions-page #faq summary {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 22px 0;
+  font-family: var(--font-main, 'Space Grotesk', sans-serif);
+  font-size: clamp(16px, 1.2vw, 18.5px);
+  font-weight: 500;
+  cursor: pointer;
+  color: #e5e5ea;
+  user-select: none;
+  transition: color 0.25s ease;
+}
+
+.solutions-page #faq summary::-webkit-details-marker,
+.solutions-page #faq summary::marker {
+  display: none !important;
+}
+
+.solutions-page #faq summary:hover {
+  color: #ffffff;
+}
+
+.solutions-page #faq summary .faq-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-size: 19px;
+  font-weight: 300;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.25s ease,
+              border-color 0.25s ease,
+              color 0.25s ease;
+}
+
+.solutions-page #faq summary:hover .faq-icon {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+}
+
+.solutions-page #faq details[open] summary {
+  color: #ffffff;
+}
+
+.solutions-page #faq details[open] summary .faq-icon {
+  transform: rotate(45deg);
+  background: rgba(255, 255, 255, 0.18);
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+.solutions-page #faq .faq-answer-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.25s ease;
+  opacity: 0;
+}
+
+.solutions-page #faq details[open] .faq-answer-wrap {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.solutions-page #faq .faq-answer-wrap > p {
+  overflow: hidden;
+  margin: 0 0 24px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #b5b5be;
+  font-family: var(--font-secondary, 'Inter', sans-serif);
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (Tablets & Mobile)
+   ========================================================================== */
+@media (max-width: 900px) {
+  .bilva-scan__stage {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding-block: 40px 52px;
+    text-align: center;
+  }
+  .bilva-scan__center { order: 1; }
+  .bilva-scan__trigger { width: 295px; height: 325px; }
+  .bilva-scan__print-frame { width: 235px; height: 295px; }
+  .bilva-scan__corner { width: 10px; height: 10px; }
+  .bilva-scan__intro {
+    order: 2;
+    max-height: 0;
+    max-width: 500px;
+    overflow: hidden;
+    margin: 0;
+    transition: max-height .5s ease, opacity .25s ease, transform .25s ease;
+  }
+  .bilva-scan__intro h1 { font-size: clamp(34px, 7vw, 50px); }
+  .bilva-scan__description { margin: 15px auto 20px; }
+  .bilva-scan__keywords {
+    order: 3;
+    max-width: 450px;
+    max-height: 0;
+    overflow: hidden;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 18px;
+    transition: max-height .5s ease;
+  }
+  .bilva-scan__keywords li { padding: 11px 0; font-size: 12.5px; text-align: left; gap: 10px; }
+  .bilva-scan__keywords li:nth-child(2) { border-top: 1px solid var(--bscan-line); }
+  .bilva-scan.is-active .bilva-scan__intro { max-height: 320px; margin-top: 26px; }
+  .bilva-scan.is-active .bilva-scan__keywords { max-height: 280px; margin-top: 24px; }
+  .bilva-scan__desktop-hint { display: none; }
+  .bilva-scan__touch-hint { display: inline; }
+}
+
+@media (max-width: 720px) {
+  .solutions-page .compact-faq-body {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 28px 20px;
+  }
+  .solutions-page .compact-faq-intro {
+    position: static;
+  }
+}
+
+@media (max-width: 500px) {
+  .bilva-scan__trigger { width: 265px; height: 295px; }
+  .bilva-scan__print-frame { width: 205px; height: 256px; }
+  .bilva-scan__intro h1 { font-size: 34px; }
+  .bilva-scan__keywords { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bilva-scan *, .bilva-scan *::before, .bilva-scan *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+    transition-delay: 0ms !important;
+  }
+  .bilva-scan.is-active .bilva-scan__print--reveal { animation: none !important; clip-path: inset(0 0 0% 0); }
+  .bilva-scan.is-active .bilva-scan__beam { animation: none !important; opacity: 0; }
+}

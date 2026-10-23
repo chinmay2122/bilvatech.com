@@ -1,0 +1,404 @@
+/* ==========================================================================
+   Applications / Use Cases Section — Minimal Structured Card Carousel
+   Strictly scoped to .applications-section-body and .applications-chroma-*
+   Reference visual layout: Minimal tall charcoal cards, thin borders,
+   two-column header layout, and understated square styling.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Section Layout & Two-Column Header
+   -------------------------------------------------------------------------- */
+.applications-layout-container {
+  display: grid;
+  grid-template-columns: clamp(160px, 18vw, 240px) minmax(0, 1fr);
+  column-gap: clamp(28px, 4vw, 56px);
+  row-gap: 24px;
+  align-items: start;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Left Column: Label + Unobtrusive Navigation */
+.applications-sidebar-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.applications-col-label {
+  font-family: var(--font-secondary, 'Space Grotesk', monospace);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8c8b91;
+  user-select: none;
+  margin-top: 4px;
+}
+
+/* Navigation Controls in Sidebar (Unobtrusive, never obscuring cards) */
+.applications-nav-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 36px;
+}
+
+.applications-nav-btn {
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #161619;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 0 !important;
+  color: #c4c3c8;
+  cursor: pointer;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.applications-nav-btn svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+}
+
+.applications-nav-btn:hover:not(:disabled) {
+  background: #1f1f24;
+  border-color: rgba(255, 255, 255, 0.32);
+  color: #ffffff;
+}
+
+.applications-nav-btn:focus-visible {
+  outline: 2px solid #249175;
+  outline-offset: 2px;
+}
+
+.applications-nav-btn:disabled,
+.applications-nav-btn.is-disabled {
+  opacity: 0.22;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Right Column: Title + Horizontal Slider */
+.applications-main-col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.applications-section-title {
+  margin: 0 0 clamp(36px, 4.5vw, 56px) 0;
+  font-family: var(--font-main, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif);
+  font-size: clamp(28px, 3.2vw, 42px);
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: -0.03em;
+  color: #f4f3f6;
+}
+
+/* --------------------------------------------------------------------------
+   2. Horizontal Card Slider Track
+   -------------------------------------------------------------------------- */
+.applications-chroma-grid {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.applications-chroma-inner {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 24px;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE & Edge */
+  padding: 2px 2px 16px 2px;
+  box-sizing: border-box;
+}
+
+.applications-chroma-inner::-webkit-scrollbar {
+  display: none; /* WebKit */
+}
+
+/* --------------------------------------------------------------------------
+   3. Tall Portrait Card Structure
+   -------------------------------------------------------------------------- */
+.applications-chroma-card {
+  position: relative;
+  flex: 0 0 clamp(260px, 22vw, 298px);
+  min-width: 260px;
+  max-width: 298px;
+  height: 462px;
+  min-height: 462px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30px 26px 24px 26px;
+  box-sizing: border-box;
+  background: #1f1f22;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0 !important;
+  color: #f4f3f6;
+  text-decoration: none;
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+  cursor: default;
+  user-select: none;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+
+.applications-chroma-card:hover {
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
+.applications-chroma-card:focus-visible {
+  outline: 2px solid #249175;
+  outline-offset: 3px;
+}
+
+/* Top Area: Outlined Circle with Centered Dot + Title/Index Group */
+.applications-card-top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.applications-card-symbol {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.applications-card-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #d1d1d6;
+  display: block;
+}
+
+.applications-card-title-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.applications-chroma-title {
+  margin: 0;
+  font-family: var(--font-main, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif);
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: #f3f3f5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.applications-card-index {
+  margin-top: 3px;
+  font-family: var(--font-main, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif);
+  font-size: 12px;
+  font-weight: 400;
+  color: #848389;
+  letter-spacing: 0.04em;
+}
+
+/* Lower Half: Category Label + Dividers + Description + Bottom-Right Badge */
+.applications-card-bottom {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.applications-card-category {
+  font-family: var(--font-secondary, 'Space Grotesk', monospace);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: #727177;
+  margin-bottom: 12px;
+  user-select: none;
+}
+
+.applications-card-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.12);
+  border: none;
+  margin: 0 0 16px 0;
+  width: 100%;
+}
+
+.applications-chroma-description {
+  margin: 0 0 20px 0;
+  font-family: var(--font-main, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif);
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #a2a1a7;
+  word-break: normal;
+  overflow-wrap: break-word;
+  max-width: 240px;
+}
+
+.applications-card-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Bottom-Right Small Restrained Teal CTA Badge */
+.applications-card-badge {
+  width: 26px;
+  height: 26px;
+  background-color: #249175;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  color: #ffffff;
+}
+
+.applications-card-badge svg,
+.applications-card-badge .applications-icon-svg {
+  width: 14px;
+  height: 14px;
+  max-width: 14px;
+  max-height: 14px;
+  stroke: #ffffff;
+  color: #ffffff;
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   4. Responsive Breakpoints
+   -------------------------------------------------------------------------- */
+
+/* Tablet (max-width: 960px) */
+@media (max-width: 960px) {
+  .applications-layout-container {
+    grid-template-columns: 1fr;
+    row-gap: 20px;
+  }
+
+  .applications-sidebar-col {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .applications-nav-controls {
+    margin-top: 0;
+  }
+
+  .applications-section-title {
+    margin-bottom: 32px;
+  }
+
+  .applications-chroma-card {
+    flex: 0 0 clamp(250px, 38vw, 280px);
+    min-width: 250px;
+    max-width: 280px;
+    height: 440px;
+    min-height: 440px;
+    padding: 26px 22px 22px 22px;
+  }
+}
+
+/* Mobile (max-width: 640px) */
+@media (max-width: 640px) {
+  .applications-col-label {
+    font-size: 12px;
+  }
+
+  .applications-nav-btn {
+    width: 34px;
+    height: 34px;
+  }
+
+  .applications-nav-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .applications-section-title {
+    font-size: 26px;
+    line-height: 1.22;
+    margin-bottom: 24px;
+  }
+
+  .applications-chroma-inner {
+    gap: 16px;
+    padding-bottom: 12px;
+  }
+
+  .applications-chroma-card {
+    flex: 0 0 calc(100% - 40px);
+    min-width: 240px;
+    max-width: 300px;
+    height: 420px;
+    min-height: 420px;
+    padding: 24px 20px 20px 20px;
+  }
+
+  .applications-card-symbol {
+    width: 42px;
+    height: 42px;
+  }
+
+  .applications-chroma-title {
+    font-size: 16px;
+  }
+
+  .applications-chroma-description {
+    font-size: 13px;
+    margin-bottom: 16px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   5. Reduced Motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .applications-chroma-inner {
+    scroll-behavior: auto !important;
+  }
+
+  .applications-nav-btn,
+  .applications-chroma-card {
+    transition: none !important;
+  }
+}

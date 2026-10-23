@@ -1,0 +1,344 @@
+/* ==========================================================================
+   Bilva Tech — Contact Page Redesign (Reference Image 1)
+   Two-column composition: Monochrome Halftone Cloud Panel + Charcoal Form
+   ========================================================================== */
+
+/* Outer Section */
+.contact-composition-section {
+  position: relative;
+  width: 100%;
+  margin: 0;
+}
+
+/* Two-Column Layout Grid */
+.contact-composition-shell {
+  display: grid;
+  grid-template-columns: 1.28fr 0.92fr; /* ~58% left panel, ~42% form */
+  gap: clamp(32px, 4.5vw, 68px);
+  align-items: stretch;
+  width: 100%;
+}
+
+/* ==========================================================================
+   Left Column: Halftone Artwork Panel
+   ========================================================================== */
+.contact-artwork-panel {
+  position: relative;
+  min-height: clamp(520px, 48vw, 620px);
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 0;
+  overflow: hidden;
+  background-color: #000000;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.contact-artwork-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  display: block;
+  pointer-events: none;
+  filter: contrast(1.08) brightness(0.96);
+}
+
+.contact-artwork-overlay {
+  position: relative;
+  z-index: 2;
+  padding: clamp(28px, 4vw, 44px);
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.35) 45%,
+    rgba(0, 0, 0, 0.88) 100%
+  );
+}
+
+.contact-artwork-heading {
+  font-family: var(--font-main, "Space Grotesk", sans-serif);
+  font-size: clamp(28px, 3.2vw, 42px);
+  font-weight: 600;
+  line-height: 1.14;
+  letter-spacing: -0.035em;
+  color: #ffffff;
+  margin: 0 0 12px;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.7);
+}
+
+.contact-artwork-sub {
+  font-family: var(--font-secondary, "Inter", sans-serif);
+  font-size: clamp(13px, 1.1vw, 15px);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.84);
+  margin: 0;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* ==========================================================================
+   Right Column: Exact Charcoal Form
+   ========================================================================== */
+.contact-form-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.contact-composition-form {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 1.8vw, 18px);
+  width: 100%;
+}
+
+.contact-form-heading {
+  font-family: var(--font-main, "Space Grotesk", sans-serif);
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  color: #F2F0ED;
+  margin: 0;
+  text-align: left;
+}
+
+.contact-input-wrap {
+  position: relative;
+  width: 100%;
+}
+
+/* Wide rectangular charcoal inputs */
+.contact-input,
+.contact-textarea {
+  width: 100%;
+  background: #29292c;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  padding: 0 22px;
+  color: #ffffff;
+  font-family: var(--font-secondary, "Inter", sans-serif);
+  font-size: 15px;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.contact-input {
+  height: clamp(52px, 5.2vw, 58px);
+}
+
+.contact-textarea {
+  height: clamp(120px, 13vw, 145px);
+  padding: 18px 22px;
+  line-height: 1.55;
+  resize: none;
+}
+
+/* Placeholders matching Reference Image 1 */
+.contact-input::placeholder,
+.contact-textarea::placeholder {
+  color: #8f8c92;
+  font-size: 14.5px;
+  opacity: 1;
+}
+
+/* Focus State */
+.contact-input:focus,
+.contact-textarea:focus {
+  outline: none;
+  background: #313135;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Invalid State */
+.contact-input:user-invalid,
+.contact-textarea:user-invalid {
+  border-color: rgba(220, 90, 90, 0.6);
+}
+
+/* Light Pill Submit Button */
+.contact-submit-btn {
+  width: 100%;
+  height: clamp(50px, 5vw, 56px);
+  background: #ffffff;
+  color: #141316;
+  font-family: var(--font-main, "Space Grotesk", sans-serif);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  border: none;
+  border-radius: 9999px; /* Exact pill shape from reference */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, transform 0.15s ease, opacity 0.2s ease;
+  margin-top: 2px;
+}
+
+.contact-submit-btn:hover {
+  background: #e7e4e8;
+}
+
+.contact-submit-btn:active {
+  transform: scale(0.99);
+}
+
+.contact-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Form Status Message */
+.contact-composition-form .form-status {
+  font-family: var(--font-secondary, "Inter", sans-serif);
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--ink-secondary, #aaa7ab);
+  margin: 8px 0 0;
+  min-height: 20px;
+  transition: opacity 0.2s ease;
+}
+
+.contact-composition-form .form-status.is-success {
+  color: #6ee7b7;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  padding: 10px 14px;
+  border-radius: 4px;
+}
+
+.contact-composition-form .form-status.is-error {
+  color: #fca5a5;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  padding: 10px 14px;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   Downstream Homepage Sections Styling on Contact Page
+   ========================================================================== */
+
+/* Testimonials, FAQ, and Final CTA seamless spacing inside .inner-shell */
+.contact-page-body .testimonials-section,
+.contact-page-body .compact-faq,
+.contact-page-body .architecture-cta {
+  border: 1px solid var(--line, #252527);
+  background: var(--surface-panel, #0b0b0d);
+  overflow: hidden;
+  padding: 0;
+}
+
+/* Keep animated cards and their focus/hover edges clear of the clipped marquee rows. */
+.contact-page-body .testimonials-marquee-viewport {
+  padding-block: 16px;
+}
+
+.contact-page-body .marquee-row {
+  padding-block: 4px;
+}
+
+/* The inner-page type system targets all h3/p elements. Restore the
+   testimonial component's compact author stack without affecting Home. */
+.contact-page-body .card-author-name {
+  font-family: var(--font-main, "Inter", sans-serif);
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: normal;
+  margin: 0;
+}
+
+.contact-page-body .card-author-title {
+  font-family: var(--font-secondary, "Space Grotesk", sans-serif);
+  font-size: 11.5px;
+  line-height: normal;
+  margin: 0;
+}
+
+.contact-page-body .card-author-org {
+  font-family: var(--font-secondary, "Space Grotesk", sans-serif);
+  font-size: 11px;
+  line-height: normal;
+  margin: 0;
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+
+/* Tablet (≤ 960px) */
+@media (max-width: 960px) {
+  .contact-composition-shell {
+    gap: 28px;
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+  .contact-artwork-panel {
+    min-height: 480px;
+  }
+  .contact-artwork-heading {
+    font-size: 28px;
+  }
+  .contact-input {
+    height: 50px;
+  }
+  .contact-textarea {
+    height: 115px;
+  }
+  .contact-submit-btn {
+    height: 48px;
+  }
+}
+
+/* Mobile (≤ 768px): Stack Artwork on Top, Form on Bottom */
+@media (max-width: 768px) {
+  .contact-composition-shell {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .contact-artwork-panel {
+    min-height: 380px;
+    border-radius: 4px;
+  }
+  .contact-artwork-overlay {
+    padding: 24px 20px;
+  }
+  .contact-artwork-heading {
+    font-size: 26px;
+    margin-bottom: 8px;
+  }
+  .contact-artwork-sub {
+    font-size: 13px;
+  }
+  .contact-form-col {
+    padding: 0;
+  }
+  .contact-input {
+    height: 48px;
+    font-size: 14.5px;
+  }
+  .contact-textarea {
+    height: 110px;
+    font-size: 14.5px;
+  }
+  .contact-submit-btn {
+    height: 48px;
+    font-size: 14.5px;
+  }
+}
+.contact-privacy-note {
+  color: #9d9da5;
+  font-size: 11px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.contact-privacy-note a {
+  color: #e5e5ea;
+  text-underline-offset: 3px;
+}

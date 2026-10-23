@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#080809" />
+    <meta name="robots" content="noindex,follow" />
+    <meta
+      name="description"
+      content="Page not found — Bilva Tech Business Solutions. The requested page may have moved or no longer exists."
+    />
+    <title>404 — Page Not Found | Bilva Tech</title>
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="inner-pages.css" />
+    <link rel="stylesheet" href="homepage.css" />
+    <link rel="stylesheet" href="black-motion.css" />
+    <style>
+      .error-panel {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        padding: clamp(48px, 8vw, 96px) clamp(24px, 5vw, 64px);
+        position: relative;
+        overflow: hidden;
+      }
+      .error-code {
+        font-family: var(--font-mono, "Space Mono", monospace);
+        font-size: clamp(64px, 12vw, 120px);
+        font-weight: 700;
+        line-height: 1;
+        letter-spacing: -0.04em;
+        color: rgba(255, 255, 255, 0.12);
+        margin: 0 0 16px;
+        user-select: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        width: 100%;
+        padding-bottom: 16px;
+      }
+      .error-heading {
+        font-family: var(--font-main, "Space Grotesk", sans-serif);
+        font-size: clamp(28px, 4vw, 44px);
+        font-weight: 600;
+        line-height: 1.15;
+        letter-spacing: -0.03em;
+        color: #ffffff;
+        margin: 0 0 14px;
+      }
+      .error-copy {
+        font-family: var(--font-secondary, "Inter", sans-serif);
+        font-size: clamp(15px, 1.2vw, 17px);
+        line-height: 1.6;
+        color: #aaa7ab;
+        max-width: 540px;
+        margin: 0 0 32px;
+      }
+      .error-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        align-items: center;
+      }
+      .btn-primary-404 {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: #ffffff;
+        color: #0b0b0d;
+        font-family: var(--font-main, "Space Grotesk", sans-serif);
+        font-size: 15px;
+        font-weight: 600;
+        padding: 14px 28px;
+        border-radius: 9999px;
+        text-decoration: none;
+        transition: background-color 0.2s ease, transform 0.15s ease;
+      }
+      .btn-primary-404:hover {
+        background: #e5e2de;
+        transform: translateY(-1px);
+      }
+      .btn-secondary-404 {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: transparent;
+        color: #e8e2dc;
+        font-family: var(--font-main, "Space Grotesk", sans-serif);
+        font-size: 15px;
+        font-weight: 500;
+        padding: 13px 26px;
+        border-radius: 9999px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        text-decoration: none;
+        transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+      }
+      .btn-secondary-404:hover {
+        border-color: rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.05);
+        color: #ffffff;
+      }
+      @media (max-width: 600px) {
+        .error-actions {
+          flex-direction: column;
+          align-items: stretch;
+          width: 100%;
+        }
+        .btn-primary-404, .btn-secondary-404 {
+          width: 100%;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body class="bilva-inner">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <!-- SITE HEADER -->
+    <header class="site-header" aria-label="Primary navigation">
+      <a class="logo-button" href="index.html" aria-label="Bilva Tech home">
+        <img src="assets/logo.webp" alt="" width="651" height="177" />
+        <span class="brand-copy" aria-hidden="true">
+          <strong>Bilva Tech</strong>
+          <span>Business Solutions</span>
+        </span>
+      </a>
+
+      <nav class="nav-pill" aria-label="Desktop navigation">
+        <a href="index.html">Home</a>
+        <a href="solutions.html">Solutions</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <a class="header-cta" href="contact.html">Get Started</a>
+
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span></span><span></span><span></span>
+      </button>
+    </header>
+
+    <div class="mobile-overlay" hidden>
+      <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
+        <a href="index.html">Home</a>
+        <a href="solutions.html">Solutions</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a class="mobile-cta" href="contact.html">Get Started</a>
+      </nav>
+    </div>
+
+    <!-- MAIN CONTENT SHELL -->
+    <main class="inner-shell" id="main-content">
+      <section class="inner-box error-panel" aria-labelledby="error-heading">
+        <div class="inner-meta" style="width: 100%;">
+          <span>404 / ROUTE STATUS</span>
+          <span>RESOURCE NOT LOCATED</span>
+        </div>
+
+        <div class="error-code" aria-hidden="true">404</div>
+
+        <h1 class="error-heading" id="error-heading">Page not found</h1>
+
+        <p class="error-copy">
+          The page you're looking for may have moved or no longer exists. Use the links below to return to known platform routes.
+        </p>
+
+        <div class="error-actions">
+          <a class="btn-primary-404" href="index.html">
+            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Back to Home
+          </a>
+          <a class="btn-secondary-404" href="solutions.html">
+            Explore Solutions <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER (Populated by main.js) -->
+    <footer class="site-footer"></footer>
+
+    <!-- SCRIPTS -->
+    <script src="main.js"></script>
+    <script src="inner-pages.js"></script>
+  </body>
+</html>

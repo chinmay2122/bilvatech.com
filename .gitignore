@@ -1,0 +1,17 @@
+.vercel
+backups/
+.chrome-qa*
+.edge-qa*
+*_corner_bright.png
+crop_card*.png
+overall_c1_*.png
+poster1_corner_bright.png
+section_box_*.png
+*.original
+node_modules/
+.DS_Store
+Thumbs.db
+.env
+.env.*
+contact-config.local.php
+composer.phar
