@@ -12,6 +12,7 @@ Production source for the Bilva Tech marketing website currently published at
 - `/separation-kernel-hypervisor`
 - `/iot-solutions`
 - `/cybersecurity-solutions`
+- `/secure-qr-printing`
 - `/information-security-consulting`
 - `/insights`
 - `/user-policy`

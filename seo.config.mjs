@@ -117,6 +117,41 @@ export const pages = [
     ],
   },
   {
+    file: "secure-qr-printing.html",
+    path: "/secure-qr-printing",
+    title: "Secure QR Printing Software for Windows | Bilva Tech",
+    description:
+      "Print unique QR codes and dynamic secure patterns on each unit with Windows software supporting AUTO, API, and CSV data for digital printing.",
+    breadcrumb: "Secure QR Printing",
+    breadcrumbParents: [
+      { name: "Solutions", path: "/solutions" },
+      { name: "Cybersecurity Solutions", path: "/cybersecurity-solutions" },
+    ],
+    serviceType: "Secure QR printing software for digital printing workflows",
+    faqs: [
+      {
+        question: "What does the Secure QR Printing software print?",
+        answer:
+          "It places a dynamic QR code with human-readable text and a dynamic secure pattern with a message inside the configured print region. The variable output can change for every printed unit.",
+      },
+      {
+        question: "How can QR code data be supplied?",
+        answer:
+          "A print run can use codes generated automatically by the software, codes fetched from an API endpoint, or codes imported from a CSV file.",
+      },
+      {
+        question: "Can a print setup be reused?",
+        answer:
+          "Yes. The configured region, size, orientation, human-readable text, and message can be saved as a job configuration and reused for later print runs.",
+      },
+      {
+        question: "What production information is available?",
+        answer:
+          "The software provides MIS reporting for production information such as the total number of codes printed and other print-run reports.",
+      },
+    ],
+  },
+  {
     file: "information-security-consulting.html",
     path: "/information-security-consulting",
     title: "Information Security Consulting | Bilva Tech",

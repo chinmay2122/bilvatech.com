@@ -44,7 +44,16 @@ function breadcrumbSchema(page) {
     { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
   ];
 
-  if (page.serviceType) {
+  if (page.breadcrumbParents) {
+    for (const parent of page.breadcrumbParents) {
+      items.push({
+        "@type": "ListItem",
+        position: items.length + 1,
+        name: parent.name,
+        item: absoluteUrl(parent.path),
+      });
+    }
+  } else if (page.serviceType) {
     items.push({
       "@type": "ListItem",
       position: 2,
@@ -164,7 +173,8 @@ function stripLegacySeo(html) {
 for (const page of pages) {
   const filePath = path.join(root, page.file);
   let html = await readFile(filePath, "utf8");
-  html = stripLegacySeo(html);
+  const hasManagedSeoBlock = html.includes(seoStart);
+  if (!hasManagedSeoBlock) html = stripLegacySeo(html);
   html = html
     .replaceAll('href="index.html"', 'href="/"')
     .replaceAll('href="solutions.html"', 'href="/solutions"')
@@ -173,6 +183,7 @@ for (const page of pages) {
     .replaceAll('href="separation-kernel-hypervisor.html"', 'href="/separation-kernel-hypervisor"')
     .replaceAll('href="iot-solutions.html"', 'href="/iot-solutions"')
     .replaceAll('href="cybersecurity-solutions.html"', 'href="/cybersecurity-solutions"')
+    .replaceAll('href="secure-qr-printing.html"', 'href="/secure-qr-printing"')
     .replaceAll('href="information-security-consulting.html"', 'href="/information-security-consulting"');
   html = html
     .replaceAll('href="privacy.html"', 'href="/user-policy"')
@@ -203,7 +214,11 @@ for (const page of pages) {
     );
   }
 
-  html = html.replace(/<\/head>/i, `  ${seoBlock(page)}\n  </head>`);
+  if (hasManagedSeoBlock) {
+    html = html.replace(new RegExp(`${seoStart}[\\s\\S]*?${seoEnd}`), seoBlock(page));
+  } else {
+    html = html.replace(/<\/head>/i, `  ${seoBlock(page)}\n  </head>`);
+  }
   html = html.replace(/[ \t]+$/gm, "");
   await writeFile(filePath, html);
 }
