@@ -35,6 +35,9 @@
     <link rel="stylesheet" href="homepage.css" />
     <link rel="stylesheet" href="cto-homepage.css" />
     <link rel="stylesheet" href="black-motion.css">
+    <link rel="stylesheet" href="preloader.css" />
+    <script src="preloader.js" defer></script>
+    <noscript><style>#site-preloader{display:none}.site-is-preloading{overflow:auto}</style></noscript>
   <!-- SEO:START -->
     <title>Bilva Tech | Cybersecurity, IoT &amp; Business Solutions</title>
     <meta name="description" content="Bilva Tech engineers separation kernel hypervisors, secure IoT and edge systems, cybersecurity solutions, and information security consulting." />
@@ -85,7 +88,10 @@
     </script>
     <!-- SEO:END -->
   </head>
-  <body class="bilva-home cto-home">
+  <body class="bilva-home cto-home site-is-preloading">
+    <div class="site-preloader" id="site-preloader" aria-hidden="true">
+      <div class="site-preloader__grid" data-preloader-grid></div>
+    </div>
     <a class="skip-link" href="#main-content">Skip to main content</a>
 
     <div class="page">

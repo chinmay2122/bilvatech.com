@@ -39,6 +39,8 @@ const assets = [
   "dot-grid.js",
   "secure-qr-printing.js",
   "black-motion.css",
+  "preloader.css",
+  "preloader.js",
   "site-motion.js",
   "main.js",
   "service-dial.js",
