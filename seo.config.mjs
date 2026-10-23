@@ -9,29 +9,17 @@ export const pages = [
   {
     file: "index.html",
     path: "/",
-<<<<<<< HEAD
     title: "Bilva Tech | Secure QR Code, IoT & Business Solutions",
     description:
       "Bilva Tech engineers separation kernel hypervisors, secure IoT and edge systems, Secure QR Code, and information security consulting.",
-=======
-    title: "Bilva Tech | Cybersecurity, IoT & Business Solutions",
-    description:
-      "Bilva Tech engineers separation kernel hypervisors, secure IoT and edge systems, cybersecurity solutions, and information security consulting.",
->>>>>>> a8dd296c550f54f403e78c0fd81df86b2c014592
     type: "home",
   },
   {
     file: "solutions.html",
     path: "/solutions",
-<<<<<<< HEAD
     title: "Secure QR Code, IoT & Secure Systems Solutions | Bilva Tech",
     description:
       "Explore Bilva Tech solutions for workload isolation, secure IoT and edge systems, Secure QR Code, and information security consulting.",
-=======
-    title: "Cybersecurity, IoT & Secure Systems Solutions | Bilva Tech",
-    description:
-      "Explore Bilva Tech solutions for workload isolation, secure IoT and edge systems, embedded cybersecurity, and information security consulting.",
->>>>>>> a8dd296c550f54f403e78c0fd81df86b2c014592
     breadcrumb: "Solutions",
   },
   {
@@ -47,11 +35,7 @@ export const pages = [
     path: "/contact",
     title: "Contact Bilva Tech | Discuss Your Security Project",
     description:
-<<<<<<< HEAD
       "Contact Bilva Tech to discuss separation kernels, IoT architecture, Secure QR Code, or information security consulting.",
-=======
-      "Contact Bilva Tech to discuss separation kernels, IoT architecture, connected-system cybersecurity, or information security consulting.",
->>>>>>> a8dd296c550f54f403e78c0fd81df86b2c014592
     breadcrumb: "Contact",
   },
   {
@@ -109,7 +93,6 @@ export const pages = [
   {
     file: "cybersecurity-solutions.html",
     path: "/cybersecurity-solutions",
-<<<<<<< HEAD
     title: "Secure QR Code for Connected Systems | Bilva Tech",
     description:
       "Build security into embedded and connected systems with architecture, identity, data protection, secure boot, updates, and vulnerability management.",
@@ -118,16 +101,6 @@ export const pages = [
     faqs: [
       {
         question: "What does connected-system Secure QR Code cover?",
-=======
-    title: "Cybersecurity Solutions for Connected Systems | Bilva Tech",
-    description:
-      "Build security into embedded and connected systems with architecture, identity, data protection, secure boot, updates, and vulnerability management.",
-    breadcrumb: "Cybersecurity Solutions",
-    serviceType: "Cybersecurity engineering for embedded and connected systems",
-    faqs: [
-      {
-        question: "What does connected-system cybersecurity cover?",
->>>>>>> a8dd296c550f54f403e78c0fd81df86b2c014592
         answer:
           "It covers trust boundaries, device and user identity, data protection, platform integrity, update mechanisms, event visibility, and vulnerability handling across the product lifecycle.",
       },
@@ -153,11 +126,7 @@ export const pages = [
     faqLabel: "07 / SERVICE QUESTIONS",
     breadcrumbParents: [
       { name: "Solutions", path: "/solutions" },
-<<<<<<< HEAD
       { name: "Secure QR Code", path: "/cybersecurity-solutions" },
-=======
-      { name: "Cybersecurity Solutions", path: "/cybersecurity-solutions" },
->>>>>>> a8dd296c550f54f403e78c0fd81df86b2c014592
     ],
     serviceType: "Secure QR printing software for digital printing workflows",
     faqs: [
@@ -217,15 +186,9 @@ export const pages = [
   {
     file: "insights.html",
     path: "/insights",
-<<<<<<< HEAD
     title: "Secure QR Code & IoT Insights | Bilva Tech",
     description:
       "Bilva Tech technical insights will cover secure systems, workload isolation, IoT and edge architecture, Secure QR Code, and information security.",
-=======
-    title: "Cybersecurity & IoT Insights | Bilva Tech",
-    description:
-      "Bilva Tech technical insights will cover secure systems, workload isolation, IoT and edge architecture, cybersecurity, and information security.",
->>>>>>> a8dd296c550f54f403e78c0fd81df86b2c014592
     breadcrumb: "Insights",
   },
   {
