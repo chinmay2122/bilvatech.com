@@ -11,7 +11,11 @@
 ## 1. Executive Summary
 
 ### Overall Project Condition
+<<<<<<< HEAD
 The Bilva Tech web application is a high-performance, dark-themed, bespoke technical marketing platform engineered for Secure QR Code, mission-critical hypervisor virtualization, connected IoT systems, and enterprise risk consulting. The core site is built using modern vanilla HTML5, modular CSS3, and modern JavaScript, with a dedicated PHP/PHPMailer backend for contact enquiries.
+=======
+The Bilva Tech web application is a high-performance, dark-themed, bespoke technical marketing platform engineered for cybersecurity, mission-critical hypervisor virtualization, connected IoT systems, and enterprise risk consulting. The core site is built using modern vanilla HTML5, modular CSS3, and modern JavaScript, with a dedicated PHP/PHPMailer backend for contact enquiries.
+>>>>>>> a8dd296c550f54f403e78c0fd81df86b2c014592
 
 ### Main Improvements Completed
 1. **Custom 404 Routing:** Designed and implemented a responsive, branded `404.html` error page matching the Bilva Tech design system (Space Grotesk typography, near-black `#080809` background, navigation header, and direct recovery buttons). Integrated 404 handling into `server.mjs`, `worker.js`, and Vercel configuration.

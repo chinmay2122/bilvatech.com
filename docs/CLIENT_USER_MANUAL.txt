@@ -14,7 +14,11 @@ The Bilva Tech website is an online technical showcase for Bilva Tech Business
 Solutions. It presents Bilva Tech's engineering capabilities in:
   * Separation Kernel & Hypervisor Virtualization (Mission-Critical Computing)
   * Connected Operations & IoT Solutions (Edge and Connected Devices)
+<<<<<<< HEAD
   * Embedded & Connected Secure QR Code Solutions
+=======
+  * Embedded & Connected Cybersecurity Solutions
+>>>>>>> a8dd296c550f54f403e78c0fd81df86b2c014592
   * Information Security Consulting, Governance, Risk & Resilience
 
 The website consists of eight primary pages:
@@ -30,7 +34,11 @@ The website consists of eight primary pages:
      In-depth service page with interactive process timeline.
   6. Connected Operations & IoT (iot-solutions.html): Device security and
      connectivity service page.
+<<<<<<< HEAD
   7. Secure QR Code (cybersecurity-solutions.html): Platform integrity
+=======
+  7. Embedded Cybersecurity (cybersecurity-solutions.html): Platform integrity
+>>>>>>> a8dd296c550f54f403e78c0fd81df86b2c014592
      and security lifecycle service page.
   8. Security Consulting (information-security-consulting.html): Governance,
      threat modeling, and compliance roadmap page.

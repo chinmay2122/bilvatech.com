@@ -62,7 +62,11 @@ var testimonialsRow1 = [
   },
   {
     id: "perspective-cyber-1",
+<<<<<<< HEAD
     solutionArea: "Secure QR Code",
+=======
+    solutionArea: "Cybersecurity Consulting",
+>>>>>>> a8dd296c550f54f403e78c0fd81df86b2c014592
     badgeColor: "#F2F0ED",
     quote: "Threat landscapes in connected infrastructure demand continuous posture evaluation rather than static compliance audits. Risk models must reflect active attack vectors against operational workflows.",
     author: "Sarah Jenkins",
