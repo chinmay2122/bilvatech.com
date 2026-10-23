@@ -120,7 +120,7 @@ if (globalFooter) {
   globalFooter.innerHTML = `
     <div class="footer-top">
       <div class="footer-brand"><a href="/" aria-label="Bilva Tech home"><img src="assets/logo-icon.webp" alt="" width="44" height="44"><span><strong>Bilva Tech</strong><small>Business Solutions</small></span></a><p>Security engineered for connected and critical systems.</p></div>
-      <div class="footer-nav-group"><div><span>Navigate</span><a href="/">Home</a><a href="/solutions">Solutions</a><a href="/about">About</a><a href="/insights">Insights</a><a href="/contact">Contact</a></div><div><span>Solutions</span><a href="/separation-kernel-hypervisor">Separation Kernel</a><a href="/iot-solutions">IoT Solutions</a><a href="/cybersecurity-solutions">Cybersecurity</a><a href="/information-security-consulting">Security Consulting</a></div></div>
+      <div class="footer-nav-group"><div><span>Navigate</span><a href="/">Home</a><a href="/solutions">Solutions</a><a href="/about">About</a><a href="/insights">Insights</a><a href="/contact">Contact</a></div><div><span>Solutions</span><a href="/separation-kernel-hypervisor">Separation Kernel</a><a href="/iot-solutions">IoT Solutions</a><a href="/cybersecurity-solutions">Secure QR Code</a><a href="/information-security-consulting">Security Consulting</a></div></div>
       <div class="footer-legal"><span>Information</span><a href="/user-policy">User Policy</a><a href="/terms-and-conditions">Terms &amp; Conditions</a></div>
     </div>
     <div class="footer-bottom">

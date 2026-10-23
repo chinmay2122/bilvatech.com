@@ -195,7 +195,7 @@ for (const page of pages) {
       .replace('id="bilva-scan-content" inert aria-hidden="true"', 'id="bilva-scan-content"')
       .replace(
         "Interactive reference architecture and technical walkthrough.",
-        "Bilva Tech brings four disciplines into one secure-systems practice: separation kernel hypervisors, IoT and edge solutions, connected-system cybersecurity, and information security consulting.",
+        "Bilva Tech brings four disciplines into one secure-systems practice: separation kernel hypervisors, IoT and edge solutions, Secure QR Code, and information security consulting.",
       )
       .replace('aria-controls="bilva-scan-content bilva-scan-keywords"', 'aria-controls="bilva-scan-keywords"')
       .replace("for (const el of [details, keywords])", "for (const el of [keywords])");

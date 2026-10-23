@@ -9,17 +9,17 @@ export const pages = [
   {
     file: "index.html",
     path: "/",
-    title: "Bilva Tech | Cybersecurity, IoT & Business Solutions",
+    title: "Bilva Tech | Secure QR Code, IoT & Business Solutions",
     description:
-      "Bilva Tech engineers separation kernel hypervisors, secure IoT and edge systems, cybersecurity solutions, and information security consulting.",
+      "Bilva Tech engineers separation kernel hypervisors, secure IoT and edge systems, Secure QR Code, and information security consulting.",
     type: "home",
   },
   {
     file: "solutions.html",
     path: "/solutions",
-    title: "Cybersecurity, IoT & Secure Systems Solutions | Bilva Tech",
+    title: "Secure QR Code, IoT & Secure Systems Solutions | Bilva Tech",
     description:
-      "Explore Bilva Tech solutions for workload isolation, secure IoT and edge systems, embedded cybersecurity, and information security consulting.",
+      "Explore Bilva Tech solutions for workload isolation, secure IoT and edge systems, Secure QR Code, and information security consulting.",
     breadcrumb: "Solutions",
   },
   {
@@ -35,7 +35,7 @@ export const pages = [
     path: "/contact",
     title: "Contact Bilva Tech | Discuss Your Security Project",
     description:
-      "Contact Bilva Tech to discuss separation kernels, IoT architecture, connected-system cybersecurity, or information security consulting.",
+      "Contact Bilva Tech to discuss separation kernels, IoT architecture, Secure QR Code, or information security consulting.",
     breadcrumb: "Contact",
   },
   {
@@ -93,14 +93,14 @@ export const pages = [
   {
     file: "cybersecurity-solutions.html",
     path: "/cybersecurity-solutions",
-    title: "Cybersecurity Solutions for Connected Systems | Bilva Tech",
+    title: "Secure QR Code for Connected Systems | Bilva Tech",
     description:
       "Build security into embedded and connected systems with architecture, identity, data protection, secure boot, updates, and vulnerability management.",
-    breadcrumb: "Cybersecurity Solutions",
-    serviceType: "Cybersecurity engineering for embedded and connected systems",
+    breadcrumb: "Secure QR Code",
+    serviceType: "Secure QR Code engineering for embedded and connected systems",
     faqs: [
       {
-        question: "What does connected-system cybersecurity cover?",
+        question: "What does connected-system Secure QR Code cover?",
         answer:
           "It covers trust boundaries, device and user identity, data protection, platform integrity, update mechanisms, event visibility, and vulnerability handling across the product lifecycle.",
       },
@@ -126,7 +126,7 @@ export const pages = [
     faqLabel: "07 / SERVICE QUESTIONS",
     breadcrumbParents: [
       { name: "Solutions", path: "/solutions" },
-      { name: "Cybersecurity Solutions", path: "/cybersecurity-solutions" },
+      { name: "Secure QR Code", path: "/cybersecurity-solutions" },
     ],
     serviceType: "Secure QR printing software for digital printing workflows",
     faqs: [
@@ -186,9 +186,9 @@ export const pages = [
   {
     file: "insights.html",
     path: "/insights",
-    title: "Cybersecurity & IoT Insights | Bilva Tech",
+    title: "Secure QR Code & IoT Insights | Bilva Tech",
     description:
-      "Bilva Tech technical insights will cover secure systems, workload isolation, IoT and edge architecture, cybersecurity, and information security.",
+      "Bilva Tech technical insights will cover secure systems, workload isolation, IoT and edge architecture, Secure QR Code, and information security.",
     breadcrumb: "Insights",
   },
   {
